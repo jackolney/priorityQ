@@ -67,12 +67,13 @@ int main(int argc, const char * argv[])
 	//You have to pass a pointer to an event. ITS ALL POINTERS!!
 	testQ.Add(testEvent);
 	
+	//CHALLENGE.
+	//Pull out the top() etc. EXPAND! GO GO GO!
 
 	
 //	priority_queue<testClass, vector<testClass>, timeComparison> testQ;
 	
-
-
+//	yr_cd4 = {10,5};
 
     return 0;
 }
