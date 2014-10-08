@@ -19,9 +19,9 @@ class event {
 //			~event();	//Destructer  [not neccessary at the moment]
 	
 //		double time = 0; //define time - make private eventually.
-		void (*p_fun)(); //function pointer - make private eventually.
+		void (*ptr_fun)(); //function pointer - make private eventually.
 	
-		/*accessor methods*/
+		/*Accessor methods*/
 		double GetTime() const {return eventTime;}
 		// Include a "GetTime()" when private.
 		// Include a "GetFun()" when private.
@@ -48,17 +48,18 @@ class eventQ {
 	//	eventQ(); //need to initialise currentTime;
 	//	~eventQ();
 		
-		/*methods*/
+		/*Methods*/
 		void AddEvent(event * const theEvent);
 		//Jeff has a Run() here that walks through events.
 		
-		/*accessor methods*/
+		/*Accessor methods*/
 		size_t Size() const; //size_t is a type able to represent the size of any object in bytes.
 		//Empty
 		double GetTime() const {return currentTime;}
 	
-		/*methods*/
+		/*Methods*/
 		event * GetTop(); //Perhaps make private eventually.
+		void PopTop();
 	
 	private:
 		priority_queue<event*, vector<event*>, timeComparison> iQ;
@@ -83,11 +84,23 @@ event * eventQ::GetTop()
 	return theEvent;
 }
 
+	/*Define PopTop()*/
+void eventQ::PopTop()
+{
+	iQ.pop();
+}
+
 	/*Define Size()*/
 size_t eventQ::Size() const //const after a function declaration means the function is not allowed to change any class members.
 {
 	return iQ.size();
 }
+
+	/*Test Function to be pointed to*/
+void testFunc() {
+	cout << "Hello, Jack. This function worked, aren't you clever." << endl;
+}
+
 
 int main(int argc, const char * argv[])
 {
@@ -102,6 +115,9 @@ int main(int argc, const char * argv[])
 	event * testEvent1 = new event(20); //Needs to be created on the heap so that (a) I can assign a time to the constructor and (b) allows me to destroy it later.
 	event * testEvent2 = new event(5);
 	
+	testEvent1->ptr_fun = &testFunc;
+	testEvent2->ptr_fun = &testFunc;
+	
 	/*Access time*/
 	cout << testEvent1->GetTime() << endl;
 	cout << testEvent2->GetTime() << endl;
@@ -113,12 +129,20 @@ int main(int argc, const char * argv[])
 	/*Access top of the queue*/
 	cout << testQ.GetTop()->GetTime() << endl;
 	cout << testQ.Size() << endl;
+	testQ.GetTop()->ptr_fun();
+
+	testQ.PopTop();
+
+	cout << testQ.GetTop()->GetTime() << endl;
+	cout << testQ.Size() << endl;
+	testQ.GetTop()->ptr_fun();
+	
 	
 	/*CHALLENGE*/
 	
 	// 1) Pull out the top() etc. = Done.
 	// 2) Pull out multiple tops(), ensuring that they are being ordered correctly. = Done.
-	// 3) Test out including function pointers in here too.
+	// 3) Test out including function pointers in here too. = Done.
 	// 4) Transition to multiple cpp files.
 	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue.
 	// 6) EXPAND to include all functions of the model.
