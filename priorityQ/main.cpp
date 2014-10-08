@@ -14,53 +14,61 @@ using namespace std;
 
 	/*Event definition */
 class event {
-public:
-	//	testClass();	//Constructer [not neccessary at the moment]
-	//	~testClass();	//Destructer  [not neccessary at the moment]
+	public:
+			event(const double Time);	//Constructer [not neccessary at the moment]
+//			~event();	//Destructer  [not neccessary at the moment]
 	
-	double time = 0; //define time - make private eventually.
-	void (*p_fun)(); //function pointer - make private eventually.
+//		double time = 0; //define time - make private eventually.
+		void (*p_fun)(); //function pointer - make private eventually.
 	
-	// Include a "GetTime()" when private.
-	// Include a "GetFun()" when private.
-	
+		/*accessor methods*/
+		double GetTime() const {return eventTime;}
+		// Include a "GetTime()" when private.
+		// Include a "GetFun()" when private.
+	protected:
+		const double eventTime;
 	
 };
+
+event::event(const double Time) : eventTime(Time)
+{}
 
 
 	/*Define operator() for comparison class*/
 struct timeComparison {
 	bool operator()(const event *lhs, const event *rhs) const
 	{
-		return lhs->time > rhs->time;
+		return lhs->GetTime() > rhs->GetTime();
 	}
 };
 
 	/*Define eventQ class*/
 class eventQ {
-public:
-//	eventQ();
-//	~eventQ();
+	public:
+	//	eventQ(); //need to initialise currentTime;
+	//	~eventQ();
+		
+		/*methods*/
+		void AddEvent(event * const theEvent);
+		//Jeff has a Run() here that walks through events.
+		
+		/*accessor methods*/
+		size_t Size() const; //size_t is a type able to represent the size of any object in bytes.
+		//Empty
+		double GetTime() const {return currentTime;}
 	
-	/*methods*/
-	void Add(event * const theEvent);
-	//Jeff has a Run() here that walks through events.
+		/*methods*/
+		event * GetTop(); //Perhaps make private eventually.
 	
-	/*accessor methods*/
-	//Size
-	//Empty
-	//GetTime
-	
-	/*methods*/
-	event * GetTop();
-	
-	priority_queue<event*, vector<event*>, timeComparison> iQ;
-	//Can include a currentTime;
+	private:
+		priority_queue<event*, vector<event*>, timeComparison> iQ;
+		double currentTime = 0; //assign in constructor Jack, don't get sloppy.
+		//Can include a currentTime - perhaps not in here though.
 	
 };
 
-	/*Define Add()*/
-void eventQ::Add(event * const theEvent)
+	/*Define AddEvent()*/
+void eventQ::AddEvent(event * const theEvent)
 {
 	iQ.push(theEvent);
 	
@@ -75,6 +83,11 @@ event * eventQ::GetTop()
 	return theEvent;
 }
 
+	/*Define Size()*/
+size_t eventQ::Size() const //const after a function declaration means the function is not allowed to change any class members.
+{
+	return iQ.size();
+}
 
 int main(int argc, const char * argv[])
 {
@@ -85,24 +98,26 @@ int main(int argc, const char * argv[])
 	/*Define the event queue*/
 	eventQ testQ;
 
-	/*Create event*/
-	event * testEvent;
-	/*Give event a time*/
-	testEvent->time = 10;
+	/*Create event and provide time to constructor*/
+	event * testEvent1 = new event(20); //Needs to be created on the heap so that (a) I can assign a time to the constructor and (b) allows me to destroy it later.
+	event * testEvent2 = new event(5);
 	
-//	cout << testEvent->time << endl;
+	/*Access time*/
+	cout << testEvent1->GetTime() << endl;
+	cout << testEvent2->GetTime() << endl;
 	
 	/*Add event to the Q*/
-	testQ.Add(testEvent);
+	testQ.AddEvent(testEvent1);
+	testQ.AddEvent(testEvent2);
 	
 	/*Access top of the queue*/
-	cout << testQ.GetTop()->time << endl;
-	
+	cout << testQ.GetTop()->GetTime() << endl;
+	cout << testQ.Size() << endl;
 	
 	/*CHALLENGE*/
 	
-	// 1) Pull out the top() etc. EXPAND! GO GO GO!
-	// 2) To pull out the top() need a function in eventQ to get the top of the Q -> see Jeff's code.
+	// 1) Pull out the top() etc. = Done.
+	// 2) Pull out multiple tops(), ensuring that they are being ordered correctly. = Done.
 	// 3) Test out including function pointers in here too.
 	// 4) Transition to multiple cpp files.
 	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue.
