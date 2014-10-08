@@ -27,8 +27,6 @@ eventQ::~eventQ()
 void eventQ::AddEvent(event * const theEvent)
 {
 	iQ.push(theEvent);
-	
-	return;
 }
 
 /* Define GetTop() */

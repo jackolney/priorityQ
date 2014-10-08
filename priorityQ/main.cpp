@@ -22,9 +22,6 @@ void testFunc() {
 
 int main(int argc, const char * argv[])
 {
-
-	/* Print Hello */
-	cout << "Hello, Jack!" << endl;
 	
 	/* Define the event queue */
 	eventQ testQ;

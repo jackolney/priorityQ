@@ -10,7 +10,9 @@
 
 /* Define constructor */
 event::event(const double Time) : eventTime(Time)
-{}
+{
+//	ptr_fun = /* ideally a parameter of the event constructor */
+}
 
 /* Define desctructor */
 event::~event()
