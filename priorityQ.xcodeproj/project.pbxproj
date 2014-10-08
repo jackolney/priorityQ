@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		04CD81C719A9051C004432AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CD81C619A9051C004432AC /* main.cpp */; };
 		04CD81C919A9051C004432AC /* priorityQ.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04CD81C819A9051C004432AC /* priorityQ.1 */; };
+		04EAF85C19E58A5F0058B45A /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF85A19E58A5F0058B45A /* event.cpp */; };
+		04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF85D19E58E0E0058B45A /* eventQ.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		04CD81C319A9051C004432AC /* priorityQ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = priorityQ; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CD81C619A9051C004432AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		04CD81C819A9051C004432AC /* priorityQ.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = priorityQ.1; sourceTree = "<group>"; };
+		04EAF85A19E58A5F0058B45A /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
+		04EAF85B19E58A5F0058B45A /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		04EAF85D19E58E0E0058B45A /* eventQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventQ.cpp; sourceTree = "<group>"; };
+		04EAF85E19E58E0E0058B45A /* eventQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventQ.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				04CD81C619A9051C004432AC /* main.cpp */,
+				04EAF85D19E58E0E0058B45A /* eventQ.cpp */,
+				04EAF85E19E58E0E0058B45A /* eventQ.h */,
+				04EAF85A19E58A5F0058B45A /* event.cpp */,
+				04EAF85B19E58A5F0058B45A /* event.h */,
 				04CD81C819A9051C004432AC /* priorityQ.1 */,
 			);
 			path = priorityQ;
@@ -117,6 +127,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04EAF85C19E58A5F0058B45A /* event.cpp in Sources */,
+				04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */,
 				04CD81C719A9051C004432AC /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +239,7 @@
 				04CD81CE19A9051C004432AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
