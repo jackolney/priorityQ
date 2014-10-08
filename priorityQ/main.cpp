@@ -11,6 +11,8 @@
 
 using namespace std;
 
+
+	/*Event definition */
 class event {
 public:
 	//	testClass();	//Constructer [not neccessary at the moment]
@@ -26,7 +28,7 @@ public:
 };
 
 
-// Define operator() for comparison class
+	/*Define operator() for comparison class*/
 struct timeComparison {
 	bool operator()(const event *lhs, const event *rhs) const
 	{
@@ -34,6 +36,7 @@ struct timeComparison {
 	}
 };
 
+	/*Define eventQ class*/
 class eventQ {
 public:
 //	eventQ();
@@ -56,6 +59,7 @@ public:
 	
 };
 
+	/*Define Add()*/
 void eventQ::Add(event * const theEvent)
 {
 	iQ.push(theEvent);
@@ -63,6 +67,7 @@ void eventQ::Add(event * const theEvent)
 	return;
 }
 
+	/*Define GetTop()*/
 event * eventQ::GetTop()
 {
 	event * theEvent = iQ.top();
@@ -74,29 +79,40 @@ event * eventQ::GetTop()
 int main(int argc, const char * argv[])
 {
 
-	// insert code here...
+	/*Print Hello*/
 	cout << "Hello, Jack!" << endl;
 	
-	eventQ testQ; //define eventQ;
+	/*Define the event queue*/
+	eventQ testQ;
 
+	/*Create event*/
 	event * testEvent;
+	/*Give event a time*/
 	testEvent->time = 10;
 	
 //	cout << testEvent->time << endl;
 	
-	//You have to pass a pointer to an event. ITS ALL POINTERS!!
+	/*Add event to the Q*/
 	testQ.Add(testEvent);
+	
+	/*Access top of the queue*/
 	cout << testQ.GetTop()->time << endl;
 	
-	//CHALLENGE.
-	//Pull out the top() etc. EXPAND! GO GO GO!
-	//To pull out the top() need a function in eventQ to get the top of the Q -> see Jeff's code
-
 	
-//	priority_queue<testClass, vector<testClass>, timeComparison> testQ;
+	/*CHALLENGE*/
 	
-//	yr_cd4 = {10,5};
+	// 1) Pull out the top() etc. EXPAND! GO GO GO!
+	// 2) To pull out the top() need a function in eventQ to get the top of the Q -> see Jeff's code.
+	// 3) Test out including function pointers in here too.
+	// 4) Transition to multiple cpp files.
+	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue.
+	// 6) EXPAND to include all functions of the model.
 
     return 0;
 }
 
+
+/*NOTES*/
+
+// Will create this model for one individual
+// Transistion into defining an array of pointers (of class event) to an array of pointers (of class event Q) to corresponding eventQ's. Therefore allowing me to simulate mulitple individuals simultaneously.
