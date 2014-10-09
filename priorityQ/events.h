@@ -12,14 +12,12 @@
 #include <stdio.h>
 #include "event.h"
 
-void testFunc();
-
 /////////////////////
 /////////////////////
 
 class HivTest : public event {
 public:
-	HivTest(const double Time, void (*funcAddr)()); //constructor
+	HivTest(const double Time); //constructor
 	~HivTest(); //destructor
 	
 	/* Methods */
@@ -35,7 +33,7 @@ private:
 
 class Cd4Test : public event {
 public:
-	Cd4Test(const double Time, void (*funcAddr)()); //constructor
+	Cd4Test(const double Time); //constructor
 	~Cd4Test(); //destructor
 	
 	/* Methods */

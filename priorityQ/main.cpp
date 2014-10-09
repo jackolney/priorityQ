@@ -14,13 +14,6 @@
 using namespace std;
 
 
-
-//	/* Test Function to be pointed to */
-//void testFunc() {
-//	cout << "Hello, Jack. This function worked, aren't you clever." << endl;
-//}
-//
-
 int main(int argc, const char * argv[])
 {
 	
@@ -31,8 +24,8 @@ int main(int argc, const char * argv[])
 	eventQ testQ;
 
 	/* Schedule some events */
-	event * testEvent1 = new HivTest(10,&testFunc);
-	event * testEvent2 = new Cd4Test(20,&testFunc);
+	event * testEvent1 = new HivTest(10);
+	event * testEvent2 = new Cd4Test(20);
 	
 	/* Add events into priorityQ */
 	testQ.AddEvent(testEvent1);
@@ -46,9 +39,6 @@ int main(int argc, const char * argv[])
 	
 	/* Call top event again */
 	testQ.GetTop()->Execute();
-	
-	/* Can run the referenced function too... */
-	testQ.GetTop()->funcPtr();
 
 	/* Size */
 	testQ.Size();

@@ -14,14 +14,13 @@
 /* Define event class */
 class event {
 public:
-	event(const double Time, void (*funcAddr)()); //Constructor
+	event(const double Time); //Constructor
 	virtual ~event(); //Destructor
 	
 	/* Methods */
 	virtual void Execute() = 0; //This is a PURE virtual function - as it is not defined in event.cpp but differently in derived classes.
 	
 	//		double time = 0; //define time - make private eventually.
-	void (*funcPtr)(); //function pointer - make private eventually.
 
 	/*Accessor methods*/
 	double GetTime() const {return eventTime;}
