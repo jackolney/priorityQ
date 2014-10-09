@@ -38,8 +38,7 @@ public:
 	
 private:
 	priority_queue<event*, vector<event*>, timeComparison> iQ;
-	double currentTime = 0; //assign in constructor Jack, don't get sloppy.
-	//Can include a currentTime - perhaps not in here though.
+	double currentTime;
 	
 };
 

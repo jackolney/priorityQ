@@ -51,7 +51,9 @@ int main(int argc, const char * argv[])
 	// 4) Transition to multiple cpp files. = Done.
 	// 5) Supply time and function reference in event class constructor. = Done.
 	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue.
-	// 6) EXPAND to include all functions of the model.
+	// 6) Include a PERSON upon which these functions can act.
+	// 7) Allow person to be part of a COHORT.
+	// 8) EXPAND to include all functions of the model.
 
     return 0;
 }

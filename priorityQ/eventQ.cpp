@@ -16,7 +16,7 @@ bool timeComparison::operator()(const event *lhs, const event *rhs) const
 }
 
 /* Define constructor */
-eventQ::eventQ()
+eventQ::eventQ() : currentTime(0)
 {}
 
 /* Define destructor */
