@@ -37,14 +37,21 @@ void eventQ::RunEvents()
 {
 	while(!Empty() && currentTime < endTime) {
 		event * nextEvent = GetTop();
-		PopTop();
-		currentTime  = nextEvent->GetTime();
+		currentTime = nextEvent->GetTime();
 		cout << "Current time is = " << currentTime << endl;
-//		if(!nextEvent->Cancelled())
-		nextEvent->Execute();
+		PopTop();
+//		if(!nextEvent->Cancelled()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
+			nextEvent->Execute();
+		UpdateQ(); // UpdateQ will update iQ with relevant events (regardless of whether event ran, this is to ensure that events dependant on time are accounted for.)
 		delete nextEvent;
 	}
 	return;
+}
+
+/* Define UpdateQ */
+void eventQ::UpdateQ()
+{
+	cout << "Updating iQ." << endl;
 }
 
 
@@ -58,7 +65,6 @@ bool eventQ::Empty() const
 event * eventQ::GetTop()
 {
 	event * theEvent = iQ.top();
-	//	iQ.pop(); // Could be useful eventually?
 	return theEvent;
 }
 
