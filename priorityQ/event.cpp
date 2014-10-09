@@ -9,9 +9,9 @@
 #include "event.h"
 
 /* Define constructor */
-event::event(const double Time) : eventTime(Time)
+event::event(const double Time, void (*funcAddr)()) : eventTime(Time)
 {
-//	ptr_fun = /* ideally a parameter of the event constructor */
+	funcPtr = funcAddr;
 }
 
 /* Define desctructor */

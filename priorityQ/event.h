@@ -14,18 +14,18 @@
 /* Define event class */
 class event {
 public:
-	event(const double Time); //Constructor
+	event(const double Time, void (*funcAddr)()); //Constructor
 	virtual ~event(); //Destructor
 	
 	//		double time = 0; //define time - make private eventually.
-	void (*ptr_fun)(); //function pointer - make private eventually.
-	
+	void (*funcPtr)(); //function pointer - make private eventually.
+
 	/*Accessor methods*/
 	double GetTime() const {return eventTime;}
 	// Include a "GetTime()" when private.
 	// Include a "GetFun()" when private.
 protected:
-	const double eventTime;
+	const double eventTime = 0;
 	
 };
 
