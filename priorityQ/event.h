@@ -19,12 +19,13 @@ public:
 	
 	/* Methods */
 	virtual void Execute() = 0; //This is a PURE virtual function - as it is not defined in event.cpp but differently in derived classes.
-	
-	//		double time = 0; //define time - make private eventually.
 
 	/*Accessor methods*/
 	double GetTime() const {return eventTime;}
-	// Include a "GetFun()" when private.
+
+	/* Can include cancelling methods here */
+	
+	
 protected:
 	const double eventTime = 0;
 	
