@@ -8,10 +8,41 @@
 
 #include <iostream>
 #include "events.h"
+#include "event.h"
 
 using namespace std;
 
 /* Test Function to be pointed to */
-void testFunc() {
+void testFunc()
+{
 	cout << "Hello, Jack. This function worked, aren't you clever." << endl;
 }
+
+/////////////////////
+/////////////////////
+
+
+void HivTest::Execute()
+{
+	cout << "HivTest executed." << endl;
+};
+
+HivTest::HivTest(const double Time, void (*funcAddr)()) : event(Time,funcAddr)
+{}
+
+HivTest::~HivTest()
+{}
+
+/////////////////////
+/////////////////////
+
+void Cd4Test::Execute()
+{
+	cout << "Cd4Test executed." << endl;
+};
+
+Cd4Test::Cd4Test(const double Time, void (*funcAddr)()) : event(Time,funcAddr)
+{}
+
+Cd4Test::~Cd4Test()
+{}

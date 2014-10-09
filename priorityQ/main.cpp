@@ -30,28 +30,28 @@ int main(int argc, const char * argv[])
 	/* Define the event queue */
 	eventQ testQ;
 
-	/* Create event and provide time to constructor */
-	event * testEvent1 = new event(20,&testFunc); //Needs to be created on the heap so that (a) I can assign a time to the constructor and (b) allows me to destroy it later.
-	event * testEvent2 = new event(5,&testFunc);
+	/* Schedule some events */
+	event * testEvent1 = new HivTest(10,&testFunc);
+	event * testEvent2 = new Cd4Test(20,&testFunc);
 	
-	/* Add event to the Q */
+	/* Add events into priorityQ */
 	testQ.AddEvent(testEvent1);
 	testQ.AddEvent(testEvent2);
 	
-	/* Access top of the queue */
-	cout << testQ.GetTop()->GetTime() << endl;
-	cout << testQ.Size() << endl;
+	/* Call top event */
+	testQ.GetTop()->Execute();
+	
+	/* PopTop */
+	testQ.PopTop();
+	
+	/* Call top event again */
+	testQ.GetTop()->Execute();
+	
+	/* Can run the referenced function too... */
 	testQ.GetTop()->funcPtr();
 
-	testQ.PopTop();
-
-	cout << testQ.GetTop()->GetTime() << endl;
-	cout << testQ.Size() << endl;
-	testQ.GetTop()->funcPtr();
-	
-	testQ.PopTop();
-	cout << testQ.Size() << endl;
-	
+	/* Size */
+	testQ.Size();
 	
 	/*CHALLENGE*/
 	
