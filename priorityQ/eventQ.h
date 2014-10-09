@@ -20,25 +20,26 @@ struct timeComparison {bool operator()(const event *lhs, const event *rhs) const
 /* Define eventQ class */
 class eventQ {
 public:
-	eventQ(); //constructor
+	eventQ(const double startTime, const double stopTime); //constructor
 	~eventQ(); //destructor
 	
 	/* Methods */
 	void AddEvent(event * const theEvent);
-	//Jeff has a Run() here that walks through events.
+	void RunEvents();
 	
 	/* Accessor methods */
 	size_t Size() const; //size_t is a type able to represent the size of any object in bytes.
-	//Empty
+	bool Empty() const; //to empty the Q at the end of the run?
 	double GetTime() const {return currentTime;}
 	
 	/* Methods */
-	event * GetTop(); //Perhaps make private eventually.
+	event * GetTop(); //Perhaps make private eventually - Jeff calls this NextEvent.
 	void PopTop();
 	
 private:
 	priority_queue<event*, vector<event*>, timeComparison> iQ;
 	double currentTime;
+	double endTime;
 	
 };
 

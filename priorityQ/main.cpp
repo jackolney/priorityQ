@@ -21,7 +21,7 @@ int main(int argc, const char * argv[])
 	cout << "Starting code." << endl;
 	
 	/* Define the event queue */
-	eventQ testQ;
+	eventQ testQ(0,100); //constructor takes the paramters of startTime and stopTime.
 
 	/* Schedule some events */
 	event * testEvent1 = new HivTest(10);
@@ -31,17 +31,23 @@ int main(int argc, const char * argv[])
 	testQ.AddEvent(testEvent1);
 	testQ.AddEvent(testEvent2);
 	
-	/* Call top event */
-	testQ.GetTop()->Execute();
-	
-	/* PopTop */
-	testQ.PopTop();
-	
-	/* Call top event again */
-	testQ.GetTop()->Execute();
+	cout << "Start time = " << testQ.GetTime() << endl;
 
-	/* Size */
-	testQ.Size();
+	testQ.RunEvents();
+	
+	cout << "End time = " << testQ.GetTime() << endl;
+	
+//	/* Call top event */
+//	testQ.GetTop()->Execute();
+//	
+//	/* PopTop */
+//	testQ.PopTop();
+//	
+//	/* Call top event again */
+//	testQ.GetTop()->Execute();
+//
+//	/* Size */
+//	cout << testQ.Size() << endl;
 	
 	/*CHALLENGE*/
 	
