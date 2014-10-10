@@ -36,13 +36,15 @@ int main(int argc, const char * argv[])
 	
 	/* Create a person */
 	thePerson = new person(0);
-
-	/* Schedule some events */
-	event * testEvent1 = new HivTest(10);
-	event * testEvent2 = new Cd4Test(20);
 	
+	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
+	
+//	/* Schedule some events */
+//	event * testEvent1 = new HivTest(10);
+	event * testEvent2 = new Cd4Test(20);
+//
 	/* Add events into priorityQ */
-	theQ->AddEvent(testEvent1);
+//	theQ->AddEvent(testEvent1);
 	theQ->AddEvent(testEvent2);
 	
 	cout << "Start time = " << theQ->GetTime() << endl;
@@ -59,9 +61,11 @@ int main(int argc, const char * argv[])
 	// 4) Transition to multiple cpp files. = Done.
 	// 5) Supply time and function reference in event class constructor. = Done.
 	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue. = Done.
-	// 6) Include a PERSON upon which these functions can act.
-	// 7) Allow person to be part of a COHORT.
-	// 8) EXPAND to include all functions of the model.
+	// 6) Include a PERSON. = Done.
+	// 7) Assign characteristics to an instance of person at initialisation. = Done.
+	// 8) Allow events (derived from class event) to act upon person.
+	// 9) Allow person to be part of a COHORT.
+	// 10) EXPAND to include all functions of the model.
 
     return 0;
 }

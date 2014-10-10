@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 
-double AssignGender();
+//double AssignGender();
 
-double AssignNaturalDeathDate();
+//double AssignNaturalDeathDate();
 
 #endif /* defined(__priorityQ__toolbox__) */

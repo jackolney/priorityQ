@@ -581,6 +581,7 @@ turn_on_floating_exceptions yes_turn_on_floating_exceptions;
 #endif /* _MSC_VER */
 #endif /* _TURNONFPES */
 
+/* Declare RandomNumberGenerator structure */
 struct Rng
 {
 	Ullong u,v,w;
@@ -623,6 +624,5 @@ struct Rng
 			return 0;
 	}
 };
-
 
 #endif

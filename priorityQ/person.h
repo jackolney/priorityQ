@@ -16,8 +16,13 @@ public:
 	person(const double startAge); //constuctor
 	virtual ~person(); //destructor
 	
+	/* Initialiser functions */
+	double AssignGender();
+	double AssignNatDeathDate();
+	
 	/* Accessor methods */
-	bool GetGender();
+	bool GetGender() const;
+	double GetNatDeathDate() const;
 	
 	
 private:
@@ -28,7 +33,6 @@ private:
 	
 	double seroStatus;
 	double hivDeathDate;
-	
 };
 
 #endif /* defined(__priorityQ__person__) */

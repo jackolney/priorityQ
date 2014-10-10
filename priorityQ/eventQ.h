@@ -26,7 +26,7 @@ public:
 	/* Methods */
 	void AddEvent(event * const theEvent);
 	void RunEvents();
-	void UpdateQ();
+	void UpdateQ(const double * theTime);
 	
 	/* Accessor methods */
 	size_t Size() const; //size_t is a type able to represent the size of any object in bytes.
