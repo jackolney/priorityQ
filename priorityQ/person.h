@@ -14,10 +14,14 @@
 class person {
 public:
 	person(const double startAge); //constuctor
-	~person(); //destructor
+	virtual ~person(); //destructor
+	
+	/* Accessor methods */
+	bool GetGender();
 	
 	
 private:
+	double gender;
 	double currentAge;
 	double initialAge;
 	double natDeathDate;

@@ -8,8 +8,20 @@
 
 #include <iostream>
 #include "person.h"
+#include "toolbox.h"
+
+using namespace std;
 
 person::person(const double startAge) : currentAge(startAge), initialAge(startAge), natDeathDate(0), seroStatus(0), hivDeathDate(0)
 {
-// Include a sample that picks a naturalDeathDate;
+	gender = AssignGender();
+	// assignNaturalDeathDate
+}
+
+person::~person()
+{}
+
+bool person::GetGender()
+{
+	return gender;
 }

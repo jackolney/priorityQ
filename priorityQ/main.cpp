@@ -7,11 +7,19 @@
 //
 
 #include <iostream>
+#include <mach/mach_time.h>
+#include "rng.h"
+#include "person.h"
 #include "event.h"
 #include "events.h"
 #include "eventQ.h"
 
 using namespace std;
+
+/* Pointers to things (allows me to access them elsewhere with extern) */
+Rng * theRng;
+eventQ * theQ;
+person * thePerson;
 
 
 int main(int argc, const char * argv[])
@@ -19,35 +27,29 @@ int main(int argc, const char * argv[])
 	
 	/* Keeps the output window open */
 	cout << "Starting code." << endl;
-	
+
+	/* Declare RandomNumberGenerator */
+	theRng = new Rng(mach_absolute_time());
+
 	/* Define the event queue */
-	eventQ testQ(0,100); //constructor takes the paramters of startTime and stopTime.
+	theQ = new eventQ(0,100); //constructor takes the paramters of startTime and stopTime.
+	
+	/* Create a person */
+	thePerson = new person(0);
 
 	/* Schedule some events */
 	event * testEvent1 = new HivTest(10);
 	event * testEvent2 = new Cd4Test(20);
 	
 	/* Add events into priorityQ */
-	testQ.AddEvent(testEvent1);
-	testQ.AddEvent(testEvent2);
+	theQ->AddEvent(testEvent1);
+	theQ->AddEvent(testEvent2);
 	
-	cout << "Start time = " << testQ.GetTime() << endl;
+	cout << "Start time = " << theQ->GetTime() << endl;
 
-	testQ.RunEvents();
+	theQ->RunEvents();
 	
-	cout << "End time = " << testQ.GetTime() << endl;
-	
-//	/* Call top event */
-//	testQ.GetTop()->Execute();
-//	
-//	/* PopTop */
-//	testQ.PopTop();
-//	
-//	/* Call top event again */
-//	testQ.GetTop()->Execute();
-//
-//	/* Size */
-//	cout << testQ.Size() << endl;
+	cout << "End time = " << theQ->GetTime() << endl;
 	
 	/*CHALLENGE*/
 	
@@ -56,7 +58,7 @@ int main(int argc, const char * argv[])
 	// 3) Test out including function pointers in here too. = Done.
 	// 4) Transition to multiple cpp files. = Done.
 	// 5) Supply time and function reference in event class constructor. = Done.
-	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue.
+	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue. = Done.
 	// 6) Include a PERSON upon which these functions can act.
 	// 7) Allow person to be part of a COHORT.
 	// 8) EXPAND to include all functions of the model.
