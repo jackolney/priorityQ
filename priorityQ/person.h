@@ -13,7 +13,7 @@
 
 class person {
 public:
-	person(const double startAge); //constuctor
+	person(const double Time); //constuctor
 	virtual ~person(); //destructor
 	
 	/* Initialiser functions */
@@ -38,8 +38,9 @@ private:
 	double seroStatus;
 	double hivDeathDate;
 	
-	/* Death */
+	/* Day = time an event occured */
 	double DeathDay;
+	const double BirthDay;
 };
 
 #endif /* defined(__priorityQ__person__) */

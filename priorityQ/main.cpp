@@ -10,6 +10,7 @@
 #include <mach/mach_time.h>
 #include "rng.h"
 #include "person.h"
+#include "cohort.h"
 #include "event.h"
 #include "events.h"
 #include "eventQ.h"
@@ -33,25 +34,46 @@ int main(int argc, const char * argv[])
 
 	/* Define the event queue */
 	theQ = new eventQ(0,100); //constructor takes the parameters of startTime and stopTime.
+
+//	person * test[2] = {new person(0),new person(0)};
+//	cohort * test[2] = {new person(0),new person(0)};
+//	cout << test[0]->GetNatDeathDate() << endl;
+//	cout << test[1]->GetNatDeathDate() << endl;
 	
-	/* Create a person */
-	thePerson = new person(0);
+	cohort * theCohort = new cohort(2);
+
+	theCohort->GenerateCohort(0);
 	
-	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
-	cout << "Alive = " << thePerson->Alive() << endl;
-		
-//	/* Schedule some events */
-	event * testEvent1 = new HivTest(10);
-//	event * testEvent2 = new Cd4Test(20);
-//
-	/* Add events into priorityQ */
-	theQ->AddEvent(testEvent1);
-//	theQ->AddEvent(testEvent2);
+	// PRIORITY //
+	// Need to find a way of accessing the new persons created in each cohort individually.
 	
-	/* Model Run */
-	cout << "Start time = " << theQ->GetTime() << endl;
-	theQ->RunEvents();
-	cout << "End time = " << theQ->GetTime() << endl;
+	
+//	/* Create a person */
+//	thePerson = new person(0);
+//	
+//	
+//	
+//	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
+//	cout << "Alive = " << thePerson->Alive() << endl;
+//		
+////	/* Schedule some events */
+//	event * testEvent1 = new HivTest(10);
+////	event * testEvent2 = new Cd4Test(20);
+////
+//	/* Add events into priorityQ */
+//	theQ->AddEvent(testEvent1);
+////	theQ->AddEvent(testEvent2);
+//	
+//	/* Model Run */
+//	cout << "Start time = " << theQ->GetTime() << endl;
+//	theQ->RunEvents();
+//	cout << "End time = " << theQ->GetTime() << endl;
+	
+	/* Upcoming planned order of events */
+	// cohort * theCohort = new cohort(100);
+	// theCohort->GenerateCohort();
+	// theQ->RunEvents();
+	// RunEvents() will have a function that will include NEW cohorts each year, thereby keeping main() code minimal.
 	
 	/*CHALLENGE*/
 	
@@ -64,11 +86,16 @@ int main(int argc, const char * argv[])
 	// 6) Include a PERSON. = Done.
 	// 7) Assign characteristics to an instance of person at initialisation. = Done.
 	// 8) Allow events (derived from class event) to act upon person. = Done.
-	// 9) Allow UpdateQ() to run -> perhaps to remote functions.
-	// 10) Allow events to be cancelled.
-	// 11) How to handle multiple events occuring on the same day?
-	// 12) Allow person to be part of a COHORT.
-	// 13) EXPAND to include all functions of the model.
+	// 9) Run two people on one eventQ with a GlobalTime.
+	// 10) Set up ages to run properly.
+	// 11) DeathDates should be MINUS initialAge (convert to days too).
+	// 12) Allow UpdateQ() to run -> perhaps to remote functions.
+	// 13) Allow events to be cancelled.
+	// 14) How to handle multiple events occuring on the same day?
+	// 15) Allow person to be part of a COHORT.
+	// 16) EXPAND to include all functions of the model.
+	
+	theQ->Empty(); //Empty eventQ at end of run.
 
     return 0;
 }

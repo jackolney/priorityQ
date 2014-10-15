@@ -19,7 +19,13 @@ extern eventQ * theQ;
 
 using namespace std;
 
-person::person(const double startAge) : currentAge(startAge), initialAge(startAge), seroStatus(0), hivDeathDate(0), DeathDay(0)
+person::person(const double Time) :
+currentAge(0),
+initialAge(0),
+seroStatus(0),
+hivDeathDate(0),
+DeathDay(0),
+BirthDay(0)
 {
 	gender = AssignGender();
 	natDeathDate = AssignNatDeathDate();
