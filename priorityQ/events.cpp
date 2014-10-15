@@ -9,17 +9,30 @@
 #include <iostream>
 #include "events.h"
 #include "event.h"
+#include "person.h"
+
+extern person * thePerson;
+
 
 using namespace std;
 
 /////////////////////
 /////////////////////
 
+Death::Death(const double Time) : event(Time)
+{}
 
-void HivTest::Execute()
+Death::~Death()
+{}
+
+void Death::Execute()
 {
-	cout << "HivTest executed." << endl;
-};
+	cout << "Death executed." << endl;
+	thePerson->Kill(eventTime);
+}
+
+/////////////////////
+/////////////////////
 
 HivTest::HivTest(const double Time) : event(Time)
 {}
@@ -27,16 +40,21 @@ HivTest::HivTest(const double Time) : event(Time)
 HivTest::~HivTest()
 {}
 
-/////////////////////
-/////////////////////
-
-void Cd4Test::Execute()
+void HivTest::Execute()
 {
-	cout << "Cd4Test executed." << endl;
+	cout << "HivTest executed." << endl;
 };
+
+/////////////////////
+/////////////////////
 
 Cd4Test::Cd4Test(const double Time) : event(Time)
 {}
 
 Cd4Test::~Cd4Test()
 {}
+
+void Cd4Test::Execute()
+{
+	cout << "Cd4Test executed." << endl;
+};

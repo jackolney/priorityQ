@@ -88,9 +88,9 @@ void eventQ::UpdateQ(const double * theTime)
 	cout << "Updating iQ." << endl;
 	cout << "UpdateQ.Time is = " << *theTime << endl;
 	
-	if (*theTime == 20 && thePerson->GetGender()) {
+	if (*theTime == 10 && thePerson->GetGender()) {
 		cout << "Hey, this is pretty neat. It only executes if time = 20 and you are Male." << endl;
-		event * theEvent = new HivTest(25);
+		event * theEvent = new Cd4Test(25);
 		theQ->AddEvent(theEvent);
 		// Don't delete theEvent.
 		}

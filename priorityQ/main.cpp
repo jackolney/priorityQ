@@ -32,25 +32,25 @@ int main(int argc, const char * argv[])
 	theRng = new Rng(mach_absolute_time());
 
 	/* Define the event queue */
-	theQ = new eventQ(0,100); //constructor takes the paramters of startTime and stopTime.
+	theQ = new eventQ(0,100); //constructor takes the parameters of startTime and stopTime.
 	
 	/* Create a person */
 	thePerson = new person(0);
 	
 	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
-	
+	cout << "Alive = " << thePerson->Alive() << endl;
+		
 //	/* Schedule some events */
-//	event * testEvent1 = new HivTest(10);
-	event * testEvent2 = new Cd4Test(20);
+	event * testEvent1 = new HivTest(10);
+//	event * testEvent2 = new Cd4Test(20);
 //
 	/* Add events into priorityQ */
-//	theQ->AddEvent(testEvent1);
-	theQ->AddEvent(testEvent2);
+	theQ->AddEvent(testEvent1);
+//	theQ->AddEvent(testEvent2);
 	
+	/* Model Run */
 	cout << "Start time = " << theQ->GetTime() << endl;
-
 	theQ->RunEvents();
-	
 	cout << "End time = " << theQ->GetTime() << endl;
 	
 	/*CHALLENGE*/
@@ -63,9 +63,12 @@ int main(int argc, const char * argv[])
 	// 5) Including a "currentTime" we walk through time and execute the top of the queue, pop it off and continue. = Done.
 	// 6) Include a PERSON. = Done.
 	// 7) Assign characteristics to an instance of person at initialisation. = Done.
-	// 8) Allow events (derived from class event) to act upon person.
-	// 9) Allow person to be part of a COHORT.
-	// 10) EXPAND to include all functions of the model.
+	// 8) Allow events (derived from class event) to act upon person. = Done.
+	// 9) Allow UpdateQ() to run -> perhaps to remote functions.
+	// 10) Allow events to be cancelled.
+	// 11) How to handle multiple events occuring on the same day?
+	// 12) Allow person to be part of a COHORT.
+	// 13) EXPAND to include all functions of the model.
 
     return 0;
 }
@@ -78,3 +81,9 @@ int main(int argc, const char * argv[])
 
 // All events.h classes inherit attributes from event.h
 // Ell events have an Execute() which takes NO arguments.
+
+/* Rules to implement */
+// 1) Require a GlobalTime variable
+// 2) One eventQ -> theQ.
+// 3) One cohort of people run per year
+// 4) ALL persons feed events into the queue which then executes over time. All individuals run on same time, BUT do not interact (yet).

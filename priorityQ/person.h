@@ -20,9 +20,13 @@ public:
 	double AssignGender();
 	double AssignNatDeathDate();
 	
+	/* Methods */
+	void Kill(double Time);
+	
 	/* Accessor methods */
 	bool GetGender() const;
 	double GetNatDeathDate() const;
+	bool Alive();
 	
 	
 private:
@@ -33,6 +37,9 @@ private:
 	
 	double seroStatus;
 	double hivDeathDate;
+	
+	/* Death */
+	double DeathDay;
 };
 
 #endif /* defined(__priorityQ__person__) */

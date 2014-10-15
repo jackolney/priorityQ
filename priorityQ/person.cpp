@@ -10,12 +10,16 @@
 #include "rng.h"
 #include "person.h"
 #include "toolbox.h"
+#include "event.h"
+#include "events.h"
+#include "eventQ.h"
 
 extern Rng * theRng;
+extern eventQ * theQ;
 
 using namespace std;
 
-person::person(const double startAge) : currentAge(startAge), initialAge(startAge), seroStatus(0), hivDeathDate(0)
+person::person(const double startAge) : currentAge(startAge), initialAge(startAge), seroStatus(0), hivDeathDate(0), DeathDay(0)
 {
 	gender = AssignGender();
 	natDeathDate = AssignNatDeathDate();
@@ -34,6 +38,18 @@ double person::GetNatDeathDate() const
 	return natDeathDate;
 }
 
+bool person::Alive()
+{
+	int aliveStatus = 0;
+	
+	if(DeathDay == 0)
+		aliveStatus = 1;
+	else
+		aliveStatus = 0;
+	
+	return aliveStatus;
+}
+
 double person::AssignGender()
 {
 	return theRng->Sample(0.5);
@@ -41,7 +57,7 @@ double person::AssignGender()
 
 double person::AssignNatDeathDate()
 {
-	
+	/* Declare survival distribution */
 	double surv [2] [100] =
 	{
 		{1.00000000,0.98145100,0.97214488,0.96582011,0.96110208,0.95738742,0.95433431,0.95172039,0.94944006,0.94743295,0.94566314,0.94407159,0.94257429,0.94109068,0.93954823,0.93789463,0.93611357,0.93421700,0.93221778,0.93012122,0.92792613,0.92562952,0.92323584,0.92075326,0.91818804,0.91554641,0.91283182,0.91004768,0.90719923,0.90429347,0.90133553,0.89832326,0.89525190,0.89211762,0.88891849,0.88565704,0.88232609,0.87890355,0.87535805,0.87164828,0.86773807,0.86361718,0.85931118,0.85485995,0.85030953,0.84569490,0.84100722,0.83618908,0.83115774,0.82582087,0.82009380,0.81394228,0.80738516,0.80046345,0.79322486,0.78569636,0.77784411,0.76957485,0.76077014,0.75131225,0.74109365,0.73003579,0.71808146,0.70517538,0.69126156,0.67627985,0.66016140,0.64283084,0.62421767,0.60426456,0.58293160,0.56020659,0.53611211,0.51070683,0.48408726,0.45637810,0.42769291,0.39813334,0.36782505,0.33694613,0.28555679,0.24200510,0.20509569,0.17381552,0.14730605,0.12483967,0.10579974,0.08966370,0.07598864,0.06439923,0.05457738,0.04625351,0.03919916,0.03322070,0.02815404,0.02386013,0.02022110,0.01713708,0.01452342,0.01230838},
@@ -52,17 +68,32 @@ double person::AssignNatDeathDate()
 	int j = 0;
 	double random = theRng->doub();
 	
+	/* Walk up distribution to find the correct year of death */
 	while (random < surv [i] [j] && j < 100)
 		j++;
 	
+	/* Finds closest death year */
 	if(j > 0) {
 		double a = (random - surv [i] [j]);
 		double b = (surv [i] [j] - a);
 		if(a != b && a > b)
 			j -= 1;
-	}
+		}
 	else if(j == 0)
 		j = 1;
 	
+	/* Create Natural Death Date Event & Add to eventQ */
+	event * newEvent = new Death(j);
+	theQ->AddEvent(newEvent);
+	
 	return j;
+}
+
+void person::Kill(double Time)
+{
+	//Kill person
+	//Break loop here?
+
+	DeathDay = Time;
+	return;
 }

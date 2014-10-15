@@ -15,6 +15,19 @@
 /////////////////////
 /////////////////////
 
+class Death : public event {
+public:
+	Death(const double Time); //constructor
+	~Death(); //destructor
+	
+	/* Methods */
+	void Execute();
+};
+
+
+/////////////////////
+/////////////////////
+
 class HivTest : public event {
 public:
 	HivTest(const double Time); //constructor
