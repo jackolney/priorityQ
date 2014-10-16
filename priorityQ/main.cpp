@@ -33,7 +33,7 @@ int main(int argc, const char * argv[])
 	theRng = new Rng(mach_absolute_time());
 
 	/* Define the event queue */
-	theQ = new eventQ(0,100); //constructor takes the parameters of startTime and stopTime.
+	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
 
 	
@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
 //	cout << test[1]->GetNatDeathDate() << endl;
 
 ///////////////////////////
-	cohort * theCohort = new cohort(1);
+	cohort * theCohort = new cohort(10);
 	theCohort->GenerateCohort(0);
 	
 	cout << "Cohort size " << theCohort->GetCohortSize() << endl;
@@ -127,6 +127,7 @@ int main(int argc, const char * argv[])
 		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
 	}
 
+	cout << "size of the priority queue = " << theQ->Size() << endl;
 	
 	/* Upcoming planned order of events */
 	// cohort * theCohort = new cohort(100);

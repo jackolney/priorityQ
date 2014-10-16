@@ -28,7 +28,9 @@ bool timeComparison::operator()(const event *lhs, const event *rhs) const
 }
 
 /* Define constructor */
-eventQ::eventQ(const double startTime,const double stopTime) : currentTime(startTime), endTime(stopTime)
+eventQ::eventQ(const double startTime,const double stopTime) :
+currentTime(startTime),
+endTime(stopTime)
 {}
 
 /* Define destructor */
