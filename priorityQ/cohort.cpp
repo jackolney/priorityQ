@@ -10,7 +10,7 @@
 #include "cohort.h"
 #include "person.h"
 
-extern person * thePerson;
+//extern person * thePerson;
 
 cohort::cohort(const unsigned int Size) : cohortSize(Size)
 {}
@@ -27,11 +27,14 @@ void cohort::GenerateCohort(const double Time) // Having these as constant argum
 {
 	for(size_t i = 0; i < cohortSize; i++) {
 		NewPerson(Time);
-		cohortContainer.push_back(thePerson);
+//		cohortContainer.push_back(thePerson);
 	}
 }
 
 void cohort::NewPerson(const double Time)
 {
-	thePerson = new person(Time); //Not correct (yet).
+//	person * testPerson = new person(Time); //Not correct (yet).
+//	cohortContainer.push_back(testPerson);
+	new person(Time); //Not correct (yet... maybe now).
+	//When constructing person we should pass the pointer 'this' TO THE VECTOR.
 }

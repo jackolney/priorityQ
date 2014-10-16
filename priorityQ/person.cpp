@@ -13,9 +13,12 @@
 #include "event.h"
 #include "events.h"
 #include "eventQ.h"
+#include "cohort.h"
+#include <vector>
 
 extern Rng * theRng;
 extern eventQ * theQ;
+extern cohort * theCohort;
 
 using namespace std;
 
@@ -27,6 +30,8 @@ hivDeathDate(0),
 DeathDay(0),
 BirthDay(0)
 {
+	theCohort->cohortContainer.push_back(this);
+	cout << this << endl;
 	gender = AssignGender();
 	natDeathDate = AssignNatDeathDate();
 }
