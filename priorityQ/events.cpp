@@ -45,6 +45,7 @@ HivTest::~HivTest()
 void HivTest::Execute()
 {
 	cout << "HivTest executed." << endl;
+	pPerson->SetDiagnosedState(true);
 	UpdateEvents(pPerson);
 };
 
@@ -62,5 +63,6 @@ Cd4Test::~Cd4Test()
 void Cd4Test::Execute()
 {
 	cout << "Cd4Test executed." << endl;
+	pPerson->SetCd4TestState(true);
 	UpdateEvents(pPerson);
 };

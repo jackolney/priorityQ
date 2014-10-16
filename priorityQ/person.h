@@ -18,28 +18,44 @@ public:
 	
 	/* Initialiser functions */
 	double AssignGender();
+	void AssignInitialAge(const double Time);
 	double AssignNatDeathDate();
 	
 	/* Methods */
 	void Kill(double Time);
+	double SetAge(double Time);
+	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
+	void SetCd4TestState(const bool theState) { cd4Test = theState; }
 	
 	/* Accessor methods */
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive();
+	double GetAge() const;
+	bool GetDiagnosedState() const { return diagnosed; }
+	bool GetCd4TestState() const { return cd4Test; }
 	
 private:
+	/* basic characteristics */
 	double gender;
 	double currentAge;
 	double initialAge;
 	double natDeathDate;
 	
+	/* HIV status */
 	double seroStatus;
 	double hivDeathDate;
 	
 	/* Day = time an event occured */
 	double DeathDay;
 	const double BirthDay;
+	
+	/* HIV care */
+	bool diagnosed;
+	bool inCare;
+	bool cd4Test;
+	bool cd4Result;
+	bool art;
 };
 
 #endif /* defined(__priorityQ__person__) */

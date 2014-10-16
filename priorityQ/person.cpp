@@ -27,9 +27,15 @@ initialAge(0),
 seroStatus(0),
 hivDeathDate(0),
 DeathDay(0),
-BirthDay(0)
+BirthDay(Time),
+diagnosed(0),
+inCare(0),
+cd4Test(0),
+cd4Result(0),
+art(0)
 {
 	gender = AssignGender();
+	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate();
 	SeedEvents(this,Time);
 }
@@ -40,6 +46,16 @@ person::~person()
 bool person::GetGender() const
 {
 	return gender;
+}
+
+void person::AssignInitialAge(const double Time)
+{
+//	if(Time == 0){
+//		//Assign age as per Kenya in 1970.
+//	}
+	initialAge = theRng->doub() * 365.25;
+	currentAge = initialAge;
+	cout << "Initial age = " << initialAge << endl;
 }
 
 double person::GetNatDeathDate() const
@@ -91,11 +107,15 @@ double person::AssignNatDeathDate()
 	else if(j == 0)
 		j = 1;
 	
-	/* Create Natural Death Date Event & Add to eventQ */
-	event * newEvent = new Death(this,j);
-	theQ->AddEvent(newEvent);
+	/* convert j into days */
+	j *= 365.25;
 	
-	return j;
+	/* Create Natural Death Date Event & Add to eventQ */
+	event * newEvent = new Death(this,j-initialAge);
+	theQ->AddEvent(newEvent);
+	cout << "NatDeathDate = " << j-initialAge << endl;
+	
+	return j-initialAge;
 }
 
 void person::Kill(double Time)
@@ -104,4 +124,14 @@ void person::Kill(double Time)
 	DeathDay = Time;
 	cout << "DeathDate = " << DeathDay << endl;
 	return;
+}
+
+double person::GetAge() const
+{
+	return currentAge;
+}
+
+double person::SetAge(double Time)
+{
+	return currentAge += Time;
 }

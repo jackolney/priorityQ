@@ -16,4 +16,8 @@ void SeedEvents(person * const thePerson, const double Time);
 
 void UpdateEvents(person * const thePerson);
 
+void UpdateAge(person * const thePerson);
+
+void ScheduleCd4Test(person * const thePerson);
+
 #endif /* defined(__priorityQ__update__) */

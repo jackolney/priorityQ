@@ -19,21 +19,55 @@ extern eventQ * theQ;
 
 using namespace std;
 
-void SeedEvents(person * const thePerson, const double Time) {
+////////////////////
+////////////////////
 
-	cout << "Seeding events." << endl;
-	// Need to tie an event occurring in time to a specific person.
+void SeedEvents(person * const thePerson, const double Time)
+{
+	cout << "Seeding initial events." << endl;
 	
 	if (Time == 0) {
-		event * theEvent = new HivTest(thePerson,theRng->SampleExpDist(25));
+		event * theEvent = new HivTest(thePerson,Time + theRng->SampleExpDist(25));
 		theQ->AddEvent(theEvent);
 		cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl;
 		}
 	
 }
 
-void UpdateEvents(person * const thePerson) {
+////////////////////
+////////////////////
+
+void UpdateEvents(person * const thePerson)
+{
 	//Need to take currentTime from somewhere, theQ?
 	cout << "UpdateEvents executed." << endl;
 	cout << "UpdateEvents time = " << theQ->GetTime() << endl;
+	
+	// Split tasks into multiple functions.
+	
+	UpdateAge(thePerson);
+	
+	ScheduleCd4Test(thePerson);
+	
+}
+
+////////////////////
+////////////////////
+
+void UpdateAge(person * const thePerson)
+{
+	thePerson->SetAge(theQ->GetTime());
+	cout << "Updated Age = " << thePerson->GetAge() << endl;
+}
+
+////////////////////
+////////////////////
+
+void ScheduleCd4Test(person * const thePerson)
+{
+	if(thePerson->GetDiagnosedState() && !thePerson->GetCd4TestState()) {
+		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
+		theQ->AddEvent(theEvent);
+		cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl;		
+	}
 }

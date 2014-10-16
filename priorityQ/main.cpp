@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
 //	cout << test[1]->GetNatDeathDate() << endl;
 
 ///////////////////////////
-	cohort * theCohort = new cohort(2);
+	cohort * theCohort = new cohort(1);
 	theCohort->GenerateCohort(0);
 	
 	cout << "Cohort size " << theCohort->GetCohortSize() << endl;
@@ -82,6 +82,7 @@ int main(int argc, const char * argv[])
 	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
 	{
 		cout << "cohort output, natdeathdate = " << theCohort->cohortContainer[i]->GetNatDeathDate() << endl;
+		cout << "cohort output, initialAge = " << theCohort->cohortContainer[i]->GetAge() << endl;
 	}
 
 	cout << "size of the priority queue = " << theQ->Size() << endl;
@@ -125,6 +126,7 @@ int main(int argc, const char * argv[])
 	{
 		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
 	}
+
 	
 	/* Upcoming planned order of events */
 	// cohort * theCohort = new cohort(100);
@@ -143,14 +145,16 @@ int main(int argc, const char * argv[])
 	// 6) Include a PERSON. = Done.
 	// 7) Assign characteristics to an instance of person at initialisation. = Done.
 	// 8) Allow events (derived from class event) to act upon person. = Done.
-	// 9) Run two people on one eventQ with a GlobalTime.
-	// 10) Set up ages to run properly.
-	// 11) DeathDates should be MINUS initialAge (convert to days too).
+	// 9) Run two people on one eventQ with a GlobalTime. = Done.
+	// 10) Set up ages to run properly. = Done.
+	// 11) DeathDates should be MINUS initialAge (convert to days too). = Done.
 	// 12) Allow UpdateQ() to run -> perhaps to remote functions.
-	// 13) Allow events to be cancelled.
-	// 14) How to handle multiple events occuring on the same day?
-	// 15) Allow person to be part of a COHORT.
-	// 16) EXPAND to include all functions of the model.
+	// 13) Allow cohorts to be fired off at different times.
+	// 14) Stagger start of individuals in each cohort (spread throughout the year).
+	// 15) Allow events to be cancelled.
+	// 16) How to handle multiple events occuring on the same day?
+	// 17) Allow person to be part of a COHORT.
+	// 18) EXPAND to include all functions of the model.
 	
 	theQ->Empty(); //Empty eventQ at end of run.
 
