@@ -21,6 +21,11 @@ unsigned int cohort::GetCohortSize() const
 	return cohortSize;
 }
 
+void cohort::Push(person * const thePerson)
+{
+	cohortContainer.push_back(thePerson);
+}
+
 void cohort::GenerateCohort(const double Time) // Having these as constant arguments should not cause any issues.
 {
 	for(size_t i = 0; i < cohortSize; i++)
@@ -30,5 +35,5 @@ void cohort::GenerateCohort(const double Time) // Having these as constant argum
 void cohort::NewPerson(const double Time)
 {
 	person * thePerson = new person(Time); //Not correct (yet).
-	cohortContainer.push_back(thePerson);
+	Push(thePerson);
 }

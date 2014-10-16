@@ -602,7 +602,7 @@ struct Rng
 	inline Doub doub() {return 5.42101086242752217E-20 * int64();}
 	inline Uint int32() {return (Uint)int64();}
 	
-	inline double SampleExpDist(double mean)
+	inline int SampleExpDist(double mean) // Change back to double if this isn't truncating the value as desired.
 	{
 		double exp = 0;
 		double rate;

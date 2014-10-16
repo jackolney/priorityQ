@@ -30,6 +30,9 @@ public:
 	/* vector */
 	vector<person*> cohortContainer;
 	
+	/* vector methods */
+	void Push(person * const thePerson);
+	
 private:
 	unsigned int cohortSize; //Unsigned denotes type can only contain positive values.
 	

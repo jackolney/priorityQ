@@ -28,7 +28,6 @@ private:
 	person * const pPerson; // pPerson here is the pointer to the relevant person that will experience the event.
 };
 
-
 /////////////////////
 /////////////////////
 

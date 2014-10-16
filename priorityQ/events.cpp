@@ -10,6 +10,7 @@
 #include "events.h"
 #include "event.h"
 #include "person.h"
+#include "update.h"
 
 using namespace std;
 
@@ -44,6 +45,7 @@ HivTest::~HivTest()
 void HivTest::Execute()
 {
 	cout << "HivTest executed." << endl;
+	UpdateEvents(pPerson);
 };
 
 /////////////////////
@@ -60,4 +62,5 @@ Cd4Test::~Cd4Test()
 void Cd4Test::Execute()
 {
 	cout << "Cd4Test executed." << endl;
+	UpdateEvents(pPerson);
 };

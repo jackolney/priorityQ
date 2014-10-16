@@ -12,10 +12,12 @@
 #include "eventQ.h"
 #include "rng.h"
 #include "person.h"
+#include "cohort.h"
+#include "update.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
-
+extern cohort * theCohort;
 
 using namespace std;
 
@@ -49,7 +51,6 @@ void eventQ::RunEvents()
 		PopTop();
 //		if(!nextEvent->Cancelled()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
 			nextEvent->Execute();
-		UpdateQ(&currentTime); // UpdateQ will update iQ with relevant events (regardless of whether event ran, this is to ensure that events dependant on time are accounted for.)
 		delete nextEvent;
 	}
 	return;
@@ -78,22 +79,4 @@ void eventQ::PopTop()
 size_t eventQ::Size() const //const after a function declaration means the function is not allowed to change any class members.
 {
 	return iQ.size();
-}
-
-/* Define UpdateQ() */
-//This function schedules the relevant events to occur based up on time / health etc.
-void eventQ::UpdateQ(const double * theTime)
-{
-//	cout << "Updating iQ." << endl;
-//	cout << "UpdateQ.Time is = " << *theTime << endl;
-//	
-//	if (*theTime == 10 && thePerson->GetGender()) {
-//		cout << "Hey, this is pretty neat. It only executes if time = 20 and you are Male." << endl;
-//		event * theEvent = new Cd4Test(25);
-//		theQ->AddEvent(theEvent);
-//		// Don't delete theEvent.
-//		}
-	
-	// Include functions here that farm out the code to other places. Makes it neater.
-	
 }

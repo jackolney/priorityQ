@@ -9,12 +9,11 @@
 #include <iostream>
 #include "rng.h"
 #include "person.h"
-#include "toolbox.h"
 #include "event.h"
 #include "events.h"
 #include "eventQ.h"
 #include "cohort.h"
-#include <vector>
+#include "update.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -22,7 +21,7 @@ extern cohort * theCohort;
 
 using namespace std;
 
-person::person(const double Time) :
+person::person(const double Time) : //can use Time to specify the start time for the individual.
 currentAge(0),
 initialAge(0),
 seroStatus(0),
@@ -32,6 +31,7 @@ BirthDay(0)
 {
 	gender = AssignGender();
 	natDeathDate = AssignNatDeathDate();
+	SeedEvents(this,Time);
 }
 
 person::~person()
