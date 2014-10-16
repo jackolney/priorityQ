@@ -15,7 +15,7 @@
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern person * thePerson;
+//extern person * thePerson;
 
 
 using namespace std;
@@ -85,15 +85,15 @@ size_t eventQ::Size() const //const after a function declaration means the funct
 //This function schedules the relevant events to occur based up on time / health etc.
 void eventQ::UpdateQ(const double * theTime)
 {
-	cout << "Updating iQ." << endl;
-	cout << "UpdateQ.Time is = " << *theTime << endl;
-	
-	if (*theTime == 10 && thePerson->GetGender()) {
-		cout << "Hey, this is pretty neat. It only executes if time = 20 and you are Male." << endl;
-		event * theEvent = new Cd4Test(25);
-		theQ->AddEvent(theEvent);
-		// Don't delete theEvent.
-		}
+//	cout << "Updating iQ." << endl;
+//	cout << "UpdateQ.Time is = " << *theTime << endl;
+//	
+//	if (*theTime == 10 && thePerson->GetGender()) {
+//		cout << "Hey, this is pretty neat. It only executes if time = 20 and you are Male." << endl;
+//		event * theEvent = new Cd4Test(25);
+//		theQ->AddEvent(theEvent);
+//		// Don't delete theEvent.
+//		}
 	
 	// Include functions here that farm out the code to other places. Makes it neater.
 	

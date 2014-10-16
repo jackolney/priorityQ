@@ -120,9 +120,23 @@ int main(int argc, const char * argv[])
 ////	theQ->AddEvent(testEvent2);
 //	
 //	/* Model Run */
-//	cout << "Start time = " << theQ->GetTime() << endl;
-//	theQ->RunEvents();
-//	cout << "End time = " << theQ->GetTime() << endl;
+	cout << "Start time = " << theQ->GetTime() << endl;
+	theQ->RunEvents();
+	cout << "End time = " << theQ->GetTime() << endl;
+//
+//	
+	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
+	{
+		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
+	}
+
+	cout << theCohort->cohortContainer[0]->Alive() << endl;
+	cout <<	theCohort->cohortContainer[0]->GetNatDeathDate() << endl;
+	cout << endl;
+	cout << theCohort->cohortContainer[1]->Alive() << endl;
+	cout << theCohort->cohortContainer[1]->GetNatDeathDate() << endl;
+	cout << endl;
+	//The issue is that the people overwrite each other... I think this stems from the point of creation.
 	
 	/* Upcoming planned order of events */
 	// cohort * theCohort = new cohort(100);

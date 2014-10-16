@@ -11,7 +11,7 @@
 #include "event.h"
 #include "person.h"
 
-extern person * thePerson;
+//extern person * thePerson;
 
 
 using namespace std;
@@ -19,7 +19,9 @@ using namespace std;
 /////////////////////
 /////////////////////
 
-Death::Death(const double Time) : event(Time)
+Death::Death(person * const thePerson, const double Time) :
+event(Time),
+iPerson(thePerson)
 {}
 
 Death::~Death()
@@ -28,7 +30,7 @@ Death::~Death()
 void Death::Execute()
 {
 	cout << "Death executed." << endl;
-	thePerson->Kill(eventTime);
+	iPerson->Kill(eventTime);
 }
 
 /////////////////////

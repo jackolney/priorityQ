@@ -28,7 +28,6 @@ public:
 	double GetNatDeathDate() const;
 	bool Alive();
 	
-	
 private:
 	double gender;
 	double currentAge;

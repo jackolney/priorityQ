@@ -10,6 +10,7 @@
 #define __priorityQ__events__
 
 #include <stdio.h>
+#include "person.h"
 #include "event.h"
 
 /////////////////////
@@ -17,11 +18,13 @@
 
 class Death : public event {
 public:
-	Death(const double Time); //constructor
+	Death(person * const thePerson, const double Time); //constructor
 	~Death(); //destructor
 	
 	/* Methods */
 	void Execute();
+private:
+	person * const iPerson;
 };
 
 

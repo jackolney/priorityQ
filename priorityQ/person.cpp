@@ -89,7 +89,7 @@ double person::AssignNatDeathDate()
 		j = 1;
 	
 	/* Create Natural Death Date Event & Add to eventQ */
-	event * newEvent = new Death(j);
+	event * newEvent = new Death(this,j);
 	theQ->AddEvent(newEvent);
 	
 	return j;
@@ -99,7 +99,7 @@ void person::Kill(double Time)
 {
 	//Kill person
 	//Break loop here?
-
 	DeathDay = Time;
+	cout << "DeathDate = " << DeathDay << endl;
 	return;
 }
