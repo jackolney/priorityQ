@@ -10,6 +10,8 @@
 #include "cohort.h"
 #include "person.h"
 
+extern person * thePerson;
+
 cohort::cohort(const unsigned int Size) : cohortSize(Size)
 {}
 
@@ -29,5 +31,5 @@ void cohort::GenerateCohort(const double Time) // Having these as constant argum
 
 void cohort::NewPerson(const double Time)
 {
-	person * thePerson = new person(Time); //Not correct.
+	person * thePerson = new person(Time); //Not correct (yet).
 }

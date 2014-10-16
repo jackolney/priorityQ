@@ -9,8 +9,11 @@
 #ifndef __priorityQ__cohort__
 #define __priorityQ__cohort__
 
+#include <vector>
 #include <stdio.h>
 #include "person.h"
+
+using namespace std;
 
 class cohort {
 public:
@@ -23,6 +26,9 @@ public:
 	
 	/* accessor methods */
 	unsigned int GetCohortSize() const;
+	
+	/* vector */
+	vector<person*> cohortContainer;
 	
 private:
 	unsigned int cohortSize; //Unsigned denotes type can only contain positive values.

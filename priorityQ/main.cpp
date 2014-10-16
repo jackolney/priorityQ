@@ -35,22 +35,68 @@ int main(int argc, const char * argv[])
 	/* Define the event queue */
 	theQ = new eventQ(0,100); //constructor takes the parameters of startTime and stopTime.
 
+
+	
+///////////////////////////
+//	vector<person*> test;
+//	
+//	for(size_t i = 0;i < 2; i++)
+//	{
+//		thePerson = new person(0);
+//		test.push_back(thePerson);
+//	}
+//	thePerson = new person(0);
+////	test.push_back(thePerson);
+//	
+//	cout << test[0]->GetNatDeathDate() << endl;
+//	cout << test[1]->GetNatDeathDate() << endl;
+//	cout << test[2]->GetNatDeathDate() << endl;
+////	cout << test[3]->GetNatDeathDate() << endl;
+//	
+//	cout << "vector size = " << test.size() << endl;
+////	test.pop_back();
+////	test.erase(test.begin(),test.begin()+2);
+////	test.clear();
+//	cout << "vector size = " << test.size() << endl;
+	
+	// why does the pointer still exist?
+//	cout << test[0]->GetNatDeathDate() << endl;
+//	cout << "Alive = " << test[0]->Alive() << endl;
+//	test[0]->Kill(1);
+//	cout << test[1]->GetNatDeathDate() << endl;
+//	cout << test[2]->GetNatDeathDate() << endl;
+	
 //	person * test[2] = {new person(0),new person(0)};
 //	cohort * test[2] = {new person(0),new person(0)};
 //	cout << test[0]->GetNatDeathDate() << endl;
 //	cout << test[1]->GetNatDeathDate() << endl;
-	
-	cohort * theCohort = new cohort(2);
 
-	theCohort->GenerateCohort(0);
+///////////////////////////
+	cohort * theCohort = new cohort(2);
+	person * personTest = new person(0);
+	theCohort->cohortContainer.push_back(personTest);
 	
+	cout << theCohort->cohortContainer.size() << endl;
+	
+//	person * thePerson = new person(Time); //Not correct.
+	
+//	theCohort->GenerateCohort(0);
+//	cout << "Cohort created containing " << theCohort->GetCohortSize() << " people." << endl;
+//	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
+	
+	// How do I differentiate between people? -> I think with a Vector <* thePerson>
+///////////////////////////
+	
+//	thePerson = new person(0); //Not correct.
+	
+	//////////////
 	// PRIORITY //
 	// Need to find a way of accessing the new persons created in each cohort individually.
-	
+	//////////////
 	
 //	/* Create a person */
 //	thePerson = new person(0);
-//	
+//
 //	
 //	
 //	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
