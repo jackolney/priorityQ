@@ -23,8 +23,9 @@ public:
 	
 	/* Methods */
 	void Execute();
+	
 private:
-	person * const iPerson;
+	person * const pPerson; // pPerson here is the pointer to the relevant person that will experience the event.
 };
 
 
@@ -33,14 +34,14 @@ private:
 
 class HivTest : public event {
 public:
-	HivTest(const double Time); //constructor
+	HivTest(person * const thePerson, const double Time); //constructor
 	~HivTest(); //destructor
 	
 	/* Methods */
 	void Execute();
 	
 private:
-	//Some private stuff
+	person * const pPerson;
 	
 };
 
@@ -49,14 +50,14 @@ private:
 
 class Cd4Test : public event {
 public:
-	Cd4Test(const double Time); //constructor
+	Cd4Test(person * const thePerson, const double Time); //constructor
 	~Cd4Test(); //destructor
 	
 	/* Methods */
 	void Execute();
 	
 private:
-	//Some private stuff
+	person * const pPerson;
 	
 };
 

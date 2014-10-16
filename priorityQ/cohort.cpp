@@ -10,8 +10,6 @@
 #include "cohort.h"
 #include "person.h"
 
-//extern person * thePerson;
-
 cohort::cohort(const unsigned int Size) : cohortSize(Size)
 {}
 

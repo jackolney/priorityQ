@@ -101,7 +101,6 @@ double person::AssignNatDeathDate()
 void person::Kill(double Time)
 {
 	//Kill person
-	//Break loop here?
 	DeathDay = Time;
 	cout << "DeathDate = " << DeathDay << endl;
 	return;

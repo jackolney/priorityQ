@@ -20,7 +20,6 @@ using namespace std;
 /* Pointers to things (allows me to access them elsewhere with extern) */
 Rng * theRng;
 eventQ * theQ;
-//person * thePerson;
 cohort * theCohort;
 
 

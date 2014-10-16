@@ -15,7 +15,6 @@
 
 extern Rng * theRng;
 extern eventQ * theQ;
-//extern person * thePerson;
 
 
 using namespace std;
