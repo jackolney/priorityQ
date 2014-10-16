@@ -25,16 +25,12 @@ unsigned int cohort::GetCohortSize() const
 
 void cohort::GenerateCohort(const double Time) // Having these as constant arguments should not cause any issues.
 {
-	for(size_t i = 0; i < cohortSize; i++) {
+	for(size_t i = 0; i < cohortSize; i++)
 		NewPerson(Time);
-//		cohortContainer.push_back(thePerson);
-	}
 }
 
 void cohort::NewPerson(const double Time)
 {
-//	person * testPerson = new person(Time); //Not correct (yet).
-//	cohortContainer.push_back(testPerson);
-	new person(Time); //Not correct (yet... maybe now).
-	//When constructing person we should pass the pointer 'this' TO THE VECTOR.
+	person * thePerson = new person(Time); //Not correct (yet).
+	cohortContainer.push_back(thePerson);
 }

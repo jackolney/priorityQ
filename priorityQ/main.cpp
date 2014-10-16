@@ -73,34 +73,19 @@ int main(int argc, const char * argv[])
 //	cout << test[1]->GetNatDeathDate() << endl;
 
 ///////////////////////////
-	cohort * theCohort = new cohort(1);
+	cohort * theCohort = new cohort(2);
 	theCohort->GenerateCohort(0);
-	
-//	person * test = new person(0);
-//
-//	theCohort->cohortContainer.push_back(test);
 	
 	cout << "Cohort size " << theCohort->GetCohortSize() << endl;
 	cout << "Q size " << theQ->Size() << endl;
 	cout << "container length " << theCohort->cohortContainer.size() << endl;
 	
-	//Maybe it doesn't exist yet... so I have to call it afterwards...
-	
-//	person * thePerson = new person(Time); //Not correct.
-	
-//	theCohort->GenerateCohort(0);
-//
-//	cout << theCohort->cohortContainer.size() << endl;
-//	
-//	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
-//	{
-//		cout << "cohort output, natdeathdate = " << theCohort->cohortContainer[i]->GetNatDeathDate() << endl;
-//	}
-//	
-//	cout << "size of the priority queue = " << theQ->Size() << endl;
-	// At this point theQ contains two death events to two separate people in the cohort.
-	
-	
+	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
+	{
+		cout << "cohort output, natdeathdate = " << theCohort->cohortContainer[i]->GetNatDeathDate() << endl;
+	}
+
+	cout << "size of the priority queue = " << theQ->Size() << endl;
 	
 //	cout << "Cohort created containing " << theCohort->GetCohortSize() << " people." << endl;
 //	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
@@ -123,32 +108,24 @@ int main(int argc, const char * argv[])
 //	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
 //	cout << "Alive = " << thePerson->Alive() << endl;
 //		
-////	/* Schedule some events */
+//	/* Schedule some events */
 //	event * testEvent1 = new HivTest(10);
-////	event * testEvent2 = new Cd4Test(20);
-////
+//	event * testEvent2 = new Cd4Test(20);
+//
 //	/* Add events into priorityQ */
 //	theQ->AddEvent(testEvent1);
-////	theQ->AddEvent(testEvent2);
-//	
+//	theQ->AddEvent(testEvent2);
+//
 //	/* Model Run */
-//	cout << "Start time = " << theQ->GetTime() << endl;
-//	theQ->RunEvents();
-//	cout << "End time = " << theQ->GetTime() << endl;
-//
-//
-//	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
-//	{
-//		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
-//	}
-//
-//	cout << theCohort->cohortContainer[0]->Alive() << endl;
-//	cout <<	theCohort->cohortContainer[0]->GetNatDeathDate() << endl;
-//	cout << endl;
-//	cout << theCohort->cohortContainer[1]->Alive() << endl;
-//	cout << theCohort->cohortContainer[1]->GetNatDeathDate() << endl;
-//	cout << endl;
-	//The issue is that the people overwrite each other... I think this stems from the point of creation.
+	cout << "Start time = " << theQ->GetTime() << endl;
+	theQ->RunEvents();
+	cout << "End time = " << theQ->GetTime() << endl;
+
+
+	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
+	{
+		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
+	}
 	
 	/* Upcoming planned order of events */
 	// cohort * theCohort = new cohort(100);

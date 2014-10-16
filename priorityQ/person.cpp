@@ -30,8 +30,6 @@ hivDeathDate(0),
 DeathDay(0),
 BirthDay(0)
 {
-	theCohort->cohortContainer.push_back(this);
-	cout << this << endl;
 	gender = AssignGender();
 	natDeathDate = AssignNatDeathDate();
 }
