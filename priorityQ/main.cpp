@@ -35,105 +35,30 @@ int main(int argc, const char * argv[])
 	/* Define the event queue */
 	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
-
-	
-///////////////////////////
-//	vector<person*> test;
-//	
-//	for(size_t i = 0;i < 2; i++)
-//	{
-//		thePerson = new person(0);
-//		test.push_back(thePerson);
-//	}
-//	thePerson = new person(0);
-////	test.push_back(thePerson);
-//	
-//	cout << test[0]->GetNatDeathDate() << endl;
-//	cout << test[1]->GetNatDeathDate() << endl;
-//	cout << test[2]->GetNatDeathDate() << endl;
-////	cout << test[3]->GetNatDeathDate() << endl;
-//	
-//	cout << "vector size = " << test.size() << endl;
-////	test.pop_back();
-////	test.erase(test.begin(),test.begin()+2);
-////	test.clear();
-//	cout << "vector size = " << test.size() << endl;
-	
-	// why does the pointer still exist?
-//	cout << test[0]->GetNatDeathDate() << endl;
-//	cout << "Alive = " << test[0]->Alive() << endl;
-//	test[0]->Kill(1);
-//	cout << test[1]->GetNatDeathDate() << endl;
-//	cout << test[2]->GetNatDeathDate() << endl;
-	
-//	person * test[2] = {new person(0),new person(0)};
-//	cohort * test[2] = {new person(0),new person(0)};
-//	cout << test[0]->GetNatDeathDate() << endl;
-//	cout << test[1]->GetNatDeathDate() << endl;
-
-///////////////////////////
+	/* Create new cohort of individuals */
 	cohort * theCohort = new cohort(10);
 	theCohort->GenerateCohort(0);
 	
-	cout << "Cohort size " << theCohort->GetCohortSize() << endl;
-	cout << "Q size " << theQ->Size() << endl;
-	cout << "container length " << theCohort->cohortContainer.size() << endl;
-	
-	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
-	{
-		cout << "cohort output, natdeathdate = " << theCohort->cohortContainer[i]->GetNatDeathDate() << endl;
-		cout << "cohort output, initialAge = " << theCohort->cohortContainer[i]->GetAge() << endl;
-	}
+	/* Ask a few questions on object sizes */
+	cout << "Cohort size = " << theCohort->GetCohortSize() << endl;
+	cout << "Q size = " << theQ->Size() << endl;
+	cout << "Container length = " << theCohort->cohortContainer.size() << endl;
 
-	cout << "size of the priority queue = " << theQ->Size() << endl;
-	
-//	cout << "Cohort created containing " << theCohort->GetCohortSize() << " people." << endl;
-//	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
-	
-	// How do I differentiate between people? -> I think with a Vector <* thePerson>
-///////////////////////////
-	
-//	thePerson = new person(0); //Not correct.
-	
-	//////////////
-	// PRIORITY //
-	// Need to find a way of accessing the new persons created in each cohort individually.
-	//////////////
-	
-//	/* Create a person */
-//	thePerson = new person(0);
-//
-//	
-//	
-//	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
-//	cout << "Alive = " << thePerson->Alive() << endl;
-//		
-//	/* Schedule some events */
-//	event * testEvent1 = new HivTest(10);
-//	event * testEvent2 = new Cd4Test(20);
-//
-//	/* Add events into priorityQ */
-//	theQ->AddEvent(testEvent1);
-//	theQ->AddEvent(testEvent2);
-//
-//	/* Model Run */
+	/* Model Run */
 	cout << "Start time = " << theQ->GetTime() << endl;
+	
 	theQ->RunEvents();
+	
 	cout << "End time = " << theQ->GetTime() << endl;
 
-
+	/* Check that everyone is dead */
 	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
 	{
-		cout << "cohort output, Alive? = " << theCohort->cohortContainer[i]->Alive() << endl;
+		cout << "All dead? = " << theCohort->cohortContainer[i]->Alive() << endl;
 	}
 
-	cout << "size of the priority queue = " << theQ->Size() << endl;
+	cout << "Size of the priority queue = " << theQ->Size() << endl;
 	
-	/* Upcoming planned order of events */
-	// cohort * theCohort = new cohort(100);
-	// theCohort->GenerateCohort();
-	// theQ->RunEvents();
-	// RunEvents() will have a function that will include NEW cohorts each year, thereby keeping main() code minimal.
 	
 	/*CHALLENGE*/
 	
@@ -149,8 +74,8 @@ int main(int argc, const char * argv[])
 	// 9) Run two people on one eventQ with a GlobalTime. = Done.
 	// 10) Set up ages to run properly. = Done.
 	// 11) DeathDates should be MINUS initialAge (convert to days too). = Done.
-	// 12) Allow UpdateQ() to run -> perhaps to remote functions.
-	// 13) Allow cohorts to be fired off at different times.
+	// 12) Allow UpdateQ() to run -> perhaps to remote functions. = Done.
+	// 13) Allow cohorts to be fired off at different times. <- CHALLENGE NOW.
 	// 14) Stagger start of individuals in each cohort (spread throughout the year).
 	// 15) Allow events to be cancelled.
 	// 16) How to handle multiple events occuring on the same day?
