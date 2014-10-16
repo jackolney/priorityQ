@@ -73,14 +73,23 @@ int main(int argc, const char * argv[])
 
 ///////////////////////////
 	cohort * theCohort = new cohort(2);
-	person * personTest = new person(0);
-	theCohort->cohortContainer.push_back(personTest);
-	
-	cout << theCohort->cohortContainer.size() << endl;
 	
 //	person * thePerson = new person(Time); //Not correct.
 	
-//	theCohort->GenerateCohort(0);
+	theCohort->GenerateCohort(0);
+	
+	cout << theCohort->cohortContainer.size() << endl;
+	
+	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
+	{
+		cout << "cohort output, natdeathdate = " << theCohort->cohortContainer[i]->GetNatDeathDate() << endl;
+	}
+	
+	cout << "size of the priority queue = " << theQ->Size() << endl;
+	// At this point theQ contains two death events to two separate people in the cohort.
+	
+	
+	
 //	cout << "Cohort created containing " << theCohort->GetCohortSize() << " people." << endl;
 //	cout << "NatDeatDate = " << thePerson->GetNatDeathDate() << endl;
 	
