@@ -59,7 +59,6 @@ int main(int argc, const char * argv[])
 
 	cout << "Size of the priority queue = " << theQ->Size() << endl;
 	
-	
 	/*CHALLENGE*/
 	
 	// 1) Pull out the top() etc. = Done.
