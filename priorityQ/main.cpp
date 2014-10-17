@@ -36,7 +36,7 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
 	/* Create new cohort of individuals */
-	cohort * theCohort = new cohort(10); //Edit cohort constructor to supply initialTime.
+	cohort * theCohort = new cohort(1,0); //Edit cohort constructor to supply initialTime.
 	theCohort->GenerateCohort(0);
 	
 	/* Ask a few questions on object sizes */
@@ -75,6 +75,9 @@ int main(int argc, const char * argv[])
 	// 11) DeathDates should be MINUS initialAge (convert to days too). = Done.
 	// 12) Allow UpdateQ() to run -> perhaps to remote functions. = Done.
 	// 13) Allow cohorts to be fired off at different times. <- CHALLENGE NOW.
+	//		-> cohort constructor defines a startTime = Done.
+	//		-> startTime then entered into theQ
+	//		-> at the correct time theQ calls cohort->GeneratreCohort();
 	// 14) Stagger start of individuals in each cohort (spread throughout the year).
 	// 15) Allow events to be cancelled.
 	// 16) How to handle multiple events occuring on the same day?

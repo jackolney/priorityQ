@@ -9,9 +9,19 @@
 #include <iostream>
 #include "cohort.h"
 #include "person.h"
+#include "event.h"
+#include "events.h"
+#include "eventQ.h"
 
-cohort::cohort(const unsigned int Size) : cohortSize(Size)
-{}
+extern eventQ * theQ;
+
+cohort::cohort(const unsigned int Size, const unsigned int StartTime) :
+cohortSize(Size),
+cohortStartTime(StartTime)
+{
+	event * newEvent = new CohortStart(this,cohortStartTime);
+	theQ->AddEvent(newEvent);
+}
 
 cohort::~cohort()
 {}

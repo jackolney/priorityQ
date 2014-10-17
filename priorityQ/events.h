@@ -11,7 +11,25 @@
 
 #include <stdio.h>
 #include "person.h"
+#include "cohort.h"
 #include "event.h"
+
+/////////////////////
+/////////////////////
+
+class CohortStart : public event {
+public:
+	CohortStart(cohort * const iCohort, const double Time); //constructor
+	~CohortStart(); //destructor
+	
+	/* Methods */
+	void Execute();
+	
+private:
+	cohort * const pCohort; //Pointer to cohort.
+	
+};
+
 
 /////////////////////
 /////////////////////

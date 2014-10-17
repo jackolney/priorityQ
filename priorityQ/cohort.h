@@ -17,7 +17,7 @@ using namespace std;
 
 class cohort {
 public:
-	cohort(const unsigned int Size); //constructor
+	cohort(const unsigned int Size, const unsigned int StartTime); //constructor
 	~cohort(); //destructor
 	
 	/* methods */

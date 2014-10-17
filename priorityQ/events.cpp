@@ -17,6 +17,23 @@ using namespace std;
 /////////////////////
 /////////////////////
 
+CohortStart::CohortStart(cohort * const iCohort, const double Time) :
+event(Time),
+pCohort(iCohort)
+{}
+
+CohortStart::~CohortStart()
+{}
+
+void CohortStart::Execute()
+{
+		//theCohort->GenerateCohort(TIME);
+	cout << "Execute CohortStart." << endl;
+}
+
+/////////////////////
+/////////////////////
+
 Death::Death(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
