@@ -10,6 +10,7 @@
 #include <mach/mach_time.h>
 #include "rng.h"
 #include "person.h"
+#include "population.h"
 #include "cohort.h"
 #include "event.h"
 #include "events.h"
@@ -36,14 +37,16 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
 	/* Create new cohort of individuals */
-	cohort * theCohort = new cohort(1,5); //Edit cohort constructor to supply initialTime.
-//	new cohort(1,10); //Edit cohort constructor to supply initialTime.
+	population * thePop = new population(10);
+	thePop->Generate();
+//	cohort * theCohort = new cohort(1,5); //Edit cohort constructor to supply initialTime.
+//	cohort * secondCohort = new cohort(1,10); //Edit cohort constructor to supply initialTime.
     // I think to solve the multiple cohorts issue - we need to develop a population class which holds the various cohorts for deployment.
 	
 	/* Ask a few questions on object sizes */
-	cout << "\t\tCohort size = " << theCohort->GetCohortSize() << endl;
-	cout << "\t\tQ size = " << theQ->Size() << endl;
-	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
+//	cout << "\t\tCohort size = " << theCohort->GetCohortSize() << endl;
+//	cout << "\t\tQ size = " << theQ->Size() << endl;
+//	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
 
 	/* Model Run */
 	cout << "\t\tStart time = " << theQ->GetTime() << endl;
@@ -53,12 +56,12 @@ int main(int argc, const char * argv[])
 	cout << "\t\tEnd time = " << theQ->GetTime() << endl;
 
 	/* Check that everyone is dead */
-	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
-	{
-		cout << "All dead? = " << theCohort->cohortContainer[i]->Alive() << endl;
-	}
-
-	cout << "Size of the priority queue = " << theQ->Size() << endl;
+//	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
+//	{
+//		cout << "All dead? = " << theCohort->cohortContainer[i]->Alive() << endl;
+//	}
+//
+//	cout << "Size of the priority queue = " << theQ->Size() << endl;
 	
 	/*CHALLENGE*/
 	
@@ -82,7 +85,7 @@ int main(int argc, const char * argv[])
 	// 14) Stagger start of individuals in each cohort (spread throughout the year). = Done.
 	//		-> Stagger over the period of one year. = Done.
 	//		-> Make sure age / death date / events are all ON TOP of this date. = Done.
-	// 15) Multiple cohorts over time.
+	// 15) Multiple cohorts over time. <- TARGET!
 	// 16) Allow events to be cancelled.
 	// 17) How to handle multiple events occuring on the same day?
 	// 18) Allow person to be part of a COHORT. = Done.
