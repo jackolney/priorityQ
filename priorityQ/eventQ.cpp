@@ -49,7 +49,7 @@ void eventQ::RunEvents()
 	while(!Empty() && currentTime < endTime) {
 		event * nextEvent = GetTop();
 		currentTime = nextEvent->GetTime();
-		cout << "Current time is = " << currentTime << endl;
+		cout << "\tCurrent time is = " << currentTime << endl;
 		PopTop();
 //		if(!nextEvent->Cancelled()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
 			nextEvent->Execute();

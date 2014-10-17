@@ -36,20 +36,20 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
 	/* Create new cohort of individuals */
-	cohort * theCohort = new cohort(1,0); //Edit cohort constructor to supply initialTime.
-	theCohort->GenerateCohort(0);
+	cohort * theCohort = new cohort(10,10); //Edit cohort constructor to supply initialTime.
+//	theCohort->GenerateCohort();
 	
 	/* Ask a few questions on object sizes */
-	cout << "Cohort size = " << theCohort->GetCohortSize() << endl;
-	cout << "Q size = " << theQ->Size() << endl;
-	cout << "Container length = " << theCohort->cohortContainer.size() << endl;
+	cout << "\t\tCohort size = " << theCohort->GetCohortSize() << endl;
+	cout << "\t\tQ size = " << theQ->Size() << endl;
+	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
 
 	/* Model Run */
-	cout << "Start time = " << theQ->GetTime() << endl;
+	cout << "\t\tStart time = " << theQ->GetTime() << endl;
 	
 	theQ->RunEvents();
 	
-	cout << "End time = " << theQ->GetTime() << endl;
+	cout << "\t\tEnd time = " << theQ->GetTime() << endl;
 
 	/* Check that everyone is dead */
 	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
@@ -76,9 +76,11 @@ int main(int argc, const char * argv[])
 	// 12) Allow UpdateQ() to run -> perhaps to remote functions. = Done.
 	// 13) Allow cohorts to be fired off at different times. <- CHALLENGE NOW.
 	//		-> cohort constructor defines a startTime = Done.
-	//		-> startTime then entered into theQ
-	//		-> at the correct time theQ calls cohort->GeneratreCohort();
+	//		-> startTime then entered into theQ = Done.
+	//		-> at the correct time theQ calls cohort->GeneratreCohort(); = Done.
+	//		-> Multiple cohorts fired off.
 	// 14) Stagger start of individuals in each cohort (spread throughout the year).
+	//		-> Stagger over the period of one year.
 	// 15) Allow events to be cancelled.
 	// 16) How to handle multiple events occuring on the same day?
 	// 17) Allow person to be part of a COHORT.

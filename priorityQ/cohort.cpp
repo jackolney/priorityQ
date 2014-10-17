@@ -21,6 +21,7 @@ cohortStartTime(StartTime)
 {
 	event * newEvent = new CohortStart(this,cohortStartTime);
 	theQ->AddEvent(newEvent);
+	cout << "New cohort initialised. Cohort will be released into the wild on day = " << StartTime << endl;
 }
 
 cohort::~cohort()
@@ -36,14 +37,16 @@ void cohort::PushToVector(person * const thePerson)
 	cohortContainer.push_back(thePerson);
 }
 
-void cohort::GenerateCohort(const double Time) // Having these as constant arguments should not cause any issues.
+void cohort::GenerateCohort() // Having these as constant arguments should not cause any issues.
 {
+	cout << "Individuals being seeded into the model." << endl;
 	for(size_t i = 0; i < cohortSize; i++)
-		NewPerson(Time);
+		NewPerson(theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
 }
 
 void cohort::NewPerson(const double Time)
 {
+	cout << "New guy entering the model." << endl;
 	person * thePerson = new person(Time);
 	PushToVector(thePerson);
 }

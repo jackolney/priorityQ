@@ -11,6 +11,7 @@
 #include "event.h"
 #include "person.h"
 #include "update.h"
+#include "cohort.h"
 
 using namespace std;
 
@@ -27,8 +28,8 @@ CohortStart::~CohortStart()
 
 void CohortStart::Execute()
 {
-		//theCohort->GenerateCohort(TIME);
 	cout << "Execute CohortStart." << endl;
+	pCohort->GenerateCohort(); //IDIOT - WRONG POINTER!!!!
 }
 
 /////////////////////

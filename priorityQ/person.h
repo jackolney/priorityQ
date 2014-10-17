@@ -34,6 +34,7 @@ public:
 	double GetAge() const;
 	bool GetDiagnosedState() const { return diagnosed; }
 	bool GetCd4TestState() const { return cd4Test; }
+	const double GetBirthDay() const { return BirthDay; }
 	
 private:
 	/* basic characteristics */

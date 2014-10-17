@@ -21,7 +21,7 @@ public:
 	~cohort(); //destructor
 	
 	/* methods */
-	void GenerateCohort(const double Time); // Create cohort of desired size...
+	void GenerateCohort(); // Create cohort of desired size...
 	void NewPerson(const double Time); // Generates new person (called by GenerateCohort())
 	
 	/* accessor methods */
@@ -32,7 +32,7 @@ public:
 	
 	/* vector methods */
 	void PushToVector(person * const thePerson);
-	
+
 private:
 	unsigned int cohortSize; //Unsigned denotes type can only contain positive values.
 	unsigned int cohortStartTime; //Specifies the time that the cohort will enter the model.

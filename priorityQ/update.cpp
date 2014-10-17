@@ -26,7 +26,7 @@ void SeedEvents(person * const thePerson, const double Time)
 {
 	cout << "Seeding initial events." << endl;
 	
-	if (Time == 0) {
+	if (thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
 		event * theEvent = new HivTest(thePerson,Time + theRng->SampleExpDist(25));
 		theQ->AddEvent(theEvent);
 		cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl;
