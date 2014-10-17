@@ -12,6 +12,9 @@
 #include "event.h"
 #include "events.h"
 #include "eventQ.h"
+#include "rng.h"
+
+extern Rng * theRng;
 
 extern eventQ * theQ;
 
@@ -37,16 +40,23 @@ void cohort::PushToVector(person * const thePerson)
 	cohortContainer.push_back(thePerson);
 }
 
-void cohort::GenerateCohort() // Having these as constant arguments should not cause any issues.
+void cohort::GenerateCohort()
 {
 	cout << "Individuals being seeded into the model." << endl;
 	for(size_t i = 0; i < cohortSize; i++)
-		NewPerson(theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
+		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
 }
 
-void cohort::NewPerson(const double Time)
+void cohort::ScheduleNewPerson(const double Time)
 {
-	cout << "New guy entering the model." << endl;
-	person * thePerson = new person(Time);
+	cout << "ScheduleNewPerson on " << Time << endl;
+	event * newEvent = new PersonStart(this,Time);
+	theQ->AddEvent(newEvent);
+}
+
+void cohort::GenerateNewPerson()
+{
+	cout << "GenerateNewPerson on " << theQ->GetTime() << endl;
+	person * thePerson = new person(theQ->GetTime());
 	PushToVector(thePerson);
 }

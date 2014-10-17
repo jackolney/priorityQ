@@ -22,7 +22,8 @@ public:
 	
 	/* methods */
 	void GenerateCohort(); // Create cohort of desired size...
-	void NewPerson(const double Time); // Generates new person (called by GenerateCohort())
+	void ScheduleNewPerson(const double Time);
+	void GenerateNewPerson(); // Generates new person (called by GenerateCohort())
 	
 	/* accessor methods */
 	unsigned int GetCohortSize() const;

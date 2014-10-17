@@ -17,7 +17,6 @@
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern cohort * theCohort;
 
 using namespace std;
 

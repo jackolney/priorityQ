@@ -17,7 +17,6 @@
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern cohort * theCohort;
 
 using namespace std;
 
@@ -36,7 +35,7 @@ art(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
-	natDeathDate = AssignNatDeathDate();
+	natDeathDate = AssignNatDeathDate(Time);
 	SeedEvents(this,Time);
 }
 
@@ -65,12 +64,10 @@ double person::GetNatDeathDate() const
 
 bool person::Alive()
 {
-	int aliveStatus = 0;
+	int aliveStatus = false;
 	
 	if(DeathDay == 0)
-		aliveStatus = 1;
-	else
-		aliveStatus = 0;
+		aliveStatus = true;
 	
 	return aliveStatus;
 }
@@ -80,7 +77,7 @@ double person::AssignGender()
 	return theRng->Sample(0.5);
 }
 
-double person::AssignNatDeathDate()
+double person::AssignNatDeathDate(const double Time)
 {
 	/* Declare survival distribution */
 	double surv [2] [100] =
@@ -111,16 +108,15 @@ double person::AssignNatDeathDate()
 	j *= 365.25;
 	
 	/* Create Natural Death Date Event & Add to eventQ */
-	event * newEvent = new Death(this,j-initialAge);
+	event * newEvent = new Death(this,Time + j - initialAge);
 	theQ->AddEvent(newEvent);
-	cout << "NatDeathDate = " << j-initialAge << endl;
+	cout << "NatDeathDate = " << Time + j - initialAge << endl;
 	
-	return j-initialAge;
+	return Time + j - initialAge;
 }
 
 void person::Kill(double Time)
 {
-	//Kill person
 	DeathDay = Time;
 	cout << "DeathDate = " << DeathDay << endl;
 	return;

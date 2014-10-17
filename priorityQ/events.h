@@ -27,7 +27,21 @@ public:
 	
 private:
 	cohort * const pCohort; //Pointer to cohort.
+};
+
+/////////////////////
+/////////////////////
+
+class PersonStart : public event {
+public:
+	PersonStart(cohort * const iCohort, const double Time); //constructor
+	~PersonStart(); //destructor
 	
+	/* Methods */
+	void Execute();
+	
+private:
+	cohort * const pCohort;
 };
 
 

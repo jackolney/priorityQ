@@ -35,6 +35,23 @@ void CohortStart::Execute()
 /////////////////////
 /////////////////////
 
+PersonStart::PersonStart(cohort * const iCohort, const double Time) :
+event(Time),
+pCohort(iCohort)
+{}
+
+PersonStart::~PersonStart()
+{}
+
+void PersonStart::Execute()
+{
+	cout << "Execute PersonStart." << endl;
+	pCohort->GenerateNewPerson();
+}
+
+/////////////////////
+/////////////////////
+
 Death::Death(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)

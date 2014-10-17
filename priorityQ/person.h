@@ -19,7 +19,7 @@ public:
 	/* Initialiser functions */
 	double AssignGender();
 	void AssignInitialAge(const double Time);
-	double AssignNatDeathDate();
+	double AssignNatDeathDate(const double Time);
 	
 	/* Methods */
 	void Kill(double Time);
