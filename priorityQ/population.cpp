@@ -21,7 +21,8 @@ void population::Generate()
 		//Will walk along an array and spit out the corresponding cohorts at the beginning of the Model.
 	double yr = 0;
 	int cohortArray [2] = {1,1};
-		//Could do something with the arguement populationSize?
+		//Allow populationSize to scale the cohort size.
+		//Use a loop to multiply all elements of an array by populationSizeScalar.
 	
 	for(int i = 0; i < 2; i++) {
 		new cohort(cohortArray[i],yr);
