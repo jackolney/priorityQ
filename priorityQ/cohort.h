@@ -35,6 +35,7 @@ public:
 	
 private:
 	unsigned int cohortSize; //Unsigned denotes type can only contain positive values.
+	unsigned int cohortStartTime; //Specifies the time that the cohort will enter the model.
 	
 };
 
