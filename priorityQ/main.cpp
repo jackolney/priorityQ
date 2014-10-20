@@ -88,12 +88,13 @@ int main(int argc, const char * argv[])
 	// 14) Stagger start of individuals in each cohort (spread throughout the year). = Done.
 	//		-> Stagger over the period of one year. = Done.
 	//		-> Make sure age / death date / events are all ON TOP of this date. = Done.
-	// 15) Multiple cohorts over time. <- TARGET!
-	// 16) Allow events to be cancelled.
-	// 17) Seed HIV incidence.
-	// 18) How to handle multiple events occuring on the same day?
-	// 19) Allow person to be part of a COHORT. = Done.
-	// 20) EXPAND to include all functions of the model.
+	// 15) Multiple cohorts over time. <- TARGET! = Done.
+	// 16) Age structure in 1970 for time == 0.
+	// 17) Allow events to be cancelled.
+	// 18) Seed HIV incidence.
+	// 19) How to handle multiple events occuring on the same day?
+	// 20) Allow person to be part of a COHORT. = Done.
+	// 21) EXPAND to include all functions of the model.
 	
 	theQ->Empty(); //Empty eventQ at end of run.
 

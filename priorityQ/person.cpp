@@ -22,6 +22,7 @@ extern eventQ * theQ;
 using namespace std;
 
 person::person(const double Time) : //can use Time to specify the start time for the individual.
+gender(0),
 currentAge(0),
 initialAge(0),
 seroStatus(0),
@@ -50,10 +51,27 @@ bool person::GetGender() const
 
 void person::AssignInitialAge(const double Time)
 {
-//	if(Time == 0){
-//		//Assign age as per Kenya in 1970.
-//	}
-	initialAge = theRng->doub() * 365.25;
+	//Assign age as per Kenya in 1970 if Time = 1970.
+	if(Time < 365.25) {
+		const double ageKenya1970 [36] = {0.101640654,0.18074287,0.24488321,0.296843465,0.33534196,0.362704406,0.387709503,0.411405909,0.43137522,0.447971405,0.461838232,0.473612273,0.4832219,0.490165978,0.494779544,0.497326542,0.49881466,0.49881466,0.60001381,0.679748066,0.744514936,0.797175037,0.836087485,0.863900411,0.889576027,0.913307092,0.932633878,0.948053875,0.961023832,0.971869188,0.981102987,0.988755443,0.994329865,0.997681397,1,1};
+		
+		const double u = theRng->doub();
+		unsigned int i = 0;
+		
+		while(u > ageKenya1970[i])
+			i++;
+		
+		if(i < 18) {
+			gender = true; //reassigns gender to Male.
+			initialAge = (i * 5 + (theRng->doub() * 5)) * 365.25;
+		} else {
+			gender = false; //reassigns gender to Female.
+			initialAge = ((i - 18) * 5 + (theRng->doub() * 5)) * 365.25;
+		}
+	} else {
+		initialAge = theRng->doub() * 365.25;
+	}
+
 	currentAge = initialAge;
 	D(cout << "Initial age = " << initialAge << endl);
 }
