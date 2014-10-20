@@ -24,7 +24,7 @@ cohortStartTime(StartTime)
 {
 	event * newEvent = new CohortStart(this,cohortStartTime);
 	theQ->AddEvent(newEvent);
-	cout << "New cohort initialised. Cohort will be released into the wild on day = " << StartTime << endl;
+	cout << "New cohort initialised. Cohort of " << Size << " people will be released into the wild on day = " << StartTime << endl;
 }
 
 cohort::~cohort()
@@ -42,7 +42,7 @@ void cohort::PushToVector(person * const thePerson)
 
 void cohort::GenerateCohort()
 {
-	cout << "Individuals being seeded into the model." << endl;
+	cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl;
 	for(size_t i = 0; i < cohortSize; i++)
 		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
 }

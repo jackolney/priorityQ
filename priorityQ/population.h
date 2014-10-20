@@ -13,14 +13,14 @@
 
 class population {
 public:
-	population(unsigned const int theSize); //constructor
+	population(const double theSize); //constructor
 	~population(); //destructor
 
 	/* Methods */
-	void Generate(unsigned const int theSize);
+	void Generate(const double theSize);
 	
 private:
-	unsigned const int populationSize;
+	const double populationSize;
 	
 };
 
