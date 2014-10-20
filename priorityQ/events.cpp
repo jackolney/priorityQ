@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "events.h"
 #include "event.h"
 #include "person.h"
@@ -28,7 +29,7 @@ CohortStart::~CohortStart()
 
 void CohortStart::Execute()
 {
-	cout << "CohortStart executed." << endl;
+	D(cout << "CohortStart executed." << endl);
 	pCohort->GenerateCohort(); //IDIOT - WRONG POINTER!!!!
 }
 
@@ -45,7 +46,7 @@ PersonStart::~PersonStart()
 
 void PersonStart::Execute()
 {
-	cout << "PersonStart executed." << endl;
+	D(cout << "PersonStart executed." << endl);
 	pCohort->GenerateNewPerson();
 }
 
@@ -62,7 +63,7 @@ Death::~Death()
 
 void Death::Execute()
 {
-	cout << "Death executed." << endl;
+	D(cout << "Death executed." << endl);
 	pPerson->Kill(eventTime);
 }
 
@@ -79,7 +80,7 @@ HivTest::~HivTest()
 
 void HivTest::Execute()
 {
-	cout << "HivTest executed." << endl;
+	D(cout << "HivTest executed." << endl);
 	pPerson->SetDiagnosedState(true);
 	UpdateEvents(pPerson);
 };
@@ -97,7 +98,7 @@ Cd4Test::~Cd4Test()
 
 void Cd4Test::Execute()
 {
-	cout << "Cd4Test executed." << endl;
+	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetCd4TestState(true);
 	UpdateEvents(pPerson);
 };

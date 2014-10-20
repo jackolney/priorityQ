@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "update.h"
 #include "person.h"
 #include "event.h"
@@ -24,12 +25,12 @@ using namespace std;
 
 void SeedEvents(person * const thePerson, const double Time)
 {
-	cout << "Seeding initial events." << endl;
+	D(cout << "Seeding initial events." << endl);
 	
 	if (thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
 		event * theEvent = new HivTest(thePerson,Time + theRng->SampleExpDist(25));
 		theQ->AddEvent(theEvent);
-		cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl;
+		D(cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl);
 		}
 	
 }
@@ -40,8 +41,8 @@ void SeedEvents(person * const thePerson, const double Time)
 void UpdateEvents(person * const thePerson)
 {
 	//Need to take currentTime from somewhere, theQ?
-	cout << "\tUpdateEvents executed." << endl;
-	cout << "\tUpdateEvents time = " << theQ->GetTime() << endl;
+	D(cout << "\tUpdateEvents executed." << endl);
+	D(cout << "\tUpdateEvents time = " << theQ->GetTime() << endl);
 	
 	// Split tasks into multiple functions.
 	
@@ -57,7 +58,7 @@ void UpdateEvents(person * const thePerson)
 void UpdateAge(person * const thePerson)
 {
 	thePerson->SetAge(theQ->GetTime());
-	cout << "\tUpdated Age = " << thePerson->GetAge() << endl;
+	D(cout << "\tUpdated Age = " << thePerson->GetAge() << endl);
 }
 
 ////////////////////
@@ -68,7 +69,7 @@ void ScheduleCd4Test(person * const thePerson)
 	if(thePerson->GetDiagnosedState() && !thePerson->GetCd4TestState()) {
 		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
 		theQ->AddEvent(theEvent);
-		cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl;		
+		D(cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl);
 	}
 }
 

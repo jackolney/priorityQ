@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "rng.h"
 #include "person.h"
 #include "event.h"
@@ -54,7 +55,7 @@ void person::AssignInitialAge(const double Time)
 //	}
 	initialAge = theRng->doub() * 365.25;
 	currentAge = initialAge;
-	cout << "Initial age = " << initialAge << endl;
+	D(cout << "Initial age = " << initialAge << endl);
 }
 
 double person::GetNatDeathDate() const
@@ -110,7 +111,7 @@ double person::AssignNatDeathDate(const double Time)
 	/* Create Natural Death Date Event & Add to eventQ */
 	event * newEvent = new Death(this,Time + j - initialAge);
 	theQ->AddEvent(newEvent);
-	cout << "NatDeathDate = " << Time + j - initialAge << endl;
+	D(cout << "NatDeathDate = " << Time + j - initialAge << endl);
 	
 	return Time + j - initialAge;
 }
@@ -118,7 +119,7 @@ double person::AssignNatDeathDate(const double Time)
 void person::Kill(double Time)
 {
 	DeathDay = Time;
-	cout << "DeathDate = " << DeathDay << endl;
+	D(cout << "DeathDate = " << DeathDay << endl);
 	return;
 }
 

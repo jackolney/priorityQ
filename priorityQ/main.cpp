@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include <mach/mach_time.h>
 #include "rng.h"
 #include "person.h"
@@ -28,8 +29,9 @@ int main(int argc, const char * argv[])
 {
 	
 	/* Keeps the output window open */
-	cout << "Starting code." << endl << endl;
+	D(cout << "Starting code." << endl << endl);
 
+	
 	/* Declare RandomNumberGenerator */
 	theRng = new Rng(mach_absolute_time());
 
@@ -49,12 +51,12 @@ int main(int argc, const char * argv[])
 //	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
 
 	/* Model Run */
-	cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tStart time = " << theQ->GetTime() << endl;
+	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tStart time = " << theQ->GetTime() << endl);
 	
 	theQ->RunEvents();
-	cout << "Empty? " << theQ->Empty() << endl;
+	D(cout << "Empty? " << theQ->Empty() << endl);
 	
-	cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEnd time = " << theQ->GetTime() << endl;
+	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEnd time = " << theQ->GetTime() << endl);
 
 	/* Check that everyone is dead */
 //	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)

@@ -44,6 +44,7 @@
 		04CD81C319A9051C004432AC /* priorityQ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = priorityQ; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CD81C619A9051C004432AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		04CD81C819A9051C004432AC /* priorityQ.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = priorityQ.1; sourceTree = "<group>"; };
+		04CF95C919F51E7300A061C8 /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		04EAF85A19E58A5F0058B45A /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
 		04EAF85B19E58A5F0058B45A /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
 		04EAF85D19E58E0E0058B45A /* eventQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventQ.cpp; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 				0400AE2819E817FE00357D2D /* rng.h */,
 				0400AE2219E707B500357D2D /* person.cpp */,
 				0400AE2319E707B500357D2D /* person.h */,
+				04CF95C919F51E7300A061C8 /* macro.h */,
 				04CD81C819A9051C004432AC /* priorityQ.1 */,
 			);
 			path = priorityQ;

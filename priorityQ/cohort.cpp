@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "cohort.h"
 #include "person.h"
 #include "event.h"
@@ -24,7 +25,7 @@ cohortStartTime(StartTime)
 {
 	event * newEvent = new CohortStart(this,cohortStartTime);
 	theQ->AddEvent(newEvent);
-	cout << "New cohort initialised. Cohort of " << Size << " people will be released into the wild on day = " << StartTime << endl;
+	D(cout << "New cohort initialised. Cohort of " << Size << " people will be released into the wild on day = " << StartTime << endl);
 }
 
 cohort::~cohort()
@@ -42,21 +43,21 @@ void cohort::PushToVector(person * const thePerson)
 
 void cohort::GenerateCohort()
 {
-	cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl;
+	D(cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl);
 	for(size_t i = 0; i < cohortSize; i++)
 		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
 }
 
 void cohort::ScheduleNewPerson(const double Time)
 {
-	cout << "ScheduleNewPerson on " << Time << endl;
+	D(cout << "ScheduleNewPerson on " << Time << endl);
 	event * newEvent = new PersonStart(this,Time);
 	theQ->AddEvent(newEvent);
 }
 
 void cohort::GenerateNewPerson()
 {
-	cout << "GenerateNewPerson on " << theQ->GetTime() << endl;
+	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
 	person * thePerson = new person(theQ->GetTime());
 	PushToVector(thePerson);
 }
