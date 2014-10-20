@@ -15,6 +15,7 @@
 #include "eventQ.h"
 #include "cohort.h"
 #include "update.h"
+#include "hiv.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -26,6 +27,7 @@ gender(0),
 currentAge(0),
 initialAge(0),
 seroStatus(0),
+seroconversionDay(0),
 hivDeathDate(0),
 DeathDay(0),
 BirthDay(Time),
@@ -91,7 +93,7 @@ bool person::Alive()
 	return aliveStatus;
 }
 
-double person::AssignGender()
+bool person::AssignGender()
 {
 	return theRng->Sample(0.5);
 }
@@ -133,7 +135,7 @@ double person::AssignNatDeathDate(const double Time)
 	return Time + j - initialAge;
 }
 
-void person::Kill(double Time)
+void person::Kill(const double Time)
 {
 	DeathDay = Time;
 	D(cout << "DeathDate = " << DeathDay << endl);
@@ -145,7 +147,15 @@ double person::GetAge() const
 	return currentAge;
 }
 
-double person::SetAge(double Time)
+double person::SetAge(const double Time)
 {
 	return currentAge += Time;
+}
+
+bool person::CheckHiv(const double Time)
+{
+	if(Time >= 1826)
+		return Hiv(currentAge,gender,Time);
+	else
+		return false;
 }

@@ -17,16 +17,17 @@ public:
 	virtual ~person(); //destructor
 	
 	/* Initialiser functions */
-	double AssignGender();
+	bool AssignGender();
 	void AssignInitialAge(const double Time);
 	double AssignNatDeathDate(const double Time);
 	
 	/* Methods */
-	void Kill(double Time);
-	double SetAge(double Time);
+	void Kill(const double Time);
+	double SetAge(const double Time);
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
 	void SetCd4TestState(const bool theState) { cd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
+	bool CheckHiv(const double Time);
 	
 	/* Accessor methods */
 	bool GetGender() const;
@@ -37,16 +38,18 @@ public:
 	bool GetDiagnosedState() const { return diagnosed; }
 	bool GetCd4TestState() const { return cd4Test; }
 	bool GetArtInitiationState() const { return art; }
+	bool GetSeroStatus() const { return seroStatus; }
 	
 private:
 	/* basic characteristics */
-	double gender;
+	bool gender;
 	double currentAge;
 	double initialAge;
 	double natDeathDate;
 	
 	/* HIV status */
 	double seroStatus;
+	double seroconversionDay;
 	double hivDeathDate;
 	
 	/* Day = time an event occured */

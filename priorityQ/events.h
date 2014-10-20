@@ -66,6 +66,24 @@ private:
 /////////////////////
 /////////////////////
 
+class HivIncidence : public event {
+public:
+	HivIncidence(person * const thePerson, const double Time); //constructor
+	~HivIncidence(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+
+/////////////////////
+/////////////////////
+
+
 class HivTest : public event {
 public:
 	HivTest(person * const thePerson, const double Time); //constructor
@@ -77,7 +95,6 @@ public:
 	
 private:
 	person * const pPerson;
-	
 };
 
 /////////////////////
@@ -94,7 +111,6 @@ public:
 	
 private:
 	person * const pPerson;
-	
 };
 
 /////////////////////
@@ -111,7 +127,6 @@ public:
 	
 private:
 	person * const pPerson;
-	
 };
 
 

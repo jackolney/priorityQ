@@ -90,8 +90,10 @@ int main(int argc, const char * argv[])
 	//		-> Make sure age / death date / events are all ON TOP of this date. = Done.
 	// 15) Multiple cohorts over time. <- TARGET! = Done.
 	// 16) Age structure in 1970 for time == 0. = Done.
-	// 17) Allow events to be cancelled.
+	// 17) Allow events to be cancelled. = Done.
 	// 18) Seed HIV incidence.
+	//		-> Create hiv.h and Hiv(). = Done.
+	//		-> Schedule HivIncidence each year.
 	// 19) How to handle multiple events occuring on the same day?
 	// 20) Allow person to be part of a COHORT. = Done.
 	// 21) EXPAND to include all functions of the model.

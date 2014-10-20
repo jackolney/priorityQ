@@ -13,6 +13,7 @@
 		049A06DC19F16FEC006BFBCE /* population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049A06DA19F16FEC006BFBCE /* population.cpp */; };
 		04CD81C719A9051C004432AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CD81C619A9051C004432AC /* main.cpp */; };
 		04CD81C919A9051C004432AC /* priorityQ.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04CD81C819A9051C004432AC /* priorityQ.1 */; };
+		04CF95CC19F56FF900A061C8 /* hiv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CF95CA19F56FF900A061C8 /* hiv.cpp */; };
 		04EAF85C19E58A5F0058B45A /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF85A19E58A5F0058B45A /* event.cpp */; };
 		04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF85D19E58E0E0058B45A /* eventQ.cpp */; };
 		04F71B6A19EECC4600D72B67 /* cohort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04F71B6819EECC4600D72B67 /* cohort.cpp */; };
@@ -45,6 +46,8 @@
 		04CD81C619A9051C004432AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		04CD81C819A9051C004432AC /* priorityQ.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = priorityQ.1; sourceTree = "<group>"; };
 		04CF95C919F51E7300A061C8 /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
+		04CF95CA19F56FF900A061C8 /* hiv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hiv.cpp; sourceTree = "<group>"; };
+		04CF95CB19F56FF900A061C8 /* hiv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiv.h; sourceTree = "<group>"; };
 		04EAF85A19E58A5F0058B45A /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
 		04EAF85B19E58A5F0058B45A /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
 		04EAF85D19E58E0E0058B45A /* eventQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eventQ.cpp; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				04EAF85B19E58A5F0058B45A /* event.h */,
 				0447636D19E694AD001C5089 /* events.cpp */,
 				0447636E19E694AD001C5089 /* events.h */,
+				04CF95CA19F56FF900A061C8 /* hiv.cpp */,
+				04CF95CB19F56FF900A061C8 /* hiv.h */,
 				0400AE2819E817FE00357D2D /* rng.h */,
 				0400AE2219E707B500357D2D /* person.cpp */,
 				0400AE2319E707B500357D2D /* person.h */,
@@ -162,6 +167,7 @@
 				04EAF85C19E58A5F0058B45A /* event.cpp in Sources */,
 				04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */,
 				04CD81C719A9051C004432AC /* main.cpp in Sources */,
+				04CF95CC19F56FF900A061C8 /* hiv.cpp in Sources */,
 				0400AE2419E707B500357D2D /* person.cpp in Sources */,
 				040CC6FF19F0063700611C57 /* update.cpp in Sources */,
 			);
