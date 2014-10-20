@@ -127,8 +127,7 @@ double person::AssignNatDeathDate(const double Time)
 	j *= 365.25;
 	
 	/* Create Natural Death Date Event & Add to eventQ */
-	event * newEvent = new Death(this,Time + j - initialAge);
-	theQ->AddEvent(newEvent);
+	new Death(this,Time + j - initialAge);
 	D(cout << "NatDeathDate = " << Time + j - initialAge << endl);
 	
 	return Time + j - initialAge;

@@ -20,4 +20,6 @@ void UpdateAge(person * const thePerson);
 
 void ScheduleCd4Test(person * const thePerson);
 
+void ScheduleArtInitiation(person * const thePerson);
+
 #endif /* defined(__priorityQ__update__) */

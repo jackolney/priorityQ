@@ -95,6 +95,23 @@ private:
 /////////////////////
 /////////////////////
 
+class ArtInitiation : public event {
+public:
+	ArtInitiation(person * const thePerson, const double Time); // constructor
+	~ArtInitiation(); //destructor
+	
+	/* Methodss */
+	void Execute();
+	
+private:
+	person * const pPerson;
+	
+};
+
+
+/////////////////////
+/////////////////////
+
 
 
 #endif /* defined(__priorityQ__events__) */

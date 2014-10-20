@@ -23,8 +23,7 @@ cohort::cohort(const unsigned int Size, const unsigned int StartTime) :
 cohortSize(Size),
 cohortStartTime(StartTime)
 {
-	event * newEvent = new CohortStart(this,cohortStartTime);
-	theQ->AddEvent(newEvent);
+	new CohortStart(this,cohortStartTime);
 	D(cout << "New cohort initialised. Cohort of " << Size << " people will be released into the wild on day = " << StartTime << endl);
 }
 
@@ -51,8 +50,7 @@ void cohort::GenerateCohort()
 void cohort::ScheduleNewPerson(const double Time)
 {
 	D(cout << "ScheduleNewPerson on " << Time << endl);
-	event * newEvent = new PersonStart(this,Time);
-	theQ->AddEvent(newEvent);
+	new PersonStart(this,Time);
 }
 
 void cohort::GenerateNewPerson()

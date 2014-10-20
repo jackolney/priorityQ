@@ -102,3 +102,22 @@ void Cd4Test::Execute()
 	pPerson->SetCd4TestState(true);
 	UpdateEvents(pPerson);
 };
+
+/////////////////////
+/////////////////////
+
+ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+ArtInitiation::~ArtInitiation()
+{}
+
+void ArtInitiation::Execute()
+{
+	D(cout << "ArtInitiation executed." << endl);
+	pPerson->SetArtInitiationState(true);
+//	UpdateEvents(pPerson);
+}
+

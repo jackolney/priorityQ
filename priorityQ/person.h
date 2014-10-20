@@ -26,6 +26,7 @@ public:
 	double SetAge(double Time);
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
 	void SetCd4TestState(const bool theState) { cd4Test = theState; }
+	void SetArtInitiationState(const bool theState) { art = theState; }
 	
 	/* Accessor methods */
 	bool GetGender() const;

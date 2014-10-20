@@ -29,7 +29,6 @@ void SeedEvents(person * const thePerson, const double Time)
 	
 	if (thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
 		event * theEvent = new HivTest(thePerson,Time + theRng->SampleExpDist(25));
-		theQ->AddEvent(theEvent);
 		D(cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl);
 		}
 	
@@ -50,6 +49,8 @@ void UpdateEvents(person * const thePerson)
 	
 	ScheduleCd4Test(thePerson);
 	
+//	ScheduleArtInitiation(thePerson);
+	
 }
 
 ////////////////////
@@ -68,8 +69,19 @@ void ScheduleCd4Test(person * const thePerson)
 {
 	if(thePerson->GetDiagnosedState() && !thePerson->GetCd4TestState()) {
 		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
-		theQ->AddEvent(theEvent);
 		D(cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl);
+	}
+}
+
+////////////////////
+////////////////////
+
+void ScheduleArtInitiation(person * const thePerson)
+{
+	if(thePerson->GetDiagnosedState() && !thePerson->GetCd4TestState()) {
+		event * theEvent = new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(10));
+		D(cout << "ArtInitiation scheduled for day = " << theEvent->GetTime() << endl);
+		D(cout << "DUMMY ART INITIATION." << endl);
 	}
 }
 
