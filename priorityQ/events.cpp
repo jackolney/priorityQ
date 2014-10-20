@@ -27,6 +27,11 @@ pCohort(iCohort)
 CohortStart::~CohortStart()
 {}
 
+bool CohortStart::CheckValid()
+{
+	return true;
+}
+
 void CohortStart::Execute()
 {
 	D(cout << "CohortStart executed." << endl);
@@ -43,6 +48,11 @@ pCohort(iCohort)
 
 PersonStart::~PersonStart()
 {}
+
+bool PersonStart::CheckValid()
+{
+	return true;
+}
 
 void PersonStart::Execute()
 {
@@ -61,6 +71,11 @@ pPerson(thePerson)
 Death::~Death()
 {}
 
+bool Death::CheckValid()
+{
+	return true;
+}
+
 void Death::Execute()
 {
 	D(cout << "Death executed." << endl);
@@ -77,6 +92,17 @@ pPerson(thePerson)
 
 HivTest::~HivTest()
 {}
+
+bool HivTest::CheckValid()
+{
+	if(!pPerson->Alive()) {
+		Cancel();
+		D(cout << "HivTest cancelled." << endl);
+		return false;
+	}
+	else
+		return true;
+}
 
 void HivTest::Execute()
 {
@@ -96,6 +122,11 @@ pPerson(thePerson)
 Cd4Test::~Cd4Test()
 {}
 
+bool Cd4Test::CheckValid()
+{
+	return true;
+}
+
 void Cd4Test::Execute()
 {
 	D(cout << "Cd4Test executed." << endl);
@@ -114,10 +145,15 @@ pPerson(thePerson)
 ArtInitiation::~ArtInitiation()
 {}
 
+bool ArtInitiation::CheckValid()
+{
+	return true;
+}
+
 void ArtInitiation::Execute()
 {
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
-//	UpdateEvents(pPerson);
+	UpdateEvents(pPerson);
 }
 

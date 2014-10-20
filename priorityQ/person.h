@@ -33,9 +33,10 @@ public:
 	double GetNatDeathDate() const;
 	bool Alive();
 	double GetAge() const;
+	const double GetBirthDay() const { return BirthDay; }
 	bool GetDiagnosedState() const { return diagnosed; }
 	bool GetCd4TestState() const { return cd4Test; }
-	const double GetBirthDay() const { return BirthDay; }
+	bool GetArtInitiationState() const { return art; }
 	
 private:
 	/* basic characteristics */

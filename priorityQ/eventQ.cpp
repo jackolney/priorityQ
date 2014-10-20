@@ -50,7 +50,7 @@ void eventQ::RunEvents()
 		event * nextEvent = GetTop();
 		currentTime = nextEvent->GetTime();
 		PopTop();
-//		if(!nextEvent->Cancelled()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
+		if(nextEvent->CheckValid()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
 			nextEvent->Execute();
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcurrentTime is = " << currentTime << endl);
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttheQ size is = " << theQ->Size() << endl);

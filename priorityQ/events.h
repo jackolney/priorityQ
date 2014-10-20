@@ -23,6 +23,7 @@ public:
 	~CohortStart(); //destructor
 	
 	/* Methods */
+	bool CheckValid();
 	void Execute();
 	
 private:
@@ -38,6 +39,7 @@ public:
 	~PersonStart(); //destructor
 	
 	/* Methods */
+	bool CheckValid();
 	void Execute();
 	
 private:
@@ -54,6 +56,7 @@ public:
 	~Death(); //destructor
 	
 	/* Methods */
+	bool CheckValid();
 	void Execute();
 	
 private:
@@ -69,6 +72,7 @@ public:
 	~HivTest(); //destructor
 	
 	/* Methods */
+	bool CheckValid();
 	void Execute();
 	
 private:
@@ -85,6 +89,7 @@ public:
 	~Cd4Test(); //destructor
 	
 	/* Methods */
+	bool CheckValid();
 	void Execute();
 	
 private:
@@ -101,6 +106,7 @@ public:
 	~ArtInitiation(); //destructor
 	
 	/* Methodss */
+	bool CheckValid();
 	void Execute();
 	
 private:
