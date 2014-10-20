@@ -14,6 +14,8 @@
 
 void SeedEvents(person * const thePerson, const double Time);
 
+void SeedHiv(person * const thePerson);
+
 void UpdateEvents(person * const thePerson);
 
 void UpdateAge(person * const thePerson);

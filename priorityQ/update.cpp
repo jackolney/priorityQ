@@ -37,6 +37,19 @@ void SeedEvents(person * const thePerson, const double Time)
 ////////////////////
 ////////////////////
 
+void SeedHiv(person * const thePerson)
+{
+	D(cout << "Seeding Hiv." << endl);
+	
+		//Create array of times
+		//Loop through creating events.
+//	new HivIncidence(thePerson,TIME);
+	
+}
+
+////////////////////
+////////////////////
+
 void UpdateEvents(person * const thePerson)
 {
 	//Need to take currentTime from somewhere, theQ?
