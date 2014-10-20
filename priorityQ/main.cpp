@@ -89,7 +89,7 @@ int main(int argc, const char * argv[])
 	//		-> Stagger over the period of one year. = Done.
 	//		-> Make sure age / death date / events are all ON TOP of this date. = Done.
 	// 15) Multiple cohorts over time. <- TARGET! = Done.
-	// 16) Age structure in 1970 for time == 0.
+	// 16) Age structure in 1970 for time == 0. = Done.
 	// 17) Allow events to be cancelled.
 	// 18) Seed HIV incidence.
 	// 19) How to handle multiple events occuring on the same day?
