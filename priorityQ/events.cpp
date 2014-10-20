@@ -96,7 +96,7 @@ HivIncidence::~HivIncidence()
 
 bool HivIncidence::CheckValid()
 {
-	if(pPerson->Alive() && pPerson->GetSeroStatus())
+	if(pPerson->Alive() && !pPerson->GetSeroStatus())
 		return true;
 	else
 		return false;

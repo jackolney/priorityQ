@@ -26,16 +26,16 @@ person::person(const double Time) : //can use Time to specify the start time for
 gender(0),
 currentAge(0),
 initialAge(0),
-seroStatus(0),
+seroStatus(false),
 seroconversionDay(0),
 hivDeathDate(0),
 DeathDay(0),
 BirthDay(Time),
-diagnosed(0),
-inCare(0),
-cd4Test(0),
-cd4Result(0),
-art(0)
+diagnosed(false),
+inCare(false),
+cd4Test(false),
+cd4Result(false),
+art(false)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -154,8 +154,12 @@ double person::SetAge(const double Time)
 
 bool person::CheckHiv(const double Time)
 {
-	if(Time >= 1826)
-		return Hiv(currentAge,gender,Time);
+	if(Time >= 1826) {
+		bool HivResult = Hiv(currentAge,gender,Time);
+		if(HivResult)
+			seroconversionDay = Time;
+		return HivResult;
+	}
 	else
 		return false;
 }

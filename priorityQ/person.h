@@ -48,7 +48,7 @@ private:
 	double natDeathDate;
 	
 	/* HIV status */
-	double seroStatus;
+	bool seroStatus;
 	double seroconversionDay;
 	double hivDeathDate;
 	

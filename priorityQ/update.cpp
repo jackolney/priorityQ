@@ -41,10 +41,13 @@ void SeedHiv(person * const thePerson)
 {
 	D(cout << "Seeding Hiv." << endl);
 	
-		//Create array of times
-		//Loop through creating events.
-//	new HivIncidence(thePerson,TIME);
+	unsigned int yr [55];
 	
+	for(size_t i = 0; i < 55; i++) {
+		yr[i] = (5+i) * 365.25;
+		new HivIncidence(thePerson,yr[i]);
+	}
+
 }
 
 ////////////////////
