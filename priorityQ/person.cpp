@@ -40,7 +40,7 @@ art(false)
 	gender = AssignGender();
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
-//	SeedHiv(this);
+	SeedHiv(this);
 	SeedEvents(this,Time);
 }
 
@@ -168,8 +168,11 @@ bool person::CheckHiv(const double Time)
 {
 	if(Time >= 1826) {
 		bool HivResult = Hiv(currentAge,gender,Time);
-		if(HivResult)
+		if(HivResult) {
+			cout << "HIV+" << endl;
+			SetSeroStatus(true);
 			seroconversionDay = Time;
+		}
 		return HivResult;
 	}
 	else

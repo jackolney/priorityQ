@@ -29,6 +29,7 @@ public:
 	void SetCd4TestState(const bool theState) { cd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 	bool CheckHiv(const double Time);
+	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	
 	/* Accessor methods */
 	bool GetGender() const;
