@@ -17,7 +17,7 @@ public:
 	~population(); //destructor
 
 	/* Methods */
-	void Generate();
+	void Generate(unsigned const int theSize);
 	
 private:
 	unsigned const int populationSize;

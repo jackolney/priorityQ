@@ -21,14 +21,14 @@ using namespace std;
 /* Pointers to things (allows me to access them elsewhere with extern) */
 Rng * theRng;
 eventQ * theQ;
-cohort * theCohort;
+//cohort * theCohort;
 
 
 int main(int argc, const char * argv[])
 {
 	
 	/* Keeps the output window open */
-	cout << "Starting code." << endl;
+	cout << "Starting code." << endl << endl;
 
 	/* Declare RandomNumberGenerator */
 	theRng = new Rng(mach_absolute_time());
@@ -37,8 +37,8 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
 
 	/* Create new cohort of individuals */
-	population * thePop = new population(10);
-	thePop->Generate();
+	new population(1);
+//	thePop->Generate();
 //	cohort * theCohort = new cohort(1,5); //Edit cohort constructor to supply initialTime.
 //	cohort * secondCohort = new cohort(1,10); //Edit cohort constructor to supply initialTime.
     // I think to solve the multiple cohorts issue - we need to develop a population class which holds the various cohorts for deployment.
@@ -49,11 +49,12 @@ int main(int argc, const char * argv[])
 //	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
 
 	/* Model Run */
-	cout << "\t\tStart time = " << theQ->GetTime() << endl;
+	cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tStart time = " << theQ->GetTime() << endl;
 	
 	theQ->RunEvents();
+	cout << "Empty? " << theQ->Empty() << endl;
 	
-	cout << "\t\tEnd time = " << theQ->GetTime() << endl;
+	cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEnd time = " << theQ->GetTime() << endl;
 
 	/* Check that everyone is dead */
 //	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
@@ -87,9 +88,10 @@ int main(int argc, const char * argv[])
 	//		-> Make sure age / death date / events are all ON TOP of this date. = Done.
 	// 15) Multiple cohorts over time. <- TARGET!
 	// 16) Allow events to be cancelled.
-	// 17) How to handle multiple events occuring on the same day?
-	// 18) Allow person to be part of a COHORT. = Done.
-	// 19) EXPAND to include all functions of the model.
+	// 17) Seed HIV incidence.
+	// 18) How to handle multiple events occuring on the same day?
+	// 19) Allow person to be part of a COHORT. = Done.
+	// 20) EXPAND to include all functions of the model.
 	
 	theQ->Empty(); //Empty eventQ at end of run.
 

@@ -40,8 +40,8 @@ void SeedEvents(person * const thePerson, const double Time)
 void UpdateEvents(person * const thePerson)
 {
 	//Need to take currentTime from somewhere, theQ?
-	cout << "UpdateEvents executed." << endl;
-	cout << "UpdateEvents time = " << theQ->GetTime() << endl;
+	cout << "\tUpdateEvents executed." << endl;
+	cout << "\tUpdateEvents time = " << theQ->GetTime() << endl;
 	
 	// Split tasks into multiple functions.
 	
@@ -57,7 +57,7 @@ void UpdateEvents(person * const thePerson)
 void UpdateAge(person * const thePerson)
 {
 	thePerson->SetAge(theQ->GetTime());
-	cout << "Updated Age = " << thePerson->GetAge() << endl;
+	cout << "\tUpdated Age = " << thePerson->GetAge() << endl;
 }
 
 ////////////////////

@@ -28,7 +28,7 @@ CohortStart::~CohortStart()
 
 void CohortStart::Execute()
 {
-	cout << "Execute CohortStart." << endl;
+	cout << "CohortStart executed." << endl;
 	pCohort->GenerateCohort(); //IDIOT - WRONG POINTER!!!!
 }
 
@@ -45,7 +45,7 @@ PersonStart::~PersonStart()
 
 void PersonStart::Execute()
 {
-	cout << "Execute PersonStart." << endl;
+	cout << "PersonStart executed." << endl;
 	pCohort->GenerateNewPerson();
 }
 
