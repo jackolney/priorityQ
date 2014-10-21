@@ -30,7 +30,6 @@ int main(int argc, const char * argv[])
 	
 	/* Keeps the output window open */
 	D(cout << "Starting code." << endl << endl);
-
 	
 	/* Declare RandomNumberGenerator */
 	theRng = new Rng(mach_absolute_time());
@@ -40,31 +39,13 @@ int main(int argc, const char * argv[])
 
 	/* Create new cohort of individuals */
 	new population(1);
-//	thePop->Generate();
-//	cohort * theCohort = new cohort(1,5); //Edit cohort constructor to supply initialTime.
-//	cohort * secondCohort = new cohort(1,10); //Edit cohort constructor to supply initialTime.
-    // I think to solve the multiple cohorts issue - we need to develop a population class which holds the various cohorts for deployment.
-	
-	/* Ask a few questions on object sizes */
-//	cout << "\t\tCohort size = " << theCohort->GetCohortSize() << endl;
-//	cout << "\t\tQ size = " << theQ->Size() << endl;
-//	cout << "\t\tContainer length = " << theCohort->cohortContainer.size() << endl;
 
 	/* Model Run */
 	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tStart time = " << theQ->GetTime() << endl);
 	
 	theQ->RunEvents();
-	D(cout << "Empty? " << theQ->Empty() << endl);
 	
 	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEnd time = " << theQ->GetTime() << endl);
-
-	/* Check that everyone is dead */
-//	for(size_t i = 0; i < theCohort->cohortContainer.size(); i++)
-//	{
-//		cout << "All dead? = " << theCohort->cohortContainer[i]->Alive() << endl;
-//	}
-//
-//	cout << "Size of the priority queue = " << theQ->Size() << endl;
 	
 	/*CHALLENGE*/
 	
