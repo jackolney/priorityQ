@@ -40,7 +40,7 @@ art(false)
 	gender = AssignGender();
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
-//	SeedHiv(this); //blanked out for testing.
+	SeedHiv(this);
 	SeedEvents(this,Time);
 }
 

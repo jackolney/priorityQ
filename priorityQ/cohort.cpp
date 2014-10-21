@@ -57,5 +57,5 @@ void cohort::GenerateNewPerson()
 {
 	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
 	person * thePerson = new person(theQ->GetTime());
-	PushToVector(thePerson);
+	PushToVector(thePerson); //redundant now?
 }

@@ -77,7 +77,7 @@ int main(int argc, const char * argv[])
 	//		-> Schedule HivIncidence each year. = Done.
 	// 19) How to handle multiple events occuring on the same day? (non-issue).
 	// 20) Allow person to be part of a COHORT. = Done.
-	// 21) Scope to allow HIV to be acquired sometime during the year.
+	// 21) Scope to allow HIV to be acquired sometime during the year. = Done.
 	// 22) EXPAND to include all functions of the model.
 	
 	theQ->Empty(); //Empty eventQ at end of run.
