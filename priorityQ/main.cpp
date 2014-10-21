@@ -19,11 +19,9 @@
 
 using namespace std;
 
-/* Pointers to things (allows me to access them elsewhere with extern) */
+/* Pointers to core stuff */
 Rng * theRng;
 eventQ * theQ;
-//cohort * theCohort;
-
 
 int main(int argc, const char * argv[])
 {
@@ -79,6 +77,13 @@ int main(int argc, const char * argv[])
 	// 20) Allow person to be part of a COHORT. = Done.
 	// 21) Scope to allow HIV to be acquired sometime during the year. = Done.
 	// 22) EXPAND to include all functions of the model.
+	//		-> Only allow Cd4Testing if HIV-positive.
+	//		-> Ensure that I reuse as much code as possible.
+	//			-> An HIV-test through ANY route (each route should have a separate event but should all call a HivTest function.
+	//		-> Need a more solid end point (break;) in the code
+	//			-> Inclusion of HIV-related death date.
+	//		-> Make more use of Cancel() for overriding competing hazards in the model.
+	//		-> Costs / DALYs - can I calculate costs from the clinic perspective?
 	
 	theQ->Empty(); //Empty eventQ at end of run.
 
@@ -88,14 +93,6 @@ int main(int argc, const char * argv[])
 
 /*NOTES*/
 
-// Will create this model for one individual
-// Transistion into defining an array of pointers (of class event) to an array of pointers (of class event Q) to corresponding eventQ's. Therefore allowing me to simulate mulitple individuals simultaneously.
-
-// All events.h classes inherit attributes from event.h
-// Ell events have an Execute() which takes NO arguments.
-
-/* Rules to implement */
-// 1) Require a GlobalTime variable
-// 2) One eventQ -> theQ.
-// 3) One cohort of people run per year
-// 4) ALL persons feed events into the queue which then executes over time. All individuals run on same time, BUT do not interact (yet).
+// Consider output metrics from the model.
+// Endtime of theQ may be overkill, we want everyone to die first ->> may cause longterm issues.
+// Be mindful of eventual need to input parameter values / Rtools inclusion and interaction through R.
