@@ -29,6 +29,10 @@ initialAge(0),
 seroStatus(false),
 seroconversionDay(0),
 hivDeathDate(0),
+currentCd4(0),
+initialCd4(0),
+currentWho(0),
+initialWho(0),
 DeathDay(0),
 BirthDay(Time),
 diagnosed(false),
@@ -47,10 +51,16 @@ art(false)
 person::~person()
 {}
 
+/////////////////////
+/////////////////////
+
 bool person::GetGender() const
 {
 	return gender;
 }
+
+/////////////////////
+/////////////////////
 
 void person::AssignInitialAge(const double Time)
 {
@@ -79,10 +89,16 @@ void person::AssignInitialAge(const double Time)
 	D(cout << "Initial age = " << initialAge << endl);
 }
 
+/////////////////////
+/////////////////////
+
 double person::GetNatDeathDate() const
 {
 	return natDeathDate;
 }
+
+/////////////////////
+/////////////////////
 
 bool person::Alive()
 {
@@ -94,10 +110,16 @@ bool person::Alive()
 	return aliveStatus;
 }
 
+/////////////////////
+/////////////////////
+
 bool person::AssignGender()
 {
 	return theRng->Sample(0.5);
 }
+
+/////////////////////
+/////////////////////
 
 double person::GenerateNatDeathDate()
 {
@@ -132,6 +154,9 @@ double person::GenerateNatDeathDate()
 	return j;
 }
 
+/////////////////////
+/////////////////////
+
 double person::AssignNatDeathDate(const double Time)
 {
 	double deathDate = 0;
@@ -141,11 +166,14 @@ double person::AssignNatDeathDate(const double Time)
 		deathDate = GenerateNatDeathDate();
 	
 	/* Create Natural Death Date Event & Add to eventQ */
-	new Death(this,Time + deathDate - initialAge);
+	new Death(this,Time + deathDate - initialAge,false);
 	D(cout << "NatDeathDate = " << Time + deathDate - initialAge << endl);
 	
 	return Time + deathDate - initialAge;
 }
+
+/////////////////////
+/////////////////////
 
 void person::Kill(const double Time)
 {
@@ -154,15 +182,24 @@ void person::Kill(const double Time)
 	return;
 }
 
+/////////////////////
+/////////////////////
+
 double person::GetAge() const
 {
 	return currentAge;
 }
 
+/////////////////////
+/////////////////////
+
 double person::SetAge(const double Time)
 {
 	return currentAge += Time;
 }
+
+/////////////////////
+/////////////////////
 
 bool person::CheckHiv(const double Time)
 {
@@ -171,10 +208,90 @@ bool person::CheckHiv(const double Time)
 		if(HivResult) {
 			cout << "HIV+" << endl;
 			SetSeroStatus(true);
-			seroconversionDay = Time;
+			SetSeroconversionDay(Time);
+			//SetupHivIndicators() //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 		}
 		return HivResult;
 	}
 	else
 		return false;
+}
+
+/////////////////////
+/////////////////////
+
+void person::SetHivIndicators()
+{
+	SetCd4Count();
+	SetWhoStage();
+	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
+}
+
+/////////////////////
+/////////////////////
+
+void person::SetCd4Count()
+{
+	double uniformSample = theRng->doub();
+	
+	double Cd4CatMax [5] = {0,0.03,0.19,0.42,1};
+	
+	unsigned int i = 0;
+	
+	while(uniformSample > Cd4CatMax[i])
+		i++;
+	
+	currentCd4 = i;
+	initialCd4 = i;
+	D(cout << "InitialCd4 = " << i << endl);
+}
+
+/////////////////////
+/////////////////////
+
+void person::SetWhoStage()
+{
+	currentCd4 = 1;
+	initialWho = 1;
+	D(cout << "InitialWho = 1" << endl);
+}
+
+/////////////////////
+/////////////////////
+
+double person::GenerateHivDeathDate()
+{
+	//Be mindful that this will change frequently.
+	//Perhaps a way of cancelling the previous date in the line??
+	
+		//HivMortalityTime [ART] [WHO-1] [CD4-1];
+	double HivMortalityTime [2] [4] [4] =
+		{
+			{
+				{10.89670749,18.89537630,145.12237880,4100.20238599},
+				{5.55555556,16.45278052,30.19225219,80.73449010},
+				{3.33333333,8.81927541,11.24427329,23.00614908},
+				{0.80895939,2.76601300,3.92628016,7.96693404}
+			},
+		
+			{
+				{12.18473104,21.12886652,162.27627978,4584.85862111},
+				{6.21223891,18.39754859,33.76106706,90.27754928},
+				{3.72734334,9.86174025,12.57338016,25.72554499},
+				{0.90458082,3.09296405,4.39037827,8.90864957}
+			}
+		};
+	
+	D(cout << theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25) << " = HivMortalityTime" << endl);
+	
+	return theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
+}
+
+/////////////////////
+/////////////////////
+
+void person::AssignHivDeathDate()
+{
+	new Death(this,GenerateHivDeathDate(),true);
+	D(cout << "HivDeathDate = " << GenerateHivDeathDate() << endl);
 }

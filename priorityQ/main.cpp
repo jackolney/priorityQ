@@ -77,7 +77,7 @@ int main(int argc, const char * argv[])
 	// 20) Allow person to be part of a COHORT. = Done.
 	// 21) Scope to allow HIV to be acquired sometime during the year. = Done.
 	// 22) EXPAND to include all functions of the model.
-	//		-> Only allow Cd4Testing if HIV-positive.
+	//		-> Only allow Cd4Testing if HIV-positive. = Done.
 	//		-> Ensure that I reuse as much code as possible.
 	//			-> An HIV-test through ANY route (each route should have a separate event but should all call a HivTest function.
 	//		-> Need a more solid end point (break;) in the code
@@ -85,7 +85,11 @@ int main(int argc, const char * argv[])
 	//		-> Make more use of Cancel() for overriding competing hazards in the model.
 	//		-> Costs / DALYs - can I calculate costs from the clinic perspective?
 	
-	theQ->Empty(); //Empty eventQ at end of run.
+	/* PLAYGROUND. (who needs Swift?) */
+	
+	/* Empty eventQ at end of run */
+	while(!theQ->Empty())
+		theQ->PopTop();
 
     return 0;
 }

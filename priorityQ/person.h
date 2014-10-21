@@ -25,11 +25,25 @@ public:
 	/* Methods */
 	void Kill(const double Time);
 	double SetAge(const double Time);
+
+	/* Hiv Acquisition Functions */
+	bool CheckHiv(const double Time);
+	void SetSeroStatus(const bool theState) { seroStatus = theState; }
+	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
+	void SetHivIndicators();
+	void SetCd4Count();
+	void SetWhoStage();
+	
+	/* Hiv Progression Functions */
+	//void UpdateCd4Count();
+	//void UpdateWhoStage();
+	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
+	void AssignHivDeathDate(); //function creates the Death event.
+	
+	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
 	void SetCd4TestState(const bool theState) { cd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
-	bool CheckHiv(const double Time);
-	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	
 	/* Accessor methods */
 	bool GetGender() const;
@@ -53,6 +67,11 @@ private:
 	bool seroStatus;
 	double seroconversionDay;
 	double hivDeathDate;
+	
+	unsigned int currentCd4;
+	unsigned int initialCd4;
+	unsigned int currentWho;
+	unsigned int initialWho;
 	
 	/* Day = time an event occured */
 	double DeathDay;

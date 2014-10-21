@@ -52,7 +52,7 @@ private:
 
 class Death : public event {
 public:
-	Death(person * const thePerson, const double Time); //constructor
+	Death(person * const thePerson, const double Time, const bool hivCause); //constructor
 	~Death(); //destructor
 	
 	/* Methods */
@@ -61,6 +61,7 @@ public:
 	
 private:
 	person * const pPerson; // pPerson here is the pointer to the relevant person that will experience the event.
+	const bool hivRelated;
 };
 
 /////////////////////

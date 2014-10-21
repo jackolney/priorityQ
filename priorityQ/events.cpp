@@ -63,9 +63,10 @@ void PersonStart::Execute()
 /////////////////////
 /////////////////////
 
-Death::Death(person * const thePerson, const double Time) :
+Death::Death(person * const thePerson, const double Time, const bool hivCause) :
 event(Time),
-pPerson(thePerson)
+pPerson(thePerson),
+hivRelated(hivCause)
 {}
 
 Death::~Death()
@@ -78,7 +79,11 @@ bool Death::CheckValid()
 
 void Death::Execute()
 {
-	D(cout << "Death executed." << endl);
+	if(hivRelated)
+		D(cout << "Death executed (HIV-related)." << endl);
+	else
+		D(cout << "Death executed (Natural)." << endl);
+	
 	pPerson->Kill(eventTime);
 }
 
