@@ -83,7 +83,9 @@ void UpdateAge(person * const thePerson)
 
 void ScheduleCd4Test(person * const thePerson)
 {
-	if(thePerson->GetDiagnosedState() && !thePerson->GetCd4TestState()) {
+	if(thePerson->GetDiagnosedState() &&
+   	   thePerson->GetSeroStatus() &&
+	   !thePerson->GetCd4TestState()) {
 		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
 		D(cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl);
 	}
@@ -95,6 +97,7 @@ void ScheduleCd4Test(person * const thePerson)
 void ScheduleArtInitiation(person * const thePerson)
 {
 	if(thePerson->GetDiagnosedState() &&
+	   thePerson->GetSeroStatus() &&
 	   thePerson->GetCd4TestState() &&
 	   !thePerson->GetArtInitiationState()) {
 		event * theEvent = new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
