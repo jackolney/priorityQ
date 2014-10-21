@@ -74,10 +74,11 @@ int main(int argc, const char * argv[])
 	// 17) Allow events to be cancelled. = Done.
 	// 18) Seed HIV incidence.
 	//		-> Create hiv.h and Hiv(). = Done.
-	//		-> Schedule HivIncidence each year.
-	// 19) How to handle multiple events occuring on the same day?
+	//		-> Schedule HivIncidence each year. = Done.
+	// 19) How to handle multiple events occuring on the same day? (non-issue).
 	// 20) Allow person to be part of a COHORT. = Done.
-	// 21) EXPAND to include all functions of the model.
+	// 21) Scope to allow HIV to be acquired sometime during the year.
+	// 22) EXPAND to include all functions of the model.
 	
 	theQ->Empty(); //Empty eventQ at end of run.
 
