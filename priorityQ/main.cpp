@@ -79,6 +79,32 @@ int main(int argc, const char * argv[])
 	// 22) EXPAND to include all functions of the model.
 	//		-> Only allow Cd4Testing if HIV-positive. = Done.
 	//		-> Ensure that I reuse as much code as possible.
+	//
+	//			>> NATURAL HISTORY:
+	//				-> UpdateCd4Count()
+	//				-> UpdateWhoStage()
+	//				-> ForArtToo... ensure that disease progression occurs properly.
+	//				-> Flags for checking too?
+	//
+	//			>> CASCADE:
+	//				-> HivTesting (HCT / VCT / PICT);
+	//				-> Cd4Testing (care etc.)
+	//				-> Cd4Restults
+	//				-> LTFU.
+	//				-> Pre-ART Care Retention.
+	//				-> ART Initiation.
+	//				-> ART dropout.
+	//
+	//			>> INTERVENTIONS:
+	//				-> Include 12 interventions.
+	//				-> Intervention scenarios.
+	//
+	//			>> OUTPUT METRICS:
+	//				-> DALYs between 2010 and 2030.
+	//				-> Cost between 2010 and 2030.
+	//				-> Care experience of those died between 2010 and 2030.
+	//
+	//
 	//			-> An HIV-test through ANY route (each route should have a separate event but should all call a HivTest function.
 	//		-> Need a more solid end point (break;) in the code
 	//			-> Inclusion of HIV-related death date.

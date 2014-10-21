@@ -261,7 +261,6 @@ void person::SetWhoStage()
 
 double person::GenerateHivDeathDate()
 {
-	//Be mindful that this will change frequently.
 	//Perhaps a way of cancelling the previous date in the line??
 	
 		//HivMortalityTime [ART] [WHO-1] [CD4-1];
@@ -292,6 +291,6 @@ double person::GenerateHivDeathDate()
 
 void person::AssignHivDeathDate()
 {
-	new Death(this,GenerateHivDeathDate(),true);
+	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
 	D(cout << "HivDeathDate = " << GenerateHivDeathDate() << endl);
 }
