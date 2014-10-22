@@ -140,7 +140,7 @@ void Cd4Decline::Execute()
 	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	cout << pPerson->GetCurrentCd4() << endl;
-	ScheduleCd4Update(pPerson);
+//	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 
@@ -196,9 +196,9 @@ void WhoDecline::Execute()
 {
 	cout << "WhoDecline executed." << endl;
 	cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ";
-	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
+	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
 	cout << pPerson->GetCurrentWho() << endl;
-	ScheduleWhoUpdate(pPerson);
+//	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 
@@ -225,7 +225,7 @@ void WhoRecover::Execute()
 {
 	cout << "WhoRecover executed." << endl;
 	cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ";
-	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
+	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
 	cout << pPerson->GetCurrentWho() << endl;
 	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();

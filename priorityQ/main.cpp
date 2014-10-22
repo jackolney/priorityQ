@@ -114,17 +114,11 @@ int main(int argc, const char * argv[])
 	
 	/* PLAYGROUND. (who needs Swift?) */
 	
-//		//Cd4TimeArt [WHO] [CD4-1 (1,2)]
-//	double Cd4TimeArt [4] [2] =
-//	{
-//		/* CD4200 / CD4200350 */
-//		{0.17366500,0.44638000}, //WHO = 1
-//		{0.17366500,0.44638000}, //WHO = 2
-//		{0.27560405,0.70839913}, //WHO = 3
-//		{1.41480920,3.63655620}  //WHO = 4
-//	};
-//
-//	cout << Cd4TimeArt[4-1][2-1] << " = Cd4Time." << endl;
+//		//WhoRecoverTimeArt [WHO from->to] = {2->1,3->2,4->3}
+//	const double WhoRecoverTimeArt [3] = {0.47176100,0.32243400,0.03783180};
+//	
+//		//condition is currentWho > 1
+//	cout << WhoRecoverTimeArt[1-2] << endl;
 	
 	/* Empty eventQ at end of run */
 	while(!theQ->Empty())
