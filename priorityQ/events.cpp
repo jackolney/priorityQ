@@ -198,7 +198,7 @@ void WhoDecline::Execute()
 	cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ";
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
 	cout << pPerson->GetCurrentWho() << endl;
-//	ScheduleWhoUpdate(pPerson);
+	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 

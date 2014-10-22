@@ -116,45 +116,41 @@ void ScheduleWhoUpdate(person * const thePerson)
 		//WhoTime [WHO-1][CD4-1]
 	const double WhoDeclineTime [3][4] =
 	{
-	/* <200 / 200350 / 350500 / 500 */
-	/*WHO 1->2*/	{3.60827175,3.60838000,3.60838000,111.84994839},
-	/*WHO 2->3*/	{4.50168495,4.50182000,4.50182000,139.54415407},
-	/*WHO 3->4*/	{2.46547204,2.46554600,2.46554600,76.42520822}
+		{3.60827175,3.60838000,3.60838000,111.84994839},
+		{4.50168495,4.50182000,4.50182000,139.54415407},
+		{2.46547204,2.46554600,2.46554600,76.42520822}
 	};
-		//Condition is currentWho < 4
-//	cout << WhoDeclineTime[1-1][1-1] << endl;
-
-	cout << thePerson->GetCurrentWho() << " = currentWho" << endl;
-	cout << thePerson->GetCurrentCd4() << " = currentCd4" << endl;
-//	event * theEvent = new WhoDecline(thePerson, theQ->GetTime() + (WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+	
+		//WhoTimeArt [WHO-1][CD4-1]
+	const double WhoDeclineTimeArt [3][4] =
+	{
+		{3.85125925,3.85137479,3.85137479,119.38212479},
+		{4.80483650,4.80498064,4.80498064,148.94130802},
+		{2.63140956,2.63148850,2.63148850,81.56897372}
+	};
+	
+		//WhoRecoverTimeArt [WHO from->to] = {2->1,3->2,4->3}
+	const double WhoRecoverTimeArt [3] = {0.47176100,0.32243400,0.03783180};
+	
 	
 	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentWho() < 4) {
 		event * theEvent = new WhoDecline(thePerson, theQ->GetTime() + (WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		thePerson->SetWhoDeclineDate(theEvent->GetTime());
 		cout << "\tWhoDecline from " << thePerson->GetCurrentWho() << " to occur on = " << theEvent->GetTime() << endl;
 	}
-//	else if(thePerson->GetArtInitiationState())
-	
-	
-	
-		//WhoTimeArt [WHO-1][CD4-1]
-	const double WhoDeclineTimeArt [3][4] =
-	{
-	/* <200 / 200350 / 350500 / 500 */
-	/*WHO 1->2*/	{3.85125925,3.85137479,3.85137479,119.38212479},
-	/*WHO 2->3*/	{4.80483650,4.80498064,4.80498064,148.94130802},
-	/*WHO 3->4*/	{2.63140956,2.63148850,2.63148850,81.56897372}
-	};
-		//Condition is currentWho < 4
-//	cout << WhoDeclineTimeArt[1-1][1-1] << endl;
-	
-	
-		//WhoRecoverTimeArt [WHO from->to] = {2->1,3->2,4->3}
-	const double WhoRecoverTimeArt [3] = {0.47176100,0.32243400,0.03783180};
-	
-		//condition is currentWho > 1
-//	cout << WhoRecoverTimeArt[1-2] << endl;
-
+	else if(thePerson->GetArtInitiationState()) {
+		if(thePerson->GetCurrentWho() < 4) {
+			event * theDeclineEvent = new WhoDecline(thePerson, theQ->GetTime() + (WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+			thePerson->SetWhoDeclineDate(theDeclineEvent->GetTime());
+			cout << "\tWhoDecline (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theDeclineEvent->GetTime() << endl;
+		}
+		
+		if(thePerson->GetCurrentWho() > 1) {
+			event * theRecoverEvent = new WhoRecover(thePerson, theQ->GetTime() + (WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
+			thePerson->SetWhoRecoverDate(theRecoverEvent->GetTime());
+			cout << "\tWhoReocover (ART) form " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl;
+		}
+	}
 }
 
 ////////////////////
