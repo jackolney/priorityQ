@@ -145,7 +145,7 @@ void Cd4Decline::Execute()
 	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	cout << pPerson->GetCurrentCd4() << endl;
-//	ScheduleCd4Update(pPerson);
+	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 

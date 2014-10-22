@@ -81,12 +81,13 @@ int main(int argc, const char * argv[])
 	//		-> Ensure that I reuse as much code as possible.
 	//
 	//			>> NATURAL HISTORY:
-	//				-> UpdateCd4Count()
-	//				-> UpdateWhoStage()
-	//				-> ForArtToo... ensure that disease progression occurs properly.
-	//				-> Flags for checking too?
-	//				-> Each event with competing events supplies additional info to the event which is checked in CheckValid() prior to Execute();
-	//				-> Put DATE for NH events in constructors for events?.
+	//				-> UpdateCd4Count() = Done.
+	//				-> UpdateWhoStage() = Done.
+	//				-> ForArtToo... ensure that disease progression occurs properly. = Done.
+	//				-> Flags for checking too? = Done.
+	//				-> Each event with competing events supplies additional info to the event which is checked in CheckValid() prior to Execute(); = Done.
+	//				-> Put DATE for NH events in constructors for events?. = Done.
+	//				-> CHECK THAT WHEN ON ART... REVERSE HAPPENS AS EXPECTED.
 	//
 	//			>> CASCADE:
 	//				-> HivTesting (HCT / VCT / PICT);
@@ -115,11 +116,8 @@ int main(int argc, const char * argv[])
 	
 	/* PLAYGROUND. (who needs Swift?) */
 	
-//		//WhoRecoverTimeArt [WHO from->to] = {2->1,3->2,4->3}
-//	const double WhoRecoverTimeArt [3] = {0.47176100,0.32243400,0.03783180};
-//	
-//		//condition is currentWho > 1
-//	cout << WhoRecoverTimeArt[1-2] << endl;
+
+
 	
 	/* Empty eventQ at end of run */
 	while(!theQ->Empty())
