@@ -31,12 +31,13 @@ public:
 	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
 	void SetHivIndicators();
-	void SetCd4Count();
-	void SetWhoStage();
+	void SetInitialCd4Count();
+	void SetInitialWhoStage();
 	
 	/* Hiv Progression Functions */
-	//void UpdateCd4Count();
-	//void UpdateWhoStage();
+	void ScheduleHivIndicatorUpdate();
+//	void SetCd4Count();
+//	void SetWhoStage();
 	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
 	void AssignHivDeathDate(); //function creates the Death event.
 	
@@ -51,6 +52,8 @@ public:
 	bool Alive();
 	double GetAge() const;
 	const double GetBirthDay() const { return BirthDay; }
+	unsigned int GetCurrentCd4() const { return currentCd4; }
+	unsigned int GetCurrentWho() const { return currentWho; }
 	bool GetDiagnosedState() const { return diagnosed; }
 	bool GetCd4TestState() const { return cd4Test; }
 	bool GetArtInitiationState() const { return art; }

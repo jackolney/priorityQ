@@ -115,3 +115,86 @@ void HivIncidence::Execute()
 /////////////////////
 /////////////////////
 
+Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+Cd4Decline::~Cd4Decline()
+{}
+
+bool Cd4Decline::CheckValid()
+{
+	return true;
+}
+
+void Cd4Decline::Execute()
+{
+		//DoFunStuff()
+}
+
+/////////////////////
+/////////////////////
+
+Cd4Recover::Cd4Recover(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+Cd4Recover::~Cd4Recover()
+{}
+
+bool Cd4Recover::CheckValid()
+{
+	return true;
+}
+
+void Cd4Recover::Execute()
+{
+		//DoFunStuff()
+}
+
+/////////////////////
+/////////////////////
+
+WhoDecline::WhoDecline(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+WhoDecline::~WhoDecline()
+{}
+
+bool WhoDecline::CheckValid()
+{
+	return true;
+}
+
+void WhoDecline::Execute()
+{
+		//DoFunStuff()
+}
+
+/////////////////////
+/////////////////////
+
+WhoRecover::WhoRecover(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+WhoRecover::~WhoRecover()
+{}
+
+bool WhoRecover::CheckValid()
+{
+	return true;
+}
+
+void WhoRecover::Execute()
+{
+	
+}
+
+/////////////////////
+/////////////////////

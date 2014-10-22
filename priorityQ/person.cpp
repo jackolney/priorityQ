@@ -222,6 +222,7 @@ bool person::CheckHiv(const double Time)
 	SetSeroStatus(true);
 	SetSeroconversionDay(Time);
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
 	return true;
 }
 
@@ -230,15 +231,15 @@ bool person::CheckHiv(const double Time)
 
 void person::SetHivIndicators()
 {
-	SetCd4Count();
-	SetWhoStage();
+	SetInitialCd4Count();
+	SetInitialWhoStage();
 	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
 }
 
 /////////////////////
 /////////////////////
 
-void person::SetCd4Count()
+void person::SetInitialCd4Count()
 {
 	double uniformSample = theRng->doub();
 	
@@ -257,7 +258,7 @@ void person::SetCd4Count()
 /////////////////////
 /////////////////////
 
-void person::SetWhoStage()
+void person::SetInitialWhoStage()
 {
 	currentWho = 1;
 	initialWho = 1;
@@ -301,3 +302,17 @@ double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous
 
 /////////////////////
 /////////////////////
+
+void person::ScheduleHivIndicatorUpdate()
+{
+	ScheduleCd4Update(this);
+	ScheduleWhoUpdate(this);
+		//HivRelatedMortality only changes when Cd4 or Who changes.
+}
+
+/////////////////////
+/////////////////////
+
+
+
+

@@ -113,6 +113,18 @@ int main(int argc, const char * argv[])
 	
 	/* PLAYGROUND. (who needs Swift?) */
 	
+//		//Cd4TimeArt [WHO] [CD4-1 (1,2)]
+//	double Cd4TimeArt [4] [2] =
+//	{
+//		/* CD4200 / CD4200350 */
+//		{0.17366500,0.44638000}, //WHO = 1
+//		{0.17366500,0.44638000}, //WHO = 2
+//		{0.27560405,0.70839913}, //WHO = 3
+//		{1.41480920,3.63655620}  //WHO = 4
+//	};
+//
+//	cout << Cd4TimeArt[4-1][2-1] << " = Cd4Time." << endl;
+	
 	/* Empty eventQ at end of run */
 	while(!theQ->Empty())
 		theQ->PopTop();

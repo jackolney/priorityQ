@@ -82,5 +82,68 @@ private:
 ///////////////////////
 ///////////////////////
 
+class Cd4Decline : public event {
+public:
+	Cd4Decline(person * const thePerson, const double Time); //constructor
+	~Cd4Decline(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+///////////////////////
+///////////////////////
+
+class Cd4Recover : public event {
+public:
+	Cd4Recover(person * const thePerson, const double Time); //constructor
+	~Cd4Recover(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+///////////////////////
+///////////////////////
+
+class WhoDecline : public event {
+public:
+	WhoDecline(person * const thePerson, const double Time); //constructor
+	~WhoDecline(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+///////////////////////
+///////////////////////
+
+class WhoRecover : public event {
+public:
+	WhoRecover(person * const thePerson, const double Time); //constructor
+	~WhoRecover(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+///////////////////////
+///////////////////////
 
 #endif /* defined(__priorityQ__events__) */

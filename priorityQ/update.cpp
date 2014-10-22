@@ -45,7 +45,6 @@ void SeedHiv(person * const thePerson)
 
 void UpdateEvents(person * const thePerson)
 {
-	//Need to take currentTime from somewhere, theQ?
 	D(cout << "\tUpdateEvents executed." << endl);
 	D(cout << "\tUpdateEvents time = " << theQ->GetTime() << endl);
 	
@@ -67,6 +66,54 @@ void UpdateAge(person * const thePerson)
 {
 	thePerson->SetAge(theQ->GetTime());
 	D(cout << "\tUpdated Age = " << thePerson->GetAge() << endl);
+}
+
+////////////////////
+////////////////////
+
+void ScheduleCd4Update(person * const thePerson)
+{
+	cout << "ScheduleCd4Update called." << endl;
+	
+		//Need to figure out if CD4 declining or not.
+	
+		//Cd4Time [WHO-1] [CD4-2 (4,3,2)]
+	double Cd4Time [4] [3] =
+	{
+		{2.79458000,2.69187000,7.98158000},
+		{2.79458000,2.69187000,7.98158000},
+		{1.97615529,1.90352509,5.64408302},
+		{0.83767622,0.80688886,2.39248106}
+	};
+	
+		//Cd4TimeArt [WHO-1] [CD4-1 (1,2)]
+	double Cd4TimeArt [4] [2] =
+	{
+		{0.17366500,0.44638000},
+		{0.17366500,0.44638000},
+		{0.27560405,0.70839913},
+		{1.41480920,3.63655620}
+	};
+	
+//	cout << Cd4Time[1-1][2-2] << " = Cd4Time." << endl;
+	
+	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() > 1) {
+		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + (Cd4Time [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
+		cout << "Cd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+	}
+	else if(thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() < 3) {
+		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + (Cd4TimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+		cout << "Cd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+	}
+
+}
+
+////////////////////
+////////////////////
+
+void ScheduleWhoUpdate(person * const thePerson)
+{
+	cout << "ScheduleWhoUpdate called." << endl;
 }
 
 ////////////////////
