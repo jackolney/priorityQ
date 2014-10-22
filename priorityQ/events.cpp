@@ -140,7 +140,7 @@ void Cd4Decline::Execute()
 	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	cout << pPerson->GetCurrentCd4() << endl;
-		//ScheduleCd4Update(pPerson);
+	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 
@@ -166,6 +166,11 @@ bool Cd4Recover::CheckValid()
 void Cd4Recover::Execute()
 {
 	cout << "Cd4Recover executed." << endl;
+	cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ";
+	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
+	cout << pPerson->GetCurrentCd4() << endl;
+	ScheduleCd4Update(pPerson);
+	pPerson->AssignHivDeathDate();
 }
 
 /////////////////////
