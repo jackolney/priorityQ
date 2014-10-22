@@ -44,8 +44,8 @@ art(false)
 	gender = AssignGender();
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
-	SeedHiv(this);
-	SeedEvents(this,Time);
+	SeedHiv(this); //function modified for HIV+ development.
+//	SeedEvents(this,Time); //turned off for dev.
 }
 
 person::~person()
@@ -203,18 +203,25 @@ double person::SetAge(const double Time)
 
 bool person::CheckHiv(const double Time)
 {
-	if(Time >= 1826) {
-		bool HivResult = Hiv(currentAge,gender,Time);
-		if(HivResult) {
-			cout << "HIV+" << endl;
-			SetSeroStatus(true);
-			SetSeroconversionDay(Time);
-			//SetupHivIndicators() //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-		}
-		return HivResult;
-	}
-	else
-		return false;
+//	if(Time >= 1826) {
+//		bool HivResult = Hiv(currentAge,gender,Time);
+//		if(HivResult) {
+//			cout << "HIV+" << endl;
+//			SetSeroStatus(true);
+//			SetSeroconversionDay(Time);
+//			//SetupHivIndicators() //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+//		}
+//		return HivResult;
+//	}
+//	else
+//		return false;
+	
+	//For development purposes.
+	cout << "HIV+" << endl;
+	SetSeroStatus(true);
+	SetSeroconversionDay(Time);
+	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+	return true;
 }
 
 /////////////////////
@@ -224,7 +231,7 @@ void person::SetHivIndicators()
 {
 	SetCd4Count();
 	SetWhoStage();
-	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
+//	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
 }
 
 /////////////////////
@@ -281,7 +288,7 @@ double person::GenerateHivDeathDate()
 			}
 		};
 	
-	D(cout << theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25) << " = HivMortalityTime" << endl);
+//	D(cout << theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25) << " = HivMortalityTime" << endl);
 	
 	return theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
 }
