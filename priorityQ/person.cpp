@@ -15,6 +15,7 @@
 #include "eventQ.h"
 #include "cohort.h"
 #include "update.h"
+#include "cascadeUpdate.h"
 #include "hiv.h"
 
 extern Rng * theRng;

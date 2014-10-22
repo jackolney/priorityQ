@@ -12,16 +12,10 @@
 #include <stdio.h>
 #include "person.h"
 
-void SeedEvents(person * const thePerson, const double Time);
-
 void SeedHiv(person * const thePerson);
 
 void UpdateEvents(person * const thePerson);
 
 void UpdateAge(person * const thePerson);
-
-void ScheduleCd4Test(person * const thePerson);
-
-void ScheduleArtInitiation(person * const thePerson);
 
 #endif /* defined(__priorityQ__update__) */
