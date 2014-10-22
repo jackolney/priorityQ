@@ -49,7 +49,7 @@ public:
 	/* Accessor methods */
 	bool GetGender() const;
 	double GetNatDeathDate() const;
-	bool Alive();
+	bool Alive() const;
 	double GetAge() const;
 	const double GetBirthDay() const { return BirthDay; }
 	unsigned int GetCurrentCd4() const { return currentCd4; }
@@ -58,6 +58,11 @@ public:
 	bool GetCd4TestState() const { return cd4Test; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetSeroStatus() const { return seroStatus; }
+	double GetHivDeathDate() const { return HivDeathDate; }
+	double GetCd4DeclineDate() const { return Cd4DeclineDate; }
+	double GetCd4RecoverDate() const { return Cd4RecoverDate; }
+	double GetWhoDeclineDate() const { return WhoDeclineDate; }
+	double GetWhoRecoverDate() const { return WhoRecoverDate; }
 	
 private:
 	/* basic characteristics */
@@ -79,6 +84,14 @@ private:
 	/* Day = time an event occured */
 	double DeathDay;
 	const double BirthDay;
+	
+	/* Date = time an event will occur */
+	double HivDeathDate;
+	double Cd4DeclineDate;
+	double Cd4RecoverDate;
+	double WhoDeclineDate;
+	double WhoRecoverDate;
+	
 	
 	/* HIV care */
 	bool diagnosed;

@@ -36,6 +36,11 @@ currentWho(0),
 initialWho(0),
 DeathDay(0),
 BirthDay(Time),
+HivDeathDate(0),
+Cd4DeclineDate(0),
+Cd4RecoverDate(0),
+WhoDeclineDate(0),
+WhoRecoverDate(0),
 diagnosed(false),
 inCare(false),
 cd4Test(false),
@@ -101,7 +106,7 @@ double person::GetNatDeathDate() const
 /////////////////////
 /////////////////////
 
-bool person::Alive()
+bool person::Alive() const
 {
 	int aliveStatus = false;
 	
@@ -271,6 +276,7 @@ void person::SetInitialWhoStage()
 void person::AssignHivDeathDate()
 {
 	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
+	HivDeathDate = GenerateHivDeathDate();
 	D(cout << "HivDeathDate = " << GenerateHivDeathDate() << endl);
 }
 
@@ -307,7 +313,7 @@ void person::ScheduleHivIndicatorUpdate()
 {
 	ScheduleCd4Update(this);
 	ScheduleWhoUpdate(this);
-		//HivRelatedMortality only changes when Cd4 or Who changes.
+		//HivRelatedMortality only changes when Cd4 or Who changes -> so called by the functions above.
 }
 
 /////////////////////

@@ -74,7 +74,10 @@ Death::~Death()
 
 bool Death::CheckValid()
 {
-	return pPerson->Alive();
+	if(hivRelated && pPerson->GetHivDeathDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return pPerson->Alive();
 }
 
 void Death::Execute()
