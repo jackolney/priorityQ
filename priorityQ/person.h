@@ -40,6 +40,12 @@ public:
 	void SetCurrentWhoStage(unsigned int theStage) { currentWho = theStage; }
 	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
 	void AssignHivDeathDate(); //function creates the Death event.
+
+	void SetHivDeathDate(double theDate) { HivDeathDate = theDate; }
+	void SetCd4DeclineDate(double theDate) { Cd4DeclineDate = theDate; }
+	void SetCd4RecoverDate(double theDate) { Cd4RecoverDate = theDate; }
+	void SetWhoDeclineDate(double theDate) { WhoDeclineDate = theDate; }
+	void SetWhoRecoverDate(double theDate) { WhoRecoverDate = theDate; }
 	
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }

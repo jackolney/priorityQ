@@ -95,10 +95,12 @@ void ScheduleCd4Update(person * const thePerson)
 	
 	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() > 1) {
 		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + (Cd4Time [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
+		thePerson->SetCd4DeclineDate(theEvent->GetTime());
 		cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() < 3) {
 		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + (Cd4TimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+		thePerson->SetCd4RecoverDate(theEvent->GetTime());
 		cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
 	}
 

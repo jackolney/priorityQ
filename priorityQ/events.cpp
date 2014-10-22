@@ -128,7 +128,10 @@ Cd4Decline::~Cd4Decline()
 
 bool Cd4Decline::CheckValid()
 {
-	return pPerson->Alive();
+	if(!pPerson->GetArtInitiationState())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void Cd4Decline::Execute()
@@ -154,7 +157,10 @@ Cd4Recover::~Cd4Recover()
 
 bool Cd4Recover::CheckValid()
 {
-	return true;
+	if(pPerson->GetArtInitiationState())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void Cd4Recover::Execute()

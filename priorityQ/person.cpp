@@ -276,7 +276,7 @@ void person::SetInitialWhoStage()
 void person::AssignHivDeathDate()
 {
 	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
-	HivDeathDate = GenerateHivDeathDate();
+	SetHivDeathDate(GenerateHivDeathDate());
 	D(cout << "\tHivDeathDate = " << GenerateHivDeathDate() << endl);
 }
 
