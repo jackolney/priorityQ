@@ -74,7 +74,7 @@ Death::~Death()
 
 bool Death::CheckValid()
 {
-	return true;
+	return pPerson->Alive();
 }
 
 void Death::Execute()
@@ -126,13 +126,13 @@ HivTest::~HivTest()
 
 bool HivTest::CheckValid()
 {
-	if(!pPerson->Alive()) {
+	if(pPerson->Alive())
+		return true;
+	else {
 		Cancel();
 		D(cout << "HivTest cancelled." << endl);
 		return false;
 	}
-	else
-		return true;
 }
 
 void HivTest::Execute()
