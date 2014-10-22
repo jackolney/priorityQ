@@ -128,7 +128,7 @@ Cd4Decline::~Cd4Decline()
 
 bool Cd4Decline::CheckValid()
 {
-	if(!pPerson->GetArtInitiationState())
+	if(!pPerson->GetArtInitiationState() && pPerson->GetCd4DeclineDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -157,7 +157,7 @@ Cd4Recover::~Cd4Recover()
 
 bool Cd4Recover::CheckValid()
 {
-	if(pPerson->GetArtInitiationState())
+	if(pPerson->GetArtInitiationState() && pPerson->GetCd4RecoverDate()	== GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -186,7 +186,10 @@ WhoDecline::~WhoDecline()
 
 bool WhoDecline::CheckValid()
 {
-	return true;
+	if(pPerson->GetWhoDeclineDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void WhoDecline::Execute()
@@ -207,7 +210,10 @@ WhoRecover::~WhoRecover()
 
 bool WhoRecover::CheckValid()
 {
-	return true;
+	if(pPerson->GetWhoRecoverDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void WhoRecover::Execute()
