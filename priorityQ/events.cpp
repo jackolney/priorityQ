@@ -67,7 +67,10 @@ Death::Death(person * const thePerson, const double Time, const bool hivCause) :
 event(Time),
 pPerson(thePerson),
 hivRelated(hivCause)
-{}
+{
+	if(hivCause)
+		thePerson->SetHivDeathDate(Time);
+}
 
 Death::~Death()
 {}
@@ -121,7 +124,9 @@ void HivIncidence::Execute()
 Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	thePerson->SetCd4DeclineDate(Time);
+}
 
 Cd4Decline::~Cd4Decline()
 {}
@@ -150,7 +155,9 @@ void Cd4Decline::Execute()
 Cd4Recover::Cd4Recover(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	thePerson->SetCd4RecoverDate(Time);
+}
 
 Cd4Recover::~Cd4Recover()
 {}
@@ -179,7 +186,9 @@ void Cd4Recover::Execute()
 WhoDecline::WhoDecline(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	thePerson->SetWhoDeclineDate(Time);
+}
 
 WhoDecline::~WhoDecline()
 {}
@@ -208,7 +217,9 @@ void WhoDecline::Execute()
 WhoRecover::WhoRecover(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	thePerson->SetWhoRecoverDate(Time);
+}
 
 WhoRecover::~WhoRecover()
 {}
