@@ -74,9 +74,7 @@ void UpdateAge(person * const thePerson)
 void ScheduleCd4Update(person * const thePerson)
 {
 	cout << "ScheduleCd4Update called." << endl;
-	
-		//Need to figure out if CD4 declining or not.
-	
+
 		//Cd4Time [WHO-1] [CD4-2 (4,3,2)]
 	double Cd4Time [4] [3] =
 	{
@@ -95,15 +93,13 @@ void ScheduleCd4Update(person * const thePerson)
 		{1.41480920,3.63655620}
 	};
 	
-//	cout << Cd4Time[1-1][2-2] << " = Cd4Time." << endl;
-	
 	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() > 1) {
 		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + (Cd4Time [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
-		cout << "Cd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+		cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() < 3) {
 		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + (Cd4TimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		cout << "Cd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+		cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
 	}
 
 }
