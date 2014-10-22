@@ -195,6 +195,11 @@ bool WhoDecline::CheckValid()
 void WhoDecline::Execute()
 {
 	cout << "WhoDecline executed." << endl;
+	cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ";
+	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
+	cout << pPerson->GetCurrentWho() << endl;
+	ScheduleWhoUpdate(pPerson);
+	pPerson->AssignHivDeathDate();
 }
 
 /////////////////////
@@ -219,6 +224,11 @@ bool WhoRecover::CheckValid()
 void WhoRecover::Execute()
 {
 	cout << "WhoRecover executed." << endl;
+	cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ";
+	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
+	cout << pPerson->GetCurrentWho() << endl;
+	ScheduleWhoUpdate(pPerson);
+	pPerson->AssignHivDeathDate();
 }
 
 /////////////////////
