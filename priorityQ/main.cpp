@@ -85,6 +85,7 @@ int main(int argc, const char * argv[])
 	//				-> UpdateWhoStage()
 	//				-> ForArtToo... ensure that disease progression occurs properly.
 	//				-> Flags for checking too?
+	//				-> Each event with competing events supplies additional info to the event which is checked in CheckValid() prior to Execute();
 	//
 	//			>> CASCADE:
 	//				-> HivTesting (HCT / VCT / PICT);

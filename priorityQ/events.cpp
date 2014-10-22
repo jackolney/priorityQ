@@ -84,7 +84,7 @@ void Death::Execute()
 	else
 		D(cout << "Death executed (Natural)." << endl);
 	
-	pPerson->Kill(eventTime);
+	pPerson->Kill(GetTime());
 }
 
 /////////////////////
@@ -109,7 +109,8 @@ bool HivIncidence::CheckValid()
 
 void HivIncidence::Execute()
 {
-	pPerson->CheckHiv(eventTime);
+	pPerson->CheckHiv(GetTime());
+	cout << GetTime() << endl;
 }
 
 /////////////////////
@@ -134,6 +135,7 @@ void Cd4Decline::Execute()
 	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	cout << pPerson->GetCurrentCd4() << endl;
+		//ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
 
