@@ -113,7 +113,6 @@ bool HivIncidence::CheckValid()
 void HivIncidence::Execute()
 {
 	pPerson->CheckHiv(GetTime());
-	cout << GetTime() << endl;
 }
 
 /////////////////////

@@ -257,7 +257,7 @@ void person::SetInitialCd4Count()
 	
 	currentCd4 = i;
 	initialCd4 = i;
-	D(cout << "InitialCd4 = " << i << endl);
+	D(cout << "\tInitialCd4 = " << i << endl);
 }
 
 /////////////////////
@@ -267,7 +267,7 @@ void person::SetInitialWhoStage()
 {
 	currentWho = 1;
 	initialWho = 1;
-	D(cout << "InitialWho = 1" << endl);
+	D(cout << "\tInitialWho = 1" << endl);
 }
 
 /////////////////////
@@ -277,7 +277,7 @@ void person::AssignHivDeathDate()
 {
 	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
 	HivDeathDate = GenerateHivDeathDate();
-	D(cout << "HivDeathDate = " << GenerateHivDeathDate() << endl);
+	D(cout << "\tHivDeathDate = " << GenerateHivDeathDate() << endl);
 }
 
 /////////////////////
