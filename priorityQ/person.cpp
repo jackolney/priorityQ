@@ -179,7 +179,7 @@ double person::AssignNatDeathDate(const double Time)
 void person::Kill(const double Time)
 {
 	DeathDay = Time;
-	D(cout << "DeathDate = " << DeathDay << endl);
+	D(cout << "\tDeathDate = " << DeathDay << endl);
 	return;
 }
 

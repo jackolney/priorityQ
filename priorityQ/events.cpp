@@ -125,12 +125,16 @@ Cd4Decline::~Cd4Decline()
 
 bool Cd4Decline::CheckValid()
 {
-	return true;
+	return pPerson->Alive();
 }
 
 void Cd4Decline::Execute()
 {
-		//DoFunStuff()
+	cout << "Cd4Decline executed." << endl;
+	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
+	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
+	cout << pPerson->GetCurrentCd4() << endl;
+		//Update HivRelatedDeathDate;
 }
 
 /////////////////////
@@ -151,7 +155,7 @@ bool Cd4Recover::CheckValid()
 
 void Cd4Recover::Execute()
 {
-		//DoFunStuff()
+	cout << "Cd4Recover executed." << endl;
 }
 
 /////////////////////
@@ -172,7 +176,7 @@ bool WhoDecline::CheckValid()
 
 void WhoDecline::Execute()
 {
-		//DoFunStuff()
+	cout << "WhoDecline executed." << endl;
 }
 
 /////////////////////
@@ -193,7 +197,7 @@ bool WhoRecover::CheckValid()
 
 void WhoRecover::Execute()
 {
-	
+	cout << "WhoRecover executed." << endl;
 }
 
 /////////////////////
