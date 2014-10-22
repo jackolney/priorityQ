@@ -88,6 +88,8 @@ void ArtInitiation::Execute()
 {
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
+	ScheduleCd4Update(pPerson);
+	ScheduleWhoUpdate(pPerson);
 	UpdateEvents(pPerson);
 }
 

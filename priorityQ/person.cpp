@@ -51,7 +51,7 @@ art(false)
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
-//	SeedEvents(this,Time); //turned off for dev.
+	SeedEvents(this,Time); //turned off for dev.
 }
 
 person::~person()
@@ -267,7 +267,7 @@ void person::SetInitialWhoStage()
 {
 	currentWho = 1;
 	initialWho = 1;
-	D(cout << "\tInitialWho = 1" << endl);
+	D(cout << "\tInitialWho = " << initialWho << endl);
 }
 
 /////////////////////

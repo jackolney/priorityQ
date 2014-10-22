@@ -143,7 +143,7 @@ void ScheduleWhoUpdate(person * const thePerson)
 		
 		if(thePerson->GetCurrentWho() > 1) {
 			event * theRecoverEvent = new WhoRecover(thePerson, theQ->GetTime() + (WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
-			cout << "\tWhoReocover (ART) form " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl;
+			cout << "\tWhoRecover (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl;
 		}
 	}
 }
