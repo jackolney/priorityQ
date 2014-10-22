@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0400AE2419E707B500357D2D /* person.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0400AE2219E707B500357D2D /* person.cpp */; };
+		040C113719F7A93800210A47 /* cascadeEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040C113519F7A93800210A47 /* cascadeEvents.cpp */; };
 		040CC6FF19F0063700611C57 /* update.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040CC6FD19F0063700611C57 /* update.cpp */; };
 		0447636F19E694AD001C5089 /* events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0447636D19E694AD001C5089 /* events.cpp */; };
 		049A06DC19F16FEC006BFBCE /* population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049A06DA19F16FEC006BFBCE /* population.cpp */; };
@@ -36,6 +37,8 @@
 		0400AE2219E707B500357D2D /* person.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = person.cpp; sourceTree = "<group>"; };
 		0400AE2319E707B500357D2D /* person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = person.h; sourceTree = "<group>"; };
 		0400AE2819E817FE00357D2D /* rng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rng.h; sourceTree = "<group>"; };
+		040C113519F7A93800210A47 /* cascadeEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cascadeEvents.cpp; sourceTree = "<group>"; };
+		040C113619F7A93800210A47 /* cascadeEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cascadeEvents.h; sourceTree = "<group>"; };
 		040CC6FD19F0063700611C57 /* update.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = update.cpp; sourceTree = "<group>"; };
 		040CC6FE19F0063700611C57 /* update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update.h; sourceTree = "<group>"; };
 		0447636D19E694AD001C5089 /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = events.cpp; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				04EAF85B19E58A5F0058B45A /* event.h */,
 				0447636D19E694AD001C5089 /* events.cpp */,
 				0447636E19E694AD001C5089 /* events.h */,
+				040C113519F7A93800210A47 /* cascadeEvents.cpp */,
+				040C113619F7A93800210A47 /* cascadeEvents.h */,
 				04CF95CA19F56FF900A061C8 /* hiv.cpp */,
 				04CF95CB19F56FF900A061C8 /* hiv.h */,
 				0400AE2819E817FE00357D2D /* rng.h */,
@@ -170,6 +175,7 @@
 				04CF95CC19F56FF900A061C8 /* hiv.cpp in Sources */,
 				0400AE2419E707B500357D2D /* person.cpp in Sources */,
 				040CC6FF19F0063700611C57 /* update.cpp in Sources */,
+				040C113719F7A93800210A47 /* cascadeEvents.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #include "person.h"
 #include "event.h"
 #include "events.h"
+#include "cascadeEvents.h"
 #include "rng.h"
 #include "eventQ.h"
 

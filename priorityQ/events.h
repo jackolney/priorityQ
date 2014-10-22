@@ -46,7 +46,6 @@ private:
 	cohort * const pCohort;
 };
 
-
 /////////////////////
 /////////////////////
 
@@ -80,60 +79,8 @@ private:
 	person * const pPerson;
 };
 
-
-/////////////////////
-/////////////////////
-
-
-class HivTest : public event {
-public:
-	HivTest(person * const thePerson, const double Time); //constructor
-	~HivTest(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-};
-
-/////////////////////
-/////////////////////
-
-class Cd4Test : public event {
-public:
-	Cd4Test(person * const thePerson, const double Time); //constructor
-	~Cd4Test(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-};
-
-/////////////////////
-/////////////////////
-
-class ArtInitiation : public event {
-public:
-	ArtInitiation(person * const thePerson, const double Time); // constructor
-	~ArtInitiation(); //destructor
-	
-	/* Methodss */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-};
-
-
-/////////////////////
-/////////////////////
-
+///////////////////////
+///////////////////////
 
 
 #endif /* defined(__priorityQ__events__) */
