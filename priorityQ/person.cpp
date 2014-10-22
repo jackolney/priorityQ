@@ -231,7 +231,7 @@ void person::SetHivIndicators()
 {
 	SetCd4Count();
 	SetWhoStage();
-//	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
+	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
 }
 
 /////////////////////
@@ -258,7 +258,7 @@ void person::SetCd4Count()
 
 void person::SetWhoStage()
 {
-	currentCd4 = 1;
+	currentWho = 1;
 	initialWho = 1;
 	D(cout << "InitialWho = 1" << endl);
 }
@@ -266,11 +266,9 @@ void person::SetWhoStage()
 /////////////////////
 /////////////////////
 
-double person::GenerateHivDeathDate()
+double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous date in the line??
 {
-	//Perhaps a way of cancelling the previous date in the line??
-	
-		//HivMortalityTime [ART] [WHO-1] [CD4-1];
+	//HivMortalityTime [ART] [WHO-1] [CD4-1];
 	double HivMortalityTime [2] [4] [4] =
 		{
 			{
@@ -287,8 +285,6 @@ double person::GenerateHivDeathDate()
 				{0.90458082,3.09296405,4.39037827,8.90864957}
 			}
 		};
-	
-//	D(cout << theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25) << " = HivMortalityTime" << endl);
 	
 	return theQ->GetTime() + (HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
 }
