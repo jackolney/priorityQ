@@ -141,10 +141,10 @@ bool Cd4Decline::CheckValid()
 
 void Cd4Decline::Execute()
 {
-	cout << "Cd4Decline executed." << endl;
-	cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ";
+	D(cout << "Cd4Decline executed." << endl);
+	D(cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
-	cout << pPerson->GetCurrentCd4() << endl;
+	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
@@ -172,10 +172,10 @@ bool Cd4Recover::CheckValid()
 
 void Cd4Recover::Execute()
 {
-	cout << "Cd4Recover executed." << endl;
-	cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ";
+	D(cout << "Cd4Recover executed." << endl);
+	D(cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
-	cout << pPerson->GetCurrentCd4() << endl;
+	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 }
@@ -203,10 +203,10 @@ bool WhoDecline::CheckValid()
 
 void WhoDecline::Execute()
 {
-	cout << "WhoDecline executed." << endl;
-	cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ";
+	D(cout << "WhoDecline executed." << endl);
+	D(cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
-	cout << pPerson->GetCurrentWho() << endl;
+	D(cout << pPerson->GetCurrentWho() << endl);
 	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
 }
@@ -234,10 +234,10 @@ bool WhoRecover::CheckValid()
 
 void WhoRecover::Execute()
 {
-	cout << "WhoRecover executed." << endl;
-	cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ";
+	D(cout << "WhoRecover executed." << endl);
+	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
-	cout << pPerson->GetCurrentWho() << endl;
+	D(cout << pPerson->GetCurrentWho() << endl);
 	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
 }

@@ -87,7 +87,7 @@ int main(int argc, const char * argv[])
 	//				-> Flags for checking too? = Done.
 	//				-> Each event with competing events supplies additional info to the event which is checked in CheckValid() prior to Execute(); = Done.
 	//				-> Put DATE for NH events in constructors for events?. = Done.
-	//				-> CHECK THAT WHEN ON ART... REVERSE HAPPENS AS EXPECTED.
+	//				-> CHECK THAT WHEN ON ART... REVERSE HAPPENS AS EXPECTED. = Done.
 	//
 	//			>> CASCADE:
 	//				-> HivTesting (HCT / VCT / PICT);

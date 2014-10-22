@@ -223,7 +223,7 @@ bool person::CheckHiv(const double Time)
 //		return false;
 	
 	//For development purposes.
-	cout << "HIV+" << endl;
+	D(cout << "HIV+" << endl);
 	SetSeroStatus(true);
 	SetSeroconversionDay(Time);
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.

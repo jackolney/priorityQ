@@ -73,7 +73,7 @@ void UpdateAge(person * const thePerson)
 
 void ScheduleCd4Update(person * const thePerson)
 {
-	cout << "ScheduleCd4Update called." << endl;
+	D(cout << "ScheduleCd4Update called." << endl);
 
 		//Cd4Time [WHO-1] [CD4-2 (4,3,2)]
 	const double Cd4DeclineTime [4] [3] =
@@ -95,11 +95,11 @@ void ScheduleCd4Update(person * const thePerson)
 	
 	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() > 1) {
 		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + (Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
-		cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+		D(cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() < 3) {
 		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + (Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl;
+		D(cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
 	}
 
 }
@@ -109,7 +109,7 @@ void ScheduleCd4Update(person * const thePerson)
 
 void ScheduleWhoUpdate(person * const thePerson)
 {
-	cout << "ScheduleWhoUpdate called." << endl;
+	D(cout << "ScheduleWhoUpdate called." << endl);
 	
 		//WhoTime [WHO-1][CD4-1]
 	const double WhoDeclineTime [3][4] =
@@ -133,17 +133,17 @@ void ScheduleWhoUpdate(person * const thePerson)
 	
 	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentWho() < 4) {
 		event * theEvent = new WhoDecline(thePerson, theQ->GetTime() + (WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		cout << "\tWhoDecline from " << thePerson->GetCurrentWho() << " to occur on = " << theEvent->GetTime() << endl;
+		D(cout << "\tWhoDecline from " << thePerson->GetCurrentWho() << " to occur on = " << theEvent->GetTime() << endl);
 	}
 	else if(thePerson->GetArtInitiationState()) {
 		if(thePerson->GetCurrentWho() < 4) {
 			event * theDeclineEvent = new WhoDecline(thePerson, theQ->GetTime() + (WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-			cout << "\tWhoDecline (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theDeclineEvent->GetTime() << endl;
+			D(cout << "\tWhoDecline (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theDeclineEvent->GetTime() << endl);
 		}
 		
 		if(thePerson->GetCurrentWho() > 1) {
 			event * theRecoverEvent = new WhoRecover(thePerson, theQ->GetTime() + (WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
-			cout << "\tWhoRecover (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl;
+			D(cout << "\tWhoRecover (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl);
 		}
 	}
 }
