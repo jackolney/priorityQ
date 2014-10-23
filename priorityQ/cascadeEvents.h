@@ -17,10 +17,42 @@
 /////////////////////
 /////////////////////
 
+class HctHivTest : public event {
+public:
+	HctHivTest(person * const thePerson, const double Time); //constructor
+	~HctHivTest(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class VctHivTest : public event {
 public:
 	VctHivTest(person * const thePerson, const double Time); //constructor
 	~VctHivTest(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
+class PictHivTest : public event {
+public:
+	PictHivTest(person * const thePerson, const double Time); //constructor
+	~PictHivTest(); //destructor
 	
 	/* Methods */
 	bool CheckValid();

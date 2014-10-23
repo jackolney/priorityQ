@@ -24,6 +24,8 @@ using namespace std;
 ////////////////////
 ////////////////////
 
+	//Expand to schedule Vct and a separate function for scheduling Pict and another for Hct.
+
 void SeedEvents(person * const thePerson, const double Time)
 {
 	D(cout << "Seeding initial events." << endl);

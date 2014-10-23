@@ -19,6 +19,39 @@ using namespace std;
 /////////////////////
 /////////////////////
 
+HctHivTest::HctHivTest(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	thePerson->SetHctHivTestDate(Time);
+}
+
+HctHivTest::~HctHivTest()
+{}
+
+bool HctHivTest::CheckValid()
+{
+	if(pPerson->GetHctHivTestDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
+}
+
+void HctHivTest::Execute()
+{
+	D(cout << "HctHivTest executed." << endl);
+	if(pPerson->GetSeroStatus()) {
+		pPerson->SetDiagnosedState(true);
+		D(cout << "Diagnosed as HIV-positive." << endl);
+			//Linkage probability -> ScheduleCd4Test();
+			//PrevDiagLinkage stuff?
+	}
+	UpdateEvents(pPerson);
+}
+
+/////////////////////
+/////////////////////
+
 VctHivTest::VctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
@@ -44,6 +77,7 @@ void VctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
+			//Linkageprobability.. -> ScheduleCd4Test();
 	}
 	UpdateEvents(pPerson);
 	//ScheduleVctHivTest()

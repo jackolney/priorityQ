@@ -35,7 +35,7 @@ bool CohortStart::CheckValid()
 void CohortStart::Execute()
 {
 	D(cout << "CohortStart executed." << endl);
-	pCohort->GenerateCohort(); //IDIOT - WRONG POINTER!!!!
+	pCohort->GenerateCohort();
 }
 
 /////////////////////
