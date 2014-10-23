@@ -31,13 +31,11 @@ VctHivTest::~VctHivTest()
 
 bool VctHivTest::CheckValid()
 {
-	if(pPerson->Alive())
-		return true;
-	else {
-		Cancel();
-		D(cout << "HivTest cancelled." << endl);
+	if(pPerson->GetVctHivTestDate() == GetTime())
+		return pPerson->Alive();
+	else
 		return false;
-	}
+		//If returning false, reschedule next VctHivTest();
 }
 
 void VctHivTest::Execute()
@@ -48,6 +46,7 @@ void VctHivTest::Execute()
 		D(cout << "Diagnosed as HIV-positive." << endl);
 	}
 	UpdateEvents(pPerson);
+	//ScheduleVctHivTest()
 };
 
 /////////////////////
