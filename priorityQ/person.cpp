@@ -16,6 +16,7 @@
 #include "cohort.h"
 #include "update.h"
 #include "cascadeUpdate.h"
+#include "cascadeEvents.h"
 #include "hiv.h"
 
 extern Rng * theRng;
@@ -56,7 +57,8 @@ whoTx(0)
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
-	SeedEvents(this,Time); //turned off for dev.
+	new SeedInitialHivTests(this);
+//	SeedEvents(this,Time); //turned off for dev. //To be replaced.
 }
 
 person::~person()

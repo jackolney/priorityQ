@@ -26,16 +26,25 @@ using namespace std;
 
 	//Expand to schedule Vct and a separate function for scheduling Pict and another for Hct.
 
-void SeedEvents(person * const thePerson, const double Time)
+//void SeedEvents(person * const thePerson, const double Time)
+//{
+//	D(cout << "Seeding initial events." << endl);
+//	
+//	if(thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
+//		new VctHivTest(thePerson,Time + theRng->SampleExpDist(5.8 * 365.25));
+//	}
+//	
+//	//Seed initial PICT test event too.
+//	
+//}
+
+////////////////////
+////////////////////
+
+void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho)
 {
-	D(cout << "Seeding initial events." << endl);
-	
-	if(thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
-		new VctHivTest(thePerson,Time + theRng->SampleExpDist(5.8 * 365.25));
-	}
-	
-	//Seed initial PICT test event too.
-	
+	thePerson->UpdateTxGuidelines(theCd4,theWho);
+	D(cout << "TxGuidelines Updated (Cd4 = " << theCd4 << ", Who = " << theWho << ")." << endl);
 }
 
 ////////////////////
@@ -51,7 +60,7 @@ void ScheduleHctHivTest(person * const thePerson)
 
 void ScheduleVctHivTest(person * const thePerson)
 {
-	if(theQ->GetTime() > 12418) {
+	if(theQ->GetTime() >= 12418) {
 		D(cout << "Scheduling VctHivTest." << endl);
 		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(5.8 * 365.25));
 	}
@@ -62,7 +71,7 @@ void ScheduleVctHivTest(person * const thePerson)
 
 void SchedulePictHivTest(person * const thePerson)
 {
-	if(theQ->GetTime() > 12418 && thePerson->GetSeroStatus()) {
+	if(theQ->GetTime() >= 12418 && thePerson->GetSeroStatus()) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
 			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())

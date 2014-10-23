@@ -60,6 +60,9 @@ public:
 	void SetVctHivTestDate(double theDate) { VctHivTestDate = theDate; }
 	void SetPictHivTestDate(double theDate) { PictHivTestDate = theDate; }
 	
+	/* Update Tx Guidelines */
+	void UpdateTxGuidelines(unsigned int theCd4, unsigned int theWho) { cd4Tx = theCd4; whoTx = theWho; }
+	
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////

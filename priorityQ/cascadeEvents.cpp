@@ -9,12 +9,38 @@
 #include <iostream>
 #include "macro.h"
 #include "cascadeEvents.h"
+#include "cascadeUpdate.h"
 #include "event.h"
 #include "person.h"
 #include "update.h"
 #include "cohort.h"
 
 using namespace std;
+
+/////////////////////
+/////////////////////
+
+SeedInitialHivTests::SeedInitialHivTests(person * const thePerson) :
+event(12418),
+pPerson(thePerson)
+{
+	D(cout << "InitialHivTests scheduled to begin in " <<  this->GetTime() << "." << endl);
+};
+
+SeedInitialHivTests::~SeedInitialHivTests()
+{}
+
+bool SeedInitialHivTests::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void SeedInitialHivTests::Execute()
+{
+	UpdateTreatmentGuidelines(pPerson,1,4);
+	ScheduleVctHivTest(pPerson);
+	SchedulePictHivTest(pPerson);
+}
 
 /////////////////////
 /////////////////////

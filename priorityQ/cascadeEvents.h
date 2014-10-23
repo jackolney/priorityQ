@@ -17,6 +17,22 @@
 /////////////////////
 /////////////////////
 
+class SeedInitialHivTests : public event {
+public:
+	SeedInitialHivTests(person * const thePerson); //constructor
+	~SeedInitialHivTests(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class HctHivTest : public event {
 public:
 	HctHivTest(person * const thePerson, const double Time); //constructor

@@ -12,9 +12,9 @@
 #include <stdio.h>
 #include "person.h"
 
-void SeedEvents(person * const thePerson, const double Time);
+//void SeedInitialTestingEvents(person * const thePerson);
 
-void UpdateTreatmentGuidelines(person * const thePerson);
+void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho);
 
 void ScheduleHctHivTest(person * const thePerson);
 
