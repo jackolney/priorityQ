@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "macro.h"
+#include "toolbox.h"
 #include "cascadeUpdate.h"
 #include "person.h"
 #include "event.h"
@@ -24,19 +25,7 @@ using namespace std;
 ////////////////////
 ////////////////////
 
-	//Expand to schedule Vct and a separate function for scheduling Pict and another for Hct.
 
-//void SeedEvents(person * const thePerson, const double Time)
-//{
-//	D(cout << "Seeding initial events." << endl);
-//	
-//	if(thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
-//		new VctHivTest(thePerson,Time + theRng->SampleExpDist(5.8 * 365.25));
-//	}
-//	
-//	//Seed initial PICT test event too.
-//	
-//}
 
 ////////////////////
 ////////////////////
@@ -89,6 +78,33 @@ void SchedulePictHivTest(person * const thePerson)
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(0.5 * 365.25));
 		}
 	}
+}
+
+////////////////////
+////////////////////
+
+double HctLinkage(person * const thePerson)
+{
+//	return theRng->Sample(<#double prob#>);
+	return 10;
+}
+
+////////////////////
+////////////////////
+
+double VctLinkage(person * const thePerson)
+{
+//	return theRng->Sample(<#double prob#>);
+	return 10;
+}
+
+////////////////////
+////////////////////
+
+double PictLinkage(person * const thePerson)
+{
+//	return theRng->Sample(<#double prob#>);
+	return 10;
 }
 
 ////////////////////

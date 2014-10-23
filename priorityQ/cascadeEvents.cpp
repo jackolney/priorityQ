@@ -105,7 +105,10 @@ void VctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-			//Linkageprobability.. -> ScheduleCd4Test();
+		
+		//Linkage to Care
+//		if(VctLinkage())
+//			new Cd4Test(
 	}
 	UpdateEvents(pPerson);
 };

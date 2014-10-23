@@ -30,21 +30,20 @@ currentAge(0),
 initialAge(0),
 seroStatus(false),
 seroconversionDay(0),
-hivDeathDate(0),
 currentCd4(0),
 initialCd4(0),
 currentWho(0),
 initialWho(0),
-DeathDay(0),
-BirthDay(Time),
-HivDeathDate(0),
-Cd4DeclineDate(0),
-Cd4RecoverDate(0),
-WhoDeclineDate(0),
-WhoRecoverDate(0),
-HctHivTestDate(0),
-VctHivTestDate(0),
-PictHivTestDate(0),
+deathDay(0),
+birthDay(Time),
+hivDeathDate(0),
+cd4DeclineDate(0),
+cd4RecoverDate(0),
+whoDeclineDate(0),
+whoRecoverDate(0),
+hctHivTestDate(0),
+vctHivTestDate(0),
+pictHivTestDate(0),
 diagnosed(false),
 inCare(false),
 everCd4Test(false),
@@ -117,7 +116,7 @@ bool person::Alive() const
 {
 	int aliveStatus = false;
 	
-	if(DeathDay == 0)
+	if(deathDay == 0)
 		aliveStatus = true;
 	
 	return aliveStatus;
@@ -190,8 +189,8 @@ double person::AssignNatDeathDate(const double Time)
 
 void person::Kill(const double Time)
 {
-	DeathDay = Time;
-	D(cout << "\tDeathDate = " << DeathDay << endl);
+	deathDay = Time;
+	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
 
