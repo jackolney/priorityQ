@@ -70,8 +70,8 @@ void HctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-			//Linkage probability -> ScheduleCd4Test();
-			//PrevDiagLinkage stuff?
+		if(HctLinkage(pPerson))
+			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
 	UpdateEvents(pPerson);
 }
@@ -94,9 +94,10 @@ bool VctHivTest::CheckValid()
 {
 	if(pPerson->GetVctHivTestDate() == GetTime())
 		return pPerson->Alive();
-	else
+	else {
+		ScheduleVctHivTest(pPerson);
 		return false;
-	//Schedule next Vct test here - regardless of if ValidorNot;
+	}
 }
 
 void VctHivTest::Execute()
@@ -105,11 +106,11 @@ void VctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		
 		if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
 	UpdateEvents(pPerson);
+	ScheduleVctHivTest(pPerson);
 };
 
 /////////////////////
@@ -130,9 +131,10 @@ bool PictHivTest::CheckValid()
 {
 	if(pPerson->GetPictHivTestDate() == GetTime())
 		return pPerson->Alive();
-	else
+	else {
+		SchedulePictHivTest(pPerson);
 		return false;
-	//Schedule next Pict test here - regardless of if ValidorNot;
+	}
 }
 
 void PictHivTest::Execute()
@@ -141,11 +143,11 @@ void PictHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		
 		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
 	UpdateEvents(pPerson);
+	SchedulePictHivTest(pPerson);
 }
 
 /////////////////////
@@ -168,7 +170,9 @@ bool Cd4Test::CheckValid()
 
 void Cd4Test::Execute()
 {
+	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
+	pPerson->SetInCareState(true);
 	pPerson->SetEverCd4TestState(true);
 	UpdateEvents(pPerson);
 };

@@ -110,7 +110,15 @@ bool PictLinkage(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void ScheduleCd4Test(person * const thePerson)
+void ScheduleInitialCd4TestAfterHct(person * const thePerson)
+{
+	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(hctCd4TestTime[thePerson->GetCurrentCd4()-1]));
+}
+
+////////////////////
+////////////////////
+
+void SchedulePreArtCd4Test(person * const thePerson)
 {
 	if(thePerson->GetDiagnosedState() &&
 	   thePerson->GetSeroStatus() &&

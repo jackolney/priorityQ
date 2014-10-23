@@ -28,11 +28,8 @@ const double hctProbLinkPreviouslyDiagnosed = 0.2;
 const double vctProbLink = 0.59;
 const double pictProbLink = 0.54;
 
-/* HCT time between Hiv test and Cd4 test */
-const double hctCd4TestTime_Cd4_4 = 93;
-const double hctCd4TestTime_Cd4_3 = 97;
-const double hctCd4TestTime_Cd4_2 = 152.5;
-const double hctCd4TestTime_Cd4_1 = 142;
+/* HCT time between Hiv test and Cd4 test [CD4-1] */
+const double hctCd4TestTime [4] = {142,152.5,97,93};
 
 /* Time between Cd4 test and receiving results */
 const double cd4ResultTime = 30;

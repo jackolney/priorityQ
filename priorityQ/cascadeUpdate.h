@@ -28,9 +28,11 @@ bool VctLinkage(person * const thePerson);
 
 bool PictLinkage(person * const thePerson);
 
+/* Initial Cd4 test */
+void ScheduleInitialCd4TestAfterHct(person * const thePerson);
 
 /* Pre-Art Care */
-void ScheduleCd4Test(person * const thePerson);
+void SchedulePreArtCd4Test(person * const thePerson);
 
 /* Art Care */
 void ScheduleArtInitiation(person * const thePerson);

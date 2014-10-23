@@ -46,6 +46,7 @@ public:
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; diagnosisCount += 1; }
 	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; }
+	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 
 	/* Natural History Date Setting Functions */
