@@ -51,7 +51,7 @@ void ScheduleVctHivTest(person * const thePerson)
 {
 	if(theQ->GetTime() >= 12418) {
 		D(cout << "Scheduling VctHivTest." << endl);
-		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(5.8 * 365.25));
+		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime));
 	}
 }
 
@@ -64,18 +64,18 @@ void SchedulePictHivTest(person * const thePerson)
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
 			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(2 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticNoCd4Result));
 			else if(thePerson->GetEverCd4ResultState() && (thePerson->GetCurrentCd4() > thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() < thePerson->GetWhoTxGuideline()))
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(1 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultNotEligible));
 			else if(thePerson->GetEverCd4ResultState() && (thePerson->GetCurrentCd4() <= thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() >= thePerson->GetWhoTxGuideline()))
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(0.5 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultEligible));
 		} else {
 			if(!thePerson->GetDiagnosedState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(1 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticOblivious));
 			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(0.5 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticNoCd4Result));
 			else if(thePerson->GetEverCd4ResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(0.5 * 365.25));
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticCd4Result));
 		}
 	}
 }
@@ -115,7 +115,7 @@ void ScheduleCd4Test(person * const thePerson)
 	if(thePerson->GetDiagnosedState() &&
 	   thePerson->GetSeroStatus() &&
 	   !thePerson->GetEverCd4TestState()) {
-		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
+		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
 		D(cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl);
 	}
 }
@@ -129,7 +129,7 @@ void ScheduleArtInitiation(person * const thePerson)
 	   thePerson->GetSeroStatus() &&
 	   thePerson->GetEverCd4TestState() &&
 	   !thePerson->GetArtInitiationState()) {
-		event * theEvent = new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(25));
+		event * theEvent = new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
 		D(cout << "ArtInitiation scheduled for day = " << theEvent->GetTime() << endl);
 	}
 }
