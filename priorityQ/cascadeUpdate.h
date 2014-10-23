@@ -44,4 +44,6 @@ bool AttendCd4TestResult(person * const thePerson);
 /* Art Care */
 void ScheduleArtInitiation(person * const thePerson);
 
+void ScheduleArtDropout(person * const thePerson);
+
 #endif /* defined(__priorityQ__updateCascade__) */

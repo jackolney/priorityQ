@@ -145,5 +145,10 @@ private:
 /////////////////////
 /////////////////////
 
+	//class ArtDropout : public event
+
+/////////////////////
+/////////////////////
+
 
 #endif /* defined(__priorityQ__cascadeEvents__) */

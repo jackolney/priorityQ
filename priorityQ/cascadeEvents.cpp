@@ -256,6 +256,7 @@ void ArtInitiation::Execute()
 {
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
+		//ScheduleArtDropout();
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	UpdateEvents(pPerson);

@@ -100,7 +100,7 @@ int main(int argc, const char * argv[])
 	//				-> ART Initiation.
 	//				-> ART dropout.
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ).
-	//				-> Ensure that as patient becomes symptomatic PICT trigger is enabled.
+	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled.
 	//
 	//			>> OUTPUT METRICS:
 	//				-> DALYs between 2010 and 2030.

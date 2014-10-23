@@ -173,3 +173,11 @@ void ScheduleArtInitiation(person * const thePerson)
 
 ////////////////////
 ////////////////////
+
+void ScheduleArtDropout(person * const thePerson)
+{
+		//new ArtDropout();
+}
+
+////////////////////
+////////////////////
