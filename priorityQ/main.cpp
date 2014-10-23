@@ -90,16 +90,17 @@ int main(int argc, const char * argv[])
 	//				-> CHECK THAT WHEN ON ART... REVERSE HAPPENS AS EXPECTED. = Done.
 	//
 	//			>> CASCADE:
-	//				-> HivTesting (HCT / VCT / PICT);
-	//					-> Separate events for each Test. Execute() specifies time delay and probability of entering Care and receiving CD4 test.
-	//				-> Cd4Testing (care etc.)
-	//					-> ONE EVENT for all CD4 testing. -> Need a testing route flag on person (for retention purposes).
-	//				-> Cd4Results
-	//				-> LTFU.
-	//				-> Pre-ART Care Retention.
+	//				-> HivTesting (HCT / VCT / PICT); = Done.
+	//					-> Separate events for each Test. Execute() specifies time delay and probability of entering Care and receiving CD4 test. = Done.
+	//				-> Cd4Testing (care etc.) = Done.
+	//					-> ONE EVENT for all CD4 testing. -> Need a testing route flag on person (for retention purposes). = Done.
+	//				-> Cd4Results = Done.
+	//				-> LTFU. (in progress).
+	//				-> Pre-ART Care Retention. = Done.
 	//				-> ART Initiation.
 	//				-> ART dropout.
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ).
+	//				-> Ensure that as patient becomes symptomatic PICT trigger is enabled.
 	//
 	//			>> OUTPUT METRICS:
 	//				-> DALYs between 2010 and 2030.

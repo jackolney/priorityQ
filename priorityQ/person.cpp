@@ -61,7 +61,6 @@ whoTx(0)
 	SeedHiv(this); //function modified for HIV+ development.
 	new SeedInitialHivTests(this);
 	new SeedTreatmentGuidelinesUpdate(this);
-//	SeedEvents(this,Time); //turned off for dev. //To be replaced.
 }
 
 person::~person()

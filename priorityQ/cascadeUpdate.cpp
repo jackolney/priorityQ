@@ -25,11 +25,6 @@ using namespace std;
 ////////////////////
 ////////////////////
 
-
-
-////////////////////
-////////////////////
-
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho)
 {
 	thePerson->UpdateTxGuidelines(theCd4,theWho);

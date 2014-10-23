@@ -249,7 +249,7 @@ ArtInitiation::~ArtInitiation()
 
 bool ArtInitiation::CheckValid()
 {
-	return true;
+	return pPerson->Alive();
 }
 
 void ArtInitiation::Execute()
