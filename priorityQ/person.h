@@ -56,9 +56,9 @@ public:
 	void SetWhoRecoverDate(double theDate) { WhoRecoverDate = theDate; }
 
 	/* Hiv Care Date Setting Functions */
-	void SetHctTestDate(double theDate) { HctTestDate = theDate; }
-	void SetVctTestDate(double theDate) { VctTestDate = theDate; }
-	void SetPictTestDate(double theDate) { PictTestDate = theDate; }
+	void SetHctHivTestDate(double theDate) { HctHivTestDate = theDate; }
+	void SetVctHivTestDate(double theDate) { VctHivTestDate = theDate; }
+	void SetPictHivTestDate(double theDate) { PictHivTestDate = theDate; }
 	
 	//////////////////////
 	/* Accessor methods */
@@ -85,9 +85,9 @@ public:
 	double GetWhoRecoverDate() const { return WhoRecoverDate; }
 	
 	/* Hiv Care Date Getting Functions */
-	double GetHctTestDate() const { return HctTestDate; }
-	double GetVctTestDate() const { return VctTestDate; }
-	double GetPictTestDate() const { return PictTestDate; }
+	double GetHctHivTestDate() const { return HctHivTestDate; }
+	double GetVctHivTestDate() const { return VctHivTestDate; }
+	double GetPictHivTestDate() const { return PictHivTestDate; }
 	
 private:
 	/* basic characteristics */
@@ -118,9 +118,9 @@ private:
 	double WhoRecoverDate;
 	
 	/* Hiv test dates */
-	double HctTestDate;
-	double VctTestDate;
-	double PictTestDate;
+	double HctHivTestDate;
+	double VctHivTestDate;
+	double PictHivTestDate;
 	
 	/* Hiv care flags */
 	bool diagnosed;

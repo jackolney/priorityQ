@@ -23,7 +23,7 @@ VctHivTest::VctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-		//VctHivTestDate?
+	thePerson->SetVctHivTestDate(Time);
 }
 
 VctHivTest::~VctHivTest()
