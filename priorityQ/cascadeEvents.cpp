@@ -19,15 +19,17 @@ using namespace std;
 /////////////////////
 /////////////////////
 
-HivTest::HivTest(person * const thePerson, const double Time) :
+VctHivTest::VctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
+{
+		//VctHivTestDate?
+}
+
+VctHivTest::~VctHivTest()
 {}
 
-HivTest::~HivTest()
-{}
-
-bool HivTest::CheckValid()
+bool VctHivTest::CheckValid()
 {
 	if(pPerson->Alive())
 		return true;
@@ -38,10 +40,13 @@ bool HivTest::CheckValid()
 	}
 }
 
-void HivTest::Execute()
+void VctHivTest::Execute()
 {
-	D(cout << "HivTest executed." << endl);
-	pPerson->SetDiagnosedState(true);
+	D(cout << "VctHivTest executed." << endl);
+	if(pPerson->GetSeroStatus()) {
+		pPerson->SetDiagnosedState(true);
+		D(cout << "Diagnosed as HIV-positive." << endl);
+	}
 	UpdateEvents(pPerson);
 };
 

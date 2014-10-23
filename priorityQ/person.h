@@ -22,7 +22,9 @@ public:
 	double GenerateNatDeathDate();
 	double AssignNatDeathDate(const double Time);
 	
+	/////////////
 	/* Methods */
+	/////////////
 	void Kill(const double Time);
 	double SetAge(const double Time);
 
@@ -40,19 +42,27 @@ public:
 	void SetCurrentWhoStage(unsigned int theStage) { currentWho = theStage; }
 	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
 	void AssignHivDeathDate(); //function creates the Death event.
-
-	void SetHivDeathDate(double theDate) { HivDeathDate = theDate; }
-	void SetCd4DeclineDate(double theDate) { Cd4DeclineDate = theDate; }
-	void SetCd4RecoverDate(double theDate) { Cd4RecoverDate = theDate; }
-	void SetWhoDeclineDate(double theDate) { WhoDeclineDate = theDate; }
-	void SetWhoRecoverDate(double theDate) { WhoRecoverDate = theDate; }
 	
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
 	void SetCd4TestState(const bool theState) { cd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
+
+	/* Natural History Date Setting Functions */
+	void SetHivDeathDate(double theDate) { HivDeathDate = theDate; }
+	void SetCd4DeclineDate(double theDate) { Cd4DeclineDate = theDate; }
+	void SetCd4RecoverDate(double theDate) { Cd4RecoverDate = theDate; }
+	void SetWhoDeclineDate(double theDate) { WhoDeclineDate = theDate; }
+	void SetWhoRecoverDate(double theDate) { WhoRecoverDate = theDate; }
+
+	/* Hiv Care Date Setting Functions */
+	void SetHctTestDate(double theDate) { HctTestDate = theDate; }
+	void SetVctTestDate(double theDate) { VctTestDate = theDate; }
+	void SetPictTestDate(double theDate) { PictTestDate = theDate; }
 	
+	//////////////////////
 	/* Accessor methods */
+	//////////////////////
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
@@ -60,15 +70,24 @@ public:
 	const double GetBirthDay() const { return BirthDay; }
 	unsigned int GetCurrentCd4() const { return currentCd4; }
 	unsigned int GetCurrentWho() const { return currentWho; }
+	
+	/* Hiv Care Flag Getting Functions */
 	bool GetDiagnosedState() const { return diagnosed; }
 	bool GetCd4TestState() const { return cd4Test; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetSeroStatus() const { return seroStatus; }
+	
+	/* Hiv Care Date Getting Functions */
 	double GetHivDeathDate() const { return HivDeathDate; }
 	double GetCd4DeclineDate() const { return Cd4DeclineDate; }
 	double GetCd4RecoverDate() const { return Cd4RecoverDate; }
 	double GetWhoDeclineDate() const { return WhoDeclineDate; }
 	double GetWhoRecoverDate() const { return WhoRecoverDate; }
+	
+	/* Hiv Care Date Getting Functions */
+	double GetHctTestDate() const { return HctTestDate; }
+	double GetVctTestDate() const { return VctTestDate; }
+	double GetPictTestDate() const { return PictTestDate; }
 	
 private:
 	/* basic characteristics */
@@ -77,7 +96,7 @@ private:
 	double initialAge;
 	double natDeathDate;
 	
-	/* HIV status */
+	/* Hiv status */
 	bool seroStatus;
 	double seroconversionDay;
 	double hivDeathDate;
@@ -98,8 +117,12 @@ private:
 	double WhoDeclineDate;
 	double WhoRecoverDate;
 	
+	/* Hiv test dates */
+	double HctTestDate;
+	double VctTestDate;
+	double PictTestDate;
 	
-	/* HIV care */
+	/* Hiv care flags */
 	bool diagnosed;
 	bool inCare;
 	bool cd4Test;

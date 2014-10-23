@@ -29,8 +29,8 @@ void SeedEvents(person * const thePerson, const double Time)
 	D(cout << "Seeding initial events." << endl);
 	
 	if (thePerson->GetBirthDay() == Time) { //check to ensure that events get seeded on BirthDay.
-		event * theEvent = new HivTest(thePerson,Time + theRng->SampleExpDist(25));
-		D(cout << "HivTest scheduled for day = " << theEvent->GetTime() << endl);
+		event * theEvent = new VctHivTest(thePerson,Time + theRng->SampleExpDist(25));
+		D(cout << "VctHivTest scheduled for day = " << theEvent->GetTime() << endl);
 	}
 	
 }

@@ -17,10 +17,10 @@
 /////////////////////
 /////////////////////
 
-class HivTest : public event {
+class VctHivTest : public event {
 public:
-	HivTest(person * const thePerson, const double Time); //constructor
-	~HivTest(); //destructor
+	VctHivTest(person * const thePerson, const double Time); //constructor
+	~VctHivTest(); //destructor
 	
 	/* Methods */
 	bool CheckValid();
