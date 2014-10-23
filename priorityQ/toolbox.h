@@ -37,7 +37,7 @@ const double cd4ResultTime = 30;
 /* Time between receiving result Cd4 test and subsequent Cd4 test */
 const double cd4TestTime = 335.25;
 
-/* Pre-Art retention probability */
+/* Pre-Art retention probability (between test and result) */
 const double hctShortTermRetention = 0.6192;
 const double hctLongTermRetention = 0.6192;
 
@@ -46,6 +46,11 @@ const double vctLongTermRetention = 0.5326;
 
 const double pictShortTermRetention = 0.5407;
 const double pictLongTermRetention = 0.5407;
+
+/* Proportion returning for secondary Cd4 testing  */
+const double hctProbSecondaryCd4Test = 0.4333;
+const double vctProbSecondaryCd4Test = 0.3105;
+const double pictProbSecondaryCd4Test = 0.3129;
 
 /* Time between eligiblity and Art initiation */
 const double artInitiationTime = 217.07;

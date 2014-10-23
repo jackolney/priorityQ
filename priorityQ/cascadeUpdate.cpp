@@ -120,15 +120,52 @@ void ScheduleInitialCd4TestAfterHct(person * const thePerson)
 }
 
 ////////////////////
-//BIT CRAPPY BELOW//
 ////////////////////
 
 void SchedulePreArtCd4Test(person * const thePerson)
 {
-	if(thePerson->GetDiagnosedState() &&
-	   thePerson->GetSeroStatus() &&
-	   !thePerson->GetEverCd4TestState())
-		new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
+	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
+}
+
+////////////////////
+////////////////////
+
+void ScheduleCd4TestResult(person * const thePerson)
+{
+	new Cd4TestResult(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4ResultTime));
+}
+
+////////////////////
+////////////////////
+
+bool ReceiveCd4TestResult(person * const thePerson)
+{
+	if(thePerson->GetCd4TestCount() <= 1) {
+	 switch(thePerson->GetDiagnosisRoute()) {
+		 case 1: return theRng->Sample(hctShortTermRetention); break;
+		 case 2: return theRng->Sample(vctShortTermRetention); break;
+		 case 3: return theRng->Sample(pictShortTermRetention); break;
+		 default: return false;
+	 }
+	}
+	else
+		switch(thePerson->GetDiagnosisRoute()) {
+		 case 1: return theRng->Sample(hctLongTermRetention); break;
+		 case 2: return theRng->Sample(vctLongTermRetention); break;
+		 case 3: return theRng->Sample(pictLongTermRetention); break;
+		 default: return false;
+	 }
+}
+
+////////////////////
+////////////////////
+
+bool AttendCd4TestResult(person * const thePerson)
+{
+	if(theRng->Sample(0.8))
+		return thePerson->Alive();
+	else
+		return false;
 }
 
 ////////////////////
@@ -136,11 +173,7 @@ void SchedulePreArtCd4Test(person * const thePerson)
 
 void ScheduleArtInitiation(person * const thePerson)
 {
-	if(thePerson->GetDiagnosedState() &&
-	   thePerson->GetSeroStatus() &&
-	   thePerson->GetEverCd4TestState() &&
-	   !thePerson->GetArtInitiationState())
-		new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
+	new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
 }
 
 ////////////////////

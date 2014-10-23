@@ -91,7 +91,7 @@ void HctHivTest::Execute()
 {
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
-		pPerson->SetDiagnosedState(true);
+		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
@@ -127,7 +127,7 @@ void VctHivTest::Execute()
 {
 	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
-		pPerson->SetDiagnosedState(true);
+		pPerson->SetDiagnosedState(true,2);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
@@ -164,7 +164,7 @@ void PictHivTest::Execute()
 {
 	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
-		pPerson->SetDiagnosedState(true);
+		pPerson->SetDiagnosedState(true,3);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
@@ -197,9 +197,39 @@ void Cd4Test::Execute()
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
 	pPerson->SetEverCd4TestState(true);
-		//ScheduleCd4TestResult();
+	if(ReceiveCd4TestResult(pPerson))
+		ScheduleCd4TestResult(pPerson);
 	UpdateEvents(pPerson);
 };
+
+/////////////////////
+/////////////////////
+
+Cd4TestResult::Cd4TestResult(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "Cd4TestResult scheduled for day = " << Time << endl);
+}
+
+Cd4TestResult::~Cd4TestResult()
+{}
+
+bool Cd4TestResult::CheckValid()
+{
+	return AttendCd4TestResult(pPerson);
+}
+
+void Cd4TestResult::Execute()
+{
+	D(cout << "Cd4TestResult executed." << endl);
+	pPerson->SetEverCD4TestResultState(true);
+	if(pPerson->GetEligible())
+		ScheduleArtInitiation(pPerson);
+	else
+		SchedulePreArtCd4Test(pPerson);
+	UpdateEvents(pPerson);
+}
 
 /////////////////////
 /////////////////////
@@ -208,6 +238,7 @@ ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
+	D(cout << "Eligible for ART." << endl);
 	D(cout << "ArtInitiation scheduled for day = " << Time << endl);
 }
 

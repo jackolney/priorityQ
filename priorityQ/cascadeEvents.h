@@ -113,6 +113,22 @@ private:
 /////////////////////
 /////////////////////
 
+class Cd4TestResult : public event {
+public:
+	Cd4TestResult(person * const thePerson, const double Time); //constructor
+	~Cd4TestResult(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class ArtInitiation : public event {
 public:
 	ArtInitiation(person * const thePerson, const double Time); // constructor

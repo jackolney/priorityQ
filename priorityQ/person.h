@@ -44,8 +44,9 @@ public:
 	void AssignHivDeathDate(); //function creates the Death event.
 	
 	/* Hiv Care Functions */
-	void SetDiagnosedState(const bool theState) { diagnosed = theState; diagnosisCount += 1; }
-	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; }
+	void SetDiagnosedState(const bool theState,unsigned int theRoute) { diagnosed = theState; diagnosisCount += 1; diagnosisRoute = theRoute; }
+	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount += 1; }
+	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; }
 	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 
@@ -78,8 +79,11 @@ public:
 	/* Hiv Care Flag Getting Functions */
 	bool GetDiagnosedState() const { return diagnosed; }
 	unsigned int GetDiagnosisCount() const { return diagnosisCount; }
+	unsigned int GetDiagnosisRoute() const { return diagnosisRoute; }
 	bool GetEverCd4TestState() const { return everCd4Test; }
-	bool GetEverCd4ResultState() const { return everCd4Result; }
+	unsigned int GetCd4TestCount() const { return cd4TestCount; }
+	bool GetEverCd4ResultState() const { return everCd4TestResult; }
+	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetSeroStatus() const { return seroStatus; }
 	
@@ -134,9 +138,11 @@ private:
 	/* Hiv care flags */
 	bool diagnosed;
 	unsigned int diagnosisCount;
+	unsigned int diagnosisRoute; //1 = Hct, 2 = Vct, 3 = Pict.
 	bool inCare;
 	bool everCd4Test;
-	bool everCd4Result;
+	unsigned int cd4TestCount;
+	bool everCd4TestResult;
 	bool art;
 	
 	/* Tx Guidelines */

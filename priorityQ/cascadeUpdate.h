@@ -31,8 +31,15 @@ bool PictLinkage(person * const thePerson);
 /* Initial Cd4 test */
 void ScheduleInitialCd4TestAfterHct(person * const thePerson);
 
-/* Pre-Art Care */
+/* Pre-Art Cd4 Test */
 void SchedulePreArtCd4Test(person * const thePerson);
+
+/* Cd4 Test Result */
+void ScheduleCd4TestResult(person * const thePerson);
+
+bool ReceiveCd4TestResult(person * const thePerson);
+
+bool AttendCd4TestResult(person * const thePerson);
 
 /* Art Care */
 void ScheduleArtInitiation(person * const thePerson);
