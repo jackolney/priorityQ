@@ -224,10 +224,13 @@ void Cd4TestResult::Execute()
 {
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
-	if(pPerson->GetEligible())
+	if(pPerson->GetEligible()) {
+		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
-	else
+	} else {
+		D(cout << "Not eligible for ART." << endl);
 		SchedulePreArtCd4Test(pPerson);
+	}
 	UpdateEvents(pPerson);
 }
 
@@ -238,7 +241,6 @@ ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "Eligible for ART." << endl);
 	D(cout << "ArtInitiation scheduled for day = " << Time << endl);
 }
 
