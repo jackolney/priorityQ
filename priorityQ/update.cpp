@@ -46,7 +46,6 @@ void SeedHiv(person * const thePerson)
 void UpdateEvents(person * const thePerson)
 {
 	D(cout << "\tUpdateEvents executed." << endl);
-	D(cout << "\tUpdateEvents time = " << theQ->GetTime() << endl);
 	
 	// Split tasks into multiple functions.
 	
@@ -54,8 +53,16 @@ void UpdateEvents(person * const thePerson)
 	UpdateAge(thePerson);
 	
 	/* Cascade Updates */
-	ScheduleCd4Test(thePerson);
-	ScheduleArtInitiation(thePerson);
+	/* HIV-testing */
+	
+	
+	/* CD4-testing */
+//	ScheduleCd4Test(thePerson);
+	//ScheduleCd4TestResult(thePerson);
+	
+	/* ART Initiation */
+//	ScheduleArtInitiation(thePerson);
+	//ScheduleReturnArt(thePerson);
 	
 }
 

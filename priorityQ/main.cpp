@@ -91,21 +91,23 @@ int main(int argc, const char * argv[])
 	//
 	//			>> CASCADE:
 	//				-> HivTesting (HCT / VCT / PICT);
+	//					-> Separate events for each Test. Execute() specifies time delay and probability of entering Care and receiving CD4 test.
 	//				-> Cd4Testing (care etc.)
-	//				-> Cd4Restults
+	//					-> ONE EVENT for all CD4 testing. -> Need a testing route flag on person (for retention purposes).
+	//				-> Cd4Results
 	//				-> LTFU.
 	//				-> Pre-ART Care Retention.
 	//				-> ART Initiation.
 	//				-> ART dropout.
 	//
-	//			>> INTERVENTIONS:
-	//				-> Include 12 interventions.
-	//				-> Intervention scenarios.
-	//
 	//			>> OUTPUT METRICS:
 	//				-> DALYs between 2010 and 2030.
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
+	//
+	//			>> INTERVENTIONS:
+	//				-> Include 12 interventions.
+	//				-> Intervention scenarios.
 	//
 	//
 	//			-> An HIV-test through ANY route (each route should have a separate event but should all call a HivTest function.

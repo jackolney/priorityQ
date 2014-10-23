@@ -227,7 +227,7 @@ bool person::CheckHiv(const double Time)
 	SetSeroStatus(true);
 	SetSeroconversionDay(Time);
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
+//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
 	return true;
 }
 
@@ -312,7 +312,6 @@ void person::ScheduleHivIndicatorUpdate()
 {
 	ScheduleCd4Update(this);
 	ScheduleWhoUpdate(this);
-		//HivRelatedMortality only changes when Cd4 or Who changes -> so called by the functions above.
 }
 
 /////////////////////
