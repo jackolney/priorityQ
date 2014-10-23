@@ -174,6 +174,7 @@ void Cd4Test::Execute()
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
 	pPerson->SetEverCd4TestState(true);
+		//ScheduleCd4TestResult();
 	UpdateEvents(pPerson);
 };
 

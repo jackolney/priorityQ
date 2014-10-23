@@ -41,7 +41,11 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 
 void ScheduleHctHivTest(person * const thePerson)
 {
-		//To be filled in when including the interventions.
+	if(theQ->GetTime() >= 14610) {
+		for(size_t i = 0; i < 20; i++) {
+			new HctHivTest(thePerson,theQ->GetTime() + (i * 365.25) + theRng->SampleExpDist(hctHivTestTime));
+		}
+	}
 }
 
 ////////////////////
@@ -116,6 +120,7 @@ void ScheduleInitialCd4TestAfterHct(person * const thePerson)
 }
 
 ////////////////////
+//BIT CRAPPY BELOW//
 ////////////////////
 
 void SchedulePreArtCd4Test(person * const thePerson)
