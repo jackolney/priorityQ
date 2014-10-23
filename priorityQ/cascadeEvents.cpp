@@ -45,6 +45,29 @@ void SeedInitialHivTests::Execute()
 /////////////////////
 /////////////////////
 
+SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson) :
+event(14975),
+pPerson(thePerson)
+{
+	D(cout << "Treatment guidelines will update on 14975" << endl);
+}
+
+SeedTreatmentGuidelinesUpdate::~SeedTreatmentGuidelinesUpdate()
+{}
+
+bool SeedTreatmentGuidelinesUpdate::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void SeedTreatmentGuidelinesUpdate::Execute()
+{
+	UpdateTreatmentGuidelines(pPerson,2,3);
+}
+
+/////////////////////
+/////////////////////
+
 HctHivTest::HctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
@@ -120,7 +143,7 @@ PictHivTest::PictHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	thePerson->SetVctHivTestDate(Time);
+	thePerson->SetPictHivTestDate(Time);
 	D(cout << "PictHivTest scheduled for day = " << Time << endl);
 }
 

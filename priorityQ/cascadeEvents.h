@@ -33,6 +33,22 @@ private:
 /////////////////////
 /////////////////////
 
+class SeedTreatmentGuidelinesUpdate : public event {
+public:
+	SeedTreatmentGuidelinesUpdate(person * const thePerson); //constructor
+	~SeedTreatmentGuidelinesUpdate(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class HctHivTest : public event {
 public:
 	HctHivTest(person * const thePerson, const double Time); //constructor
