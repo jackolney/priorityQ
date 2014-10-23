@@ -14,6 +14,14 @@
 
 void SeedEvents(person * const thePerson, const double Time);
 
+void UpdateTreatmentGuidelines(person * const thePerson);
+
+void ScheduleHctHivTest(person * const thePerson);
+
+void ScheduleVctHivTest(person * const thePerson);
+
+void SchedulePictHivTest(person * const thePerson);
+
 void ScheduleCd4Test(person * const thePerson);
 
 void ScheduleArtInitiation(person * const thePerson);

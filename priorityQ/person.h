@@ -45,7 +45,7 @@ public:
 	
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
-	void SetCd4TestState(const bool theState) { cd4Test = theState; }
+	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 
 	/* Natural History Date Setting Functions */
@@ -73,7 +73,8 @@ public:
 	
 	/* Hiv Care Flag Getting Functions */
 	bool GetDiagnosedState() const { return diagnosed; }
-	bool GetCd4TestState() const { return cd4Test; }
+	bool GetEverCd4TestState() const { return everCd4Test; }
+	bool GetEverCd4ResultState() const { return everCd4Result; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetSeroStatus() const { return seroStatus; }
 	
@@ -88,6 +89,10 @@ public:
 	double GetHctHivTestDate() const { return HctHivTestDate; }
 	double GetVctHivTestDate() const { return VctHivTestDate; }
 	double GetPictHivTestDate() const { return PictHivTestDate; }
+	
+	/* Tx Guideline Getting Functions */
+	unsigned int GetCd4TxGuideline() const { return cd4Tx; }
+	unsigned int GetWhoTxGuideline() const { return whoTx; }
 	
 private:
 	/* basic characteristics */
@@ -125,9 +130,14 @@ private:
 	/* Hiv care flags */
 	bool diagnosed;
 	bool inCare;
-	bool cd4Test;
-	bool cd4Result;
+	bool everCd4Test;
+	bool everCd4Result;
 	bool art;
+	
+	/* Tx Guidelines */
+	unsigned int cd4Tx;
+	unsigned int whoTx;
+	
 };
 
 #endif /* defined(__priorityQ__person__) */

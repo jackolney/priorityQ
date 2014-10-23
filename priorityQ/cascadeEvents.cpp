@@ -24,6 +24,7 @@ event(Time),
 pPerson(thePerson)
 {
 	thePerson->SetHctHivTestDate(Time);
+	D(cout << "HctHivTest scheduled for day = " << Time << endl);	
 }
 
 HctHivTest::~HctHivTest()
@@ -57,6 +58,7 @@ event(Time),
 pPerson(thePerson)
 {
 	thePerson->SetVctHivTestDate(Time);
+	D(cout << "VctHivTest scheduled for day = " << Time << endl);
 }
 
 VctHivTest::~VctHivTest()
@@ -90,6 +92,7 @@ event(Time),
 pPerson(thePerson)
 {
 	thePerson->SetVctHivTestDate(Time);
+	D(cout << "PictHivTest scheduled for day = " << Time << endl);
 }
 
 PictHivTest::~PictHivTest()
@@ -134,7 +137,7 @@ bool Cd4Test::CheckValid()
 void Cd4Test::Execute()
 {
 	D(cout << "Cd4Test executed." << endl);
-	pPerson->SetCd4TestState(true);
+	pPerson->SetEverCd4TestState(true);
 	UpdateEvents(pPerson);
 };
 

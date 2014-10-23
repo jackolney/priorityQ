@@ -46,9 +46,11 @@ VctHivTestDate(0),
 PictHivTestDate(0),
 diagnosed(false),
 inCare(false),
-cd4Test(false),
-cd4Result(false),
-art(false)
+everCd4Test(false),
+everCd4Result(false),
+art(false),
+cd4Tx(0),
+whoTx(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
