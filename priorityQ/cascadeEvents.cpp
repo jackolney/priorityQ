@@ -68,7 +68,7 @@ bool VctHivTest::CheckValid()
 		return pPerson->Alive();
 	else
 		return false;
-		//If returning false, reschedule next VctHivTest();
+	//Schedule next Vct test here - regardless of if ValidorNot;
 }
 
 void VctHivTest::Execute()
@@ -80,8 +80,40 @@ void VctHivTest::Execute()
 			//Linkageprobability.. -> ScheduleCd4Test();
 	}
 	UpdateEvents(pPerson);
-	//ScheduleVctHivTest()
 };
+
+/////////////////////
+/////////////////////
+
+PictHivTest::PictHivTest(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	thePerson->SetVctHivTestDate(Time);
+}
+
+PictHivTest::~PictHivTest()
+{}
+
+bool PictHivTest::CheckValid()
+{
+	if(pPerson->GetPictHivTestDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
+	//Schedule next Pict test here - regardless of if ValidorNot;
+}
+
+void PictHivTest::Execute()
+{
+	D(cout << "PictHivTest executed." << endl);
+	if(pPerson->GetSeroStatus()) {
+		pPerson->SetDiagnosedState(true);
+		D(cout << "Diagnosed as HIV-positive." << endl);
+			//Linkage probability -> ScheduleCd4Test();
+	}
+	UpdateEvents(pPerson);
+}
 
 /////////////////////
 /////////////////////
