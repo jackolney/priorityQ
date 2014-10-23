@@ -83,28 +83,28 @@ void SchedulePictHivTest(person * const thePerson)
 ////////////////////
 ////////////////////
 
-double HctLinkage(person * const thePerson)
+bool HctLinkage(person * const thePerson)
 {
-//	return theRng->Sample(<#double prob#>);
-	return 10;
+	if(thePerson->GetDiagnosisCount() > 1)
+		return theRng->Sample(hctProbLinkPreviouslyDiagnosed);
+	else
+		return theRng->Sample(hctProbLink);
 }
 
 ////////////////////
 ////////////////////
 
-double VctLinkage(person * const thePerson)
+bool VctLinkage(person * const thePerson)
 {
-//	return theRng->Sample(<#double prob#>);
-	return 10;
+	return theRng->Sample(vctProbLink);
 }
 
 ////////////////////
 ////////////////////
 
-double PictLinkage(person * const thePerson)
+bool PictLinkage(person * const thePerson)
 {
-//	return theRng->Sample(<#double prob#>);
-	return 10;
+	return theRng->Sample(pictProbLink);
 }
 
 ////////////////////
@@ -114,10 +114,8 @@ void ScheduleCd4Test(person * const thePerson)
 {
 	if(thePerson->GetDiagnosedState() &&
 	   thePerson->GetSeroStatus() &&
-	   !thePerson->GetEverCd4TestState()) {
-		event * theEvent = new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
-		D(cout << "Cd4Test scheduled for day = " << theEvent->GetTime() << endl);
-	}
+	   !thePerson->GetEverCd4TestState())
+		new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
 }
 
 ////////////////////
@@ -128,10 +126,8 @@ void ScheduleArtInitiation(person * const thePerson)
 	if(thePerson->GetDiagnosedState() &&
 	   thePerson->GetSeroStatus() &&
 	   thePerson->GetEverCd4TestState() &&
-	   !thePerson->GetArtInitiationState()) {
-		event * theEvent = new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
-		D(cout << "ArtInitiation scheduled for day = " << theEvent->GetTime() << endl);
-	}
+	   !thePerson->GetArtInitiationState())
+		new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
 }
 
 ////////////////////

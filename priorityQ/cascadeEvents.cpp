@@ -106,9 +106,8 @@ void VctHivTest::Execute()
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		
-		//Linkage to Care
-//		if(VctLinkage())
-//			new Cd4Test(
+		if(VctLinkage(pPerson))
+			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
 	UpdateEvents(pPerson);
 };
@@ -142,7 +141,9 @@ void PictHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-			//Linkage probability -> ScheduleCd4Test();
+		
+		if(PictLinkage(pPerson))
+			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
 	UpdateEvents(pPerson);
 }
@@ -153,7 +154,9 @@ void PictHivTest::Execute()
 Cd4Test::Cd4Test(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	D(cout << "Cd4Test scheduled for day = " << Time << endl);
+}
 
 Cd4Test::~Cd4Test()
 {}
@@ -176,7 +179,9 @@ void Cd4Test::Execute()
 ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	D(cout << "ArtInitiation scheduled for day = " << Time << endl);
+}
 
 ArtInitiation::~ArtInitiation()
 {}

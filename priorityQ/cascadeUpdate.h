@@ -22,11 +22,11 @@ void ScheduleVctHivTest(person * const thePerson);
 void SchedulePictHivTest(person * const thePerson);
 
 /* Linkage */
-double HctLinkage(person * const thePerson);
+bool HctLinkage(person * const thePerson);
 
-double VctLinkage(person * const thePerson);
+bool VctLinkage(person * const thePerson);
 
-double PictLinkage(person * const thePerson);
+bool PictLinkage(person * const thePerson);
 
 
 /* Pre-Art Care */

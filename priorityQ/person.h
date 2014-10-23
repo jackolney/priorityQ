@@ -44,7 +44,7 @@ public:
 	void AssignHivDeathDate(); //function creates the Death event.
 	
 	/* Hiv Care Functions */
-	void SetDiagnosedState(const bool theState) { diagnosed = theState; }
+	void SetDiagnosedState(const bool theState) { diagnosed = theState; diagnosisCount += 1; }
 	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 
@@ -76,6 +76,7 @@ public:
 	
 	/* Hiv Care Flag Getting Functions */
 	bool GetDiagnosedState() const { return diagnosed; }
+	unsigned int GetDiagnosisCount() const { return diagnosisCount; }
 	bool GetEverCd4TestState() const { return everCd4Test; }
 	bool GetEverCd4ResultState() const { return everCd4Result; }
 	bool GetArtInitiationState() const { return art; }
@@ -131,6 +132,7 @@ private:
 	
 	/* Hiv care flags */
 	bool diagnosed;
+	unsigned int diagnosisCount;
 	bool inCare;
 	bool everCd4Test;
 	bool everCd4Result;
