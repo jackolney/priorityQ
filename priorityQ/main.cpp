@@ -98,9 +98,9 @@ int main(int argc, const char * argv[])
 	//				-> ART dropout. = Done.
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). = Done.
 	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers). = Done.
-	//				-> Check that all times and proportions are correct.
+	//				-> Check that all times and proportions are correct. = Done.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
-	//			>> OUTPUT METRICS:
+	//			>> OUTPUT METRICS: (how to calculate? per person? or by year and across the population?)
 	//				-> DALYs between 2010 and 2030.
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.

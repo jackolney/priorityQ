@@ -62,4 +62,16 @@ const double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
 /* Time between being lost from Art care and returning */
 const double artReturnTime = 3 * 365.25;
 
+/////////////////////
+/////////////////////
+
+/* DALY weights */
+const double dalyWeight_Cd4_3 = 0.053;
+const double dalyWeight_Cd4_2 = 0.221;
+const double dalyWeight_Cd4_1 = 0.547;
+const double dalyWeightArt = 0.053;
+
+/////////////////////
+/////////////////////
+
 #endif
