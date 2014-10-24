@@ -89,6 +89,7 @@ bool HctHivTest::CheckValid()
 
 void HctHivTest::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1);
@@ -96,7 +97,6 @@ void HctHivTest::Execute()
 		if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
-	UpdateEvents(pPerson);
 }
 
 /////////////////////
@@ -126,6 +126,7 @@ bool VctHivTest::CheckValid()
 
 void VctHivTest::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2);
@@ -133,7 +134,6 @@ void VctHivTest::Execute()
 		if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
-	UpdateEvents(pPerson);
 	ScheduleVctHivTest(pPerson);
 };
 
@@ -164,6 +164,7 @@ bool PictHivTest::CheckValid()
 
 void PictHivTest::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3);
@@ -171,7 +172,6 @@ void PictHivTest::Execute()
 		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
-	UpdateEvents(pPerson);
 	SchedulePictHivTest(pPerson);
 }
 
@@ -198,13 +198,13 @@ bool Cd4Test::CheckValid()
 
 void Cd4Test::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
 	pPerson->SetEverCd4TestState(true);
 	if(ReceiveCd4TestResult(pPerson))
 		ScheduleCd4TestResult(pPerson);
-	UpdateEvents(pPerson);
 };
 
 /////////////////////
@@ -227,6 +227,7 @@ bool Cd4TestResult::CheckValid()
 
 void Cd4TestResult::Execute()
 {
+	UpdateAge(pPerson);	
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
 	if(pPerson->GetEligible()) {
@@ -236,7 +237,6 @@ void Cd4TestResult::Execute()
 		D(cout << "Not eligible for ART." << endl);
 		SchedulePreArtCd4Test(pPerson);
 	}
-	UpdateEvents(pPerson);
 }
 
 /////////////////////
@@ -262,12 +262,12 @@ bool ArtInitiation::CheckValid()
 
 void ArtInitiation::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
-	UpdateEvents(pPerson);
 }
 
 /////////////////////
@@ -290,11 +290,11 @@ bool ArtDropout::CheckValid()
 
 void ArtDropout::Execute()
 {
+	UpdateAge(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
-	UpdateEvents(pPerson);
 }
 
 /////////////////////

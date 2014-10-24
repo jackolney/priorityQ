@@ -211,7 +211,7 @@ double person::GetAge() const
 
 double person::SetAge(const double Time)
 {
-	return currentAge += Time;
+	return currentAge = initialAge + (Time - birthDay);
 }
 
 /////////////////////
