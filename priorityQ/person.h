@@ -46,7 +46,7 @@ public:
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState,unsigned int theRoute) { diagnosed = theState; diagnosisCount += 1; diagnosisRoute = theRoute; }
 	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount += 1; }
-	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; }
+	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount +=1; }
 	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState) { art = theState; }
 
@@ -143,6 +143,7 @@ private:
 	bool everCd4Test;
 	unsigned int cd4TestCount;
 	bool everCd4TestResult;
+	unsigned int cd4TestResultCount;
 	bool art;
 	
 	/* Tx Guidelines */

@@ -51,6 +51,7 @@ inCare(false),
 everCd4Test(false),
 cd4TestCount(0),
 everCd4TestResult(false),
+cd4TestResultCount(0),
 art(false),
 cd4Tx(0),
 whoTx(0)

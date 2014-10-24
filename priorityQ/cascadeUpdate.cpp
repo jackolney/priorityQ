@@ -84,10 +84,24 @@ void SchedulePictHivTest(person * const thePerson)
 
 bool HctLinkage(person * const thePerson)
 {
-	if(thePerson->GetDiagnosisCount() > 1)
-		return theRng->Sample(hctProbLinkPreviouslyDiagnosed);
-	else
-		return theRng->Sample(hctProbLink);
+	if(thePerson->GetDiagnosisCount() > 1) {
+		if(theRng->Sample(hctProbLinkPreviouslyDiagnosed)) {
+			D(cout << "Linked to care after Hct (previously diagnosed)." << endl);
+			return true;
+		} else {
+			D(cout << "Failed to link to care after Hct (previously diagnosed)." << endl);
+			return false;
+		}
+	}
+	else {
+		if(theRng->Sample(hctProbLink)) {
+			D(cout << "Linked to care after Hct." << endl);
+			return true;
+		} else {
+			D(cout << "Failed to link to care after Hct." << endl);
+			return false;
+		}
+	}
 }
 
 ////////////////////
@@ -95,7 +109,13 @@ bool HctLinkage(person * const thePerson)
 
 bool VctLinkage(person * const thePerson)
 {
-	return theRng->Sample(vctProbLink);
+	if(theRng->Sample(vctProbLink)) {
+		D(cout << "Linked to care after Vct." << endl);
+		return true;
+	} else {
+		D(cout << "Failed to link to care after Vct." << endl);
+		return false;
+	}
 }
 
 ////////////////////
@@ -103,7 +123,13 @@ bool VctLinkage(person * const thePerson)
 
 bool PictLinkage(person * const thePerson)
 {
-	return theRng->Sample(pictProbLink);
+	if(theRng->Sample(pictProbLink)) {
+		D(cout << "Linked to care after Pict." << endl);
+		return true;
+	} else {
+		D(cout << "Failed to link to care after Pict." << endl);
+		return false;
+	}
 }
 
 ////////////////////

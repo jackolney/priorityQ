@@ -39,11 +39,7 @@ int main(int argc, const char * argv[])
 	new population(1);
 
 	/* Model Run */
-	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tStart time = " << theQ->GetTime() << endl);
-	
 	theQ->RunEvents();
-	
-	D(cout << "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEnd time = " << theQ->GetTime() << endl);
 	
 	/*CHALLENGE*/
 	
@@ -80,7 +76,8 @@ int main(int argc, const char * argv[])
 	//		-> Only allow Cd4Testing if HIV-positive. = Done.
 	//		-> Ensure that I reuse as much code as possible.
 	//
-	//			>> NATURAL HISTORY:
+	//			---------------------------------------------------------------------------------------------------------------------------------------------
+	//			>> NATURAL HISTORY: 
 	//				-> UpdateCd4Count() = Done.
 	//				-> UpdateWhoStage() = Done.
 	//				-> ForArtToo... ensure that disease progression occurs properly. = Done.
@@ -88,7 +85,7 @@ int main(int argc, const char * argv[])
 	//				-> Each event with competing events supplies additional info to the event which is checked in CheckValid() prior to Execute(); = Done.
 	//				-> Put DATE for NH events in constructors for events?. = Done.
 	//				-> CHECK THAT WHEN ON ART... REVERSE HAPPENS AS EXPECTED. = Done.
-	//
+	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> CASCADE:
 	//				-> HivTesting (HCT / VCT / PICT); = Done.
 	//					-> Separate events for each Test. Execute() specifies time delay and probability of entering Care and receiving CD4 test. = Done.
@@ -101,16 +98,17 @@ int main(int argc, const char * argv[])
 	//				-> ART dropout.
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ).
 	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled.
-	//
+	//				-> Check that all times and proportions are correct.
+	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS:
 	//				-> DALYs between 2010 and 2030.
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
-	//
+	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> INTERVENTIONS:
 	//				-> Include 12 interventions.
 	//				-> Intervention scenarios.
-	//
+	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//
 	//			-> An HIV-test through ANY route (each route should have a separate event but should all call a HivTest function.
 	//		-> Need a more solid end point (break;) in the code

@@ -55,6 +55,10 @@ const double pictProbSecondaryCd4Test = 0.3129;
 /* Time between eligiblity and Art initiation */
 const double artInitiationTime = 217.07;
 
+/* Art dropout times */
+const double artDropoutTimeOneYear = 11.99 * 365.25; //0.08/100py
+const double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
+
 /* Time between being lost from Art care and returning */
 const double artReturnTime = 3 * 365.25;
 
