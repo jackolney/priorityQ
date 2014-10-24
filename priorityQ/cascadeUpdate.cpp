@@ -202,8 +202,13 @@ void ScheduleArtInitiation(person * const thePerson)
 
 void ScheduleArtDropout(person * const thePerson)
 {
-		//Need an Art initiation day.
-	new ArtDropout(thePerson,theQ->GetTime() + theRng->SampleExpDist(artDropoutTimeOneYear));
+	const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear);
+
+	if(artDropoutDate < 365.25)
+		new ArtDropout(thePerson,theQ->GetTime() + artDropoutDate);
+	else
+		new ArtDropout(thePerson,theQ->GetTime() + 365.25 + theRng->SampleExpDist(artDropoutTimeTwoYear));
+
 }
 
 ////////////////////

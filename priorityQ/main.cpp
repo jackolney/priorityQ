@@ -94,10 +94,10 @@ int main(int argc, const char * argv[])
 	//				-> Cd4Results = Done.
 	//				-> LTFU. (in progress).
 	//				-> Pre-ART Care Retention. = Done.
-	//				-> ART Initiation.
+	//				-> ART Initiation. = Done.
 	//				-> ART dropout.
-	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ).
-	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled.
+	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). -> include in iQ somehow?
+	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers).
 	//				-> Check that all times and proportions are correct.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS:
