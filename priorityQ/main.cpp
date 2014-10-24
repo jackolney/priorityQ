@@ -96,7 +96,7 @@ int main(int argc, const char * argv[])
 	//				-> Pre-ART Care Retention. = Done.
 	//				-> ART Initiation. = Done.
 	//				-> ART dropout. = Done.
-	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). -> include in iQ somehow?
+	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). = Done.
 	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers).
 	//				-> Check that all times and proportions are correct.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------

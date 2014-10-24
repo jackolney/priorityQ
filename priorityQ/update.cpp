@@ -46,7 +46,6 @@ void SeedHiv(person * const thePerson)
 void UpdateAge(person * const thePerson)
 {
 	thePerson->SetAge(theQ->GetTime());
-	D(cout << "\tUpdated Age = " << thePerson->GetAge() << endl);
 }
 
 ////////////////////

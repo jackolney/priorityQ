@@ -94,6 +94,7 @@ void HctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
+		SchedulePictHivTest(pPerson);
 		if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
@@ -118,7 +119,7 @@ bool VctHivTest::CheckValid()
 	if(pPerson->GetVctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		if(!pPerson->GetEverArt())
+		if(!pPerson->GetEverArt() && pPerson->Alive())
 			ScheduleVctHivTest(pPerson);
 		return false;
 	}
@@ -131,6 +132,7 @@ void VctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2);
 		D(cout << "Diagnosed as HIV-positive." << endl);
+		SchedulePictHivTest(pPerson);
 		if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
 	}
@@ -156,7 +158,7 @@ bool PictHivTest::CheckValid()
 	if(pPerson->GetPictHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		if(!pPerson->GetEverArt())
+		if(!pPerson->GetEverArt() && pPerson->Alive())
 			SchedulePictHivTest(pPerson);
 		return false;
 	}
@@ -237,6 +239,7 @@ void Cd4TestResult::Execute()
 		D(cout << "Not eligible for ART." << endl);
 		SchedulePreArtCd4Test(pPerson);
 	}
+	SchedulePictHivTest(pPerson);
 }
 
 /////////////////////

@@ -12,6 +12,7 @@
 #include "event.h"
 #include "person.h"
 #include "update.h"
+#include "cascadeUpdate.h"
 #include "cohort.h"
 
 using namespace std;
@@ -214,6 +215,8 @@ void WhoDecline::Execute()
 	D(cout << pPerson->GetCurrentWho() << endl);
 	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
+	if(pPerson->GetCurrentWho() > 2)
+		SchedulePictHivTest(pPerson);
 }
 
 /////////////////////
