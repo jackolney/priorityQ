@@ -101,7 +101,7 @@ int main(int argc, const char * argv[])
 	//				-> Check that all times and proportions are correct. = Done.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS: (how to calculate? per person? or by year and across the population?)
-	//				-> DALYs between 2010 and 2030.
+	//				-> DALYs between 2010 and 2030. -> For cohort or for person?
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
