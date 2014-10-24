@@ -48,7 +48,7 @@ public:
 	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount += 1; }
 	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount +=1; }
 	void SetInCareState(const bool theState) { inCare = theState; }
-	void SetArtInitiationState(const bool theState) { art = theState; }
+	void SetArtInitiationState(const bool theState) { art = theState; if(theState) everArt = true; }
 
 	/* Natural History Date Setting Functions */
 	void SetHivDeathDate(double theDate) { hivDeathDate = theDate; }
@@ -85,6 +85,7 @@ public:
 	bool GetEverCd4ResultState() const { return everCd4TestResult; }
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
 	bool GetArtInitiationState() const { return art; }
+	bool GetEverArt() const { return everArt; }
 	bool GetSeroStatus() const { return seroStatus; }
 	
 	/* Hiv Care Date Getting Functions */
@@ -145,6 +146,7 @@ private:
 	bool everCd4TestResult;
 	unsigned int cd4TestResultCount;
 	bool art;
+	bool everArt;
 	
 	/* Tx Guidelines */
 	unsigned int cd4Tx;

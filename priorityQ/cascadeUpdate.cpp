@@ -183,7 +183,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 
 bool AttendCd4TestResult(person * const thePerson)
 {
-	if(theRng->Sample(1))
+	if(theRng->Sample(1) && !thePerson->GetEverArt()) //should be Sample(0.8).
 		return thePerson->Alive();
 	else
 		return false;

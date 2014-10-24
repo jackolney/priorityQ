@@ -81,7 +81,7 @@ HctHivTest::~HctHivTest()
 
 bool HctHivTest::CheckValid()
 {
-	if(pPerson->GetHctHivTestDate() == GetTime())
+	if(pPerson->GetHctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else
 		return false;
@@ -115,10 +115,11 @@ VctHivTest::~VctHivTest()
 
 bool VctHivTest::CheckValid()
 {
-	if(pPerson->GetVctHivTestDate() == GetTime())
+	if(pPerson->GetVctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		ScheduleVctHivTest(pPerson);
+		if(!pPerson->GetEverArt())
+			ScheduleVctHivTest(pPerson);
 		return false;
 	}
 }
@@ -152,10 +153,11 @@ PictHivTest::~PictHivTest()
 
 bool PictHivTest::CheckValid()
 {
-	if(pPerson->GetPictHivTestDate() == GetTime())
+	if(pPerson->GetPictHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		SchedulePictHivTest(pPerson);
+		if(!pPerson->GetEverArt())
+			SchedulePictHivTest(pPerson);
 		return false;
 	}
 }
@@ -188,7 +190,10 @@ Cd4Test::~Cd4Test()
 
 bool Cd4Test::CheckValid()
 {
-	return true;
+	if(!pPerson->GetEverArt())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void Cd4Test::Execute()
@@ -249,7 +254,10 @@ ArtInitiation::~ArtInitiation()
 
 bool ArtInitiation::CheckValid()
 {
-	return pPerson->Alive();
+	if(!pPerson->GetArtInitiationState())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void ArtInitiation::Execute()
