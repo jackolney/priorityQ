@@ -94,7 +94,7 @@ bool HctLinkage(person * const thePerson)
 		}
 	}
 	else {
-		if(theRng->Sample(1)) { //hctProbLink
+		if(theRng->Sample(hctProbLink)) {
 			D(cout << "Linked to care after Hct." << endl);
 			return true;
 		} else {
@@ -109,7 +109,7 @@ bool HctLinkage(person * const thePerson)
 
 bool VctLinkage(person * const thePerson)
 {
-	if(theRng->Sample(1)) { //vctProbLink
+	if(theRng->Sample(vctProbLink)) {
 		D(cout << "Linked to care after Vct." << endl);
 		return true;
 	} else {
@@ -123,7 +123,7 @@ bool VctLinkage(person * const thePerson)
 
 bool PictLinkage(person * const thePerson)
 {
-	if(theRng->Sample(1)) { //pictProbLink
+	if(theRng->Sample(pictProbLink)) {
 		D(cout << "Linked to care after Pict." << endl);
 		return true;
 	} else {
@@ -163,17 +163,17 @@ bool ReceiveCd4TestResult(person * const thePerson)
 {
 	if(thePerson->GetCd4TestCount() <= 1) {
 	 switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(1); break; //hctShortTermRetention
-		 case 2: return theRng->Sample(1); break; //vctShortTermRetention
-		 case 3: return theRng->Sample(1); break; //pictShortTermRetention
+		 case 1: return theRng->Sample(hctShortTermRetention); break;
+		 case 2: return theRng->Sample(vctShortTermRetention); break;
+		 case 3: return theRng->Sample(pictShortTermRetention); break;
 		 default: return false;
 	 }
 	}
 	else
 		switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(1); break; //hctLongTermRetention
-		 case 2: return theRng->Sample(1); break; //vctLongTermRetention
-		 case 3: return theRng->Sample(1); break; //pictLongTermRetention
+		 case 1: return theRng->Sample(hctLongTermRetention); break;
+		 case 2: return theRng->Sample(vctLongTermRetention); break;
+		 case 3: return theRng->Sample(pictLongTermRetention); break;
 		 default: return false;
 	 }
 }
@@ -183,7 +183,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 
 bool AttendCd4TestResult(person * const thePerson)
 {
-	if(theRng->Sample(1) && !thePerson->GetEverArt()) //should be Sample(0.8).
+	if(theRng->Sample(0.8) && !thePerson->GetEverArt())
 		return thePerson->Alive();
 	else
 		return false;

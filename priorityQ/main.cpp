@@ -97,7 +97,7 @@ int main(int argc, const char * argv[])
 	//				-> ART Initiation. = Done.
 	//				-> ART dropout. = Done.
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). = Done.
-	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers).
+	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers). = Done.
 	//				-> Check that all times and proportions are correct.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS:
