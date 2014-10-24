@@ -256,7 +256,34 @@ void ArtInitiation::Execute()
 {
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
-		//ScheduleArtDropout();
+	ScheduleCd4Update(pPerson);
+	ScheduleWhoUpdate(pPerson);
+	ScheduleArtDropout(pPerson);
+	UpdateEvents(pPerson);
+}
+
+/////////////////////
+/////////////////////
+
+ArtDropout::ArtDropout(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "ArtDropout scheduled for day = " << Time << endl);
+}
+
+ArtDropout::~ArtDropout()
+{}
+
+bool ArtDropout::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void ArtDropout::Execute()
+{
+	D(cout << "ArtDropout executed." << endl);
+	pPerson->SetArtInitiationState(false);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	UpdateEvents(pPerson);

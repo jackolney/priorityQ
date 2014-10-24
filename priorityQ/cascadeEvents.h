@@ -131,10 +131,10 @@ private:
 
 class ArtInitiation : public event {
 public:
-	ArtInitiation(person * const thePerson, const double Time); // constructor
+	ArtInitiation(person * const thePerson, const double Time); //constructor
 	~ArtInitiation(); //destructor
 	
-	/* Methodss */
+	/* Methods */
 	bool CheckValid();
 	void Execute();
 	
@@ -145,7 +145,18 @@ private:
 /////////////////////
 /////////////////////
 
-	//class ArtDropout : public event
+class ArtDropout : public event {
+public:
+	ArtDropout(person * const thePerson, const double Time); //constructor
+	~ArtDropout(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
 
 /////////////////////
 /////////////////////

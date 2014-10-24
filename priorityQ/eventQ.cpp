@@ -50,7 +50,7 @@ void eventQ::RunEvents()
 		event * nextEvent = GetTop();
 		currentTime = nextEvent->GetTime();
 		PopTop();
-		if(nextEvent->CheckValid()) // Checks to see if event is cancelled, if so doesn't even bother doing anything else should just PopTop() it.
+		if(nextEvent->CheckValid())
 			nextEvent->Execute();
 		else
 			nextEvent->Cancel();
@@ -64,7 +64,7 @@ void eventQ::RunEvents()
 /* Define Empty() */
 bool eventQ::Empty() const
 {
-	return iQ.empty(); //Returns 1 if iQ is empty.
+	return iQ.empty();
 }
 
 /* Define GetTop() */
@@ -81,7 +81,7 @@ void eventQ::PopTop()
 }
 
 /* Define Size() */
-size_t eventQ::Size() const //const after a function declaration means the function is not allowed to change any class members.
+size_t eventQ::Size() const
 {
 	return iQ.size();
 }

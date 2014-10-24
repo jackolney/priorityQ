@@ -36,7 +36,7 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 
 void ScheduleHctHivTest(person * const thePerson)
 {
-	if(theQ->GetTime() >= 14610) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610) {
 		for(size_t i = 0; i < 20; i++) {
 			new HctHivTest(thePerson,theQ->GetTime() + (i * 365.25) + theRng->SampleExpDist(hctHivTestTime));
 		}
@@ -48,7 +48,7 @@ void ScheduleHctHivTest(person * const thePerson)
 
 void ScheduleVctHivTest(person * const thePerson)
 {
-	if(theQ->GetTime() >= 12418) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418) {
 		D(cout << "Scheduling VctHivTest." << endl);
 		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime));
 	}
@@ -59,7 +59,7 @@ void ScheduleVctHivTest(person * const thePerson)
 
 void SchedulePictHivTest(person * const thePerson)
 {
-	if(theQ->GetTime() >= 12418 && thePerson->GetSeroStatus()) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418 && thePerson->GetSeroStatus()) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
 			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())
@@ -85,7 +85,7 @@ void SchedulePictHivTest(person * const thePerson)
 bool HctLinkage(person * const thePerson)
 {
 	if(thePerson->GetDiagnosisCount() > 1) {
-		if(theRng->Sample(hctProbLinkPreviouslyDiagnosed)) {
+		if(theRng->Sample(1)) { //hctProbLinkPreviouslyDiagnosed
 			D(cout << "Linked to care after Hct (previously diagnosed)." << endl);
 			return true;
 		} else {
@@ -94,7 +94,7 @@ bool HctLinkage(person * const thePerson)
 		}
 	}
 	else {
-		if(theRng->Sample(hctProbLink)) {
+		if(theRng->Sample(1)) { //hctProbLink
 			D(cout << "Linked to care after Hct." << endl);
 			return true;
 		} else {
@@ -109,7 +109,7 @@ bool HctLinkage(person * const thePerson)
 
 bool VctLinkage(person * const thePerson)
 {
-	if(theRng->Sample(vctProbLink)) {
+	if(theRng->Sample(1)) { //vctProbLink
 		D(cout << "Linked to care after Vct." << endl);
 		return true;
 	} else {
@@ -123,7 +123,7 @@ bool VctLinkage(person * const thePerson)
 
 bool PictLinkage(person * const thePerson)
 {
-	if(theRng->Sample(pictProbLink)) {
+	if(theRng->Sample(1)) { //pictProbLink
 		D(cout << "Linked to care after Pict." << endl);
 		return true;
 	} else {
@@ -163,17 +163,17 @@ bool ReceiveCd4TestResult(person * const thePerson)
 {
 	if(thePerson->GetCd4TestCount() <= 1) {
 	 switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(hctShortTermRetention); break;
-		 case 2: return theRng->Sample(vctShortTermRetention); break;
-		 case 3: return theRng->Sample(pictShortTermRetention); break;
+		 case 1: return theRng->Sample(1); break; //hctShortTermRetention
+		 case 2: return theRng->Sample(1); break; //vctShortTermRetention
+		 case 3: return theRng->Sample(1); break; //pictShortTermRetention
 		 default: return false;
 	 }
 	}
 	else
 		switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(hctLongTermRetention); break;
-		 case 2: return theRng->Sample(vctLongTermRetention); break;
-		 case 3: return theRng->Sample(pictLongTermRetention); break;
+		 case 1: return theRng->Sample(1); break; //hctLongTermRetention
+		 case 2: return theRng->Sample(1); break; //vctLongTermRetention
+		 case 3: return theRng->Sample(1); break; //pictLongTermRetention
 		 default: return false;
 	 }
 }
@@ -183,7 +183,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 
 bool AttendCd4TestResult(person * const thePerson)
 {
-	if(theRng->Sample(0.8))
+	if(theRng->Sample(1))
 		return thePerson->Alive();
 	else
 		return false;
@@ -202,7 +202,8 @@ void ScheduleArtInitiation(person * const thePerson)
 
 void ScheduleArtDropout(person * const thePerson)
 {
-		//new ArtDropout();
+		//Need an Art initiation day.
+	new ArtDropout(thePerson,theQ->GetTime() + theRng->SampleExpDist(artDropoutTimeOneYear));
 }
 
 ////////////////////
