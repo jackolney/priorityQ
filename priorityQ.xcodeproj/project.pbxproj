@@ -112,8 +112,6 @@
 				04EAF85B19E58A5F0058B45A /* event.h */,
 				0447636D19E694AD001C5089 /* events.cpp */,
 				0447636E19E694AD001C5089 /* events.h */,
-				0421651019FE461D00E47DB4 /* impact.cpp */,
-				0421651119FE461D00E47DB4 /* impact.h */,
 				040C113519F7A93800210A47 /* cascadeEvents.cpp */,
 				040C113619F7A93800210A47 /* cascadeEvents.h */,
 				04CF95CA19F56FF900A061C8 /* hiv.cpp */,
@@ -123,6 +121,8 @@
 				0400AE2319E707B500357D2D /* person.h */,
 				04CF95C919F51E7300A061C8 /* macro.h */,
 				047C252219F91B1F00F9CE73 /* toolbox.h */,
+				0421651019FE461D00E47DB4 /* impact.cpp */,
+				0421651119FE461D00E47DB4 /* impact.h */,
 				0421651319FE567F00E47DB4 /* output.h */,
 				04CD81C819A9051C004432AC /* priorityQ.1 */,
 			);

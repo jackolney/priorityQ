@@ -54,8 +54,7 @@ everCd4TestResult(false),
 cd4TestResultCount(0),
 art(false),
 cd4Tx(0),
-whoTx(0),
-iDALY(0)
+whoTx(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);

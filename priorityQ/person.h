@@ -152,10 +152,6 @@ private:
 	/* Tx Guidelines */
 	unsigned int cd4Tx;
 	unsigned int whoTx;
-	
-	/* DALY */
-	double iDALY;
-	
 };
 
 #endif /* defined(__priorityQ__person__) */

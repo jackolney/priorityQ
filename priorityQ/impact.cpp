@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 Jack Olney. All rights reserved.
 //
 
+#include <iostream>
 #include "impact.h"
 #include "person.h"
 #include "toolbox.h"
 #include "eventQ.h"
 #include "output.h"
+
+using namespace std;
 
 extern eventQ * theQ;
 
@@ -19,23 +22,20 @@ extern eventQ * theQ;
 
 void UpdateDaly(person * const thePerson)
 {
-//	dalyWeight_Cd4_3;
-//	dalyWeight_Cd4_2;
-//	dalyWeight_Cd4_1;
-//	dalyWeightArt;
-
-	/* Daly calculation */
-
+	/* Daly calculation for within a year. */
+	if(theQ->GetTime() >= 14610) {
 	if(thePerson->GetArtInitiationState())
-		theDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt;
+		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt;
 	else if(thePerson->GetCurrentCd4() >= 3)
-		theDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3;
+		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3;
 	else if(thePerson->GetCurrentCd4() == 2)
-		theDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2;
+		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2;
 	else if(thePerson->GetCurrentCd4() == 1)
-		theDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1;
+		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1;
+	}
 	
-		//Change to iDALY.
+	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << iDALY << endl;
+	
 }
 
 /////////////////////
@@ -58,9 +58,24 @@ bool Daly::CheckValid()
 
 void Daly::Execute()
 {
-		//Update iDALY for an individual.
+	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
+	double yr [20];
 	
-		//Report DALYs for the year >> Save it somewhere >> zero iDALY.
+	for(size_t i = 0; i<20; i++)
+		yr[i] = 14975.25 + (i * 365.25);
+
+
+	unsigned int i = 0;
+
+	while(i < yr[i])
+		i++;
+
+	theDALY[i] = iDALY;
+
+//	iDALY = 0;
+	
+		//Update theDALY for the particular year.
+		//Zero's iDALY.
 }
 
 /////////////////////
