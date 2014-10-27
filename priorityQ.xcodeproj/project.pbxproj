@@ -11,6 +11,7 @@
 		040C113719F7A93800210A47 /* cascadeEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040C113519F7A93800210A47 /* cascadeEvents.cpp */; };
 		040C113A19F7AA8D00210A47 /* cascadeUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */; };
 		040CC6FF19F0063700611C57 /* update.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040CC6FD19F0063700611C57 /* update.cpp */; };
+		0421651219FE461D00E47DB4 /* impact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0421651019FE461D00E47DB4 /* impact.cpp */; };
 		0447636F19E694AD001C5089 /* events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0447636D19E694AD001C5089 /* events.cpp */; };
 		049A06DC19F16FEC006BFBCE /* population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049A06DA19F16FEC006BFBCE /* population.cpp */; };
 		04CD81C719A9051C004432AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CD81C619A9051C004432AC /* main.cpp */; };
@@ -44,6 +45,8 @@
 		040C113919F7AA8D00210A47 /* cascadeUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cascadeUpdate.h; sourceTree = "<group>"; };
 		040CC6FD19F0063700611C57 /* update.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = update.cpp; sourceTree = "<group>"; };
 		040CC6FE19F0063700611C57 /* update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update.h; sourceTree = "<group>"; };
+		0421651019FE461D00E47DB4 /* impact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = impact.cpp; sourceTree = "<group>"; };
+		0421651119FE461D00E47DB4 /* impact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = impact.h; sourceTree = "<group>"; };
 		0447636D19E694AD001C5089 /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = events.cpp; sourceTree = "<group>"; };
 		0447636E19E694AD001C5089 /* events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = events.h; sourceTree = "<group>"; };
 		047C252219F91B1F00F9CE73 /* toolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolbox.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				04EAF85B19E58A5F0058B45A /* event.h */,
 				0447636D19E694AD001C5089 /* events.cpp */,
 				0447636E19E694AD001C5089 /* events.h */,
+				0421651019FE461D00E47DB4 /* impact.cpp */,
+				0421651119FE461D00E47DB4 /* impact.h */,
 				040C113519F7A93800210A47 /* cascadeEvents.cpp */,
 				040C113619F7A93800210A47 /* cascadeEvents.h */,
 				04CF95CA19F56FF900A061C8 /* hiv.cpp */,
@@ -178,6 +183,7 @@
 				049A06DC19F16FEC006BFBCE /* population.cpp in Sources */,
 				04EAF85C19E58A5F0058B45A /* event.cpp in Sources */,
 				04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */,
+				0421651219FE461D00E47DB4 /* impact.cpp in Sources */,
 				04CD81C719A9051C004432AC /* main.cpp in Sources */,
 				04CF95CC19F56FF900A061C8 /* hiv.cpp in Sources */,
 				0400AE2419E707B500357D2D /* person.cpp in Sources */,
