@@ -11,7 +11,7 @@
 
 /* Output header */
 
-double iDALY = 0; //DALY counter in each year.
+//double iDALY = 0; //DALY counter in each year.
 
 double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 

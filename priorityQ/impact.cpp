@@ -20,23 +20,33 @@ extern eventQ * theQ;
 /////////////////////
 /////////////////////
 
+void SeedDaly(person * const thePerson)
+{
+	double yr [21];
+	for(size_t i = 0; i < 21; i++) {
+		yr[i] = 14610 + (i * 365.25);
+		new Daly(thePerson,yr[i]);
+	}
+}
+
+/////////////////////
+/////////////////////
+
 void UpdateDaly(person * const thePerson)
 {
-//	/* Daly calculation for within a year. */
-//	if(theQ->GetTime() >= 14610) {
-//	if(thePerson->GetArtInitiationState())
-//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt;
-//	else if(thePerson->GetCurrentCd4() >= 3)
-//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3;
-//	else if(thePerson->GetCurrentCd4() == 2)
-//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2;
-//	else if(thePerson->GetCurrentCd4() == 1)
-//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1;
-//	}
-//	
-//	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << iDALY << endl;
-//	
-//	//NEED TO ACCOUNT FOR DEAD INDIVIDUALS (those who died from HIV-related DEATHS).
+	/* Daly calculation for within a year. */
+	if(thePerson->GetArtInitiationState())
+		thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeightArt);
+	else if(thePerson->GetCurrentCd4() >= 3)
+		thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3);
+	else if(thePerson->GetCurrentCd4() == 2)
+		thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2);
+	else if(thePerson->GetCurrentCd4() == 1)
+		thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
+	
+	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << thePerson->GetDalys() << endl;
+	
+	//NEED TO ACCOUNT FOR DEAD INDIVIDUALS (those who died from HIV-related DEATHS).
 	
 }
 
@@ -60,6 +70,12 @@ bool Daly::CheckValid()
 
 void Daly::Execute()
 {
+//	/* Zero DALYs at the beginning of 2010 */ //bit redundant now.
+//	if(theQ->GetTime() == 14610)
+//		iDALY = 0;
+	
+	UpdateDaly(pPerson);
+	
 	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
 	double yr [20];
 	
@@ -69,15 +85,22 @@ void Daly::Execute()
 
 	unsigned int i = 0;
 
-	while(i < yr[i])
+	while(theQ->GetTime() > yr[i])
 		i++;
 
-	theDALY[i] = iDALY;
-
-//	iDALY = 0;
+	theDALY[i] = pPerson->GetDalys();
 	
-		//Update theDALY for the particular year.
-		//Zero's iDALY.
+	cout << "\t\t\t\t\t\t\t\t\t\ttheTime = " << theQ->GetTime() << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\ttheyr[i] = " << yr[i] << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << pPerson->GetDalys()<< endl;
+	cout << "\t\t\t\t\t\t\t\t\t\ttheDALY = " << theDALY[i] << endl;
+	
+	pPerson->ResetDalys();
+	
+	cout << "\t\t\t\t\t\t\t\t\t\tiDALY (should be ZERO) = " << pPerson->GetDalys() << endl;
+	
+	//This event will be scheduled on 1st Jan 2010 and each year thereafter.
+	//It will first write a huge value to the first value in the array on 1st Jan 2010 and then overwrite it in 2011.
 }
 
 /////////////////////

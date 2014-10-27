@@ -18,6 +18,7 @@
 #include "cascadeUpdate.h"
 #include "cascadeEvents.h"
 #include "hiv.h"
+#include "impact.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -60,6 +61,7 @@ whoTx(0)
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
+	SeedDaly(this); //Seed DALY collecting events.
 	new SeedInitialHivTests(this);
 	new SeedTreatmentGuidelinesUpdate(this);
 }

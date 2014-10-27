@@ -65,6 +65,10 @@ public:
 	/* Update Tx Guidelines */
 	void UpdateTxGuidelines(unsigned int theCd4, unsigned int theWho) { cd4Tx = theCd4; whoTx = theWho; }
 	
+	/* Daly Functions */
+	void SetDalys(const double theValue) { iDALY += theValue; }
+	void ResetDalys() { iDALY = 0; }
+	
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////
@@ -104,6 +108,9 @@ public:
 	/* Tx Guideline Getting Functions */
 	unsigned int GetCd4TxGuideline() const { return cd4Tx; }
 	unsigned int GetWhoTxGuideline() const { return whoTx; }
+	
+	/* Daly Functions */
+	double GetDalys() const { return iDALY; }
 	
 private:
 	/* basic characteristics */
@@ -152,6 +159,9 @@ private:
 	/* Tx Guidelines */
 	unsigned int cd4Tx;
 	unsigned int whoTx;
+	
+	/* DALY */
+	double iDALY;
 };
 
 #endif /* defined(__priorityQ__person__) */
