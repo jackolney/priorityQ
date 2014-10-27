@@ -87,6 +87,7 @@ public:
 	bool GetArtInitiationState() const { return art; }
 	bool GetEverArt() const { return everArt; }
 	bool GetSeroStatus() const { return seroStatus; }
+	double GetSeroconversionDay() const { return seroconversionDay; }
 	
 	/* Hiv Care Date Getting Functions */
 	double GetHivDeathDate() const { return hivDeathDate; }

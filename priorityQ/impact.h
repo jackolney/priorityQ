@@ -16,7 +16,12 @@
 /////////////////////
 /////////////////////
 
-class Daly : public event {
+void UpdateDaly(person * const thePerson);
+
+/////////////////////
+/////////////////////
+
+class Daly : public event { //For reporting DALYs annually.
 
 public:
 	Daly(person * const thePerson, const double Time); //constructor
