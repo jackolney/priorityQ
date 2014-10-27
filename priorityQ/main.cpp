@@ -104,7 +104,7 @@ int main(int argc, const char * argv[])
 	//				-> ART Adherence (challenge).
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS: (how to calculate? per person? or by year and across the population?)
-	//				-> DALYs between 2010 and 2030. -> For cohort or for person?
+	//				-> DALYs between 2010 and 2030. = Done.
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------

@@ -155,6 +155,7 @@ private:
 	unsigned int cd4TestResultCount;
 	bool art;
 	bool everArt;
+	bool adherence;
 	
 	/* Tx Guidelines */
 	unsigned int cd4Tx;

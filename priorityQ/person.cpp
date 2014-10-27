@@ -54,6 +54,8 @@ cd4TestCount(0),
 everCd4TestResult(false),
 cd4TestResultCount(0),
 art(false),
+everArt(false),
+adherence(theRng->Sample(0.75)),
 cd4Tx(0),
 whoTx(0)
 {
