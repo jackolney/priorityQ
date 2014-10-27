@@ -9,10 +9,7 @@
 #ifndef __priorityQ__person__
 #define __priorityQ__person__
 
-#include <iostream>
 #include <stdio.h>
-
-using namespace	std;
 
 class person {
 public:
@@ -69,7 +66,7 @@ public:
 	void UpdateTxGuidelines(unsigned int theCd4, unsigned int theWho) { cd4Tx = theCd4; whoTx = theWho; }
 	
 	/* Daly Functions */
-	void SetDalys(const double theValue) { iDALY += theValue; cout << theValue << " =theValue" << endl; }
+	void SetDalys(const double theValue) { iDALY += theValue; }
 	void ResetDalys() { iDALY = 0; }
 	
 	//////////////////////

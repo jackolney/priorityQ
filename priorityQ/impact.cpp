@@ -36,33 +36,21 @@ void UpdateDaly(person * const thePerson)
 {
 	/* Daly calculation for within a year. */
 	if(thePerson->Alive()) {
-		if(thePerson->GetArtInitiationState()) {
+		if(thePerson->GetArtInitiationState())
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeightArt);
-			cout << "Incremental time = " << theQ->GetIncrementalTime() << endl;
-			cout << "theValue (to be set) = " << (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt << endl;
-		}
-		else if(thePerson->GetCurrentCd4() >= 3) {
+		else if(thePerson->GetCurrentCd4() >= 3)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3);
-			cout << "Incremental time = " << theQ->GetIncrementalTime() << endl;
-			cout << "theValue (to be set) = " << (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3 << endl;
-		}
-		else if(thePerson->GetCurrentCd4() == 2) {
+		else if(thePerson->GetCurrentCd4() == 2)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2);
-			cout << "Incremental time = " << theQ->GetIncrementalTime() << endl;
-			cout << "theValue (to be set) = " << (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2 << endl;
-		}
-		else if(thePerson->GetCurrentCd4() == 1) {
+		else if(thePerson->GetCurrentCd4() == 1)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
-			cout << "Incremental time = " << theQ->GetIncrementalTime() << endl;
-			cout << "theValue (to be set) = " << (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1 << endl;
-		}
 	}
-	if(theQ->GetTime() <= thePerson->GetNatDeathDate()) {
-		if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35)
-			thePerson->SetDalys((theQ->GetTime() - thePerson->GetHivDeathDate()) / 365.25);
-		else
-			thePerson->SetDalys(1);
-	}
+//	else if(theQ->GetTime() <= thePerson->GetNatDeathDate()) {
+//			if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35)
+//				thePerson->SetDalys((theQ->GetTime() - thePerson->GetHivDeathDate()) / 365.25);
+//			else
+//				thePerson->SetDalys(1);
+//	}
 	
 	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << thePerson->GetDalys() << endl;
 	
