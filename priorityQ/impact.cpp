@@ -12,7 +12,6 @@
 #include "person.h"
 #include "toolbox.h"
 #include "eventQ.h"
-#include "output.h"
 
 using namespace std;
 
@@ -87,7 +86,6 @@ void Daly::Execute()
 		theDALY[i] += pPerson->GetDalys(); //+= should specify that DALYs can accumulate.
 	
 	pPerson->ResetDalys();
-	
 }
 
 /////////////////////

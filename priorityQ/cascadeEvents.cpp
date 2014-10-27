@@ -278,7 +278,7 @@ void ArtInitiation::Execute()
 	D(cout << "ArtInitiation executed." << endl);
 	if(!pPerson->GetArtAdherenceState())
 		D(cout << "NON-ADHERER to Art." << endl);
-	pPerson->SetArtInitiationState(true);
+	pPerson->SetArtInitiationState(true,GetTime());
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
@@ -307,7 +307,7 @@ void ArtDropout::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);	
 	D(cout << "ArtDropout executed." << endl);
-	pPerson->SetArtInitiationState(false);
+	pPerson->SetArtInitiationState(false,GetTime());
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 }

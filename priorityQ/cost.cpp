@@ -9,6 +9,21 @@
 #include "cost.h"
 #include "person.h"
 #include "toolbox.h"
+#include "eventQ.h"
+
+extern eventQ * theQ;
+
+/////////////////////
+/////////////////////
+
+void SeedCost(person * const thePerson)
+{
+	double yr [21];
+	for(size_t i = 0; i < 21; i++) {
+		yr[i] = 14610 + (i * 365.25);
+		new Cost(thePerson,yr[i]);
+	}
+}
 
 /////////////////////
 /////////////////////
@@ -50,39 +65,40 @@ void ChargePreArtClinicResultVisit(person * const thePerson)
 void ChargeArtCare(person * const thePerson)
 {
 		//This is an annual thing so not sure how to calculate it.
-		//Have an annual cost function blasting the value calculated by Time since an Art initiation day.
+		//Need to address the issue of dropouts -> Need to be able to dropout and return to ART care and for costs to account for that.
+	thePerson->SetAnnualArtCost((theQ->GetTime() - thePerson->GetArtDay()) / 365.25);
 }
 
 /////////////////////
 /////////////////////
 
-/* COST */
-//double iHctVisitCost;
-//double iRapidHivTestCost;
-//double iPreArtClinicVisitCost;
-//double iLabCd4Test;
-//double iPocCd4Test;
-//double iAnnualArtCost;
+Cost::Cost(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
 
+Cost::~Cost()
+{}
 
-//const double hctVisitCost = 8.00;
-//const double rapidHivTestCost = 10.00;
-//const double preArtClinicVisitCost = 28.00;
-//const double labCd4Test = 12.00;
-//const double pocCd4Test = 42.00;
-//const double annualArtCost = 367.00;
-//
-//	//How to use:
-///* HBCT */
-//	//HCT visit + HIV-test = 8 + 10 = $18
-//	//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
-//
-///* VCT or PICT */
-//	//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
-//	//Clinic visit = $28 (Result visit)
-//	//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
-//
-///* Pre-ART Care */
-//	//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
-//	//Clinic visit = $28 (Result visit)
-//	//Clinic visit + POC-CD4 test = 28 + 42 = $70
+bool Cost::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void Cost::Execute()
+{
+	ChargeArtCare(pPerson);
+	
+	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
+	double yr [20];
+	for(size_t i = 0; i<20; i++)
+		yr[i] = 14975.25 + (i * 365.25);
+	
+	unsigned int i = 0;
+	while(theQ->GetTime() > yr[i])
+		i++;
+	
+	if(GetTime() > 14610)
+		theCOST[i] += pPerson->GetHctVisitCost() + pPerson->GetRapidHivTestCost() + pPerson->GetPreArtClinicVisitCost() + pPerson->GetLabCd4Test() + pPerson->GetPocCd4Test() + pPerson->GetAnnualArtCost();
+
+}

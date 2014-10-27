@@ -49,7 +49,6 @@
 		040CC6FE19F0063700611C57 /* update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update.h; sourceTree = "<group>"; };
 		0421651019FE461D00E47DB4 /* impact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = impact.cpp; sourceTree = "<group>"; };
 		0421651119FE461D00E47DB4 /* impact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = impact.h; sourceTree = "<group>"; };
-		0421651719FE911900E47DB4 /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 		0421651819FE95D000E47DB4 /* rlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rlib.cpp; sourceTree = "<group>"; };
 		0421651A19FEB10700E47DB4 /* cost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cost.cpp; sourceTree = "<group>"; };
 		0421651B19FEB10700E47DB4 /* cost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cost.h; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 				0421651B19FEB10700E47DB4 /* cost.h */,
 				0421651019FE461D00E47DB4 /* impact.cpp */,
 				0421651119FE461D00E47DB4 /* impact.h */,
-				0421651719FE911900E47DB4 /* output.h */,
 				0421651819FE95D000E47DB4 /* rlib.cpp */,
 				04CD81C819A9051C004432AC /* priorityQ.1 */,
 			);

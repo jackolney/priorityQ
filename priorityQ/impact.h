@@ -16,6 +16,13 @@
 /////////////////////
 /////////////////////
 
+double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+double * pTheDALY = theDALY;
+
+/////////////////////
+/////////////////////
+
 void SeedDaly(person * const thePerson);
 
 /////////////////////
@@ -27,7 +34,6 @@ void UpdateDaly(person * const thePerson);
 /////////////////////
 
 class Daly : public event { //For reporting DALYs annually.
-
 public:
 	Daly(person * const thePerson, const double Time); //constructor
 	~Daly(); //destructor
