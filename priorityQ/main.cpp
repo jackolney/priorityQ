@@ -108,6 +108,7 @@ int main(int argc, const char * argv[])
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
 	//				-> ACCOUNT FOR ART DROPOUT AND RETURN IN COSTS.
+	//				-> Linker error may be as a result of UpdateDaly() in events.cpp??
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> R-TOOLS:
 	//				-> Specific functions that will run theQ->RunEvents() with a different set of parameters and spit-back different things (DALYs or COST etc.)
