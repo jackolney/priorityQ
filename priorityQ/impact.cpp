@@ -45,16 +45,16 @@ void UpdateDaly(person * const thePerson)
 		else if(thePerson->GetCurrentCd4() == 1)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
 	}
-//	else if(theQ->GetTime() <= thePerson->GetNatDeathDate()) {
-//			if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35)
-//				thePerson->SetDalys((theQ->GetTime() - thePerson->GetHivDeathDate()) / 365.25);
-//			else
-//				thePerson->SetDalys(1);
-//	}
+	else if(theQ->GetTime() <= thePerson->GetNatDeathDate()) {
+		if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35)
+				thePerson->SetDalys((theQ->GetTime() - thePerson->GetHivDeathDate()) / 365.25);
+		else
+			thePerson->SetDalys(1);
+	}
 	
 	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << thePerson->GetDalys() << endl;
 	
-	//NEED TO ACCOUNT FOR DEAD INDIVIDUALS (those who died from HIV-related DEATHS).
+		//Something odd going on with a negative value here an there around hivDeathDate??
 	
 }
 
