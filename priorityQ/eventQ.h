@@ -30,7 +30,8 @@ public:
 	/* Accessor methods */
 	size_t Size() const; //size_t is a type able to represent the size of any object in bytes.
 	bool Empty() const;
-	double GetTime() const {return currentTime;}
+	double GetTime() const { return currentTime; }
+	double GetIncrementalTime() const { return incrementalTime; }
 	
 	/* Methods */
 	event * GetTop();
@@ -42,7 +43,6 @@ private:
 	double currentTime;
 	double incrementalTime;
 	double endTime;
-
 };
 
 #endif /* defined(__priorityQ__eventQ__) */
