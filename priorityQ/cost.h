@@ -16,9 +16,9 @@
 /////////////////////
 /////////////////////
 
-double theCOST [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+extern double theCOST [20];
 
-double * pTheCOST = theCOST;
+extern double * pTheCOST;
 
 /////////////////////
 /////////////////////

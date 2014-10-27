@@ -16,6 +16,13 @@ extern eventQ * theQ;
 /////////////////////
 /////////////////////
 
+double theCOST [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+double * pTheCOST = theCOST;
+
+/////////////////////
+/////////////////////
+
 void SeedCost(person * const thePerson)
 {
 	double yr [21];

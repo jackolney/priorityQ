@@ -16,9 +16,9 @@
 /////////////////////
 /////////////////////
 
-double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+extern double theDALY [20];
 
-double * pTheDALY = theDALY;
+extern double * pTheDALY;
 
 /////////////////////
 /////////////////////

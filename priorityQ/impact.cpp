@@ -20,6 +20,12 @@ extern eventQ * theQ;
 /////////////////////
 /////////////////////
 
+double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+double * pTheDALY = theDALY;
+
+/////////////////////
+
 void SeedDaly(person * const thePerson)
 {
 	double yr [21];
