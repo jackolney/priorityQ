@@ -9,11 +9,13 @@
 #ifndef priorityQ_toolbox_h
 #define priorityQ_toolbox_h
 
+////////////////////
+//PARAMETER VALUES//
+////////////////////
+
 /* Hiv testing times */
 const double hctHivTestTime = 1 * 365.25;
-
 const double vctHivTestTime = 5.8 * 365.25;
-
 const double pictHivTestTime_AsymptomaticNoCd4Result = 2 * 365.25;
 const double pictHivTestTime_AsymptomaticCd4ResultNotEligible = 1 * 365.25;
 const double pictHivTestTime_AsymptomaticCd4ResultEligible = 0.5 * 365.25;
@@ -62,8 +64,9 @@ const double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
 /* Time between being lost from Art care and returning */
 const double artReturnTime = 3 * 365.25;
 
-/////////////////////
-/////////////////////
+////////////////
+//DALY WEIGHTS//
+////////////////
 
 /* DALY weights */
 const double dalyWeight_Cd4_3 = 0.053;
@@ -71,7 +74,31 @@ const double dalyWeight_Cd4_2 = 0.221;
 const double dalyWeight_Cd4_1 = 0.547;
 const double dalyWeightArt = 0.053;
 
-/////////////////////
-/////////////////////
+//////////////
+//UNIT COSTS//
+//////////////
+
+/* Hiv care unit costs */
+const double hctVisitCost = 8.00;
+const double rapidHivTestCost = 10.00;
+const double preArtClinicVisitCost = 28.00;
+const double labCd4Test = 12.00;
+const double pocCd4Test = 42.00;
+const double annualArtCost = 367.00;
+
+	//How to use:
+/* HBCT */
+	//HCT visit + HIV-test = 8 + 10 = $18
+	//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
+
+/* VCT or PICT */
+	//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
+	//Clinic visit = $28 (Result visit)
+	//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
+
+/* Pre-ART Care */
+	//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
+	//Clinic visit = $28 (Result visit)
+	//Clinic visit + POC-CD4 test = 28 + 42 = $70
 
 #endif
