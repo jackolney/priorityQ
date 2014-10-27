@@ -102,7 +102,7 @@ void Daly::Execute()
 		i++;
 
 	theDALY[i] = pPerson->GetDalys();
-	
+
 	cout << "\t\t\t\t\t\t\t\t\t\ttheTime = " << theQ->GetTime() << endl;
 	cout << "\t\t\t\t\t\t\t\t\t\ttheyr[i] = " << yr[i] << endl;
 	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << pPerson->GetDalys()<< endl;

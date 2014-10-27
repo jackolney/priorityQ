@@ -11,14 +11,13 @@
 
 /* Output header */
 
-//double iDALY = 0; //DALY counter in each year.
+	//double iDALY = 0; //DALY counter in each year.
 
 double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-
-
 	//Do with one updating variable then expand to include one for each year from 2010 to 2030.
 
-double theCOST = 0;
+	//double theCOST = 0;
+
 
 #endif
