@@ -100,6 +100,7 @@ int main(int argc, const char * argv[])
 	//				-> Update AGE in each step ( I think I need to apply this to NH and Cascade events ). = Done.
 	//				-> Ensure that as patient becomes symptomatic a PICT trigger is enabled. (and cascade event triggers). = Done.
 	//				-> Check that all times and proportions are correct. = Done.
+	//				-> ART Adherence (challenge).
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS: (how to calculate? per person? or by year and across the population?)
 	//				-> DALYs between 2010 and 2030. -> For cohort or for person?
