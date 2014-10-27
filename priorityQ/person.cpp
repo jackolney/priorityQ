@@ -330,7 +330,3 @@ void person::ScheduleHivIndicatorUpdate()
 
 /////////////////////
 /////////////////////
-
-
-
-
