@@ -73,11 +73,11 @@ void ScheduleCd4Update(person * const thePerson)
 		{1.41480920,3.63655620}
 	};
 	
-	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() > 1) {
+	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentCd4() > 1) {
 		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
 		D(cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
 	}
-	else if(thePerson->GetArtInitiationState() && thePerson->GetCurrentCd4() < 3) {
+	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState() && thePerson->GetCurrentCd4() < 3) {
 		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		D(cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
 	}
@@ -111,11 +111,11 @@ void ScheduleWhoUpdate(person * const thePerson)
 	const double WhoRecoverTimeArt [3] = {0.47176100,0.32243400,0.03783180};
 	
 	
-	if(!thePerson->GetArtInitiationState() && thePerson->GetCurrentWho() < 4) {
+	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentWho() < 4) {
 		event * theEvent = new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		D(cout << "\tWhoDecline from " << thePerson->GetCurrentWho() << " to occur on = " << theEvent->GetTime() << endl);
 	}
-	else if(thePerson->GetArtInitiationState()) {
+	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState()) {
 		if(thePerson->GetCurrentWho() < 4) {
 			event * theDeclineEvent = new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 			D(cout << "\tWhoDecline (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theDeclineEvent->GetTime() << endl);

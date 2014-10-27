@@ -270,6 +270,8 @@ void ArtInitiation::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	D(cout << "ArtInitiation executed." << endl);
+	if(!pPerson->GetArtAdherenceState())
+		D(cout << "NON-ADHERER to Art." << endl);
 	pPerson->SetArtInitiationState(true);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);

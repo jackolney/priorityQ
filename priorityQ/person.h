@@ -89,6 +89,7 @@ public:
 	bool GetEverCd4ResultState() const { return everCd4TestResult; }
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
 	bool GetArtInitiationState() const { return art; }
+	bool GetArtAdherenceState() const { return adherence; }
 	bool GetEverArt() const { return everArt; }
 	bool GetSeroStatus() const { return seroStatus; }
 	double GetSeroconversionDay() const { return seroconversionDay; }
