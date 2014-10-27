@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include "person.h"
 
-//void ChargeHctVisit(person * const thePerson);
+void ChargeHctVisit(person * const thePerson);
 
 //void ChargeHctVisitPoc(person * const thePerson);
 
-void ChargeVctPictClinicVisit(person * const thePerson);
+void ChargeVctPictHivTest(person * const thePerson);
 
 //void ChargeVctPictClinicVisitPoc(person * const thePerson);
 

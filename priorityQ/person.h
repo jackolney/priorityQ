@@ -75,7 +75,7 @@ public:
 	void SetPreArtClinicVisitCost(const double theCost) { iPreArtClinicVisitCost += theCost; }
 	void SetLabCd4Test(const double theCost) { iLabCd4Test += theCost; }
 	void SetPocCd4Test(const double theCost) { iPocCd4Test += theCost; }
-	void SetAnnualArtCost(const double theCost) { iAnnualArtCost += theCost; }
+	void SetAnnualArtCost(const double theCost) { iAnnualArtCost = theCost; }
 	
 	//////////////////////
 	/* Accessor methods */

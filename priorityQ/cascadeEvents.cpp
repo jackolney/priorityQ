@@ -15,6 +15,7 @@
 #include "update.h"
 #include "cohort.h"
 #include "impact.h"
+#include "cost.h"
 
 using namespace std;
 
@@ -92,6 +93,7 @@ void HctHivTest::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
+	ChargeHctVisit(pPerson);
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1);
@@ -129,6 +131,7 @@ void VctHivTest::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
+	ChargeVctPictHivTest(pPerson);
 	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2);
@@ -167,6 +170,7 @@ void PictHivTest::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
+	ChargeVctPictHivTest(pPerson);
 	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3);
@@ -202,6 +206,7 @@ void Cd4Test::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
+	ChargePreArtClinicVisit(pPerson);
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
@@ -232,6 +237,7 @@ void Cd4TestResult::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
+	ChargePreArtClinicResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
 	if(pPerson->GetEligible()) {

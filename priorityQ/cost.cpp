@@ -22,11 +22,9 @@ void ChargeHctVisit(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void ChargeVctPictClinicVisit(person * const thePerson)
+void ChargeVctPictHivTest(person * const thePerson)
 {
-	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
 	thePerson->SetRapidHivTestCost(rapidHivTestCost);
-	thePerson->SetLabCd4Test(labCd4Test);
 }
 
 /////////////////////
