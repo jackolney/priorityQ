@@ -69,6 +69,14 @@ public:
 	void SetDalys(const double theValue) { iDALY += theValue; }
 	void ResetDalys() { iDALY = 0; }
 	
+	/* Cost Functions */
+	void SetHctVisitCost(const double theCost) { iHctVisitCost += theCost; }
+	void SetRapidHivTestCost(const double theCost) { iRapidHivTestCost += theCost; }
+	void SetPreArtClinicVisitCost(const double theCost) { iPreArtClinicVisitCost += theCost; }
+	void SetLabCd4Test(const double theCost) { iLabCd4Test += theCost; }
+	void SetPocCd4Test(const double theCost) { iPocCd4Test += theCost; }
+	void SetAnnualArtCost(const double theCost) { iAnnualArtCost += theCost; }
+	
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////
@@ -112,6 +120,14 @@ public:
 	
 	/* Daly Functions */
 	double GetDalys() const { return iDALY; }
+	
+	/* Cost Functions */
+	double GetHctVisitCost() const { return iHctVisitCost; }
+	double GetRapidHivTestCost() const { return iRapidHivTestCost; }
+	double GetPreArtClinicVisitCost() const { return iPreArtClinicVisitCost; }
+	double GetLabCd4Test() const { return iLabCd4Test; }
+	double GetPocCd4Test() const { return iPocCd4Test; }
+	double GetAnnualArtCost() const { return iAnnualArtCost; }
 	
 private:
 	/* basic characteristics */
@@ -164,6 +180,15 @@ private:
 	
 	/* DALY */
 	double iDALY;
+	
+	/* COST */
+	double iHctVisitCost;
+	double iRapidHivTestCost;
+	double iPreArtClinicVisitCost;
+	double iLabCd4Test;
+	double iPocCd4Test;
+	double iAnnualArtCost;
+	
 };
 
 #endif /* defined(__priorityQ__person__) */

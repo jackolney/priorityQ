@@ -107,6 +107,7 @@ int main(int argc, const char * argv[])
 	//				-> DALYs between 2010 and 2030. = Done.
 	//				-> Cost between 2010 and 2030.
 	//				-> Care experience of those died between 2010 and 2030.
+	//				(Update Age + UpdateDaly + UpdateCost) -> group together?
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> R-TOOLS:
 	//				-> Specific functions that will run theQ->RunEvents() with a different set of parameters and spit-back different things (DALYs or COST etc.)

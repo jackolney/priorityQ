@@ -57,7 +57,14 @@ art(false),
 everArt(false),
 adherence(theRng->Sample(0.75)),
 cd4Tx(0),
-whoTx(0)
+whoTx(0),
+iDALY(0),
+iHctVisitCost(0),
+iRapidHivTestCost(0),
+iPreArtClinicVisitCost(0),
+iLabCd4Test(0),
+iPocCd4Test(0),
+iAnnualArtCost(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
