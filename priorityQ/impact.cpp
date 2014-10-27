@@ -46,12 +46,17 @@ void UpdateDaly(person * const thePerson)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
 	}
 	else if(theQ->GetTime() <= thePerson->GetNatDeathDate()) {
-		if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35)
+		if((theQ->GetTime() - thePerson->GetHivDeathDate()) <= 365.35) {
 				thePerson->SetDalys((theQ->GetTime() - thePerson->GetHivDeathDate()) / 365.25);
+				cout << "GetTime() = " << theQ->GetTime() << endl;
+				cout << "GetHivDeathDate() = " << thePerson->GetHivDeathDate() << endl;
+				cout << "theQ->GetTime() - thePerson->GetHivDeathDate() = " << theQ->GetTime() - thePerson->GetHivDeathDate() << endl;
+		}
 		else
 			thePerson->SetDalys(1);
 	}
 	
+	cout << "Incremental time = " << theQ->GetIncrementalTime() << endl;
 	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << thePerson->GetDalys() << endl;
 	
 		//Something odd going on with a negative value here an there around hivDeathDate??
