@@ -22,19 +22,21 @@ extern eventQ * theQ;
 
 void UpdateDaly(person * const thePerson)
 {
-	/* Daly calculation for within a year. */
-	if(theQ->GetTime() >= 14610) {
-	if(thePerson->GetArtInitiationState())
-		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt;
-	else if(thePerson->GetCurrentCd4() >= 3)
-		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3;
-	else if(thePerson->GetCurrentCd4() == 2)
-		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2;
-	else if(thePerson->GetCurrentCd4() == 1)
-		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1;
-	}
-	
-	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << iDALY << endl;
+//	/* Daly calculation for within a year. */
+//	if(theQ->GetTime() >= 14610) {
+//	if(thePerson->GetArtInitiationState())
+//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeightArt;
+//	else if(thePerson->GetCurrentCd4() >= 3)
+//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_3;
+//	else if(thePerson->GetCurrentCd4() == 2)
+//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_2;
+//	else if(thePerson->GetCurrentCd4() == 1)
+//		iDALY += (theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1;
+//	}
+//	
+//	cout << "\t\t\t\t\t\t\t\t\t\tiDALY = " << iDALY << endl;
+//	
+//	//NEED TO ACCOUNT FOR DEAD INDIVIDUALS (those who died from HIV-related DEATHS).
 	
 }
 

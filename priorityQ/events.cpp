@@ -14,6 +14,7 @@
 #include "update.h"
 #include "cascadeUpdate.h"
 #include "cohort.h"
+#include "impact.h"
 
 using namespace std;
 
@@ -92,6 +93,7 @@ void Death::Execute()
 		D(cout << "Death executed (Natural)." << endl);
 	
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime());
 }
 
@@ -145,6 +147,7 @@ bool Cd4Decline::CheckValid()
 void Cd4Decline::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "Cd4Decline executed." << endl);
 	D(cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
@@ -177,6 +180,7 @@ bool Cd4Recover::CheckValid()
 void Cd4Recover::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "Cd4Recover executed." << endl);
 	D(cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
@@ -209,6 +213,7 @@ bool WhoDecline::CheckValid()
 void WhoDecline::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "WhoDecline executed." << endl);
 	D(cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
@@ -242,7 +247,8 @@ bool WhoRecover::CheckValid()
 
 void WhoRecover::Execute()
 {
-	UpdateAge(pPerson);	
+	UpdateAge(pPerson);
+	UpdateDaly(pPerson);	
 	D(cout << "WhoRecover executed." << endl);
 	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);

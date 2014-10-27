@@ -14,6 +14,7 @@
 #include "person.h"
 #include "update.h"
 #include "cohort.h"
+#include "impact.h"
 
 using namespace std;
 
@@ -90,6 +91,7 @@ bool HctHivTest::CheckValid()
 void HctHivTest::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1);
@@ -119,8 +121,6 @@ bool VctHivTest::CheckValid()
 	if(pPerson->GetVctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		if(!pPerson->GetEverArt() && pPerson->Alive())
-			ScheduleVctHivTest(pPerson);
 		return false;
 	}
 }
@@ -128,6 +128,7 @@ bool VctHivTest::CheckValid()
 void VctHivTest::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2);
@@ -158,8 +159,6 @@ bool PictHivTest::CheckValid()
 	if(pPerson->GetPictHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
-		if(!pPerson->GetEverArt() && pPerson->Alive())
-			SchedulePictHivTest(pPerson);
 		return false;
 	}
 }
@@ -167,6 +166,7 @@ bool PictHivTest::CheckValid()
 void PictHivTest::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3);
@@ -201,6 +201,7 @@ bool Cd4Test::CheckValid()
 void Cd4Test::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
@@ -229,7 +230,8 @@ bool Cd4TestResult::CheckValid()
 
 void Cd4TestResult::Execute()
 {
-	UpdateAge(pPerson);	
+	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
 	if(pPerson->GetEligible()) {
@@ -266,6 +268,7 @@ bool ArtInitiation::CheckValid()
 void ArtInitiation::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
 	D(cout << "ArtInitiation executed." << endl);
 	pPerson->SetArtInitiationState(true);
 	ScheduleCd4Update(pPerson);
@@ -294,6 +297,7 @@ bool ArtDropout::CheckValid()
 void ArtDropout::Execute()
 {
 	UpdateAge(pPerson);
+	UpdateDaly(pPerson);	
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false);
 	ScheduleCd4Update(pPerson);
