@@ -35,10 +35,12 @@ public:
 	/* Methods */
 	event * GetTop();
 	void PopTop();
+	void UpdateTime(const double theTime);
 	
 private:
 	priority_queue<event*, vector<event*>, timeComparison> iQ;
 	double currentTime;
+	double incrementalTime;
 	double endTime;
 
 };
