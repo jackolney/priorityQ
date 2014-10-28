@@ -214,10 +214,11 @@ void Cd4Test::Execute()
 	ChargePreArtClinicCd4Test(pPerson);
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
-	pPerson->SetInCareState(true);
 	pPerson->SetEverCd4TestState(true);
-	if(ReceiveCd4TestResult(pPerson))
+	if(ReceiveCd4TestResult(pPerson)) {
 		ScheduleCd4TestResult(pPerson);
+		pPerson->SetInCareState(true);
+	}
 };
 
 /////////////////////
@@ -250,7 +251,8 @@ void Cd4TestResult::Execute()
 		ScheduleArtInitiation(pPerson);
 	} else {
 		D(cout << "Not eligible for ART." << endl);
-		SchedulePreArtCd4Test(pPerson);
+		if(SecondaryCd4Test(pPerson))
+			SchedulePreArtCd4Test(pPerson);
 	}
 	SchedulePictHivTest(pPerson);
 }

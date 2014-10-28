@@ -41,6 +41,8 @@ bool ReceiveCd4TestResult(person * const thePerson);
 
 bool AttendCd4TestResult(person * const thePerson);
 
+bool SecondaryCd4Test(person * const thePerson);
+
 /* Art Care */
 void ScheduleArtInitiation(person * const thePerson);
 

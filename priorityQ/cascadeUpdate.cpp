@@ -185,8 +185,24 @@ bool AttendCd4TestResult(person * const thePerson)
 {
 	if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
 		return thePerson->Alive();
-	else
+	else {
+		thePerson->SetInCareState(false);
 		return false;
+	}
+}
+
+////////////////////
+////////////////////
+
+bool SecondaryCd4Test(person * const thePerson)
+{
+	switch(thePerson->GetDiagnosisRoute()) {
+		case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
+		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
+		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
+		default: return false;
+		}
+	
 }
 
 ////////////////////
