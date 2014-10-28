@@ -28,9 +28,9 @@ double * pTheCOST = theCOST;
 
 void SeedCost(person * const thePerson)
 {
-	double yr [20];
-	for(size_t i = 0; i < 20; i++) {
-		yr[i] = 14975.25 + (i * 365.25);
+	double yr [21];
+	for(size_t i = 0; i < 21; i++) {
+		yr[i] = 14610 + (i * 365.25);
 		new Cost(thePerson,yr[i]);
 	}
 }
@@ -81,7 +81,6 @@ void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 
 void ChargeArtCare(person * const thePerson)
 {
-		//this function is not executed until 1st Jan 2010.
 	if(thePerson->GetArtInitiationState()) {
 		if(thePerson->GetArtDay() <= 14610)
 			thePerson->SetAnnualArtCost((((theQ->GetTime() - 14610) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
@@ -120,14 +119,18 @@ void Cost::Execute()
 	while(theQ->GetTime() > yr[i])
 		i++;
 	
-	cout << pPerson->GetHctVisitCost() << " = GetHctVisitCost()" << endl;
-	cout << pPerson->GetRapidHivTestCost() << " = GetRapidHivTestCost()" << endl;
-	cout << pPerson->GetPreArtClinicVisitCost() << " = GetPreArtClinicVisitCost()" << endl;
-	cout << pPerson->GetLabCd4Test() << " = GetLabCd4Test()" << endl;
-	cout << pPerson->GetPocCd4Test() << " = GetPocCd4Test()" << endl;
-	cout << pPerson->GetAnnualArtCost() << " = GetAnnualArtCost()" << endl;
+//	cout << pPerson->GetHctVisitCost() << " = GetHctVisitCost()" << endl;
+//	cout << pPerson->GetRapidHivTestCost() << " = GetRapidHivTestCost()" << endl;
+//	cout << pPerson->GetPreArtClinicVisitCost() << " = GetPreArtClinicVisitCost()" << endl;
+//	cout << pPerson->GetLabCd4Test() << " = GetLabCd4Test()" << endl;
+//	cout << pPerson->GetPocCd4Test() << " = GetPocCd4Test()" << endl;
+//	cout << pPerson->GetAnnualArtCost() << " = GetAnnualArtCost()" << endl;
 	
 	if(GetTime() > 14610)
 		theCOST[i] += pPerson->GetHctVisitCost() + pPerson->GetRapidHivTestCost() + pPerson->GetPreArtClinicVisitCost() + pPerson->GetLabCd4Test() + pPerson->GetPocCd4Test() + pPerson->GetAnnualArtCost();
+	
+	if(GetTime() == 14610)
+		pPerson->ResetCost();
+	
 
 }
