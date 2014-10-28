@@ -34,7 +34,7 @@ int main(int argc, const char * argv[])
 //	theRng = new Rng(1); //Fixed seed for testing.
 
 	/* Define the event queue */
-	theQ = new eventQ(0,1e+06*365.25); //constructor takes the parameters of startTime and stopTime.
+	theQ = new eventQ(0); //constructor takes the parameters of startTime and stopTime.
 
 	/* Create new cohort of individuals */
 	new population(1);

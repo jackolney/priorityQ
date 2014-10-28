@@ -20,7 +20,7 @@ struct timeComparison {bool operator()(const event *lhs, const event *rhs) const
 /* Define eventQ class */
 class eventQ {
 public:
-	eventQ(const double startTime, const double stopTime); //constructor
+	eventQ(const double startTime); //constructor
 	~eventQ(); //destructor
 	
 	/* Methods */
@@ -42,7 +42,6 @@ private:
 	priority_queue<event*, vector<event*>, timeComparison> iQ;
 	double currentTime;
 	double incrementalTime;
-	double endTime;
 };
 
 #endif /* defined(__priorityQ__eventQ__) */
