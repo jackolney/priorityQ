@@ -22,7 +22,7 @@ using namespace std;
 /* Pointers to core stuff */
 Rng * theRng;
 eventQ * theQ;
-extern double * pTheDALY;
+extern double * pTheCOST;
 
 int main(int argc, const char * argv[])
 {
@@ -105,10 +105,9 @@ int main(int argc, const char * argv[])
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> OUTPUT METRICS: (how to calculate? per person? or by year and across the population?)
 	//				-> DALYs between 2010 and 2030. = Done.
-	//				-> Cost between 2010 and 2030.
+	//				-> Cost between 2010 and 2030. = Done.
 	//				-> Care experience of those died between 2010 and 2030.
-	//				-> ACCOUNT FOR ART DROPOUT AND RETURN IN COSTS.
-	//				-> Linker error may be as a result of UpdateDaly() in events.cpp??
+	//				-> Account for art dropout and return in costs = Done.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> R-TOOLS:
 	//				-> Specific functions that will run theQ->RunEvents() with a different set of parameters and spit-back different things (DALYs or COST etc.)
@@ -129,7 +128,7 @@ int main(int argc, const char * argv[])
 	/* PLAYGROUND. (who needs Swift?) */
 	
 	for(size_t i = 0; i<20; i++)
-		cout << pTheDALY[i] << endl;
+		cout << pTheCOST[i] << endl;
 	
 	
 	/* Empty eventQ at end of run */

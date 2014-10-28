@@ -348,7 +348,9 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 	if(theState) {
 		everArt = true;
 		artDay = theTime;
-	} else
+	} else if(theTime > 14610 && artDay <= 14610)
+		artTime = theTime - 14610;
+	else if(theTime > 14610)
 		artTime = theTime - artDay;
 }
 

@@ -81,13 +81,13 @@ void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 
 void ChargeArtCare(person * const thePerson)
 {
-		//This is an annual thing so not sure how to calculate it.
-		//Need to address the issue of dropouts -> Need to be able to dropout and return to ART care and for costs to account for that.
-	
-		//What about an ART counter? initialised at artDay and updated at dropout? ELSE if zero, don't run the function.
-	if(thePerson->GetArtInitiationState())
-		thePerson->SetAnnualArtCost((((theQ->GetTime() - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
-	else
+		//this function is not executed until 1st Jan 2010.
+	if(thePerson->GetArtInitiationState()) {
+		if(thePerson->GetArtDay() <= 14610)
+			thePerson->SetAnnualArtCost((((theQ->GetTime() - 14610) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
+		else
+			thePerson->SetAnnualArtCost((((theQ->GetTime() - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
+	} else
 		thePerson->SetAnnualArtCost((thePerson->GetArtTime() / 365.25) * annualArtCost);
 }
 
