@@ -16,7 +16,7 @@ double careExperienceAmongHivRelatedDeaths [5]; //NeverDiagnosed, DiagnosedButNe
 
 void FillOutCareExperienceArray(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetHivDeath() && theTime >= 14610) {
+	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
 			//NeverDiagnosed
 		careExperienceAmongHivRelatedDeaths[0] += !thePerson->GetDiagnosedState();
 			//DiagnosedButNeverInitiatedArt
