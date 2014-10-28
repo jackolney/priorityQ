@@ -22,7 +22,6 @@ using namespace std;
 /* Pointers to core stuff */
 Rng * theRng;
 eventQ * theQ;
-extern double * pTheCOST;
 
 int main(int argc, const char * argv[])
 {
@@ -127,8 +126,6 @@ int main(int argc, const char * argv[])
 	
 	/* PLAYGROUND. (who needs Swift?) */
 	
-	for(size_t i = 0; i<20; i++)
-		cout << pTheCOST[i] << endl;
 	
 	
 	/* Empty eventQ at end of run */

@@ -120,8 +120,6 @@ VctHivTest::~VctHivTest()
 
 bool VctHivTest::CheckValid()
 {
-	cout << boolalpha << pPerson->GetEverArt() << " = EVER ART." << endl;
-	cout << boolalpha << pPerson->GetArtInitiationState() << " = ART INITIATION STATE." << endl;
 	if(pPerson->GetVctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
@@ -163,8 +161,6 @@ PictHivTest::~PictHivTest()
 
 bool PictHivTest::CheckValid()
 {
-	cout << boolalpha << pPerson->GetEverArt() << " = EVER ART." << endl;
-	cout << boolalpha << pPerson->GetArtInitiationState() << " = ART INITIATION STATE." << endl;
 	if(pPerson->GetPictHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else {
@@ -274,7 +270,6 @@ ArtInitiation::~ArtInitiation()
 
 bool ArtInitiation::CheckValid()
 {
-	cout << boolalpha << pPerson->GetArtInitiationState() << " = ART INITIATION STATE." << endl;
 	if(!pPerson->GetArtInitiationState())
 		return pPerson->Alive();
 	else
@@ -292,7 +287,6 @@ void ArtInitiation::Execute()
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
-	cout << boolalpha << pPerson->GetEverArt() << " = EVER ART." << endl;
 }
 
 /////////////////////

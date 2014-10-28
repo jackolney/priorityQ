@@ -56,6 +56,6 @@ void cohort::ScheduleNewPerson(const double Time)
 void cohort::GenerateNewPerson()
 {
 	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
-	person * thePerson = new person(theQ->GetTime());
-	PushToVector(thePerson); //redundant now?
+	person * iPerson = new person(theQ->GetTime());
+	PushToVector(iPerson); //redundant now?
 }
