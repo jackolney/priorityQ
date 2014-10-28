@@ -38,6 +38,8 @@ currentWho(0),
 initialWho(0),
 deathDay(0),
 birthDay(Time),
+artDay(0),
+artTime(0),
 hivDeathDate(0),
 cd4DeclineDate(0),
 cd4RecoverDate(0),
@@ -335,6 +337,19 @@ void person::ScheduleHivIndicatorUpdate()
 {
 	ScheduleCd4Update(this);
 	ScheduleWhoUpdate(this);
+}
+
+/////////////////////
+/////////////////////
+
+void person::SetArtInitiationState(const bool theState, const double theTime)
+{
+	art = theState;
+	if(theState) {
+		everArt = true;
+		artDay = theTime;
+	} else
+		artTime = theTime - artDay;
 }
 
 /////////////////////

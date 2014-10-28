@@ -48,7 +48,7 @@ public:
 	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount += 1; }
 	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount +=1; }
 	void SetInCareState(const bool theState) { inCare = theState; }
-	void SetArtInitiationState(const bool theState, const double theTime) { art = theState; if(theState) { everArt = true; artDay = theTime; } }
+	void SetArtInitiationState(const bool theState, const double theTime);
 
 	/* Natural History Date Setting Functions */
 	void SetHivDeathDate(double theDate) { hivDeathDate = theDate; }
@@ -102,6 +102,7 @@ public:
 	bool GetSeroStatus() const { return seroStatus; }
 	double GetSeroconversionDay() const { return seroconversionDay; }
 	double GetArtDay() const { return artDay; }
+	double GetArtTime() const { return artTime; }
 	
 	/* Hiv Care Date Getting Functions */
 	double GetHivDeathDate() const { return hivDeathDate; }
@@ -149,7 +150,8 @@ private:
 	/* Day = time an event occured */
 	double deathDay;
 	const double birthDay;
-	double artDay;
+	double artDay;		//Art start day.
+	double artTime;		//Time spent on Art.
 	
 	/* Date = time an event will occur */
 	double hivDeathDate;
