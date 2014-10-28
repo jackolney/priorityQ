@@ -132,6 +132,11 @@ public:
 	double GetPocCd4Test() const { return iPocCd4Test; }
 	double GetAnnualArtCost() const { return iAnnualArtCost; }
 	
+	/* Output functions */
+	bool GetHivDeath() const { return hivDeath; }
+	bool GetArtDeath() const { return artDeath; }
+	unsigned int GetCd4AtArt() const { return cd4AtArt; }
+	
 private:
 	/* basic characteristics */
 	bool gender;

@@ -21,5 +21,3 @@
 
 	//In here:
 //		extern double * pTheDALY;		
-
-

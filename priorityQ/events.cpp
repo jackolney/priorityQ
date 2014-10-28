@@ -15,6 +15,7 @@
 #include "cascadeUpdate.h"
 #include "cohort.h"
 #include "impact.h"
+#include "output.h"
 
 using namespace std;
 
@@ -97,6 +98,7 @@ void Death::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
+	FillOutCareExperienceArray(pPerson);
 }
 
 /////////////////////
