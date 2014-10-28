@@ -6,10 +6,13 @@
 //  Copyright (c) 2014 Jack Olney. All rights reserved.
 //
 
+#include <iostream>
 #include "cost.h"
 #include "person.h"
 #include "toolbox.h"
 #include "eventQ.h"
+
+using namespace std;
 
 extern eventQ * theQ;
 
@@ -25,9 +28,9 @@ double * pTheCOST = theCOST;
 
 void SeedCost(person * const thePerson)
 {
-	double yr [21];
-	for(size_t i = 0; i < 21; i++) {
-		yr[i] = 14610 + (i * 365.25);
+	double yr [20];
+	for(size_t i = 0; i < 20; i++) {
+		yr[i] = 14975.25 + (i * 365.25);
 		new Cost(thePerson,yr[i]);
 	}
 }
@@ -55,13 +58,20 @@ void ChargeVctPictHivTest(person * const thePerson)
 void ChargePreArtClinicVisit(person * const thePerson)
 {
 	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
+}
+
+/////////////////////
+/////////////////////
+
+void ChargePreArtClinicCd4Test(person * const thePerson)
+{
 	thePerson->SetLabCd4Test(labCd4Test);
 }
 
 /////////////////////
 /////////////////////
 
-void ChargePreArtClinicResultVisit(person * const thePerson)
+void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 {
 	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
 }
@@ -104,6 +114,13 @@ void Cost::Execute()
 	unsigned int i = 0;
 	while(theQ->GetTime() > yr[i])
 		i++;
+	
+	cout << pPerson->GetHctVisitCost() << " = GetHctVisitCost()" << endl;
+	cout << pPerson->GetRapidHivTestCost() << " = GetRapidHivTestCost()" << endl;
+	cout << pPerson->GetPreArtClinicVisitCost() << " = GetPreArtClinicVisitCost()" << endl;
+	cout << pPerson->GetLabCd4Test() << " = GetLabCd4Test()" << endl;
+	cout << pPerson->GetPocCd4Test() << " = GetPocCd4Test()" << endl;
+	cout << pPerson->GetAnnualArtCost() << " = GetAnnualArtCost()" << endl;
 	
 	if(GetTime() > 14610)
 		theCOST[i] += pPerson->GetHctVisitCost() + pPerson->GetRapidHivTestCost() + pPerson->GetPreArtClinicVisitCost() + pPerson->GetLabCd4Test() + pPerson->GetPocCd4Test() + pPerson->GetAnnualArtCost();

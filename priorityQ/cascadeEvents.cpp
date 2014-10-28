@@ -139,6 +139,8 @@ void VctHivTest::Execute()
 		SchedulePictHivTest(pPerson);
 		if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
+		else
+			ChargePreArtClinicVisit(pPerson);
 	}
 	ScheduleVctHivTest(pPerson);
 };
@@ -177,6 +179,8 @@ void PictHivTest::Execute()
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
+		else
+			ChargePreArtClinicVisit(pPerson);
 	}
 	SchedulePictHivTest(pPerson);
 }
@@ -207,6 +211,7 @@ void Cd4Test::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	ChargePreArtClinicVisit(pPerson);
+	ChargePreArtClinicCd4Test(pPerson);
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetInCareState(true);
@@ -237,7 +242,7 @@ void Cd4TestResult::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
-	ChargePreArtClinicResultVisit(pPerson);
+	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
 	if(pPerson->GetEligible()) {

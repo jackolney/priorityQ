@@ -140,8 +140,13 @@ int main(int argc, const char * argv[])
 }
 
 
-/*NOTES*/
+/* NOTES */
 
 // Consider output metrics from the model.
 // Endtime of theQ may be overkill, we want everyone to die first ->> may cause longterm issues.
 // Be mindful of eventual need to input parameter values / Rtools inclusion and interaction through R.
+
+/* COMMENTS */
+
+// COST - If an individual receives an HIV-test through PICT / VCT but not linked to care they are only charged the $10 for the rapid HIV test.
+// These individuals used to be charged 
