@@ -14,9 +14,9 @@ using namespace std;
 double careExperienceAmongHivRelatedDeaths [5]; //NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
 
 
-void FillOutCareExperienceArray(person * const thePerson)
+void FillOutCareExperienceArray(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetHivDeath()) {
+	if(thePerson->GetHivDeath() && theTime >= 14610) {
 			//NeverDiagnosed
 		careExperienceAmongHivRelatedDeaths[0] += !thePerson->GetDiagnosedState();
 			//DiagnosedButNeverInitiatedArt

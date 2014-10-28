@@ -98,7 +98,7 @@ void Death::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
-	FillOutCareExperienceArray(pPerson);
+	FillOutCareExperienceArray(pPerson,GetTime());
 }
 
 /////////////////////

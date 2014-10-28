@@ -12,6 +12,6 @@
 #include <stdio.h>
 #include "person.h"
 
-void FillOutCareExperienceArray(person * const thePerson);
+void FillOutCareExperienceArray(person * const thePerson, const double theTime);
 
 #endif /* defined(__priorityQ__output__) */
