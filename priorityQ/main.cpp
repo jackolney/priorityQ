@@ -106,7 +106,7 @@ int main(int argc, const char * argv[])
 	//				-> DALYs between 2010 and 2030. = Done.
 	//				-> Cost between 2010 and 2030. = Done.
 	//				-> Care experience of those died between 2010 and 2030.
-	//				-> Account for art dropout and return in costs = Done.
+	//				-> Account for art dropout and return in costs. = Done.
 	//			---------------------------------------------------------------------------------------------------------------------------------------------
 	//			>> R-TOOLS:
 	//				-> Specific functions that will run theQ->RunEvents() with a different set of parameters and spit-back different things (DALYs or COST etc.)

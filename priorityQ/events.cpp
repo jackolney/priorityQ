@@ -94,7 +94,6 @@ void Death::Execute()
 		D(cout << "Death executed (HIV-related)." << endl);
 	else
 		D(cout << "Death executed (Natural)." << endl);
-	
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime());
@@ -141,7 +140,7 @@ Cd4Decline::~Cd4Decline()
 
 bool Cd4Decline::CheckValid()
 {
-	if(!pPerson->GetArtInitiationState() && pPerson->GetCd4DeclineDate() == GetTime())
+	if((!pPerson->GetArtInitiationState() || (pPerson->GetArtInitiationState() && !pPerson->GetArtAdherenceState())) && pPerson->GetCd4DeclineDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -174,7 +173,7 @@ Cd4Recover::~Cd4Recover()
 
 bool Cd4Recover::CheckValid()
 {
-	if(pPerson->GetArtInitiationState() && pPerson->GetCd4RecoverDate()	== GetTime())
+	if(pPerson->GetArtInitiationState() && pPerson->GetArtAdherenceState() && pPerson->GetCd4RecoverDate()	== GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -207,7 +206,7 @@ WhoDecline::~WhoDecline()
 
 bool WhoDecline::CheckValid()
 {
-	if(pPerson->GetWhoDeclineDate() == GetTime())
+	if((!pPerson->GetArtInitiationState() || (pPerson->GetArtInitiationState() && !pPerson->GetArtAdherenceState())) && pPerson->GetWhoDeclineDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -242,7 +241,7 @@ WhoRecover::~WhoRecover()
 
 bool WhoRecover::CheckValid()
 {
-	if(pPerson->GetWhoRecoverDate() == GetTime())
+	if(pPerson->GetArtInitiationState() && pPerson->GetArtAdherenceState() && pPerson->GetWhoRecoverDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;

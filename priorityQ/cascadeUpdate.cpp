@@ -85,7 +85,7 @@ void SchedulePictHivTest(person * const thePerson)
 bool HctLinkage(person * const thePerson)
 {
 	if(thePerson->GetDiagnosisCount() > 1) {
-		if(theRng->Sample(1)) { //hctProbLinkPreviouslyDiagnosed
+		if(theRng->Sample(hctProbLinkPreviouslyDiagnosed)) {
 			D(cout << "Linked to care after Hct (previously diagnosed)." << endl);
 			return true;
 		} else {
@@ -163,16 +163,16 @@ bool ReceiveCd4TestResult(person * const thePerson)
 {
 	if(thePerson->GetCd4TestCount() <= 1) {
 	 switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(hctShortTermRetention); break;
-		 case 2: return theRng->Sample(vctShortTermRetention); break;
+		 case 1: return theRng->Sample(hctShortTermRetention);  break;
+		 case 2: return theRng->Sample(vctShortTermRetention);  break;
 		 case 3: return theRng->Sample(pictShortTermRetention); break;
 		 default: return false;
 	 }
 	}
 	else
 		switch(thePerson->GetDiagnosisRoute()) {
-		 case 1: return theRng->Sample(hctLongTermRetention); break;
-		 case 2: return theRng->Sample(vctLongTermRetention); break;
+		 case 1: return theRng->Sample(hctLongTermRetention);  break;
+		 case 2: return theRng->Sample(vctLongTermRetention);  break;
 		 case 3: return theRng->Sample(pictLongTermRetention); break;
 		 default: return false;
 	 }
@@ -183,7 +183,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 
 bool AttendCd4TestResult(person * const thePerson)
 {
-	if(theRng->Sample(0.8) && !thePerson->GetEverArt())
+	if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
 		return thePerson->Alive();
 	else
 		return false;

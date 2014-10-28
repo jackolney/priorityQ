@@ -39,6 +39,9 @@ const double cd4ResultTime = 30;
 /* Time between receiving result Cd4 test and subsequent Cd4 test */
 const double cd4TestTime = 335.25;
 
+/* Probability of attending Cd4 Test result visit */
+const double cd4ResultProbAttend = 0.8;
+
 /* Pre-Art retention probability (between test and result) */
 const double hctShortTermRetention = 0.6192;
 const double hctLongTermRetention = 0.6192;
