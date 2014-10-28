@@ -96,7 +96,7 @@ void Death::Execute()
 		D(cout << "Death executed (Natural)." << endl);
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
-	pPerson->Kill(GetTime());
+	pPerson->Kill(GetTime(),hivRelated);
 }
 
 /////////////////////

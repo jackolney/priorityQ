@@ -59,6 +59,9 @@ cd4TestResultCount(0),
 art(false),
 everArt(false),
 adherence(theRng->Sample(0.75)),
+cd4AtArt(0),
+hivDeath(false),
+artDeath(false),
 cd4Tx(0),
 whoTx(0),
 iDALY(0),
@@ -206,9 +209,11 @@ double person::AssignNatDeathDate(const double Time)
 /////////////////////
 /////////////////////
 
-void person::Kill(const double Time)
+void person::Kill(const double Time, const bool theCause)
 {
 	deathDay = Time;
+	hivDeath = theCause;
+	artDeath = art;
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
@@ -348,6 +353,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 	if(theState) {
 		everArt = true;
 		artDay = theTime;
+		cd4AtArt = currentCd4;
 	} else if(theTime > 14610 && artDay <= 14610)
 		artTime = theTime - 14610;
 	else if(theTime > 14610)

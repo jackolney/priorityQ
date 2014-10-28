@@ -25,7 +25,7 @@ public:
 	/////////////
 	/* Methods */
 	/////////////
-	void Kill(const double Time);
+	void Kill(const double Time, const bool theCause);
 	double SetAge(const double Time);
 
 	/* Hiv Acquisition Functions */
@@ -178,6 +178,12 @@ private:
 	bool art;
 	bool everArt;
 	bool adherence;
+	
+	/* Ouput info */
+	unsigned int cd4AtArt;
+	bool hivDeath;
+	bool artDeath;
+	
 	
 	/* Tx Guidelines */
 	unsigned int cd4Tx;
