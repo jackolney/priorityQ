@@ -27,12 +27,8 @@ using namespace std;
 
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho)
 {
-	cout << boolalpha << thePerson->GetEverArt() << " = EVER ART." << endl;
-	cout << boolalpha << thePerson->GetArtInitiationState() << " = ART INITIATION STATE." << endl;
 	thePerson->UpdateTxGuidelines(theCd4,theWho);
 	D(cout << "TxGuidelines Updated (Cd4 = " << theCd4 << ", Who = " << theWho << ")." << endl);
-	cout << boolalpha << thePerson->GetEverArt() << " = EVER ART." << endl;
-	cout << boolalpha << thePerson->GetArtInitiationState() << " = ART INITIATION STATE." << endl;
 }
 
 ////////////////////
