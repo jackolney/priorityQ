@@ -19,8 +19,6 @@ using namespace std;
 Rng * theRng;
 eventQ * theQ;
 
-extern double * theCOST;
-
 int main(int argc, const char * argv[])
 {
 	theRng = new Rng(mach_absolute_time());
@@ -34,9 +32,6 @@ int main(int argc, const char * argv[])
 	delete theQ;
 	delete theRng;
 	
-	for(size_t i=0;i<20;i++)
-		cout << theCOST[i] << endl;
-
     return 0;
 }
 
