@@ -29,7 +29,7 @@ public:
 	
 	
 protected:
-	const double eventTime = 0;
+	const double eventTime;
 	bool cancelled;
 		
 };
