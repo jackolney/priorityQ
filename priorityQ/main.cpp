@@ -10,11 +10,7 @@
 #include "macro.h"
 #include <mach/mach_time.h>
 #include "rng.h"
-#include "person.h"
 #include "population.h"
-#include "cohort.h"
-#include "event.h"
-#include "events.h"
 #include "eventQ.h"
 
 using namespace std;
@@ -107,8 +103,6 @@ int main(int argc, const char * argv[])
 //			---------------------------------------------------------------------------------------------------------------------------------------------
 //			>> R-TOOLS:
 //				-> Specific functions that will run theQ->RunEvents() with a different set of parameters and spit-back different things (DALYs or COST etc.)
-//
-//
 //			---------------------------------------------------------------------------------------------------------------------------------------------
 //			>> INTERVENTIONS:
 //				-> Include 12 interventions.

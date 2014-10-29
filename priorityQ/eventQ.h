@@ -10,6 +10,7 @@
 #define __priorityQ__eventQ__
 
 #include <stdio.h>
+#include "event.h"
 #include <queue>
 
 using namespace std;
