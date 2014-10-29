@@ -15,13 +15,7 @@
 using namespace std;
 
 extern eventQ * theQ;
-
-/////////////////////
-/////////////////////
-
-double theCOST [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-
-double * pTheCOST = theCOST;
+extern double * theCOST;
 
 /////////////////////
 /////////////////////
@@ -131,6 +125,6 @@ void Cost::Execute()
 	
 	if(GetTime() == 14610)
 		pPerson->ResetCost();
-	
+
 
 }

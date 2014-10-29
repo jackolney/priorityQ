@@ -11,23 +11,63 @@
 
 using namespace std;
 
-double careExperienceAmongHivRelatedDeaths [5]; //NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
+double * theCARE;
+double * theDALY;
+double * theCOST;
 
+/////////////////////
+/////////////////////
+
+void CreateCareExperienceArray()
+{
+	theCARE = new double[5]; //NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
+	
+	for(size_t i=0;i<5;i++)
+		theCARE[i] = 0;
+}
+
+/////////////////////
+/////////////////////
+
+void CreateDalyArray()
+{
+	theDALY = new double[20];
+	
+	for(size_t i=0;i<20;i++)
+		theDALY[i] = 0;
+}
+
+/////////////////////
+/////////////////////
+
+void CreateCostArray()
+{
+	theCOST = new double[20];
+	
+	for(size_t i=0;i<20;i++)
+		theCOST[i] = 0;
+}
+
+/////////////////////
+/////////////////////
 
 void FillOutCareExperienceArray(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
 			//NeverDiagnosed
-		careExperienceAmongHivRelatedDeaths[0] += !thePerson->GetDiagnosedState();
+		theCARE[0] += !thePerson->GetDiagnosedState();
 			//DiagnosedButNeverInitiatedArt
-		careExperienceAmongHivRelatedDeaths[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverArt());
+		theCARE[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverArt());
 			//ArtLate
-		careExperienceAmongHivRelatedDeaths[2] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
+		theCARE[2] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
 			//ArtButDiedOffArt
-		careExperienceAmongHivRelatedDeaths[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
+		theCARE[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
 			//ArtEarly
-		careExperienceAmongHivRelatedDeaths[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
+		theCARE[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
 	for(size_t i=0 ; i<5; i++)
-		cout << careExperienceAmongHivRelatedDeaths[i] << endl;
+		cout << theCARE[i] << endl;
 }
+
+/////////////////////
+/////////////////////

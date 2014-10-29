@@ -16,14 +16,9 @@
 using namespace std;
 
 extern eventQ * theQ;
+extern double * theDALY;
 
 /////////////////////
-/////////////////////
-
-double theDALY [20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-
-double * pTheDALY = theDALY;
-
 /////////////////////
 
 void SeedDaly(person * const thePerson)
@@ -90,6 +85,7 @@ void Daly::Execute()
 
 	if(GetTime() > 14610)
 		theDALY[i] += pPerson->GetDalys(); //+= should specify that DALYs can accumulate.
+
 	
 	pPerson->ResetDalys();
 }

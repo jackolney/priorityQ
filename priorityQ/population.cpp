@@ -9,10 +9,14 @@
 #include <iostream>
 #include "population.h"
 #include "cohort.h"
+#include "output.h"
 
 population::population(const double theSize) : populationSize(theSize)
 {
-	Generate(populationSize); //cheeky?
+	Generate(populationSize);
+	CreateCareExperienceArray();
+	CreateDalyArray();
+	CreateCostArray();
 }
 
 population::~population()

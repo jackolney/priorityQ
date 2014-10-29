@@ -16,9 +16,9 @@
 /////////////////////
 /////////////////////
 
-extern double theCOST [20];
+//extern double theCOST [20];
 
-extern double * pTheCOST;
+//extern double * pTheCOST;
 
 /////////////////////
 /////////////////////

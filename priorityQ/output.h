@@ -12,6 +12,12 @@
 #include <stdio.h>
 #include "person.h"
 
+void CreateCareExperienceArray();
+
+void CreateDalyArray();
+
+void CreateCostArray();
+
 void FillOutCareExperienceArray(person * const thePerson, const double theTime);
 
 #endif /* defined(__priorityQ__output__) */

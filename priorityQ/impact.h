@@ -16,9 +16,9 @@
 /////////////////////
 /////////////////////
 
-extern double theDALY [20];
+//extern double * theDALY;
 
-extern double * pTheDALY;
+//extern double * pTheDALY;
 
 /////////////////////
 /////////////////////
