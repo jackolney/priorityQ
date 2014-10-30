@@ -26,7 +26,7 @@ public:
 	/* Methods */
 	/////////////
 	void Kill(const double Time, const bool theCause);
-	double SetAge(const double Time);
+	void SetAge(const double Time);
 
 	/* Hiv Acquisition Functions */
 	bool CheckHiv(const double Time);

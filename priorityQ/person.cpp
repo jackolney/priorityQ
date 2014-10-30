@@ -76,7 +76,10 @@ iAnnualArtCost(0)
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
 	SeedOutput(this); //Seed annual output event.
-	new SeedInitialHivTests(this);
+	if(Time > 12418)
+		new SeedInitialHivTests(this,Time);
+	else
+		new SeedInitialHivTests(this,12418);
 	new SeedTreatmentGuidelinesUpdate(this);
 }
 
@@ -227,9 +230,11 @@ double person::GetAge() const
 /////////////////////
 /////////////////////
 
-double person::SetAge(const double Time)
+void person::SetAge(const double Time)
 {
-	return currentAge = initialAge + (Time - birthDay);
+	currentAge = initialAge + (Time - birthDay);
+	if(currentAge < 0)
+		cout << "WARNING! (negative currentAge)." << endl;
 }
 
 /////////////////////

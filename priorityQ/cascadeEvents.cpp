@@ -22,8 +22,8 @@ using namespace std;
 /////////////////////
 /////////////////////
 
-SeedInitialHivTests::SeedInitialHivTests(person * const thePerson) :
-event(12418),
+SeedInitialHivTests::SeedInitialHivTests(person * const thePerson, const double Time) :
+event(Time),
 pPerson(thePerson)
 {
 	D(cout << "InitialHivTests scheduled to begin in " <<  this->GetTime() << "." << endl);

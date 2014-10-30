@@ -19,7 +19,7 @@
 
 class SeedInitialHivTests : public event {
 public:
-	SeedInitialHivTests(person * const thePerson); //constructor
+	SeedInitialHivTests(person * const thePerson, const double Time); //constructor
 	~SeedInitialHivTests(); //destructor
 	
 	/* Methods */
