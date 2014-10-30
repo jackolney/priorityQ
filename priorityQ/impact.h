@@ -1,10 +1,10 @@
-//
-//  impact.h
-//  priorityQ
-//
-//  Created by Jack Olney on 27/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  impact.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 27/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__impact__
 #define __priorityQ__impact__
@@ -16,28 +16,12 @@
 /////////////////////
 /////////////////////
 
-void SeedDaly(person * const thePerson);
-
-/////////////////////
-/////////////////////
-
 void UpdateDaly(person * const thePerson);
 
 /////////////////////
 /////////////////////
 
-class Daly : public event { //For reporting DALYs annually.
-public:
-	Daly(person * const thePerson, const double Time); //constructor
-	~Daly(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-};
+void WriteDaly(person * const thePerson);
 
 /////////////////////
 /////////////////////

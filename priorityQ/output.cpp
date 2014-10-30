@@ -1,19 +1,60 @@
-//
-//  output.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 28/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  output.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 28/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
+#include "macro.h"
 #include "output.h"
+#include "impact.h"
+#include "cost.h"
 
 using namespace std;
 
 double * theCARE;
 double * theDALY;
 double * theCOST;
+
+/////////////////////
+/////////////////////
+
+void SeedOutput(person * const thePerson)
+{
+	double yr [60];
+	for(size_t i = 0; i < 60; i++) {
+		yr[i] = i * 365.25;
+		new Output(thePerson,yr[i]);
+	}
+}
+
+/////////////////////
+/////////////////////
+
+Output::Output(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+Output::~Output()
+{}
+
+bool Output::CheckValid()
+{
+	return true;
+}
+
+void Output::Execute()
+{
+	D(cout << "Output executed." << endl);
+	if(GetTime() >= 14610) {
+		WriteDaly(pPerson);
+		WriteCost(pPerson);
+	}
+		//Other outputs here
+}
 
 /////////////////////
 /////////////////////
@@ -65,8 +106,6 @@ void FillOutCareExperienceArray(person * const thePerson, const double theTime)
 			//ArtEarly
 		theCARE[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
-	for(size_t i=0 ; i<5; i++)
-		cout << theCARE[i] << endl;
 }
 
 /////////////////////
