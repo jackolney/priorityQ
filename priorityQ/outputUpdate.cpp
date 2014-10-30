@@ -1,10 +1,10 @@
-//
-//  outputUpdate.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 30/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  outputUpdate.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 30/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "outputUpdate.h"
@@ -18,8 +18,8 @@ extern double * thePOP;
 extern double * theHIV;
 extern double * theART;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WritePop(person * const thePerson)
 {
@@ -31,11 +31,12 @@ void WritePop(person * const thePerson)
 	while(theQ->GetTime() > yr[i])
 		i++;
 	
-	thePOP[i] += thePerson->Alive();
+	if(theQ->GetTime() > thePerson->GetBirthDay())
+		thePOP[i] += thePerson->Alive();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteHiv(person * const thePerson)
 {
@@ -46,13 +47,13 @@ void WriteHiv(person * const thePerson)
 	unsigned int i = 0;
 	while(theQ->GetTime() > yr[i])
 		i++;
-
+	
 	if(thePerson->Alive())
 		theHIV[i] += thePerson->GetSeroStatus();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteArt(person * const thePerson)
 {
@@ -68,5 +69,5 @@ void WriteArt(person * const thePerson)
 		theART[i] += thePerson->GetArtInitiationState();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
