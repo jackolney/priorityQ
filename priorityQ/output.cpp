@@ -10,6 +10,7 @@
 #include "output.h"
 #include "impact.h"
 #include "cost.h"
+#include "outputUpdate.h"
 
 using namespace std;
 
@@ -54,7 +55,9 @@ void Output::Execute()
 		WriteDaly(pPerson);
 		WriteCost(pPerson);
 	}
-		//Other outputs here
+	WritePop(pPerson);
+	WriteHiv(pPerson);
+	WriteArt(pPerson);
 }
 
 /////////////////////
