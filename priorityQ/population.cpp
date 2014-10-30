@@ -14,9 +14,7 @@
 population::population(const double theSize) : populationSize(theSize)
 {
 	Generate(populationSize);
-	CreateCareExperienceArray();
-	CreateDalyArray();
-	CreateCostArray();
+	CreateOutputArray();
 }
 
 population::~population()

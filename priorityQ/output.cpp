@@ -7,7 +7,6 @@
 	//
 
 #include <iostream>
-#include "macro.h"
 #include "output.h"
 #include "impact.h"
 #include "cost.h"
@@ -17,6 +16,9 @@ using namespace std;
 double * theCARE;
 double * theDALY;
 double * theCOST;
+double * thePOP;
+double * theHIV;
+double * theART;
 
 /////////////////////
 /////////////////////
@@ -48,7 +50,6 @@ bool Output::CheckValid()
 
 void Output::Execute()
 {
-	D(cout << "Output executed." << endl);
 	if(GetTime() >= 14610) {
 		WriteDaly(pPerson);
 		WriteCost(pPerson);
@@ -59,34 +60,26 @@ void Output::Execute()
 /////////////////////
 /////////////////////
 
-void CreateCareExperienceArray()
+void CreateOutputArray()
 {
 	theCARE = new double[5]; //NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
-	
-	for(size_t i=0;i<5;i++)
-		theCARE[i] = 0;
-}
-
-/////////////////////
-/////////////////////
-
-void CreateDalyArray()
-{
 	theDALY = new double[20];
-	
-	for(size_t i=0;i<20;i++)
-		theDALY[i] = 0;
-}
-
-/////////////////////
-/////////////////////
-
-void CreateCostArray()
-{
 	theCOST = new double[20];
+	thePOP = new double[60];
+	theHIV = new double[60];
+	theART = new double[60];
 	
-	for(size_t i=0;i<20;i++)
-		theCOST[i] = 0;
+	for(size_t i=0;i<60;i++) {
+		if(i<5)
+			theCARE[i] = 0;
+		if(i<20)
+			theDALY[i] = 0;
+		if(i<20)
+			theCOST[i] = 0;
+		thePOP[i] = 0;
+		theHIV[i] = 0;
+		theART[i] = 0;
+	}
 }
 
 /////////////////////

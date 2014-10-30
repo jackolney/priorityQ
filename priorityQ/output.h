@@ -34,11 +34,12 @@ private:
 /////////////////////
 /////////////////////
 
-void CreateCareExperienceArray();
+/* Population.cpp uses these functions. */
 
-void CreateDalyArray();
+void CreateOutputArray();
 
-void CreateCostArray();
+/////////////////////
+/////////////////////
 
 void FillOutCareExperienceArray(person * const thePerson, const double theTime);
 
