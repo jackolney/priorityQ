@@ -49,7 +49,7 @@ void population::Generate(const double theSize)
 	
 		//TEMPORARY TESTING PLATFORM//
 	
-	double yr = 12418; //specifiees startTime for individuals.
+	double yr = 0; //specifiees startTime for individuals.
 	int cohortArray [1] = {1};
 
 //	Allow populationSize to scale the cohort size.

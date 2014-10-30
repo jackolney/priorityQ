@@ -138,14 +138,14 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	};
 	
 	//Find i for currentYear (room for improvement?)
-	unsigned int yr [55];
+	double yr [55];
 	
 	for(size_t i = 0; i < 55; i++)
 		yr[i] = (5+i) * 365.25;
 	
 	int i = 0;
 	
-	while(yr[i] < Time)
+	while(Time > yr[i])
 		i++;
 	
 	//Find j for age
@@ -158,7 +158,17 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	//Determine SerStatus
 	bool serum = false;
 	
-	serum = theRng->Sample( hivInc [Sex] [i-5] [j] );
+	serum = theRng->Sample( hivInc [Sex] [i] [j] );
+	
+	if(serum) {
+		cout << "currentAge = " << Age << ". (years = " << Age / 365.25 << ")" << endl;
+		cout << "Sex = " << Sex << endl;
+		cout << "Time = " << Time << ". (years = " << Time / 365.25 << ")" << endl;
+		cout << "i = " << i << endl;
+		cout << "yr[i] = " << yr[i] << endl;
+		cout << "j = " << j << endl;
+		cout << "hivInc [Sex] [i-5] [j] = " << hivInc [Sex] [i-5] [j] << endl;
+	}
 
 	D(cout << "Serum is: " << serum << endl;)
 	

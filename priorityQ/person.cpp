@@ -73,6 +73,7 @@ iAnnualArtCost(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
+	D(cout << "Gender is = " << gender << endl);
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
 	SeedOutput(this); //Seed annual output event.
@@ -123,7 +124,7 @@ void person::AssignInitialAge(const double Time)
 	}
 
 	currentAge = initialAge;
-	D(cout << "Initial age = " << initialAge << endl);
+	D(cout << "Initial age = " << initialAge << ". (years = " << initialAge / 365.25 << ")" << endl);
 }
 
 /////////////////////
@@ -244,26 +245,28 @@ void person::SetAge(const double Time)
 
 bool person::CheckHiv(const double Time)
 {
-//	if(Time >= 1826) {
-//		bool HivResult = Hiv(currentAge,gender,Time);
-//		if(HivResult) {
-//			cout << "HIV+" << endl;
-//			SetSeroStatus(true);
-//			SetSeroconversionDay(Time);
-//			//SetupHivIndicators() //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-//		}
-//		return HivResult;
-//	}
-//	else
-//		return false;
+	if(Time >= 1826) {
+		D(cout << "CheckHIV executed." << endl);
+		bool HivResult = Hiv(currentAge,gender,Time);
+		if(HivResult) {
+			D(cout << "HIV+" << endl);
+			SetSeroStatus(true);
+			SetSeroconversionDay(Time);
+			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+			ScheduleHivIndicatorUpdate();
+		}
+		return HivResult;
+	}
+	else
+		return false;
 	
 	//For development purposes.
-	D(cout << "HIV+" << endl);
-	SetSeroStatus(true);
-	SetSeroconversionDay(Time);
-	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
-	return true;
+//	D(cout << "HIV+" << endl);
+//	SetSeroStatus(true);
+//	SetSeroconversionDay(Time);
+//	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
+//	return true;
 }
 
 /////////////////////
