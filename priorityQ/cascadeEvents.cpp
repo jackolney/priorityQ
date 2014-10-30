@@ -47,11 +47,11 @@ void SeedInitialHivTests::Execute()
 /////////////////////
 /////////////////////
 
-SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson) :
-event(14975),
+SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time) :
+event(Time),
 pPerson(thePerson)
 {
-	D(cout << "Treatment guidelines will update on 14975" << endl);
+	D(cout << "Treatment guidelines will update on " << Time << endl);
 }
 
 SeedTreatmentGuidelinesUpdate::~SeedTreatmentGuidelinesUpdate()

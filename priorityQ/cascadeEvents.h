@@ -35,7 +35,7 @@ private:
 
 class SeedTreatmentGuidelinesUpdate : public event {
 public:
-	SeedTreatmentGuidelinesUpdate(person * const thePerson); //constructor
+	SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time); //constructor
 	~SeedTreatmentGuidelinesUpdate(); //destructor
 	
 	/* Methods */
