@@ -41,7 +41,7 @@ void CreateOutputArray();
 /////////////////////
 /////////////////////
 
-void FillOutCareExperienceArray(person * const thePerson, const double theTime);
+void WriteCare(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////

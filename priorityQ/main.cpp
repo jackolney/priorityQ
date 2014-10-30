@@ -19,6 +19,8 @@ using namespace std;
 Rng * theRng;
 eventQ * theQ;
 
+
+
 int main(int argc, const char * argv[])
 {
 	theRng = new Rng(mach_absolute_time());
@@ -31,7 +33,7 @@ int main(int argc, const char * argv[])
 	
 	delete theQ;
 	delete theRng;
-	
+
     return 0;
 }
 

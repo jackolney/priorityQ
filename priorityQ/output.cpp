@@ -88,7 +88,7 @@ void CreateOutputArray()
 /////////////////////
 /////////////////////
 
-void FillOutCareExperienceArray(person * const thePerson, const double theTime)
+void WriteCare(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
 			//NeverDiagnosed
