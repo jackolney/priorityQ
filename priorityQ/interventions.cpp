@@ -32,7 +32,7 @@ extern int const * p_ArtDropout;
 
 void SeedInterventions(person * const thePerson)
 {
-	if(p_Hbct || p_Vct || p_HbctPocCd4 || p_Linkage || p_PreOutreach || p_ImprovedCare || p_PocCd4 || p_VctPocCd4 || p_ArtOutreach || p_ImmediateArt || p_UniversalTestAndTreat || p_Adherence || p_ArtDropout) {
+	if(*p_Hbct || *p_Vct || *p_HbctPocCd4 || *p_Linkage || *p_PreOutreach || *p_ImprovedCare || *p_PocCd4 || *p_VctPocCd4 || *p_ArtOutreach || *p_ImmediateArt || *p_UniversalTestAndTreat || *p_Adherence || *p_ArtDropout) {
 		if(thePerson->GetBirthDay() < 14610)
 			new Interventions(thePerson,14610);
 		else
@@ -61,67 +61,68 @@ bool Interventions::CheckValid()
 void Interventions::Execute()
 {
 	/* Hbct */
-	if(p_Hbct) {
+	if(*p_Hbct) {
 			//Schedule new HctHivTest() Event::GetTime();
+		cout << "HBCT" << endl;
 	}
 	
 	/* Vct */
-	if(p_Vct) {
+	if(*p_Vct) {
 		
 	}
-
+	
 	/* HbctPocCd4 */
-	if(p_HbctPocCd4) {
+	if(*p_HbctPocCd4) {
 		
 	}
 	
 	/* Linkage */
-	if(p_Linkage) {
+	if(*p_Linkage) {
 		
 	}
-
+	
 	/* PreOutreach */
-	if(p_PreOutreach) {
+	if(*p_PreOutreach) {
 		
 	}
 	
 	/* ImprovedCare */
-	if(p_ImprovedCare) {
+	if(*p_ImprovedCare) {
 		
 	}
 	
 	/* PocCd4 */
-	if(p_PocCd4) {
+	if(*p_PocCd4) {
 		
 	}
 	
 	/* VctPocCd4 */
-	if(p_VctPocCd4) {
+	if(*p_VctPocCd4) {
 		
 	}
 	
 	/* ArtOutreach */
-	if(p_ArtOutreach) {
+	if(*p_ArtOutreach) {
 		
 	}
 	
 	/* ImmediateArt */
-	if(p_ImmediateArt) {
+	if(*p_ImmediateArt) {
 		
 	}
 	
 	/* UniversalTestAndTreat */
-	if(p_UniversalTestAndTreat) {
+	if(*p_UniversalTestAndTreat) {
 		
 	}
 	
 	/* Adherence */
-	if(p_Adherence) {
+	if(*p_Adherence) {
 		
 	}
 	
 	/* ArtDropout */
-	if(p_ArtDropout) {
+	if(*p_ArtDropout) {
 		
 	}
 	
