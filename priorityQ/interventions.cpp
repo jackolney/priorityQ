@@ -60,71 +60,105 @@ bool Interventions::CheckValid()
 
 void Interventions::Execute()
 {
+	
+/////////////////////
+	
 	/* Hbct */
 	if(*p_Hbct) {
-			//Schedule new HctHivTest() Event::GetTime();
-		cout << "HBCT" << endl;
+		int i = 0;
+		while(i <= 20) {
+			new HctHivTest(pPerson,GetTime() + (i * 365.25));
+			i += 4;
+			D(cout << "Hbct intervention scheduled for day = " << GetTime() + (i * 365.25) << ". (year = " << (GetTime() / 365.25) + i <<  ")" << endl);
+		}
+		
 	}
+	
+/////////////////////
 	
 	/* Vct */
 	if(*p_Vct) {
 		
 	}
 	
+/////////////////////
+	
 	/* HbctPocCd4 */
 	if(*p_HbctPocCd4) {
 		
 	}
+
+/////////////////////
 	
 	/* Linkage */
 	if(*p_Linkage) {
 		
 	}
 	
+/////////////////////
+	
 	/* PreOutreach */
 	if(*p_PreOutreach) {
 		
 	}
-	
+
+/////////////////////
+
 	/* ImprovedCare */
 	if(*p_ImprovedCare) {
 		
 	}
+
+/////////////////////
 	
 	/* PocCd4 */
 	if(*p_PocCd4) {
 		
 	}
 	
+/////////////////////
+	
 	/* VctPocCd4 */
 	if(*p_VctPocCd4) {
 		
 	}
+	
+/////////////////////
 	
 	/* ArtOutreach */
 	if(*p_ArtOutreach) {
 		
 	}
 	
+/////////////////////
+	
 	/* ImmediateArt */
 	if(*p_ImmediateArt) {
 		
 	}
+	
+/////////////////////
 	
 	/* UniversalTestAndTreat */
 	if(*p_UniversalTestAndTreat) {
 		
 	}
 	
+/////////////////////
+	
 	/* Adherence */
 	if(*p_Adherence) {
 		
 	}
+
+/////////////////////
 	
 	/* ArtDropout */
 	if(*p_ArtDropout) {
 		
 	}
+	
+/////////////////////
 	
 }
 	
