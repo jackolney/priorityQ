@@ -66,6 +66,7 @@ int main(int argc, const char * argv[])
 	p_Adherence = &s_Adherence;
 	p_ArtDropout = &s_ArtDropout;
 	
+	/* THE MODEL */
 	theRng = new Rng(mach_absolute_time());
 
 	theQ = new eventQ(0);
