@@ -72,6 +72,12 @@ void Interventions::Execute()
 		new SeedHct(pPerson,18993); //2022
 		new SeedHct(pPerson,20454); //2026
 	
+//	if(*p_Hbct == 1)
+//			//dosomething;
+//	else
+//			//dosomethingelse;
+			
+	
 	}
 	
 /////////////////////

@@ -13,6 +13,10 @@
 //PARAMETER VALUES//
 ////////////////////
 
+////////////////////
+/////POINTERS//////
+
+////////////////////
 /* Hiv testing times */
 const double hctHivTestTime = 1 * 365.25;
 const double vctHivTestTime = 5.8 * 365.25;

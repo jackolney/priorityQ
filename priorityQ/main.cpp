@@ -38,7 +38,7 @@ int const * p_ArtDropout;
 int main(int argc, const char * argv[])
 {
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
-	int s_Hbct = 1;
+	int s_Hbct = 0;
 	int s_Vct = 0;
 	int s_HbctPocCd4 = 0;
 	int s_Linkage = 0;
