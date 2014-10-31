@@ -70,6 +70,29 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 /////////////////////
 /////////////////////
 
+SeedHct::SeedHct(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "Hct seeded for deployment on day = " << Time << endl);
+}
+
+SeedHct::~SeedHct()
+{}
+
+bool SeedHct::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void SeedHct::Execute()
+{
+	ScheduleHctHivTest(pPerson);
+}
+
+/////////////////////
+/////////////////////
+
 HctHivTest::HctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)

@@ -65,13 +65,13 @@ void Interventions::Execute()
 	
 	/* Hbct */
 	if(*p_Hbct) {
-		int i = 0;
-		while(i <= 20) {
-			new HctHivTest(pPerson,GetTime() + (i * 365.25));
-			i += 4;
-			D(cout << "Hbct intervention scheduled for day = " << GetTime() + (i * 365.25) << ". (year = " << (GetTime() / 365.25) + i <<  ")" << endl);
-		}
-		
+			//Need to include scenarios
+		new SeedHct(pPerson,14610); //2010
+		new SeedHct(pPerson,16071); //2014
+		new SeedHct(pPerson,17532); //2018
+		new SeedHct(pPerson,18993); //2022
+		new SeedHct(pPerson,20454); //2026
+	
 	}
 	
 /////////////////////

@@ -49,6 +49,22 @@ private:
 /////////////////////
 /////////////////////
 
+class SeedHct : public event {
+public:
+	SeedHct(person * const thePerson, const double Time); //constructor
+	~SeedHct(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class HctHivTest : public event {
 public:
 	HctHivTest(person * const thePerson, const double Time); //constructor
