@@ -18,8 +18,8 @@ extern double * thePOP;
 extern double * theHIV;
 extern double * theART;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WritePop(person * const thePerson)
 {
@@ -35,8 +35,8 @@ void WritePop(person * const thePerson)
 		thePOP[i] += thePerson->Alive();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteHiv(person * const thePerson)
 {
@@ -52,8 +52,8 @@ void WriteHiv(person * const thePerson)
 		theHIV[i] += thePerson->GetSeroStatus();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteArt(person * const thePerson)
 {
@@ -69,5 +69,5 @@ void WriteArt(person * const thePerson)
 		theART[i] += thePerson->GetArtInitiationState();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

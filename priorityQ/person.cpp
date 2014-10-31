@@ -19,6 +19,7 @@
 #include "cascadeEvents.h"
 #include "hiv.h"
 #include "output.h"
+#include "interventions.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -77,6 +78,7 @@ iAnnualArtCost(0)
 	natDeathDate = AssignNatDeathDate(Time);
 	SeedHiv(this); //function modified for HIV+ development.
 	SeedOutput(this); //Seed annual output event.
+	SeedInterventions(this);
 	if(Time > 12418) {
 		new SeedInitialHivTests(this,Time);
 		new SeedTreatmentGuidelinesUpdate(this,Time);
