@@ -10,6 +10,7 @@
 #include "macro.h"
 #include "interventions.h"
 #include "cascadeEvents.h"
+#include "cascadeUpdate.h"
 #include "toolbox.h"
 
 using namespace std;
@@ -83,7 +84,12 @@ void Interventions::Execute()
 	
 	/* Vct */
 	if(*p_Vct) {
-		
+		if(*p_Vct == 1)
+			vctHivTestTime *= 0.5; //2.9
+		else
+			vctHivTestTime *= 0.8; //4.64
+		cout << vctHivTestTime << " = vctHivTestTime." << endl;
+		ScheduleVctHivTest(pPerson);
 	}
 	
 /////////////////////
