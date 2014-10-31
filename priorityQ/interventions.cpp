@@ -10,9 +10,11 @@
 #include "macro.h"
 #include "interventions.h"
 #include "cascadeEvents.h"
+#include "toolbox.h"
 
 using namespace std;
 
+/* Intervention Pointers */
 extern int const * p_Hbct;
 extern int const * p_Vct;
 extern int const * p_HbctPocCd4;
@@ -71,13 +73,10 @@ void Interventions::Execute()
 		new SeedHct(pPerson,17532); //2018
 		new SeedHct(pPerson,18993); //2022
 		new SeedHct(pPerson,20454); //2026
-	
-//	if(*p_Hbct == 1)
-//			//dosomething;
-//	else
-//			//dosomethingelse;
-			
-	
+		
+		if(*p_Hbct == 1) {
+			hctProbLink = 1;
+		}
 	}
 	
 /////////////////////

@@ -160,15 +160,15 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	
 	serum = theRng->Sample( hivInc [Sex] [i] [j] );
 	
-	if(serum) {
-		cout << "currentAge = " << Age << ". (years = " << Age / 365.25 << ")" << endl;
-		cout << "Sex = " << Sex << endl;
-		cout << "Time = " << Time << ". (years = " << Time / 365.25 << ")" << endl;
-		cout << "i = " << i << endl;
-		cout << "yr[i] = " << yr[i] << endl;
-		cout << "j = " << j << endl;
-		cout << "hivInc [Sex] [i-5] [j] = " << hivInc [Sex] [i-5] [j] << endl;
-	}
+//	if(serum) {
+//		cout << "currentAge = " << Age << ". (years = " << Age / 365.25 << ")" << endl;
+//		cout << "Sex = " << Sex << endl;
+//		cout << "Time = " << Time << ". (years = " << Time / 365.25 << ")" << endl;
+//		cout << "i = " << i << endl;
+//		cout << "yr[i] = " << yr[i] << endl;
+//		cout << "j = " << j << endl;
+//		cout << "hivInc [Sex] [i-5] [j] = " << hivInc [Sex] [i-5] [j] << endl;
+//	}
 
 	D(cout << "Serum is: " << serum << endl;)
 	
