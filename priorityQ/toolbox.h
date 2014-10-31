@@ -29,6 +29,7 @@ const double pictHivTestTime_SymptomaticCd4Result = 0.5 * 365.25;
 
 
 /* Linkage probabilities */
+	//I changed nothing.
 const double hctProbLink = 0.054;
 const double hctProbLinkPreviouslyDiagnosed = 0.2;
 const double vctProbLink = 0.59;
