@@ -9,6 +9,7 @@
 #include <iostream>
 #include "macro.h"
 #include "interventions.h"
+#include "interventionUpdate.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 #include "toolbox.h"
@@ -65,10 +66,9 @@ void Interventions::Execute()
 {
 	
 /////////////////////
-	
 	/* Hbct */
+	
 	if(*p_Hbct) {
-			//Need to include scenarios
 		new SeedHct(pPerson,14610,false); //2010
 		new SeedHct(pPerson,16071,false); //2014
 		new SeedHct(pPerson,17532,false); //2018
@@ -82,8 +82,8 @@ void Interventions::Execute()
 	}
 	
 /////////////////////
-	
 	/* Vct */
+	
 	if(*p_Vct) {
 		if(*p_Vct == 1)
 			vctHivTestTime *= 0.5; //2.9
@@ -94,10 +94,9 @@ void Interventions::Execute()
 	}
 	
 /////////////////////
-	
 	/* HbctPocCd4 */
+	
 	if(*p_HbctPocCd4) {
-			//Need to incorporate POC CD4 ...
 		new SeedHct(pPerson,14610,true); //2010
 		new SeedHct(pPerson,16071,true); //2014
 		new SeedHct(pPerson,17532,true); //2018
@@ -108,77 +107,87 @@ void Interventions::Execute()
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
 		} else {
-			hctProbLink = ((1-hctProbLink)*0.5) + hctProbLink;
-			hctProbLinkPreviouslyDiagnosed = ((1-hctProbLinkPreviouslyDiagnosed)*0.5) + hctProbLinkPreviouslyDiagnosed;
+			hctProbLink += (1-hctProbLink)*0.5;
+			hctProbLinkPreviouslyDiagnosed += (1-hctProbLinkPreviouslyDiagnosed)*0.5;
 		}
 	}
 
 /////////////////////
-	
 	/* Linkage */
+	
 	if(*p_Linkage) {
-		
+		if(*p_Linkage == 1) {
+			hctProbLink = 1;
+			hctProbLinkPreviouslyDiagnosed = 1;
+			vctProbLink = 1;
+			pictProbLink = 1;
+		} else {
+			hctProbLink += (1-hctProbLink)*0.5;
+			hctProbLinkPreviouslyDiagnosed += (1-hctProbLinkPreviouslyDiagnosed)*0.5;
+			vctProbLink += (1-vctProbLink)*0.5;
+			pictProbLink += (1-pictProbLink)*0.5;
+		}
 	}
 	
 /////////////////////
-	
 	/* PreOutreach */
+	
 	if(*p_PreOutreach) {
 		
 	}
 
 /////////////////////
-
 	/* ImprovedCare */
+	
 	if(*p_ImprovedCare) {
 		
 	}
 
 /////////////////////
-	
 	/* PocCd4 */
+	
 	if(*p_PocCd4) {
 		
 	}
 	
 /////////////////////
-	
 	/* VctPocCd4 */
+	
 	if(*p_VctPocCd4) {
 		
 	}
 	
 /////////////////////
-	
 	/* ArtOutreach */
+	
 	if(*p_ArtOutreach) {
 		
 	}
 	
 /////////////////////
-	
 	/* ImmediateArt */
+	
 	if(*p_ImmediateArt) {
 		
 	}
 	
 /////////////////////
-	
 	/* UniversalTestAndTreat */
+	
 	if(*p_UniversalTestAndTreat) {
 		
 	}
 	
 /////////////////////
-	
 	/* Adherence */
+	
 	if(*p_Adherence) {
 		
 	}
 
 /////////////////////
-	
 	/* ArtDropout */
+	
 	if(*p_ArtDropout) {
 		
 	}

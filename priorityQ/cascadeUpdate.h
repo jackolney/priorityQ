@@ -15,15 +15,11 @@
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho);
 
 /* Hiv Testing */
-void ScheduleHctHivTest(person * const thePerson,const bool poc);
-
 void ScheduleVctHivTest(person * const thePerson);
 
 void SchedulePictHivTest(person * const thePerson);
 
 /* Linkage */
-bool HctLinkage(person * const thePerson);
-
 bool VctLinkage(person * const thePerson);
 
 bool PictLinkage(person * const thePerson);

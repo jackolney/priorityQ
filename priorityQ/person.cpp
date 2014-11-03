@@ -247,28 +247,28 @@ void person::SetAge(const double Time)
 
 bool person::CheckHiv(const double Time)
 {
-//	if(Time >= 1826) {
-//		D(cout << "CheckHIV executed." << endl);
-//		bool HivResult = Hiv(currentAge,gender,Time);
-//		if(HivResult) {
-//			D(cout << "HIV+" << endl);
-//			SetSeroStatus(true);
-//			SetSeroconversionDay(Time);
-//			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-//			ScheduleHivIndicatorUpdate();
-//		}
-//		return HivResult;
-//	}
-//	else
-//		return false;
+	if(Time >= 1826) {
+		D(cout << "CheckHIV executed." << endl);
+		bool HivResult = Hiv(currentAge,gender,Time);
+		if(HivResult) {
+			D(cout << "HIV+" << endl);
+			SetSeroStatus(true);
+			SetSeroconversionDay(Time);
+			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+			ScheduleHivIndicatorUpdate();
+		}
+		return HivResult;
+	}
+	else
+		return false;
 	
 	//For development purposes.
-	D(cout << "HIV+" << endl);
-	SetSeroStatus(true);
-	SetSeroconversionDay(Time);
-	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
-	return true;
+//	D(cout << "HIV+" << endl);
+//	SetSeroStatus(true);
+//	SetSeroconversionDay(Time);
+//	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
+//	return true;
 }
 
 /////////////////////

@@ -70,73 +70,6 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 /////////////////////
 /////////////////////
 
-SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
-event(Time),
-pPerson(thePerson),
-pointOfCare(poc)
-{
-	D(cout << "Hct seeded for deployment on day = " << Time << endl);
-}
-
-SeedHct::~SeedHct()
-{}
-
-bool SeedHct::CheckValid()
-{
-	if(!pPerson->GetEverArt())
-		return pPerson->Alive();
-	else
-		return false;
-}
-
-void SeedHct::Execute()
-{
-	ScheduleHctHivTest(pPerson,pointOfCare);
-}
-
-/////////////////////
-/////////////////////
-
-HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
-event(Time),
-pPerson(thePerson),
-pointOfCare(poc)
-{
-	thePerson->SetHctHivTestDate(Time);
-	D(cout << "HctHivTest scheduled for day = " << Time << endl);	
-}
-
-HctHivTest::~HctHivTest()
-{}
-
-bool HctHivTest::CheckValid()
-{
-	if(pPerson->GetHctHivTestDate() == GetTime() && !pPerson->GetEverArt())
-		return pPerson->Alive();
-	else
-		return false;
-}
-
-void HctHivTest::Execute()
-{
-	UpdateAge(pPerson);
-	UpdateDaly(pPerson);
-	ChargeHctVisit(pPerson);
-	D(cout << "HctHivTest executed." << endl);
-	if(pPerson->GetSeroStatus()) {
-		pPerson->SetDiagnosedState(true,1);
-		D(cout << "Diagnosed as HIV-positive." << endl);
-		if(pointOfCare)
-			new HctPocCd4Test(pPerson,GetTime());
-		else if(HctLinkage(pPerson))
-			ScheduleInitialCd4TestAfterHct(pPerson);
-		SchedulePictHivTest(pPerson);
-	}
-}
-
-/////////////////////
-/////////////////////
-
 VctHivTest::VctHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
@@ -283,43 +216,6 @@ void Cd4TestResult::Execute()
 		D(cout << "Not eligible for ART." << endl);
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
-	}
-	SchedulePictHivTest(pPerson);
-}
-
-/////////////////////
-/////////////////////
-
-HctPocCd4Test::HctPocCd4Test(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
-{
-	D(cout << "HctPocCd4Test scheduled for day = " << Time << endl);
-}
-
-HctPocCd4Test::~HctPocCd4Test()
-{}
-
-bool HctPocCd4Test::CheckValid()
-{
-	return pPerson->Alive();
-}
-
-void HctPocCd4Test::Execute()
-{
-	UpdateAge(pPerson);
-	UpdateDaly(pPerson);
-	ChargePocCd4Test(pPerson);
-	D(cout << "HctPocCd4Test executed." << endl);
-	pPerson->SetEverCd4TestState(true);
-	pPerson->SetEverCD4TestResultState(true);
-	if(pPerson->GetEligible()) {
-		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
-	} else {
-		D(cout << "Not eligible for ART." << endl);
-		if(HctLinkage(pPerson))
-			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
 	SchedulePictHivTest(pPerson);
 }
