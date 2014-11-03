@@ -77,6 +77,7 @@ void Interventions::Execute()
 		
 		if(*p_Hbct == 1) {
 			hctProbLink = 1;
+			hctProbLinkPreviouslyDiagnosed = 1;
 		}
 	}
 	
@@ -102,6 +103,14 @@ void Interventions::Execute()
 		new SeedHct(pPerson,17532,true); //2018
 		new SeedHct(pPerson,18993,true); //2022
 		new SeedHct(pPerson,20454,true); //2026
+		
+		if(*p_HbctPocCd4 == 1) {
+			hctProbLink = 1;
+			hctProbLinkPreviouslyDiagnosed = 1;
+		} else {
+			hctProbLink = ((1-hctProbLink)*0.5) + hctProbLink;
+			hctProbLinkPreviouslyDiagnosed = ((1-hctProbLinkPreviouslyDiagnosed)*0.5) + hctProbLinkPreviouslyDiagnosed;
+		}
 	}
 
 /////////////////////

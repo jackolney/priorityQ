@@ -127,7 +127,7 @@ void HctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(pointOfCare)
-			new PocCd4Test(pPerson,GetTime());
+			new HctPocCd4Test(pPerson,GetTime());
 		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 		SchedulePictHivTest(pPerson);
@@ -290,37 +290,36 @@ void Cd4TestResult::Execute()
 /////////////////////
 /////////////////////
 
-PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
+HctPocCd4Test::HctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "PocCd4Test scheduled for day = " << Time << endl);
+	D(cout << "HctPocCd4Test scheduled for day = " << Time << endl);
 }
 
-PocCd4Test::~PocCd4Test()
+HctPocCd4Test::~HctPocCd4Test()
 {}
 
-bool PocCd4Test::CheckValid()
+bool HctPocCd4Test::CheckValid()
 {
 	return pPerson->Alive();
 }
 
-void PocCd4Test::Execute()
+void HctPocCd4Test::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	ChargePocCd4Test(pPerson);
-	D(cout << "PocCd4Test executed." << endl);
+	D(cout << "HctPocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCD4TestResultState(true);
-	pPerson->SetInCareState(true);
 	if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
 		D(cout << "Not eligible for ART." << endl);
-		if(SecondaryCd4Test(pPerson))
-			SchedulePreArtCd4Test(pPerson);
+		if(HctLinkage(pPerson))
+			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
 	SchedulePictHivTest(pPerson);
 }

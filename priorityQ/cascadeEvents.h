@@ -147,10 +147,10 @@ private:
 /////////////////////
 /////////////////////
 
-class PocCd4Test : public event {
+class HctPocCd4Test : public event {
 public:
-	PocCd4Test(person * const thePerson, const double Time); //constructor
-	~PocCd4Test(); //destructor
+	HctPocCd4Test(person * const thePerson, const double Time); //constructor
+	~HctPocCd4Test(); //destructor
 	
 	/* Methods */
 	bool CheckValid();
