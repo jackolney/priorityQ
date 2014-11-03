@@ -83,7 +83,10 @@ SeedHct::~SeedHct()
 
 bool SeedHct::CheckValid()
 {
-	return pPerson->Alive();
+	if(!pPerson->GetEverArt())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void SeedHct::Execute()
@@ -123,13 +126,11 @@ void HctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		SchedulePictHivTest(pPerson);
-		if(pointOfCare) {
-				//DoPocCd4TestEvent();
-			D(cout << "POINT OF CARE HBCT." << endl);
-		}
+		if(pointOfCare)
+			new PocCd4Test(pPerson,GetTime());
 		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
+		SchedulePictHivTest(pPerson);
 	}
 }
 
@@ -292,7 +293,9 @@ void Cd4TestResult::Execute()
 PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	D(cout << "PocCd4Test scheduled for day = " << Time << endl);
+}
 
 PocCd4Test::~PocCd4Test()
 {}
@@ -306,8 +309,7 @@ void PocCd4Test::Execute()
 {
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
-	
-//	ChargePreArtClinicCd4ResultVisit(pPerson);
+	ChargePocCd4Test(pPerson);
 	D(cout << "PocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCD4TestResultState(true);
