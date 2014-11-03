@@ -47,7 +47,7 @@ void ChargePreArtClinicVisit(person * const thePerson)
 
 void ChargePreArtClinicCd4Test(person * const thePerson)
 {
-	thePerson->SetLabCd4Test(labCd4Test);
+	thePerson->SetLabCd4Test(labCd4TestCost);
 }
 
 /////////////////////
@@ -56,6 +56,14 @@ void ChargePreArtClinicCd4Test(person * const thePerson)
 void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 {
 	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
+}
+
+/////////////////////
+/////////////////////
+
+void ChargePocCd4Test(person * const thePerson)
+{
+	thePerson->SetPocCd4Test(pocCd4TestCost);
 }
 
 /////////////////////

@@ -90,8 +90,8 @@ extern double dalyWeightArt;
 extern double hctVisitCost;
 extern double rapidHivTestCost;
 extern double preArtClinicVisitCost;
-extern double labCd4Test;
-extern double pocCd4Test;
+extern double labCd4TestCost;
+extern double pocCd4TestCost;
 extern double annualArtCost;
 
 	//How to use:

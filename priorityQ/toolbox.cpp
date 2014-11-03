@@ -85,8 +85,8 @@ double dalyWeightArt = 0.053;
 double hctVisitCost = 8.00;
 double rapidHivTestCost = 10.00;
 double preArtClinicVisitCost = 28.00;
-double labCd4Test = 12.00;
-double pocCd4Test = 42.00;
+double labCd4TestCost = 12.00;
+double pocCd4TestCost = 42.00;
 double annualArtCost = 367.00;
 
 	//How to use:

@@ -124,9 +124,11 @@ void HctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		SchedulePictHivTest(pPerson);
-		if(pointOfCare)
+		if(pointOfCare) {
+				//DoPocCd4TestEvent();
 			D(cout << "POINT OF CARE HBCT." << endl);
-		if(HctLinkage(pPerson))
+		}
+		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
 }
@@ -273,6 +275,43 @@ void Cd4TestResult::Execute()
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
+	if(pPerson->GetEligible()) {
+		D(cout << "Eligible for ART." << endl);
+		ScheduleArtInitiation(pPerson);
+	} else {
+		D(cout << "Not eligible for ART." << endl);
+		if(SecondaryCd4Test(pPerson))
+			SchedulePreArtCd4Test(pPerson);
+	}
+	SchedulePictHivTest(pPerson);
+}
+
+/////////////////////
+/////////////////////
+
+PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+PocCd4Test::~PocCd4Test()
+{}
+
+bool PocCd4Test::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void PocCd4Test::Execute()
+{
+	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
+	
+//	ChargePreArtClinicCd4ResultVisit(pPerson);
+	D(cout << "PocCd4Test executed." << endl);
+	pPerson->SetEverCd4TestState(true);
+	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetInCareState(true);
 	if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);

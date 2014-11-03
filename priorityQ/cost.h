@@ -18,19 +18,15 @@
 
 void ChargeHctVisit(person * const thePerson);
 
-//void ChargeHctVisitPoc(person * const thePerson);
-
 void ChargeVctPictHivTest(person * const thePerson);
-
-//void ChargeVctPictClinicVisitPoc(person * const thePerson);
 
 void ChargePreArtClinicVisit(person * const thePerson);
 
 void ChargePreArtClinicCd4Test(person * const thePerson);
 
-//void ChargePreArtClinicCd4TestPoc(person * const thePerson);
-
 void ChargePreArtClinicCd4ResultVisit(person * const thePerson);
+
+void ChargePocCd4Test(person * const thePerson);
 
 void ChargeArtCare(person * const thePerson);
 
