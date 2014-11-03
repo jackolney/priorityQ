@@ -34,12 +34,12 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 ////////////////////
 ////////////////////
 
-void ScheduleHctHivTest(person * const thePerson)
+void ScheduleHctHivTest(person * const thePerson, const bool poc)
 {
 	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915) {
 		const double diagDay = theRng->SampleExpDist(hctHivTestTime);
 		if(diagDay <= 365.25)
-			new HctHivTest(thePerson,theQ->GetTime() + diagDay);
+			new HctHivTest(thePerson,theQ->GetTime() + diagDay,poc);
 	}
 }
 

@@ -51,7 +51,7 @@ private:
 
 class SeedHct : public event {
 public:
-	SeedHct(person * const thePerson, const double Time); //constructor
+	SeedHct(person * const thePerson, const double Time, const bool poc); //constructor
 	~SeedHct(); //destructor
 	
 	/* Methods */
@@ -60,6 +60,7 @@ public:
 	
 private:
 	person * const pPerson;
+	const bool pointOfCare;
 };
 
 /////////////////////
@@ -67,7 +68,7 @@ private:
 
 class HctHivTest : public event {
 public:
-	HctHivTest(person * const thePerson, const double Time); //constructor
+	HctHivTest(person * const thePerson, const double Time, const bool poc); //constructor
 	~HctHivTest(); //destructor
 	
 	/* Methods */
@@ -76,6 +77,7 @@ public:
 	
 private:
 	person * const pPerson;
+	const bool pointOfCare;
 };
 
 /////////////////////

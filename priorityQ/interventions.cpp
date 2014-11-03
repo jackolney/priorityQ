@@ -69,11 +69,11 @@ void Interventions::Execute()
 	/* Hbct */
 	if(*p_Hbct) {
 			//Need to include scenarios
-		new SeedHct(pPerson,14610); //2010
-		new SeedHct(pPerson,16071); //2014
-		new SeedHct(pPerson,17532); //2018
-		new SeedHct(pPerson,18993); //2022
-		new SeedHct(pPerson,20454); //2026
+		new SeedHct(pPerson,14610,false); //2010
+		new SeedHct(pPerson,16071,false); //2014
+		new SeedHct(pPerson,17532,false); //2018
+		new SeedHct(pPerson,18993,false); //2022
+		new SeedHct(pPerson,20454,false); //2026
 		
 		if(*p_Hbct == 1) {
 			hctProbLink = 1;
@@ -96,7 +96,12 @@ void Interventions::Execute()
 	
 	/* HbctPocCd4 */
 	if(*p_HbctPocCd4) {
-		
+			//Need to incorporate POC CD4 ...
+		new SeedHct(pPerson,14610,true); //2010
+		new SeedHct(pPerson,16071,true); //2014
+		new SeedHct(pPerson,17532,true); //2018
+		new SeedHct(pPerson,18993,true); //2022
+		new SeedHct(pPerson,20454,true); //2026
 	}
 
 /////////////////////

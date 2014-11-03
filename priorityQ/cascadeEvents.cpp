@@ -70,9 +70,10 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 /////////////////////
 /////////////////////
 
-SeedHct::SeedHct(person * const thePerson, const double Time) :
+SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
 event(Time),
-pPerson(thePerson)
+pPerson(thePerson),
+pointOfCare(poc)
 {
 	D(cout << "Hct seeded for deployment on day = " << Time << endl);
 }
@@ -87,15 +88,16 @@ bool SeedHct::CheckValid()
 
 void SeedHct::Execute()
 {
-	ScheduleHctHivTest(pPerson);
+	ScheduleHctHivTest(pPerson,pointOfCare);
 }
 
 /////////////////////
 /////////////////////
 
-HctHivTest::HctHivTest(person * const thePerson, const double Time) :
+HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
-pPerson(thePerson)
+pPerson(thePerson),
+pointOfCare(poc)
 {
 	thePerson->SetHctHivTestDate(Time);
 	D(cout << "HctHivTest scheduled for day = " << Time << endl);	
@@ -122,6 +124,8 @@ void HctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,1);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		SchedulePictHivTest(pPerson);
+		if(pointOfCare)
+			D(cout << "POINT OF CARE HBCT." << endl);
 		if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
