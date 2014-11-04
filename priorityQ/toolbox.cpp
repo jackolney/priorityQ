@@ -71,6 +71,7 @@ double artReturnTime = 3 * 365.25;
 /* Intervention Flags */
 bool pocFlag = false;
 bool vctPocFlag = false;
+bool immediateArtFlag = false;
 
 	////////////////
 

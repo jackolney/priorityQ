@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "macro.h"
+#include "toolbox.h"
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
 #include "update.h"
@@ -58,6 +59,8 @@ void HctHivTest::Execute()
 		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 		SchedulePictHivTest(pPerson);
+		if(immediateArtFlag)
+			new ArtInitiation(pPerson,GetTime());
 	}
 }
 

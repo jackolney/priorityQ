@@ -71,6 +71,7 @@ extern double artReturnTime;
 /* Intervention Flags */
 extern bool pocFlag;
 extern bool vctPocFlag;
+extern bool immediateArtFlag;
 
 	////////////////
 

@@ -61,7 +61,10 @@ SeedTreatmentGuidelinesUpdate::~SeedTreatmentGuidelinesUpdate()
 
 bool SeedTreatmentGuidelinesUpdate::CheckValid()
 {
-	return pPerson->Alive();
+	if(!immediateArtFlag)
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void SeedTreatmentGuidelinesUpdate::Execute()
@@ -109,6 +112,8 @@ void VctHivTest::Execute()
 				new Cd4Test(pPerson,GetTime());
 			else
 				ChargePreArtClinicVisit(pPerson);
+		if(immediateArtFlag)
+			new ArtInitiation(pPerson,GetTime());
 	}
 	ScheduleVctHivTest(pPerson);
 };
@@ -149,6 +154,8 @@ void PictHivTest::Execute()
 			new Cd4Test(pPerson,GetTime());
 		else
 			ChargePreArtClinicVisit(pPerson);
+		if(immediateArtFlag)
+			new ArtInitiation(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson);
 }

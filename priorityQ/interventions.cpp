@@ -200,7 +200,8 @@ void Interventions::Execute()
 	/* ImmediateArt */
 	
 	if(*p_ImmediateArt) {
-		
+		immediateArtFlag = true;
+		UpdateTreatmentGuidelines(pPerson,4,1);
 	}
 	
 /////////////////////
