@@ -71,14 +71,15 @@ iPreArtClinicVisitCost(0),
 iLabCd4Test(0),
 iPocCd4Test(0),
 iAnnualArtCost(0),
-iInterventionCost(0)
+iAdherenceCost(0),
+iOutreachCost(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
 	D(cout << "Gender is = " << gender << endl);
 	natDeathDate = AssignNatDeathDate(Time);
-	SeedHiv(this); //function modified for HIV+ development.
-	SeedOutput(this); //Seed annual output event.
+	SeedHiv(this);
+	SeedOutput(this);
 	SeedInterventions(this);
 	if(Time > 12418) {
 		new SeedInitialHivTests(this,Time);

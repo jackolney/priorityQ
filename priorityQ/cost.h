@@ -30,6 +30,8 @@ void ChargePocCd4Test(person * const thePerson);
 
 void ChargeArtCare(person * const thePerson);
 
+void ChargeAdherence(person * const thePerson);
+
 /////////////////////
 /////////////////////
 

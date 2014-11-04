@@ -77,7 +77,9 @@ public:
 	void SetLabCd4Test(const double theCost) { iLabCd4Test += theCost; }
 	void SetPocCd4Test(const double theCost) { iPocCd4Test += theCost; }
 	void SetAnnualArtCost(const double theCost) { iAnnualArtCost = theCost; }
-	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4Test = 0; iPocCd4Test = 0; iAnnualArtCost = 0; }
+	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost = theCost; }
+	void SetOutreachCost(const double theCost) { iOutreachCost += theCost; }
+	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4Test = 0; iPocCd4Test = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
 	
 	//////////////////////
 	/* Accessor methods */
@@ -133,6 +135,8 @@ public:
 	double GetLabCd4Test() const { return iLabCd4Test; }
 	double GetPocCd4Test() const { return iPocCd4Test; }
 	double GetAnnualArtCost() const { return iAnnualArtCost; }
+	double GetAnnualAdherenceCost() const { return iAdherenceCost; }
+	double GetOutreachCost() const { return iOutreachCost; }
 	
 	/* Output functions */
 	bool GetHivDeath() const { return hivDeath; }
@@ -206,7 +210,8 @@ private:
 	double iLabCd4Test;
 	double iPocCd4Test;
 	double iAnnualArtCost;
-	double iInterventionCost;
+	double iAdherenceCost;
+	double iOutreachCost;
 };
 
 #endif /* defined(__priorityQ__person__) */

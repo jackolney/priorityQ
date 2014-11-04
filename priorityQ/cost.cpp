@@ -83,6 +83,14 @@ void ChargeArtCare(person * const thePerson)
 /////////////////////
 /////////////////////
 
+void ChargeAdherence(person * const thePerson)
+{
+	
+}
+
+/////////////////////
+/////////////////////
+
 void WriteCost(person * const thePerson)
 {
 	if(thePerson->Alive()) {
