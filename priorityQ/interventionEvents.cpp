@@ -169,3 +169,27 @@ void VctPocCd4Test::Execute()
 
 /////////////////////
 /////////////////////
+
+PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "PocCd4Test scheduled for day = " << Time << endl);
+}
+
+PocCd4Test::~PocCd4Test()
+{}
+
+bool PocCd4Test::CheckValid()
+{
+	return pPerson->Alive();
+	
+}
+
+void PocCd4Test::Execute()
+{
+	D(cout << "PocCd4Test executed." << endl);
+}
+
+/////////////////////
+/////////////////////

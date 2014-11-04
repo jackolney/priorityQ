@@ -79,4 +79,23 @@ private:
 	person * const pPerson;
 };
 
+/////////////////////
+/////////////////////
+
+class PocCd4Test : public event {
+public:
+	PocCd4Test(person * const thePerson, const double Time); //constructor
+	~PocCd4Test(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 #endif /* defined(__priorityQ__interventionEvents__) */

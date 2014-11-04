@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "macro.h"
+#include "toolbox.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 #include "event.h"
@@ -167,9 +168,14 @@ Cd4Test::~Cd4Test()
 
 bool Cd4Test::CheckValid()
 {
-	if(!pPerson->GetEverArt())
-		return pPerson->Alive();
-	else
+	if(!pPerson->GetEverArt() && pPerson->Alive()) {
+		if(!pocFlag)
+			return true;
+		else {
+			new PocCd4Test(pPerson,GetTime());
+			return false;
+		}
+	} else
 		return false;
 }
 
