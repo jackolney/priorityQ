@@ -10,6 +10,7 @@
 #include "macro.h"
 #include "interventions.h"
 #include "interventionUpdate.h"
+#include "interventionEvents.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 #include "toolbox.h"
@@ -133,8 +134,14 @@ void Interventions::Execute()
 	/* PreOutreach */
 	
 	if(*p_PreOutreach) {
-//			new PreArtOutreach(pPerson,14792.625,1)
-			//Repeat EVERY year.
+		double k = 0;
+		if(*p_PreOutreach == 1)
+			k = 1;
+		else
+			k = 0.2;
+		
+		for(size_t i=0;i<20;i++)
+			new PreArtOutreach(pPerson,14792.625 + (i * 182.625),k);
 	}
 
 /////////////////////

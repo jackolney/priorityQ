@@ -13,10 +13,13 @@
 #include "update.h"
 #include "impact.h"
 #include "cost.h"
+#include "rng.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 
 using namespace std;
+
+extern Rng * theRng;
 
 /////////////////////
 /////////////////////
@@ -120,7 +123,8 @@ bool PreArtOutreach::CheckValid()
 void PreArtOutreach::Execute()
 {
 	D(cout << "PreArtOutreach executed." << endl);
-	new Cd4Test(pPerson,GetTime());
+	if(theRng->Sample(probReturn))
+		new Cd4Test(pPerson,GetTime());
 }
 
 /////////////////////
