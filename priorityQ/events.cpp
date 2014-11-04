@@ -208,7 +208,7 @@ WhoDecline::~WhoDecline()
 
 bool WhoDecline::CheckValid()
 {
-	if((!pPerson->GetArtInitiationState() || (pPerson->GetArtInitiationState() && !pPerson->GetArtAdherenceState())) && pPerson->GetWhoDeclineDate() == GetTime())
+	if(pPerson->GetWhoDeclineDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
