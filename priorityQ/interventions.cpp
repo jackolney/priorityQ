@@ -30,14 +30,13 @@ extern int const * p_ArtOutreach;
 extern int const * p_ImmediateArt;
 extern int const * p_UniversalTestAndTreat;
 extern int const * p_Adherence;
-extern int const * p_ArtDropout;
 
 /////////////////////
 /////////////////////
 
 void SeedInterventions(person * const thePerson)
 {
-	if(*p_Hbct || *p_Vct || *p_HbctPocCd4 || *p_Linkage || *p_PreOutreach || *p_ImprovedCare || *p_PocCd4 || *p_VctPocCd4 || *p_ArtOutreach || *p_ImmediateArt || *p_UniversalTestAndTreat || *p_Adherence || *p_ArtDropout) {
+	if(*p_Hbct || *p_Vct || *p_HbctPocCd4 || *p_Linkage || *p_PreOutreach || *p_ImprovedCare || *p_PocCd4 || *p_VctPocCd4 || *p_ArtOutreach || *p_ImmediateArt || *p_UniversalTestAndTreat || *p_Adherence) {
 		if(thePerson->GetBirthDay() < 14610)
 			new Interventions(thePerson,14610);
 		else
@@ -209,21 +208,25 @@ void Interventions::Execute()
 	/* UniversalTestAndTreat */
 	
 	if(*p_UniversalTestAndTreat) {
-		
+		D(cout << "UniversalTestAndTreat intervention." << endl);
+		immediateArtFlag = true;
+		UpdateTreatmentGuidelines(pPerson,4,1);
+		new SeedHct(pPerson,14610,false); //2010
+		new SeedHct(pPerson,16071,false); //2014
+		new SeedHct(pPerson,17532,false); //2018
+		new SeedHct(pPerson,18993,false); //2022
+		new SeedHct(pPerson,20454,false); //2026
 	}
 	
 /////////////////////
 	/* Adherence */
 	
 	if(*p_Adherence) {
-		
-	}
-
-/////////////////////
-	/* ArtDropout */
-	
-	if(*p_ArtDropout) {
-		
+		D(cout << "Adherence intervention." << endl);
+		if(*p_Adherence == 1)
+			pPerson->SetArtAdherenceState(1);
+		else
+			pPerson->SetArtAdherenceState(0.875);
 	}
 	
 /////////////////////

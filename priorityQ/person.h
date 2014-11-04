@@ -49,6 +49,7 @@ public:
 	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount +=1; }
 	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState, const double theTime);
+	void SetArtAdherenceState(const double theProb);
 
 	/* Natural History Date Setting Functions */
 	void SetHivDeathDate(double theDate) { hivDeathDate = theDate; }
@@ -205,7 +206,7 @@ private:
 	double iLabCd4Test;
 	double iPocCd4Test;
 	double iAnnualArtCost;
-	
+	double iInterventionCost;
 };
 
 #endif /* defined(__priorityQ__person__) */

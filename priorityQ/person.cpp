@@ -70,7 +70,8 @@ iRapidHivTestCost(0),
 iPreArtClinicVisitCost(0),
 iLabCd4Test(0),
 iPocCd4Test(0),
-iAnnualArtCost(0)
+iAnnualArtCost(0),
+iInterventionCost(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -368,6 +369,14 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artTime = theTime - 14610;
 	else if(theTime > 14610)
 		artTime = theTime - artDay;
+}
+
+/////////////////////
+/////////////////////
+
+void person::SetArtAdherenceState(const double theProb)
+{
+	adherence = theRng->Sample(theProb);
 }
 
 /////////////////////

@@ -32,7 +32,6 @@ int const * p_ArtOutreach;
 int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
 int const * p_Adherence;
-int const * p_ArtDropout;
 
 
 int main(int argc, const char * argv[])
@@ -47,10 +46,9 @@ int main(int argc, const char * argv[])
 	int s_PocCd4 = 0;
 	int s_VctPocCd4 = 0;
 	int s_ArtOutreach = 0;
-	int s_ImmediateArt = 1;
+	int s_ImmediateArt = 0;
 	int s_UniversalTestAndTreat = 0;
 	int s_Adherence = 0;
-	int s_ArtDropout = 0;
 	
 	p_Hbct = &s_Hbct;
 	p_Vct = &s_Vct;
@@ -64,7 +62,6 @@ int main(int argc, const char * argv[])
 	p_ImmediateArt = &s_ImmediateArt;
 	p_UniversalTestAndTreat = &s_UniversalTestAndTreat;
 	p_Adherence = &s_Adherence;
-	p_ArtDropout = &s_ArtDropout;
 	
 	/* THE MODEL */
 	theRng = new Rng(mach_absolute_time());
