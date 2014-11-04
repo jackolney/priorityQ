@@ -40,9 +40,9 @@ int main(int argc, const char * argv[])
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
 	int s_Hbct = 0;
 	int s_Vct = 0;
-	int s_HbctPocCd4 = 1;
+	int s_HbctPocCd4 = 0;
 	int s_Linkage = 0;
-	int s_PreOutreach = 0;
+	int s_PreOutreach = 1;
 	int s_ImprovedCare = 0;
 	int s_PocCd4 = 0;
 	int s_VctPocCd4 = 0;
