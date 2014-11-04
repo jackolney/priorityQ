@@ -223,6 +223,7 @@ void Interventions::Execute()
 	
 	if(*p_Adherence) {
 		D(cout << "Adherence intervention." << endl);
+		adherenceFlag = true;
 		if(*p_Adherence == 1)
 			pPerson->SetArtAdherenceState(1);
 		else

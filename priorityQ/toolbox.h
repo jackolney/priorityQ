@@ -72,6 +72,7 @@ extern double artReturnTime;
 extern bool pocFlag;
 extern bool vctPocFlag;
 extern bool immediateArtFlag;
+extern bool adherenceFlag;
 
 	////////////////
 
@@ -96,6 +97,10 @@ extern double preArtClinicVisitCost;
 extern double labCd4TestCost;
 extern double pocCd4TestCost;
 extern double annualArtCost;
+
+/* Intervention costs */
+extern double annualAdherenceCost;
+//extern double outreachCost;
 
 	//How to use:
 /* HBCT */

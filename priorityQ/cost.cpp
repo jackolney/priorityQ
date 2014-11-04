@@ -85,7 +85,13 @@ void ChargeArtCare(person * const thePerson)
 
 void ChargeAdherence(person * const thePerson)
 {
-	
+	if(adherenceFlag && thePerson->GetArtInitiationState()) {
+		if(thePerson->GetArtDay() <= 14610)
+			thePerson->SetAnnualAdherenceCost((((theQ->GetTime() - 14610) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
+		else
+			thePerson->SetAnnualAdherenceCost((((theQ->GetTime() - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
+	} else
+		thePerson->SetAnnualAdherenceCost((thePerson->GetArtTime() / 365.25) * annualAdherenceCost);
 }
 
 /////////////////////
@@ -95,6 +101,7 @@ void WriteCost(person * const thePerson)
 {
 	if(thePerson->Alive()) {
 		ChargeArtCare(thePerson);
+		ChargeAdherence(thePerson);
 		
 		/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
 		double yr [20];
@@ -106,7 +113,7 @@ void WriteCost(person * const thePerson)
 			i++;
 		
 	if(theQ->GetTime() > 14610)
-		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4Test() + thePerson->GetPocCd4Test() + thePerson->GetAnnualArtCost();
+		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4Test() + thePerson->GetPocCd4Test() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost();
 	
 	if(theQ->GetTime() == 14610)
 		thePerson->ResetCost();

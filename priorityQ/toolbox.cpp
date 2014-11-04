@@ -72,6 +72,7 @@ double artReturnTime = 3 * 365.25;
 bool pocFlag = false;
 bool vctPocFlag = false;
 bool immediateArtFlag = false;
+bool adherenceFlag = false;
 
 	////////////////
 
@@ -96,6 +97,11 @@ double preArtClinicVisitCost = 28.00;
 double labCd4TestCost = 12.00;
 double pocCd4TestCost = 42.00;
 double annualArtCost = 367.00;
+
+
+/* Intervention costs */
+double annualAdherenceCost = 33.54;
+//double outreachCost = 18.00; //CHECK!
 
 	//How to use:
 /* HBCT */
