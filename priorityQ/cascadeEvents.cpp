@@ -16,6 +16,7 @@
 #include "cohort.h"
 #include "impact.h"
 #include "cost.h"
+#include "interventionEvents.h"
 
 using namespace std;
 
@@ -101,10 +102,12 @@ void VctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,2);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		SchedulePictHivTest(pPerson);
-		if(VctLinkage(pPerson))
-			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
-		else
-			ChargePreArtClinicVisit(pPerson);
+		if(pointOfCare)
+			new VctPocCd4Test(pPerson,GetTime());
+		else if(VctLinkage(pPerson))
+				new Cd4Test(pPerson,GetTime());
+			else
+				ChargePreArtClinicVisit(pPerson);
 	}
 	ScheduleVctHivTest(pPerson);
 };
@@ -142,7 +145,7 @@ void PictHivTest::Execute()
 		pPerson->SetDiagnosedState(true,3);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(PictLinkage(pPerson))
-			new Cd4Test(pPerson,GetTime()); //Schedules a CD4 test immediately.
+			new Cd4Test(pPerson,GetTime());
 		else
 			ChargePreArtClinicVisit(pPerson);
 	}

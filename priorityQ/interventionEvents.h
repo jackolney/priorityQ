@@ -66,4 +66,17 @@ private:
 /////////////////////
 /////////////////////
 
+class VctPocCd4Test : public event {
+public:
+	VctPocCd4Test(person * const thePerson, const double Time); //constructor
+	~VctPocCd4Test(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
 #endif /* defined(__priorityQ__interventionEvents__) */

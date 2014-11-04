@@ -129,3 +129,26 @@ void PreArtOutreach::Execute()
 
 /////////////////////
 /////////////////////
+
+VctPocCd4Test::VctPocCd4Test(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "VctPocCd4Test scheduled for day = " << Time << endl);
+}
+
+VctPocCd4Test::~VctPocCd4Test()
+{}
+
+bool VctPocCd4Test::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void VctPocCd4Test::Execute()
+{
+	D(cout << "VctPocCd4Test executed." << endl);
+}
+
+/////////////////////
+/////////////////////
