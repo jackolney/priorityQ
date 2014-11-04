@@ -51,7 +51,7 @@ private:
 
 class VctHivTest : public event {
 public:
-	VctHivTest(person * const thePerson, const double Time); //constructor
+	VctHivTest(person * const thePerson, const double Time, const bool poc); //constructor
 	~VctHivTest(); //destructor
 	
 	/* Methods */
@@ -60,6 +60,7 @@ public:
 	
 private:
 	person * const pPerson;
+	const bool pointOfCare;
 };
 
 /////////////////////

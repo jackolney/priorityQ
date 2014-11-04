@@ -70,9 +70,10 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 /////////////////////
 /////////////////////
 
-VctHivTest::VctHivTest(person * const thePerson, const double Time) :
+VctHivTest::VctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
-pPerson(thePerson)
+pPerson(thePerson),
+pointOfCare(poc)
 {
 	thePerson->SetVctHivTestDate(Time);
 	D(cout << "VctHivTest scheduled for day = " << Time << endl);

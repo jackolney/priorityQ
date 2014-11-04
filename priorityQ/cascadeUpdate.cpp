@@ -51,7 +51,7 @@ void ScheduleVctHivTest(person * const thePerson)
 {
 	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418) {
 		D(cout << "Scheduling VctHivTest." << endl);
-		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime));
+		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime),false);
 	}
 }
 
