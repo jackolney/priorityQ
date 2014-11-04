@@ -100,7 +100,7 @@ extern double annualArtCost;
 
 /* Intervention costs */
 extern double annualAdherenceCost;
-//extern double outreachCost;
+extern double outreachCost;
 
 	//How to use:
 /* HBCT */

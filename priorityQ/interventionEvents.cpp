@@ -219,6 +219,7 @@ bool ArtOutreach::CheckValid()
 void ArtOutreach::Execute()
 {
 	D(cout << "ArtOutreach executed." << endl);
+	ChargeOutreach(pPerson);
 	if(theRng->Sample(probReturn))
 		new ArtInitiation(pPerson,GetTime());
 }

@@ -67,14 +67,14 @@ double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
 /* Time between being lost from Art care and returning */
 double artReturnTime = 3 * 365.25;
 
-	////////////////
-/* Intervention Flags */
+	//////////////////////
+	//Intervention Flags//
+	//////////////////////
+
 bool pocFlag = false;
 bool vctPocFlag = false;
 bool immediateArtFlag = false;
 bool adherenceFlag = false;
-
-	////////////////
 
 	////////////////
 	//DALY WEIGHTS//
@@ -101,7 +101,7 @@ double annualArtCost = 367.00;
 
 /* Intervention costs */
 double annualAdherenceCost = 33.54;
-//double outreachCost = 18.00; //CHECK!
+double outreachCost = 19.55;
 
 	//How to use:
 /* HBCT */

@@ -97,6 +97,14 @@ void ChargeAdherence(person * const thePerson)
 /////////////////////
 /////////////////////
 
+void ChargeOutreach(person * const thePerson)
+{
+	thePerson->SetOutreachCost(outreachCost);
+}
+
+/////////////////////
+/////////////////////
+
 void WriteCost(person * const thePerson)
 {
 	if(thePerson->Alive()) {
