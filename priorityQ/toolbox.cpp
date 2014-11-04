@@ -68,6 +68,12 @@ double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
 double artReturnTime = 3 * 365.25;
 
 	////////////////
+/* Intervention Flags */
+bool vctPocFlag = false;
+
+	////////////////
+
+	////////////////
 	//DALY WEIGHTS//
 	////////////////
 

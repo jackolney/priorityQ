@@ -176,9 +176,8 @@ void Interventions::Execute()
 /////////////////////
 	/* PocCd4 */
 	
-	if(*p_PocCd4) {
-		
-	}
+	if(*p_PocCd4)
+		vctPocFlag = true;
 	
 /////////////////////
 	/* VctPocCd4 */

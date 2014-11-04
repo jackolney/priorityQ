@@ -14,10 +14,6 @@
 	////////////////////
 
 	////////////////////
-	/////POINTERS//////
-
-
-	////////////////////
 /* Hiv testing times */
 extern double hctHivTestTime ;
 extern double vctHivTestTime;
@@ -27,7 +23,6 @@ extern double pictHivTestTime_AsymptomaticCd4ResultEligible;
 extern double pictHivTestTime_SymptomaticOblivious;
 extern double pictHivTestTime_SymptomaticNoCd4Result;
 extern double pictHivTestTime_SymptomaticCd4Result;
-
 
 /* Linkage probabilities */
 extern double hctProbLink;
@@ -71,6 +66,12 @@ extern double artDropoutTimeTwoYear;
 
 /* Time between being lost from Art care and returning */
 extern double artReturnTime;
+
+	////////////////
+/* Intervention Flags */
+extern bool vctPocFlag;
+
+	////////////////
 
 	////////////////
 	//DALY WEIGHTS//
