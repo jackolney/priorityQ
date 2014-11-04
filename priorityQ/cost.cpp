@@ -121,7 +121,7 @@ void WriteCost(person * const thePerson)
 			i++;
 		
 	if(theQ->GetTime() > 14610)
-		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4Test() + thePerson->GetPocCd4Test() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost();
+		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4Test() + thePerson->GetPocCd4Test() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
 	
 	if(theQ->GetTime() == 14610)
 		thePerson->ResetCost();
