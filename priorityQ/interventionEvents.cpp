@@ -94,3 +94,34 @@ void HctPocCd4Test::Execute()
 	}
 	SchedulePictHivTest(pPerson);
 }
+
+/////////////////////
+/////////////////////
+
+PreArtOutreach::PreArtOutreach(person * const thePerson, const double Time, const double theProb) :
+event(Time),
+pPerson(thePerson),
+probReturn(theProb)
+{
+	D(cout << "PreArtOutreach scheduled for day = " << Time << endl);
+}
+
+PreArtOutreach::~PreArtOutreach()
+{}
+
+bool PreArtOutreach::CheckValid()
+{
+	if(pPerson->GetDiagnosedState() && !pPerson->GetInCareState())
+		return pPerson->Alive();
+	else
+		return false;
+}
+
+void PreArtOutreach::Execute()
+{
+	D(cout << "PreArtOutreach executed." << endl);
+	new Cd4Test(pPerson,GetTime());
+}
+
+/////////////////////
+/////////////////////

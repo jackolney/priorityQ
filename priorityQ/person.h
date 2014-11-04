@@ -97,6 +97,7 @@ public:
 	unsigned int GetCd4TestCount() const { return cd4TestCount; }
 	bool GetEverCd4ResultState() const { return everCd4TestResult; }
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
+	bool GetInCareState() const { return inCare; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetArtAdherenceState() const { return adherence; }
 	bool GetEverArt() const { return everArt; }

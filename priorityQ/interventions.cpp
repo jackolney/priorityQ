@@ -133,7 +133,8 @@ void Interventions::Execute()
 	/* PreOutreach */
 	
 	if(*p_PreOutreach) {
-		
+//			new PreArtOutreach(pPerson,14792.625,1)
+			//Repeat EVERY year.
 	}
 
 /////////////////////
