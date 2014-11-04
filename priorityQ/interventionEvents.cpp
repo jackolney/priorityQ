@@ -148,6 +148,23 @@ bool VctPocCd4Test::CheckValid()
 void VctPocCd4Test::Execute()
 {
 	D(cout << "VctPocCd4Test executed." << endl);
+	D(cout << "Entered care." << endl);
+	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
+	ChargePreArtClinicVisit(pPerson);
+	ChargePocCd4Test(pPerson);
+	pPerson->SetEverCd4TestState(true);
+	pPerson->SetInCareState(true);
+	pPerson->SetEverCD4TestResultState(true);
+	if(pPerson->GetEligible()) {
+		D(cout << "Eligible for ART." << endl);
+		ScheduleArtInitiation(pPerson);
+	} else {
+		D(cout << "Not eligible for ART." << endl);
+		if(SecondaryCd4Test(pPerson))
+			SchedulePreArtCd4Test(pPerson);
+	}
+	SchedulePictHivTest(pPerson);
 }
 
 /////////////////////

@@ -176,15 +176,14 @@ void Interventions::Execute()
 /////////////////////
 	/* PocCd4 */
 	
-	if(*p_PocCd4)
-		vctPocFlag = true;
+//	if(*p_PocCd4)
+//		vctPocFlag = true;
 	
 /////////////////////
 	/* VctPocCd4 */
 	
-	if(*p_VctPocCd4) {
-		
-	}
+	if(*p_VctPocCd4)
+		vctPocFlag = true;
 	
 /////////////////////
 	/* ArtOutreach */
