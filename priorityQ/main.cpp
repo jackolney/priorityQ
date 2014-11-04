@@ -42,8 +42,8 @@ int main(int argc, const char * argv[])
 	int s_Vct = 0;
 	int s_HbctPocCd4 = 0;
 	int s_Linkage = 0;
-	int s_PreOutreach = 1;
-	int s_ImprovedCare = 0;
+	int s_PreOutreach = 0;
+	int s_ImprovedCare = 1;
 	int s_PocCd4 = 0;
 	int s_VctPocCd4 = 0;
 	int s_ArtOutreach = 0;

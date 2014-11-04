@@ -65,7 +65,8 @@ bool Interventions::CheckValid()
 
 void Interventions::Execute()
 {
-	
+
+/////////////////////
 /////////////////////
 	/* Hbct */
 	
@@ -90,7 +91,7 @@ void Interventions::Execute()
 			vctHivTestTime *= 0.5; //2.9
 		else
 			vctHivTestTime *= 0.8; //4.64
-		cout << vctHivTestTime << " = vctHivTestTime." << endl;
+		D(cout << "VctHivTest Intervention. vctHivTestTime = " << vctHivTestTime << endl);
 		ScheduleVctHivTest(pPerson);
 	}
 	
@@ -117,6 +118,7 @@ void Interventions::Execute()
 	/* Linkage */
 	
 	if(*p_Linkage) {
+		D(cout << "Linkage intervention." << endl);
 		if(*p_Linkage == 1) {
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
@@ -145,7 +147,30 @@ void Interventions::Execute()
 	/* ImprovedCare */
 	
 	if(*p_ImprovedCare) {
-		
+		D(cout << "ImprovedCare intervention." << endl);
+		if(*p_ImprovedCare == 1) {
+			cd4ResultProbAttend = 1;
+			hctShortTermRetention = 1;
+			hctLongTermRetention = 1;
+			vctShortTermRetention = 1;
+			vctLongTermRetention = 1;
+			pictShortTermRetention = 1;
+			pictLongTermRetention = 1;
+			hctProbSecondaryCd4Test = 1;
+			vctProbSecondaryCd4Test = 1;
+			pictProbSecondaryCd4Test = 1;
+		} else {
+			cd4ResultProbAttend += (1-cd4ResultProbAttend)*0.5;
+			hctShortTermRetention += (1-hctShortTermRetention)*0.5;
+			hctLongTermRetention += (1-hctLongTermRetention)*0.5;
+			vctShortTermRetention += (1-vctShortTermRetention)*0.5;
+			vctLongTermRetention += (1-vctLongTermRetention)*0.5;
+			pictShortTermRetention += (1-pictShortTermRetention)*0.5;
+			pictLongTermRetention += (1-pictLongTermRetention)*0.5;
+			hctProbSecondaryCd4Test += (1-hctProbSecondaryCd4Test)*0.5;
+			vctProbSecondaryCd4Test += (1-vctProbSecondaryCd4Test)*0.5;
+			pictProbSecondaryCd4Test += (1-pictProbSecondaryCd4Test)*0.5;
+		}
 	}
 
 /////////////////////
