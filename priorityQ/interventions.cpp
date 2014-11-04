@@ -189,7 +189,11 @@ void Interventions::Execute()
 	/* ArtOutreach */
 	
 	if(*p_ArtOutreach) {
+		double k = 0;
+		if(*p_ArtOutreach == 1) { k = 1; } else { k = 0.4; }
 		
+		for(size_t i=0;i<20;i++)
+			new ArtOutreach(pPerson,14792.625 + (i * 182.625),k);
 	}
 	
 /////////////////////

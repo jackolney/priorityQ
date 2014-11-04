@@ -193,3 +193,32 @@ void PocCd4Test::Execute()
 
 /////////////////////
 /////////////////////
+
+ArtOutreach::ArtOutreach(person * const thePerson, const double Time, const double theProb) :
+event(Time),
+pPerson(thePerson),
+probReturn(theProb)
+{
+	D(cout << "ArtOutreach scheduled for day = " << Time << endl);
+}
+
+ArtOutreach::~ArtOutreach()
+{}
+
+bool ArtOutreach::CheckValid()
+{
+	if(pPerson->GetEverArt() && !pPerson->GetArtInitiationState())
+		return pPerson->Alive();
+	else
+		return false;
+}
+
+void ArtOutreach::Execute()
+{
+	D(cout << "ArtOutreach executed." << endl);
+	if(theRng->Sample(probReturn))
+		new ArtInitiation(pPerson,GetTime());
+}
+
+/////////////////////
+/////////////////////

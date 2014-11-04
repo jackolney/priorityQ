@@ -98,4 +98,21 @@ private:
 /////////////////////
 /////////////////////
 
+class ArtOutreach : public event {
+public:
+	ArtOutreach(person * const thePerson, const double Time, const double theProb); //constructor
+	~ArtOutreach(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+	const double probReturn;
+};
+
+/////////////////////
+/////////////////////
+
 #endif /* defined(__priorityQ__interventionEvents__) */
