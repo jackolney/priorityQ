@@ -135,10 +135,7 @@ void Interventions::Execute()
 	
 	if(*p_PreOutreach) {
 		double k = 0;
-		if(*p_PreOutreach == 1)
-			k = 1;
-		else
-			k = 0.2;
+		if(*p_PreOutreach == 1) { k = 1; } else { k = 0.2; }
 		
 		for(size_t i=0;i<20;i++)
 			new PreArtOutreach(pPerson,14792.625 + (i * 182.625),k);
