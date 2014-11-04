@@ -41,7 +41,8 @@ bool SeedInitialHivTests::CheckValid()
 
 void SeedInitialHivTests::Execute()
 {
-	UpdateTreatmentGuidelines(pPerson,1,4);
+	if(!immediateArtFlag)
+		UpdateTreatmentGuidelines(pPerson,1,4);
 	ScheduleVctHivTest(pPerson);
 	SchedulePictHivTest(pPerson);
 }
