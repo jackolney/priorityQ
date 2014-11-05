@@ -7,7 +7,9 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "transmission.h"
+#include "transmissionEvents.h"
 
 using namespace std;
 
@@ -17,7 +19,9 @@ using namespace std;
 Transmission::Transmission() :
 referenceYear(11687.04),
 beta(0)
-{}
+{
+	new GetBeta(this,referenceYear);
+}
 
 Transmission::~Transmission()
 {}
@@ -62,6 +66,14 @@ void Transmission::RemoveFromVector(person * const thePerson)
 		pPersonCounter_Cd4_1.erase(remove(pPersonCounter_Cd4_1.begin(),pPersonCounter_Cd4_1.end(),thePerson),pPersonCounter_Cd4_1.end());
 }
 
+void Transmission::CalculateBeta()
+{
+	D(cout << "WOOO BETA BETA BETA!" << endl);
+}
+
+/////////////////////
+/////////////////////
+
 size_t Transmission::GetVectorSize_Art() const
 {
 	return pPersonCounter_Art.size();
@@ -87,5 +99,44 @@ size_t Transmission::GetVectorSize_Cd4_1() const
 	return pPersonCounter_Cd4_1.size();
 }
 
+double Transmission::GetWeightedTotal() const
+{
+	/* Infectiousness weights */
+	double wArt = 0.1;
+	double w500 = 1.35;
+	double w350500 = 1;
+	double w200350 = 1.64;
+	double w200 = 5.17;
+	
+	/* Calculate individual weights */
+	double tArt = wArt * pPersonCounter_Art.size();
+	double t500 = w500 * pPersonCounter_Cd4_4.size();
+	double t350500 = w350500 * pPersonCounter_Cd4_3.size();
+	double t200350 = w200350 * pPersonCounter_Cd4_2.size();
+	double t200 = w200 * pPersonCounter_Cd4_1.size();
+	
+	return(tArt + t500 + t350500 + t200350 + t200);
+}
+
 /////////////////////
 /////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

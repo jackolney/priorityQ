@@ -12,6 +12,7 @@
 #include <vector>
 #include <stdio.h>
 #include "person.h"
+#include "event.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ public:
 	void PushToVector(person * const thePerson);
 	void RemoveFromVector(person * const thePerson);
 	
+	void CalculateBeta();
+	
 	//void GetWeightedTotal or something
 	//OR a return IDEAL INCIDENCE NUMBER!!! HAHA!
 	
@@ -34,6 +37,8 @@ public:
 	size_t GetVectorSize_Cd4_3() const;
 	size_t GetVectorSize_Cd4_2() const;
 	size_t GetVectorSize_Cd4_1() const;
+	
+	double GetWeightedTotal() const;
 	
 private:
 	/* Vectors */
@@ -46,5 +51,6 @@ private:
 	double const referenceYear;
 	double beta;
 };
+
 
 #endif /* defined(__priorityQ__transmission__) */
