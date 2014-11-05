@@ -21,9 +21,11 @@
 #include "output.h"
 #include "interventions.h"
 #include "discount.h"
+#include "transmission.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
+extern Transmission * theTrans;
 
 using namespace std;
 
@@ -57,7 +59,7 @@ everCd4Test(false),
 cd4TestCount(0),
 everCd4TestResult(false),
 cd4TestResultCount(0),
-art(true), // CHANGE CHANGE CHANGECHANGE CHANGECHANGE CHANGECHANGE CHANGECHANGE CHANGECHANGE CHANGECHANGE CHANGE
+art(false),
 everArt(false),
 adherence(theRng->Sample(0.75)),
 cd4AtArt(0),
@@ -283,6 +285,7 @@ void person::SetHivIndicators()
 	SetInitialCd4Count();
 	SetInitialWhoStage();
 	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
+	theTrans->UpdateVector(this);
 }
 
 /////////////////////

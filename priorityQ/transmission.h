@@ -21,6 +21,7 @@ public:
 	~Transmission(); //destructor
 	
 	/* Methods */
+	void UpdateVector(person * const thePerson);
 	void PushToVector(person * const thePerson);
 	void RemoveFromVector(person * const thePerson);
 	

@@ -6,7 +6,10 @@
 //  Copyright (c) 2014 Jack Olney. All rights reserved.
 //
 
+#include <iostream>
 #include "transmission.h"
+
+using namespace std;
 
 /////////////////////
 /////////////////////
@@ -18,6 +21,18 @@ beta(0)
 
 Transmission::~Transmission()
 {}
+
+void Transmission::UpdateVector(person * const thePerson)
+{
+	RemoveFromVector(thePerson);
+	PushToVector(thePerson);
+	
+	cout << "pPersonCounter_Art.size() = " << pPersonCounter_Art.size() << endl;
+	cout << "pPersonCounter_Cd4_4.size() = " << pPersonCounter_Cd4_4.size() << endl;
+	cout << "pPersonCounter_Cd4_3.size() = " << pPersonCounter_Cd4_3.size() << endl;
+	cout << "pPersonCounter_Cd4_2.size() = " << pPersonCounter_Cd4_2.size() << endl;
+	cout << "pPersonCounter_Cd4_1.size() = " << pPersonCounter_Cd4_1.size() << endl;
+}
 
 void Transmission::PushToVector(person * const thePerson)
 {

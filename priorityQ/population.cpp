@@ -10,11 +10,15 @@
 #include "population.h"
 #include "cohort.h"
 #include "output.h"
+#include "transmission.h"
+
+Transmission * theTrans;
 
 population::population(const double theSize) : populationSize(theSize)
 {
 	Generate(populationSize);
 	CreateOutputArray();
+	theTrans = new Transmission;
 }
 
 population::~population()
