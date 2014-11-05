@@ -152,12 +152,12 @@ void PictHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3);
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		if(PictLinkage(pPerson))
+		if(immediateArtFlag)
+			ScheduleImmediateArt(pPerson);
+		else if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime());
 		else
 			ChargePreArtClinicVisit(pPerson);
-		if(immediateArtFlag)
-			new ArtInitiation(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson);
 }
