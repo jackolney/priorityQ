@@ -210,6 +210,11 @@ void Interventions::Execute()
 		immediateArtFlag = true;
 		UpdateTreatmentGuidelines(pPerson,4,1);
 		
+		if(*p_UniversalTestAndTreat == 1)
+			universalTestAndTreatFlag = 1;
+		else
+			universalTestAndTreatFlag = 2;
+		
 		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);

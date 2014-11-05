@@ -11,6 +11,7 @@
 #include "interventionUpdate.h"
 #include "interventionEvents.h"
 #include "cascadeUpdate.h"
+#include "cascadeEvents.h"
 #include "rng.h"
 #include "eventQ.h"
 #include "toolbox.h"
@@ -83,3 +84,20 @@ bool HctLinkage(person * const thePerson)
 		}
 	}
 }
+
+////////////////////
+////////////////////
+
+void ScheduleImmediateArt(person * const thePerson)
+{
+	if(universalTestAndTreatFlag < 2)
+		new ArtInitiation(thePerson,theQ->GetTime());
+	else if(theRng->Sample(0.8)) { //80% agree to start ART
+			if(theRng->Sample(0.8)) //80% are linked to ART
+				new ArtInitiation(thePerson,theQ->GetTime());
+	} else
+		SchedulePreArtCd4Test(thePerson);
+}
+
+////////////////////
+////////////////////

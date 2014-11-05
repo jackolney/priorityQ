@@ -40,4 +40,9 @@ bool HctLinkage(person * const thePerson);
 /////////////////////
 /////////////////////
 
+void ScheduleImmediateArt(person * const thePerson);
+
+/////////////////////
+/////////////////////
+
 #endif /* defined(__priorityQ__interventionUpdate__) */

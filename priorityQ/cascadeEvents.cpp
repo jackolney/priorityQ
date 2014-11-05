@@ -18,6 +18,7 @@
 #include "impact.h"
 #include "cost.h"
 #include "interventionEvents.h"
+#include "interventionUpdate.h"
 
 using namespace std;
 
@@ -107,14 +108,14 @@ void VctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,2);
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		SchedulePictHivTest(pPerson);
-		if(pointOfCare)
+		if(immediateArtFlag)
+			ScheduleImmediateArt(pPerson);
+		else if(pointOfCare)
 			new VctPocCd4Test(pPerson,GetTime());
 		else if(VctLinkage(pPerson))
-				new Cd4Test(pPerson,GetTime());
-			else
-				ChargePreArtClinicVisit(pPerson);
-		if(immediateArtFlag)
-			new ArtInitiation(pPerson,GetTime());
+			new Cd4Test(pPerson,GetTime());
+		else
+			ChargePreArtClinicVisit(pPerson);
 	}
 	ScheduleVctHivTest(pPerson);
 };
