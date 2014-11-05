@@ -22,10 +22,12 @@
 #include "interventions.h"
 #include "discount.h"
 #include "transmission.h"
+#include "incidence.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
 extern Transmission * theTrans;
+extern Incidence * theInc;
 
 using namespace std;
 
@@ -132,7 +134,7 @@ void person::AssignInitialAge(const double Time)
 	}
 
 	currentAge = initialAge;
-	D(cout << "Initial age = " << initialAge << ". (years = " << initialAge / 365.25 << ")" << endl);
+	D(cout << "Initial age = " << initialAge << ". (year = " << initialAge / 365.25 << ")" << endl);
 }
 
 /////////////////////
@@ -213,7 +215,7 @@ double person::AssignNatDeathDate(const double Time)
 	
 	/* Create Natural Death Date Event & Add to eventQ */
 	new Death(this,Time + deathDate - initialAge,false);
-	D(cout << "NatDeathDate = " << Time + deathDate - initialAge << endl);
+	D(cout << "NatDeathDate = " << Time + deathDate - initialAge << " (year = " << (Time + deathDate - initialAge) / 365.25 << ")" << endl);
 	
 	return Time + deathDate - initialAge;
 }
@@ -262,6 +264,7 @@ bool person::CheckHiv(const double Time)
 			SetSeroconversionDay(Time);
 			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 			ScheduleHivIndicatorUpdate();
+			theInc->UpdateIncidence(this);
 		}
 		return HivResult;
 	}

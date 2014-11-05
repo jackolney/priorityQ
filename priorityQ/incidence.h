@@ -22,6 +22,7 @@ public:
 	
 	/* Methods */
 	void UpdateIncidence(person * const thePerson);
+	void ScheduleIncidenceReset(Incidence * const theInc);
 	void ResetIncidence();
 	
 	/* Accessor Methods */

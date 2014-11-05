@@ -11,14 +11,17 @@
 #include "cohort.h"
 #include "output.h"
 #include "transmission.h"
+#include "incidence.h"
 
 Transmission * theTrans;
+Incidence * theInc;
 
 population::population(const double theSize) : populationSize(theSize)
 {
 	Generate(populationSize);
 	CreateOutputArray();
 	theTrans = new Transmission;
+	theInc = new Incidence;
 }
 
 population::~population()
@@ -53,7 +56,7 @@ void population::Generate(const double theSize)
 	
 		//TEMPORARY TESTING PLATFORM//
 	
-	double yr = 10957; //specifiees startTime for individuals.
+	double yr = 0; //specifiees startTime for individuals.
 	int cohortArray [1] = {1};
 
 //	Allow populationSize to scale the cohort size.

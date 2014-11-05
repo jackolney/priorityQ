@@ -10,5 +10,20 @@
 #define __priorityQ__incidenceEvents__
 
 #include <stdio.h>
+#include "event.h"
+#include "incidence.h"
+
+class SeedIncidence : public event {
+public:
+	SeedIncidence(Incidence * theInc, const double Time); //constructor
+	~SeedIncidence(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	Incidence * pInc;
+};
 
 #endif /* defined(__priorityQ__incidenceEvents__) */
