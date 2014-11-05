@@ -99,7 +99,7 @@ void Interventions::Execute()
 		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),true);
-		
+
 		if(*p_HbctPocCd4 == 1) {
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
