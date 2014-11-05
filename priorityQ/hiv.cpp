@@ -139,15 +139,13 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	
 	//Find i for currentYear (room for improvement?)
 	double yr [55];
-	
 	for(size_t i = 0; i < 55; i++)
 		yr[i] = (5+i) * 365.25;
 	
 	int i = 0;
-	
-	while(Time > yr[i])
+	while(Time > yr[i] && i < 55)
 		i++;
-	
+		
 	//Find j for age
 	int j = 0;
 	unsigned int ageCatMax [16] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80};
@@ -167,7 +165,8 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 //		cout << "i = " << i << endl;
 //		cout << "yr[i] = " << yr[i] << endl;
 //		cout << "j = " << j << endl;
-//		cout << "hivInc [Sex] [i-5] [j] = " << hivInc [Sex] [i-5] [j] << endl;
+//		cout << "hivInc [Sex] [i] [j] = " << hivInc [Sex] [i] [j] << endl;
+//		cout << "Sample(hivInc [Sex] [i] [j]) = " << theRng->Sample(hivInc [Sex] [i] [j]) << endl;
 //	}
 
 	D(cout << "Serum is: " << serum << endl;)
