@@ -92,10 +92,12 @@ void ScheduleImmediateArt(person * const thePerson)
 {
 	if(universalTestAndTreatFlag < 2)
 		new ArtInitiation(thePerson,theQ->GetTime());
-	else if(theRng->Sample(0.8)) { //80% agree to start ART
+	else if(theRng->Sample(0.8)) //80% agree to start ART
 			if(theRng->Sample(0.8)) //80% are linked to ART
 				new ArtInitiation(thePerson,theQ->GetTime());
-	} else
+			else
+				thePerson->SetInCareState(false);
+	else
 		SchedulePreArtCd4Test(thePerson);
 }
 

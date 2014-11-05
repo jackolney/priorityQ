@@ -47,7 +47,7 @@ int main(int argc, const char * argv[])
 	int s_VctPocCd4 = 0;
 	int s_ArtOutreach = 0;
 	int s_ImmediateArt = 0;
-	int s_UniversalTestAndTreat = 1;
+	int s_UniversalTestAndTreat = 2;
 	int s_Adherence = 0;
 	
 	p_Hbct = &s_Hbct;
