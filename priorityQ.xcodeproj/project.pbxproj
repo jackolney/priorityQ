@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0400AE2419E707B500357D2D /* person.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0400AE2219E707B500357D2D /* person.cpp */; };
+		04076CD71A0A511F0046D09D /* discount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04076CD51A0A511F0046D09D /* discount.cpp */; };
 		040C113719F7A93800210A47 /* cascadeEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040C113519F7A93800210A47 /* cascadeEvents.cpp */; };
 		040C113A19F7AA8D00210A47 /* cascadeUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */; };
 		040CC6FF19F0063700611C57 /* update.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 040CC6FD19F0063700611C57 /* update.cpp */; };
@@ -47,6 +48,8 @@
 		0400AE2219E707B500357D2D /* person.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = person.cpp; sourceTree = "<group>"; };
 		0400AE2319E707B500357D2D /* person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = person.h; sourceTree = "<group>"; };
 		0400AE2819E817FE00357D2D /* rng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rng.h; sourceTree = "<group>"; };
+		04076CD51A0A511F0046D09D /* discount.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = discount.cpp; sourceTree = "<group>"; };
+		04076CD61A0A511F0046D09D /* discount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = discount.h; sourceTree = "<group>"; };
 		040C113519F7A93800210A47 /* cascadeEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cascadeEvents.cpp; sourceTree = "<group>"; };
 		040C113619F7A93800210A47 /* cascadeEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cascadeEvents.h; sourceTree = "<group>"; };
 		040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cascadeUpdate.cpp; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				0421651B19FEB10700E47DB4 /* cost.h */,
 				0421651019FE461D00E47DB4 /* impact.cpp */,
 				0421651119FE461D00E47DB4 /* impact.h */,
+				04076CD51A0A511F0046D09D /* discount.cpp */,
+				04076CD61A0A511F0046D09D /* discount.h */,
 				0421651D19FFF80A00E47DB4 /* output.cpp */,
 				0421651E19FFF80A00E47DB4 /* output.h */,
 				0475975A1A0277B7008ADBCC /* outputUpdate.cpp */,
@@ -223,6 +228,7 @@
 				0475975C1A0277B7008ADBCC /* outputUpdate.cpp in Sources */,
 				0421651919FE95D000E47DB4 /* rlib.cpp in Sources */,
 				04EAF85F19E58E0E0058B45A /* eventQ.cpp in Sources */,
+				04076CD71A0A511F0046D09D /* discount.cpp in Sources */,
 				04B1C44B1A07D76100E84B4C /* interventionEvents.cpp in Sources */,
 				0421651219FE461D00E47DB4 /* impact.cpp in Sources */,
 				0421651F19FFF80A00E47DB4 /* output.cpp in Sources */,

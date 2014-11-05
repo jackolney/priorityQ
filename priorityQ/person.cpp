@@ -20,6 +20,7 @@
 #include "hiv.h"
 #include "output.h"
 #include "interventions.h"
+#include "discount.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -81,6 +82,7 @@ iOutreachCost(0)
 	SeedHiv(this);
 	SeedOutput(this);
 	SeedInterventions(this);
+	SeedDiscount(this);
 	if(Time > 12418) {
 		new SeedInitialHivTests(this,Time);
 		new SeedTreatmentGuidelinesUpdate(this,Time);
