@@ -28,9 +28,6 @@ public:
 	
 	void CalculateBeta();
 	
-	//void GetWeightedTotal or something
-	//OR a return IDEAL INCIDENCE NUMBER!!! HAHA!
-	
 	/* Accessor Methods */
 	size_t GetVectorSize_Art() const;
 	size_t GetVectorSize_Cd4_4() const;
