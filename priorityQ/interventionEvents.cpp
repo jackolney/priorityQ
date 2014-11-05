@@ -159,8 +159,8 @@ void VctPocCd4Test::Execute()
 	ChargePreArtClinicVisit(pPerson);
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
-	pPerson->SetInCareState(true);
 	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetInCareState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
@@ -196,6 +196,24 @@ bool PocCd4Test::CheckValid()
 void PocCd4Test::Execute()
 {
 	D(cout << "PocCd4Test executed." << endl);
+	UpdateAge(pPerson);
+	UpdateDaly(pPerson);
+	ChargePreArtClinicVisit(pPerson);
+	ChargePocCd4Test(pPerson);
+	pPerson->SetEverCd4TestState(true);
+	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetInCareState(true);	
+	if(immediateArtFlag)
+		ScheduleImmediateArt(pPerson);
+	else if(pPerson->GetEligible()) {
+		D(cout << "Eligible for ART." << endl);
+		ScheduleArtInitiation(pPerson);
+	} else {
+		D(cout << "Not eligible for ART." << endl);
+		if(SecondaryCd4Test(pPerson))
+			SchedulePreArtCd4Test(pPerson);
+	}
+	SchedulePictHivTest(pPerson);
 }
 
 /////////////////////
