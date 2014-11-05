@@ -90,7 +90,9 @@ void HctPocCd4Test::Execute()
 	D(cout << "HctPocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCD4TestResultState(true);
-	if(pPerson->GetEligible()) {
+	if(immediateArtFlag)
+		ScheduleImmediateArt(pPerson);
+	else if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
@@ -159,7 +161,9 @@ void VctPocCd4Test::Execute()
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetInCareState(true);
 	pPerson->SetEverCD4TestResultState(true);
-	if(pPerson->GetEligible()) {
+	if(immediateArtFlag)
+		ScheduleImmediateArt(pPerson);
+	else if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {

@@ -197,7 +197,9 @@ void Cd4Test::Execute()
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
-	if(ReceiveCd4TestResult(pPerson)) {
+	if(immediateArtFlag)
+		ScheduleImmediateArt(pPerson);
+	else if(ReceiveCd4TestResult(pPerson)) {
 		ScheduleCd4TestResult(pPerson);
 		pPerson->SetInCareState(true);
 	}
@@ -228,7 +230,9 @@ void Cd4TestResult::Execute()
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCD4TestResultState(true);
-	if(pPerson->GetEligible()) {
+	if(immediateArtFlag)
+		ScheduleImmediateArt(pPerson);
+	else if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
