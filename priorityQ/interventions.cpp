@@ -70,11 +70,9 @@ void Interventions::Execute()
 	/* Hbct */
 	
 	if(*p_Hbct) {
-		new SeedHct(pPerson,14610,false); //2010
-		new SeedHct(pPerson,16071,false); //2014
-		new SeedHct(pPerson,17532,false); //2018
-		new SeedHct(pPerson,18993,false); //2022
-		new SeedHct(pPerson,20454,false); //2026
+		for(size_t i=0;i<5;i++)
+			if(GetTime() <= 14610 + (i * 1461))
+				new SeedHct(pPerson,14610 + (i * 1461),false);
 		
 		if(*p_Hbct == 1) {
 			hctProbLink = 1;
@@ -87,9 +85,9 @@ void Interventions::Execute()
 	
 	if(*p_Vct) {
 		if(*p_Vct == 1)
-			vctHivTestTime *= 0.5; //2.9
+			vctHivTestTime *= 0.5; //2.9 yrs
 		else
-			vctHivTestTime *= 0.8; //4.64
+			vctHivTestTime *= 0.8; //4.64 yrs
 		D(cout << "VctHivTest Intervention. vctHivTestTime = " << vctHivTestTime << endl);
 		ScheduleVctHivTest(pPerson);
 	}
@@ -98,11 +96,9 @@ void Interventions::Execute()
 	/* HbctPocCd4 */
 	
 	if(*p_HbctPocCd4) {
-		new SeedHct(pPerson,14610,true); //2010
-		new SeedHct(pPerson,16071,true); //2014
-		new SeedHct(pPerson,17532,true); //2018
-		new SeedHct(pPerson,18993,true); //2022
-		new SeedHct(pPerson,20454,true); //2026
+		for(size_t i=0;i<5;i++)
+			if(GetTime() <= 14610 + (i * 1461))
+				new SeedHct(pPerson,14610 + (i * 1461),true);
 		
 		if(*p_HbctPocCd4 == 1) {
 			hctProbLink = 1;
@@ -139,7 +135,8 @@ void Interventions::Execute()
 		if(*p_PreOutreach == 1) { k = 1; } else { k = 0.2; }
 		
 		for(size_t i=0;i<20;i++)
-			new PreArtOutreach(pPerson,14792.625 + (i * 182.625),k);
+			if(GetTime() <= 14792.625 + (i * 365.25))
+				new PreArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 
 /////////////////////
@@ -192,7 +189,8 @@ void Interventions::Execute()
 		if(*p_ArtOutreach == 1) { k = 1; } else { k = 0.4; }
 		
 		for(size_t i=0;i<20;i++)
-			new ArtOutreach(pPerson,14792.625 + (i * 182.625),k);
+			if(GetTime() <= 14792.625 + (i * 365.25))
+				new ArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 	
 /////////////////////
@@ -211,11 +209,10 @@ void Interventions::Execute()
 		D(cout << "UniversalTestAndTreat intervention." << endl);
 		immediateArtFlag = true;
 		UpdateTreatmentGuidelines(pPerson,4,1);
-		new SeedHct(pPerson,14610,false); //2010
-		new SeedHct(pPerson,16071,false); //2014
-		new SeedHct(pPerson,17532,false); //2018
-		new SeedHct(pPerson,18993,false); //2022
-		new SeedHct(pPerson,20454,false); //2026
+		
+		for(size_t i=0;i<5;i++)
+			if(GetTime() <= 14610 + (i * 1461))
+				new SeedHct(pPerson,14610 + (i * 1461),false);
 	}
 	
 /////////////////////
