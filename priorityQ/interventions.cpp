@@ -96,6 +96,7 @@ void Interventions::Execute()
 	/* HbctPocCd4 */
 	
 	if(*p_HbctPocCd4) {
+		D(cout << "HbctPocCd4 Intervention." << endl);
 		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),true);
