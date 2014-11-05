@@ -16,23 +16,6 @@
 /////////////////////
 /////////////////////
 
-class SeedHct : public event {
-public:
-	SeedHct(person * const thePerson, const double Time, const bool poc); //constructor
-	~SeedHct(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-	const bool pointOfCare;
-};
-
-/////////////////////
-/////////////////////
-
 void ScheduleHctHivTest(person * const thePerson,const bool poc);
 
 bool HctLinkage(person * const thePerson);

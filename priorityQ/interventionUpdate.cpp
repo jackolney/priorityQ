@@ -21,33 +21,6 @@ extern Rng * theRng;
 
 using namespace std;
 
-/////////////////////
-/////////////////////
-
-SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
-event(Time),
-pPerson(thePerson),
-pointOfCare(poc)
-{
-	D(cout << "Hct seeded for deployment on day = " << Time << endl);
-}
-
-SeedHct::~SeedHct()
-{}
-
-bool SeedHct::CheckValid()
-{
-	if(!pPerson->GetEverArt())
-		return pPerson->Alive();
-	else
-		return false;
-}
-
-void SeedHct::Execute()
-{
-	ScheduleHctHivTest(pPerson,pointOfCare);
-}
-
 ////////////////////
 ////////////////////
 
