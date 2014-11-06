@@ -9,8 +9,11 @@
 #include <iostream>
 #include "incidenceEvents.h"
 #include "macro.h"
+#include "transmission.h"
 
 using namespace std;
+
+extern Transmission * theTrans;
 
 SeedIncidence::SeedIncidence(Incidence * const theIncidence, const double Time) :
 event(Time),
@@ -27,9 +30,9 @@ bool SeedIncidence::CheckValid()
 
 void SeedIncidence::Execute()
 {
-	if(GetTime() == 32 * 365.25) {
-		D(cout << "HEY HEY HEY." << endl);
-//		pTransmission->CalculateBeta();
+	if(GetTime() == theTrans->GetReferenceYear()) {
+		theTrans->CalculateBeta();
+		pInc->ResetIncidence();
 	} else
 		pInc->ResetIncidence();
 }

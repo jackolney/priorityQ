@@ -37,6 +37,7 @@ public:
 	size_t GetVectorSize_Cd4_2() const;
 	size_t GetVectorSize_Cd4_1() const;
 	
+	double GetReferenceYear() const { return referenceYear; }
 	double GetWeightedTotal() const;
 	double GetBeta() const { return beta; }
 	

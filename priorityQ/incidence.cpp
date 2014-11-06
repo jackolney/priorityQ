@@ -9,7 +9,6 @@
 #include "incidence.h"
 #include "incidenceEvents.h"
 
-
 Incidence::Incidence()
 {
 	ScheduleIncidenceReset(this);

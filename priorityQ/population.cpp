@@ -20,8 +20,8 @@ population::population(const double theSize) : populationSize(theSize)
 {
 	Generate(populationSize);
 	CreateOutputArray();
-	theTrans = new Transmission;
 	theInc = new Incidence;
+	theTrans = new Transmission;	
 }
 
 population::~population()

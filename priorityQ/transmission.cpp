@@ -9,7 +9,6 @@
 #include <iostream>
 #include "macro.h"
 #include "transmission.h"
-#include "transmissionEvents.h"
 #include "incidence.h"
 
 using namespace std;
@@ -22,9 +21,7 @@ extern Incidence * theInc;
 Transmission::Transmission() :
 referenceYear(11688),
 beta(0)
-{
-	new ScheduleBeta(this,referenceYear);
-}
+{}
 
 Transmission::~Transmission()
 {}
