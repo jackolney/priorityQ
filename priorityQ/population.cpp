@@ -56,8 +56,8 @@ void population::Generate(const double theSize)
 	
 		//TEMPORARY TESTING PLATFORM//
 	
-	double yr = 3650; //specifiees startTime for individuals.
-	int cohortArray [1] = {500};
+	double yr = 0; //specifiees startTime for individuals.
+	int cohortArray [1] = {1};
 
 //	Allow populationSize to scale the cohort size.
 //	Use a loop to multiply all elements of an array by populationSizeScalar.
