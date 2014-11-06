@@ -31,12 +31,11 @@ void Transmission::UpdateVector(person * const thePerson)
 	RemoveFromVector(thePerson);
 	PushToVector(thePerson);
 	
-	cout << "pPersonCounter_Art.size() = " << pPersonCounter_Art.size() << endl;
-	cout << "pPersonCounter_Cd4_4.size() = " << pPersonCounter_Cd4_4.size() << endl;
-	cout << "pPersonCounter_Cd4_3.size() = " << pPersonCounter_Cd4_3.size() << endl;
-	cout << "pPersonCounter_Cd4_2.size() = " << pPersonCounter_Cd4_2.size() << endl;
-	cout << "pPersonCounter_Cd4_1.size() = " << pPersonCounter_Cd4_1.size() << endl;
-}
+	D(cout << "pPersonCounter_Art.size() = " << pPersonCounter_Art.size() << endl);
+	D(cout << "pPersonCounter_Cd4_4.size() = " << pPersonCounter_Cd4_4.size() << endl);
+	D(cout << "pPersonCounter_Cd4_3.size() = " << pPersonCounter_Cd4_3.size() << endl);
+	D(cout << "pPersonCounter_Cd4_2.size() = " << pPersonCounter_Cd4_2.size() << endl);
+	D(cout << "pPersonCounter_Cd4_1.size() = " << pPersonCounter_Cd4_1.size() << endl);}
 
 void Transmission::PushToVector(person * const thePerson)
 {
@@ -70,17 +69,21 @@ void Transmission::RemoveFromVector(person * const thePerson)
 
 void Transmission::CalculateBeta()
 {
+	D(cout << "Beta calculation..." << endl);
 	if(theInc->GetIncidenceVectorSize()) {
 		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
 		D(cout << "beta = " << beta << endl);
-		D(cout << "Incidence weight = " << GetIncidenceWeight() << endl);
+		GetIncidenceWeight();
 	}
 }
 
 
 double Transmission::GetIncidenceWeight() const
 {
-	return GetBeta() * GetWeightedTotal() / theInc->GetIncidenceVectorSize();
+	if(theInc->GetIncidenceVectorSize())
+		return GetBeta() * GetWeightedTotal() / theInc->GetIncidenceVectorSize();
+	else
+		return 1;
 }
 
 /////////////////////

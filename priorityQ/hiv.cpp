@@ -10,8 +10,10 @@
 #include "macro.h"
 #include "hiv.h"
 #include "rng.h"
+#include "transmission.h"
 
 extern Rng * theRng;
+extern Transmission * theTrans;
 
 using namespace std;
 
@@ -156,18 +158,24 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	//Determine SerStatus
 	bool serum = false;
 	
-	serum = theRng->Sample( hivInc [Sex] [i] [j] );
+	if(theTrans->GetBeta())
+		serum = theRng->Sample( hivInc [Sex] [i] [j] * theTrans->GetIncidenceWeight() );
+	else
+		serum = theRng->Sample( hivInc [Sex] [i] [j] );
 	
-//	if(serum) {
-//		cout << "currentAge = " << Age << ". (years = " << Age / 365.25 << ")" << endl;
-//		cout << "Sex = " << Sex << endl;
-//		cout << "Time = " << Time << ". (years = " << Time / 365.25 << ")" << endl;
-//		cout << "i = " << i << endl;
-//		cout << "yr[i] = " << yr[i] << endl;
-//		cout << "j = " << j << endl;
-//		cout << "hivInc [Sex] [i] [j] = " << hivInc [Sex] [i] [j] << endl;
-//		cout << "Sample(hivInc [Sex] [i] [j]) = " << theRng->Sample(hivInc [Sex] [i] [j]) << endl;
-//	}
+	if(serum) {
+		D(cout << "currentAge = " << Age << ". (years = " << Age / 365.25 << ")" << endl);
+		D(cout << "Sex = " << Sex << endl);
+		D(cout << "Time = " << Time << ". (years = " << Time / 365.25 << ")" << endl);
+		D(cout << "i = " << i << endl);
+		D(cout << "yr[i] = " << yr[i] << endl);
+		D(cout << "j = " << j << endl);
+		D(cout << "hivInc [Sex] [i] [j] = " << hivInc [Sex] [i] [j] << endl);
+		if(theTrans->GetBeta()) {
+			D(cout << "IncidenceWeight = " << theTrans->GetIncidenceWeight() << endl);
+			D(cout << "hivInc[Sex][i][j] * IncidenceWeight = " << hivInc [Sex] [i] [j] * theTrans->GetIncidenceWeight() << endl);
+		}
+	}
 
 	D(cout << "Serum is: " << serum << endl;)
 	
