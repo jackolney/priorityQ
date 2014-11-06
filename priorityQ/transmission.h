@@ -28,7 +28,6 @@ public:
 	
 	void CalculateBeta();
 	void SetBeta(const double theValue) { beta = theValue; }
-	double CalculateIncidenceWeight();
 	
 	/* Accessor Methods */
 	size_t GetVectorSize_Art() const;
@@ -40,6 +39,7 @@ public:
 	double GetReferenceYear() const { return referenceYear; }
 	double GetWeightedTotal() const;
 	double GetBeta() const { return beta; }
+	double GetIncidenceWeight() const;
 	
 private:
 	/* Vectors */
