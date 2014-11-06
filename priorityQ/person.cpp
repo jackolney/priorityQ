@@ -169,7 +169,7 @@ bool person::AssignGender()
 /////////////////////
 /////////////////////
 
-double person::GenerateNatDeathDate()
+double person::GenerateNatDeathAge()
 {
 	/* Declare survival distribution */
 	const double surv [2] [100] =
@@ -207,17 +207,16 @@ double person::GenerateNatDeathDate()
 
 double person::AssignNatDeathDate(const double Time)
 {
-	double deathDate = 0;
+	double deathAge = 0;
 	
 	/* Ensure that deathDate is not < initialAge */
-	while(deathDate < initialAge)
-		deathDate = GenerateNatDeathDate();
+	while(deathAge < initialAge)
+		deathAge = GenerateNatDeathAge();
 	
 	/* Create Natural Death Date Event & Add to eventQ */
-	new Death(this,Time + deathDate - initialAge,false);
-	D(cout << "NatDeathDate = " << Time + deathDate - initialAge << " (year = " << (Time + deathDate - initialAge) / 365.25 << ")" << endl);
-	
-	return Time + deathDate - initialAge;
+	new Death(this,Time + deathAge - initialAge,false);
+	D(cout << "NatDeathDate = " << Time + deathAge - initialAge << " (year = " << (Time + deathAge - initialAge) / 365.25 << ")" << endl);
+	return Time + deathAge - initialAge;
 }
 
 /////////////////////

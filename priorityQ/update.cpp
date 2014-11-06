@@ -32,7 +32,6 @@ void SeedHiv(person * const thePerson)
 	/* HivIncidence function run every year from 1975 (theRng->doub() allows the exact time to vary within the year) */
 	double yr [55];
 	for(size_t i = 0; i < 55; i++) {
-//		yr[i] = (5 + i) * 365.25;
 		yr[i] = (5 + i + theRng->doub()) * 365.25;
 		if(thePerson->GetBirthDay() < yr[i])
 			new HivIncidence(thePerson,yr[i]);
