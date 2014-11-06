@@ -28,7 +28,7 @@ public:
 	
 	void CalculateBeta();
 	void SetBeta(const double theValue) { beta = theValue; }
-	void CalculateIncidenceWeight();
+	double CalculateIncidenceWeight();
 	
 	/* Accessor Methods */
 	size_t GetVectorSize_Art() const;

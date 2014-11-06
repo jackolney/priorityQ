@@ -70,20 +70,17 @@ void Transmission::RemoveFromVector(person * const thePerson)
 
 void Transmission::CalculateBeta()
 {
-	D(cout << "IncidenceVectorSize = " << theInc->GetIncidenceVectorSize() << endl);
-	D(cout << "GetWeightedTotal = " << GetWeightedTotal() << endl);
-	SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
-	D(cout << "beta = " << beta << endl);
-	CalculateIncidenceWeight();
+	if(theInc->GetIncidenceVectorSize()) {
+		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
+		D(cout << "beta = " << beta << endl);
+		D(cout << "Incidence weight = " << CalculateIncidenceWeight() << endl);
+	}
 }
 
 
-void Transmission::CalculateIncidenceWeight()
+double Transmission::CalculateIncidenceWeight()
 {
-	double iCases = GetBeta() * GetWeightedTotal();
-	D(cout << "iCases = " << iCases << endl);
-	double wCases = iCases / theInc->GetIncidenceVectorSize();
-	D(cout << "wCases = " << wCases << endl);
+	return GetBeta() * GetWeightedTotal() / theInc->GetIncidenceVectorSize();
 }
 
 /////////////////////
