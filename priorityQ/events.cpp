@@ -101,6 +101,7 @@ void Death::Execute()
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
+	theTrans->UpdateVector(pPerson);
 	WriteCare(pPerson,GetTime());
 }
 

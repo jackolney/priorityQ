@@ -10,8 +10,11 @@
 #include "macro.h"
 #include "transmission.h"
 #include "transmissionEvents.h"
+#include "incidence.h"
 
 using namespace std;
+
+extern Incidence * theInc;
 
 /////////////////////
 /////////////////////
@@ -40,16 +43,18 @@ void Transmission::UpdateVector(person * const thePerson)
 
 void Transmission::PushToVector(person * const thePerson)
 {
-	if(thePerson->GetArtInitiationState())
-		pPersonCounter_Art.push_back(thePerson);
-	else if(thePerson->GetCurrentCd4() == 4)
-		pPersonCounter_Cd4_4.push_back(thePerson);
-	else if(thePerson->GetCurrentCd4() == 3)
-		pPersonCounter_Cd4_3.push_back(thePerson);
-	else if(thePerson->GetCurrentCd4() == 2)
-		pPersonCounter_Cd4_2.push_back(thePerson);
-	else if(thePerson->GetCurrentCd4() == 1)
-		pPersonCounter_Cd4_1.push_back(thePerson);
+	if(thePerson->Alive()) {
+		if(thePerson->GetArtInitiationState())
+			pPersonCounter_Art.push_back(thePerson);
+		else if(thePerson->GetCurrentCd4() == 4)
+			pPersonCounter_Cd4_4.push_back(thePerson);
+		else if(thePerson->GetCurrentCd4() == 3)
+			pPersonCounter_Cd4_3.push_back(thePerson);
+		else if(thePerson->GetCurrentCd4() == 2)
+			pPersonCounter_Cd4_2.push_back(thePerson);
+		else if(thePerson->GetCurrentCd4() == 1)
+			pPersonCounter_Cd4_1.push_back(thePerson);
+	}
 }
 
 void Transmission::RemoveFromVector(person * const thePerson)
@@ -69,6 +74,8 @@ void Transmission::RemoveFromVector(person * const thePerson)
 void Transmission::CalculateBeta()
 {
 	D(cout << "WOOO BETA BETA BETA!" << endl);
+	D(cout << "Incidence vector size = " << theInc->GetIncidenceVectorSize() << endl);
+	D(cout << "GetWeighted total = " << GetWeightedTotal() << endl);
 }
 
 /////////////////////

@@ -15,7 +15,7 @@
 
 class SeedIncidence : public event {
 public:
-	SeedIncidence(Incidence * theInc, const double Time); //constructor
+	SeedIncidence(Incidence * theIncidence, const double Time); //constructor
 	~SeedIncidence(); //destructor
 	
 	/* Methods */

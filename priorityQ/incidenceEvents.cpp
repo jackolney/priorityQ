@@ -12,9 +12,9 @@
 
 using namespace std;
 
-SeedIncidence::SeedIncidence(Incidence * const theInc, const double Time) :
+SeedIncidence::SeedIncidence(Incidence * const theIncidence, const double Time) :
 event(Time),
-pInc(theInc)
+pInc(theIncidence)
 {}
 
 SeedIncidence::~SeedIncidence()
@@ -27,7 +27,5 @@ bool SeedIncidence::CheckValid()
 
 void SeedIncidence::Execute()
 {
-	cout << pInc->GetIncidenceVectorSize() << endl;
 	pInc->ResetIncidence();
-	D(cout << "Incidence Reset." << endl);
 }
