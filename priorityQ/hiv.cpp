@@ -145,7 +145,7 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 		yr[i] = (5+i) * 365.25;
 	
 	int i = 0;
-	while(Time > yr[i] && i < 55)
+	while(Time > yr[i] && i < 54)
 		i++;
 		
 	//Find j for age
