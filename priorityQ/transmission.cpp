@@ -135,23 +135,3 @@ double Transmission::GetWeightedTotal() const
 
 /////////////////////
 /////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
