@@ -27,6 +27,8 @@ public:
 	void RemoveFromVector(person * const thePerson);
 	
 	void CalculateBeta();
+	void SetBeta(const double theValue) { beta = theValue; }
+	void CalculateIncidenceWeight();
 	
 	/* Accessor Methods */
 	size_t GetVectorSize_Art() const;
@@ -36,6 +38,7 @@ public:
 	size_t GetVectorSize_Cd4_1() const;
 	
 	double GetWeightedTotal() const;
+	double GetBeta() const { return beta; }
 	
 private:
 	/* Vectors */

@@ -8,20 +8,20 @@
 
 #include "transmissionEvents.h"
 
-GetBeta::GetBeta(Transmission * const theTrans, const double Time) :
+ScheduleBeta::ScheduleBeta(Transmission * const theTrans, const double Time) :
 event(Time),
 pTransmission(theTrans)
 {}
 
-GetBeta::~GetBeta()
+ScheduleBeta::~ScheduleBeta()
 {}
 
-bool GetBeta::CheckValid()
+bool ScheduleBeta::CheckValid()
 {
 	return true;
 }
 
-void GetBeta::Execute()
+void ScheduleBeta::Execute()
 {
-	pTransmission->CalculateBeta();
+//	pTransmission->CalculateBeta();
 }

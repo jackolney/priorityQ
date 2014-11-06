@@ -13,10 +13,10 @@
 #include "event.h"
 #include "transmission.h"
 
-class GetBeta : public event {
+class ScheduleBeta : public event {
 public:
-	GetBeta(Transmission * const theTrans, const double Time); //constructor
-	~GetBeta(); //destructor
+	ScheduleBeta(Transmission * const theTrans, const double Time); //constructor
+	~ScheduleBeta(); //destructor
 	
 	/* Methods */
 	bool CheckValid();

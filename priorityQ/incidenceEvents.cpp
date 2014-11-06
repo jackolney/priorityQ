@@ -27,5 +27,9 @@ bool SeedIncidence::CheckValid()
 
 void SeedIncidence::Execute()
 {
-	pInc->ResetIncidence();
+	if(GetTime() == 32 * 365.25) {
+		D(cout << "HEY HEY HEY." << endl);
+//		pTransmission->CalculateBeta();
+	} else
+		pInc->ResetIncidence();
 }

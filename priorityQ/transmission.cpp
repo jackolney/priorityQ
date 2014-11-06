@@ -20,10 +20,10 @@ extern Incidence * theInc;
 /////////////////////
 
 Transmission::Transmission() :
-referenceYear(11687.04),
+referenceYear(11688),
 beta(0)
 {
-	new GetBeta(this,referenceYear);
+	new ScheduleBeta(this,referenceYear);
 }
 
 Transmission::~Transmission()
@@ -73,9 +73,20 @@ void Transmission::RemoveFromVector(person * const thePerson)
 
 void Transmission::CalculateBeta()
 {
-	D(cout << "WOOO BETA BETA BETA!" << endl);
-	D(cout << "Incidence vector size = " << theInc->GetIncidenceVectorSize() << endl);
-	D(cout << "GetWeighted total = " << GetWeightedTotal() << endl);
+	D(cout << "IncidenceVectorSize = " << theInc->GetIncidenceVectorSize() << endl);
+	D(cout << "GetWeightedTotal = " << GetWeightedTotal() << endl);
+	SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
+	D(cout << "beta = " << beta << endl);
+	CalculateIncidenceWeight();
+}
+
+
+void Transmission::CalculateIncidenceWeight()
+{
+	double iCases = GetBeta() * GetWeightedTotal();
+	D(cout << "iCases = " << iCases << endl);
+	double wCases = iCases / theInc->GetIncidenceVectorSize();
+	D(cout << "wCases = " << wCases << endl);
 }
 
 /////////////////////
