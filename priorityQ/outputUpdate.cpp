@@ -25,10 +25,10 @@ void WritePop(person * const thePerson)
 {
 	double yr [60];
 	for(size_t i = 0; i<60; i++)
-		yr[i] = i * 365.25;
+		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i])
+	while(theQ->GetTime() > yr[i] && i < 60)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay())
@@ -42,10 +42,10 @@ void WriteHiv(person * const thePerson)
 {
 	double yr [60];
 	for(size_t i = 0; i<60; i++)
-		yr[i] = i * 365.25;
+		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i])
+	while(theQ->GetTime() > yr[i] && i < 60)
 		i++;
 	
 	if(thePerson->Alive())
@@ -59,10 +59,10 @@ void WriteArt(person * const thePerson)
 {
 	double yr [60];
 	for(size_t i = 0; i<60; i++)
-		yr[i] = i * 365.25;
+		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i])
+	while(theQ->GetTime() > yr[i] && i < 60)
 		i++;
 	
 	if(thePerson->Alive())

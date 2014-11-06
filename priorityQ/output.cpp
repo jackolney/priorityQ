@@ -27,8 +27,8 @@ double * theART;
 void SeedOutput(person * const thePerson)
 {
 	double yr [60];
-	for(size_t i = 0; i < 60; i++) {
-		yr[i] = i * 365.25;
+	for(size_t i=0;i<60;i++) {
+		yr[i] = 365.25 + (i * 365.25);
 		if(thePerson->GetBirthDay() < yr[i])
 			new Output(thePerson,yr[i]);
 	}

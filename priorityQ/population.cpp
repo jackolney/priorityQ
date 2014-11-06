@@ -50,7 +50,7 @@ void population::Generate(const double theSize)
 //	double yr = 0;
 //	for(int i = 0; i < 60; i++) {
 //		new cohort(popSize[i],yr);
-//		yr += 10;
+//		yr += 365.25;
 //	}
 
 	

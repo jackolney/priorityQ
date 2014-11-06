@@ -12,12 +12,15 @@
 #include "rng.h"
 #include "population.h"
 #include "eventQ.h"
+#include "output.h"
 
 using namespace std;
 
 /* Pointers to core stuff */
 Rng * theRng;
 eventQ * theQ;
+
+extern double * theDALY;
 
 /* Intervention Pointers */
 int const * p_Hbct;
@@ -71,6 +74,9 @@ int main(int argc, const char * argv[])
 	new population(1);
 
 	theQ->RunEvents();
+	
+	for(size_t i=0;i<20;i++)
+		cout << theDALY[i] << endl;
 	
 	delete theQ;
 	delete theRng;
