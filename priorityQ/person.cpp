@@ -73,8 +73,8 @@ iDALY(0),
 iHctVisitCost(0),
 iRapidHivTestCost(0),
 iPreArtClinicVisitCost(0),
-iLabCd4Test(0),
-iPocCd4Test(0),
+iLabCd4TestCost(0),
+iPocCd4TestCost(0),
 iAnnualArtCost(0),
 iAdherenceCost(0),
 iOutreachCost(0)
@@ -115,7 +115,7 @@ void person::AssignInitialAge(const double Time)
 	//Assign age as per Kenya in 1970 if Time = 1970.
 	if(Time < 365.25) {
 		const double ageKenya1970 [36] = {0.101640654,0.18074287,0.24488321,0.296843465,0.33534196,0.362704406,0.387709503,0.411405909,0.43137522,0.447971405,0.461838232,0.473612273,0.4832219,0.490165978,0.494779544,0.497326542,0.49881466,0.49881466,0.60001381,0.679748066,0.744514936,0.797175037,0.836087485,0.863900411,0.889576027,0.913307092,0.932633878,0.948053875,0.961023832,0.971869188,0.981102987,0.988755443,0.994329865,0.997681397,1,1};
-		
+
 		const double u = theRng->doub();
 		unsigned int i = 0;
 		

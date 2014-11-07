@@ -74,12 +74,12 @@ public:
 	void SetHctVisitCost(const double theCost) { iHctVisitCost += theCost; }
 	void SetRapidHivTestCost(const double theCost) { iRapidHivTestCost += theCost; }
 	void SetPreArtClinicVisitCost(const double theCost) { iPreArtClinicVisitCost += theCost; }
-	void SetLabCd4Test(const double theCost) { iLabCd4Test += theCost; }
-	void SetPocCd4Test(const double theCost) { iPocCd4Test += theCost; }
+	void SetLabCd4TestCost(const double theCost) { iLabCd4TestCost += theCost; }
+	void SetPocCd4TestCost(const double theCost) { iPocCd4TestCost += theCost; }
 	void SetAnnualArtCost(const double theCost) { iAnnualArtCost = theCost; }
 	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost = theCost; }
 	void SetOutreachCost(const double theCost) { iOutreachCost += theCost; }
-	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4Test = 0; iPocCd4Test = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
+	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
 	
 	//////////////////////
 	/* Accessor methods */
@@ -132,8 +132,8 @@ public:
 	double GetHctVisitCost() const { return iHctVisitCost; }
 	double GetRapidHivTestCost() const { return iRapidHivTestCost; }
 	double GetPreArtClinicVisitCost() const { return iPreArtClinicVisitCost; }
-	double GetLabCd4Test() const { return iLabCd4Test; }
-	double GetPocCd4Test() const { return iPocCd4Test; }
+	double GetLabCd4TestCost() const { return iLabCd4TestCost; }
+	double GetPocCd4TestCost() const { return iPocCd4TestCost; }
 	double GetAnnualArtCost() const { return iAnnualArtCost; }
 	double GetAnnualAdherenceCost() const { return iAdherenceCost; }
 	double GetOutreachCost() const { return iOutreachCost; }
@@ -207,8 +207,8 @@ private:
 	double iHctVisitCost;
 	double iRapidHivTestCost;
 	double iPreArtClinicVisitCost;
-	double iLabCd4Test;
-	double iPocCd4Test;
+	double iLabCd4TestCost;
+	double iPocCd4TestCost;
 	double iAnnualArtCost;
 	double iAdherenceCost;
 	double iOutreachCost;

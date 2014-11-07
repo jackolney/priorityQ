@@ -47,7 +47,7 @@ void ChargePreArtClinicVisit(person * const thePerson)
 
 void ChargePreArtClinicCd4Test(person * const thePerson)
 {
-	thePerson->SetLabCd4Test(labCd4TestCost);
+	thePerson->SetLabCd4TestCost(labCd4TestCost);
 }
 
 /////////////////////
@@ -63,7 +63,7 @@ void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 
 void ChargePocCd4Test(person * const thePerson)
 {
-	thePerson->SetPocCd4Test(pocCd4TestCost);
+	thePerson->SetPocCd4TestCost(pocCd4TestCost);
 }
 
 /////////////////////
@@ -121,7 +121,7 @@ void WriteCost(person * const thePerson)
 			i++;
 		
 	if(theQ->GetTime() > 14610)
-		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4Test() + thePerson->GetPocCd4Test() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
+		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
 	
 	if(theQ->GetTime() == 14610)
 		thePerson->ResetCost();
