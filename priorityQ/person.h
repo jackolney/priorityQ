@@ -86,6 +86,9 @@ public:
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
 	void SetRowIndex(const size_t theIndex) { rowIndex = theIndex; }
 	
+	/* Population function */
+	void UpdatePopulation() { iPop->UpdateVector(this); }
+	
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////

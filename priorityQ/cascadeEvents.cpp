@@ -103,6 +103,7 @@ bool VctHivTest::CheckValid()
 
 void VctHivTest::Execute()
 {
+	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	ChargeVctPictHivTest(pPerson);
 	D(cout << "VctHivTest executed." << endl);
@@ -147,6 +148,7 @@ bool PictHivTest::CheckValid()
 
 void PictHivTest::Execute()
 {
+	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	ChargeVctPictHivTest(pPerson);
 	D(cout << "PictHivTest executed." << endl);
@@ -191,6 +193,7 @@ bool Cd4Test::CheckValid()
 
 void Cd4Test::Execute()
 {
+	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	ChargePreArtClinicVisit(pPerson);
 	ChargePreArtClinicCd4Test(pPerson);
@@ -225,6 +228,7 @@ bool Cd4TestResult::CheckValid()
 
 void Cd4TestResult::Execute()
 {
+	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
@@ -265,6 +269,7 @@ bool ArtInitiation::CheckValid()
 
 void ArtInitiation::Execute()
 {
+	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	D(cout << "ArtInitiation executed." << endl);
 	if(!pPerson->GetArtAdherenceState())
@@ -296,6 +301,7 @@ bool ArtDropout::CheckValid()
 
 void ArtDropout::Execute()
 {
+	pPerson->UpdatePopulation();	
 	UpdateDaly(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());

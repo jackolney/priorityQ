@@ -27,29 +27,19 @@ public:
 	void RemovePerson(person * thePerson);
 	
 	/* Vector methods */
+	void InitialiseVector();
 	void UpdateVector(person * thePerson);
 	void PushIn(person * thePerson);
 	void SwapOut(person * thePerson);
-	
 //	void GetVectorSize();
-	
-	vector<vector<person *> > people;
-	void InitialiseVector();
-	
-		//34 rows (17 for Female then 17 for Male);
-		//100 columns? Can be pushed back using matrix.at(theRow).push_back(*someGuy);
-	/* Age groups */
-	// 0to4,5to9,to14,to19,to24,to29,to34,to39,to44,to49,to54,to59,to64,to69,to74,to79,80
 
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
 	
-	/* Vector */
+	/* VectorVector */
+	vector<vector<person *> > people;
 
-
-		//Male and Female
-		//Susceptible and Infected
 };
 
 #endif /* defined(__priorityQ__population__) */

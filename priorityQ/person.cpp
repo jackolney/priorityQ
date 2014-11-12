@@ -271,6 +271,7 @@ bool person::CheckHiv(const double Time)
 			SetSeroconversionDay(Time);
 			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 			ScheduleHivIndicatorUpdate();
+			iPop->UpdateVector(this);
 			theInc->UpdateIncidence(this);
 		}
 		return HivResult;
