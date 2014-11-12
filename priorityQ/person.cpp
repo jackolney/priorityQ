@@ -80,7 +80,9 @@ iPocCd4TestCost(0),
 iAnnualArtCost(0),
 iAdherenceCost(0),
 iOutreachCost(0),
-iPop(thePop)
+iPop(thePop),
+personIndex(0),
+rowIndex(0)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -231,6 +233,7 @@ void person::Kill(const double Time, const bool theCause)
 	deathDay = Time;
 	hivDeath = theCause;
 	artDeath = art;
+	iPop->RemovePerson(this);
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }

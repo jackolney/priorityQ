@@ -83,7 +83,8 @@ public:
 	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
 	
 	/* Vector functions */
-	void SetIndex(const size_t theIndex) { iIndex = theIndex; }
+	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
+	void SetRowIndex(const size_t theIndex) { rowIndex = theIndex; }
 	
 	//////////////////////
 	/* Accessor methods */
@@ -148,7 +149,8 @@ public:
 	unsigned int GetCd4AtArt() const { return cd4AtArt; }
 	
 	/* Vector function */
-	size_t GetIndex() const { return iIndex; }
+	size_t GetPersonIndex() const { return personIndex; }
+	size_t GetRowIndex() const { return rowIndex; }
 	
 private:
 	/* basic characteristics */
@@ -222,7 +224,8 @@ private:
 	
 	/* Data */
 	population * const iPop;
-	size_t iIndex;
+	size_t personIndex;
+	size_t rowIndex;
 	
 };
 

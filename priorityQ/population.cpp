@@ -21,7 +21,7 @@ Cd4Counter * theCd4Counter;
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
 	Generate(sizeAdjustment);
-	InitialiseVectors();
+	InitialiseVector();
 	CreateOutputArray();
 	theInc = new Incidence;
 	theTrans = new Transmission;
@@ -71,35 +71,76 @@ void population::Generate(const double theSize)
 /////////////////////
 /////////////////////
 
-void population::InitialiseVectors()
+void population::InitialiseVector()
 {
-	Susceptible.resize(34,vector<person *>(0));
-	Infected.resize(34,vector<person *>(0));
+		// Rows 0 to 33 are Susceptible.
+		// Rows 34 to 67 are Infected.
+	people.resize(68,vector<person *>(0));
 }
 
-void population::AddPerson(person * me)
+void population::AddPerson(person * thePerson)
 {
-	AddToVector(me);
+	PushIn(thePerson);
 	populationSize++;
 }
 
-void population::AddToVector(person * me)
+void population::PushIn(person * thePerson)
 {
 	// 0to4,5to9,to14,to19,to24,to29,to34,to39,to44,to49,to54,to59,to64,to69,to74,to79,80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
-	while(me->GetAge() / 365.25 > ageCatMax[i] && i < 17)
+	while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 17)
 		i++;
 	
-	if(me->GetGender())
+	if(thePerson->GetGender()) // If Male then i += 17;
 		i += 17;
 	
-	if(!me->GetSeroStatus()) {
-		me->SetIndex(Susceptible.at(i).size());
-		Susceptible.at(i).push_back(me);
-	} else {
-		Infected.at(i).push_back(me);
-	}
+	if(thePerson->GetSeroStatus()) // If HIV-positive then i += 34;
+		i += 34;
+	
+		// Therefore, i (rows) covers AGE and Susceptible/Infected.
+	thePerson->SetPersonIndex(people.at(1).size());
+	thePerson->SetRowIndex(1); // thePerson->SetAgeIndex(i);
+	people.at(1).push_back(thePerson);
+	
+//	thePerson->SetPersonIndex(people.at(i).size());
+//	thePerson->SetRowIndex(i);
+//	people.at(i).push_back(thePerson);
+}
+
+void population::RemovePerson(person * thePerson)
+{
+		//Need to check the below... but it should grab thePerson and then switch it up with the guy at the end of the vector and pop_back();
+	SwapOut(thePerson);
+	populationSize--;
+}
+
+void population::UpdateVector(person * theOld)
+{
+	SwapOut(theOld);
+	PushIn(theOld);
+}
+
+void population::SwapOut(person * theOld)
+{
+	cout << endl << "people.at(" << theOld->GetRowIndex() << ").size() = " << people.at(theOld->GetRowIndex()).size() << endl;
+	cout << "theOld->GetRowIndex() = " << theOld->GetRowIndex() << endl;
+	cout << "theOld->GetPersonIndex() = " << theOld->GetPersonIndex() << endl;
+	cout << "people.at(theOld->GetRowIndex()).back()->GetRowIndex() = " << 	people.at(theOld->GetRowIndex()).back()->GetRowIndex() << endl;
+	cout << "people.at(theOld->GetRowIndex()).back()->GetPersonIndex() = " << people.at(theOld->GetRowIndex()).back()->GetPersonIndex() << endl;
+	cout << "NatDeath (switch check) = " << people.at(theOld->GetRowIndex()).back()->GetNatDeathDate() << endl;
+	
+	people.at(theOld->GetRowIndex()).at(theOld->GetPersonIndex()) = people.at(theOld->GetRowIndex()).back();
+	people.at(theOld->GetRowIndex()).back()->SetRowIndex(theOld->GetRowIndex());
+	people.at(theOld->GetRowIndex()).back()->SetPersonIndex(theOld->GetPersonIndex());
+	people.at(theOld->GetRowIndex()).pop_back();
+
+	cout << "Update..." << endl;
+	cout << "people.at(" << theOld->GetRowIndex() << ").size() = " << people.at(theOld->GetRowIndex()).size() << endl;
+	cout << "NatDeath (switch check) = " << people.at(theOld->GetRowIndex()).at(theOld->GetPersonIndex())->GetNatDeathDate() << endl;
+	
+	theOld->SetRowIndex(NULL); //Doesn't actually set them to NULL
+	theOld->SetPersonIndex(NULL); //Doesn't actually set them to NULL
 }
 
 /////////////////////

@@ -77,9 +77,41 @@ int main(int argc, const char * argv[])
 	person * theOtherPerson = new person(thePop,1);
 	person * yetAnotherPerson = new person(thePop,1);
 	
-	cout << thePerson->GetIndex() << endl;
-	cout << theOtherPerson->GetIndex() << endl;
-	cout << yetAnotherPerson->GetIndex() << endl;
+	thePop->SwapOut(theOtherPerson);
+	
+//	cout << thePerson->GetPersonIndex() << endl;
+//	cout << theOtherPerson->GetPersonIndex() << endl;
+//	cout << yetAnotherPerson->GetPersonIndex() << endl;
+//	cout << thePerson->GetNatDeathDate() << endl;
+//	cout << theOtherPerson->GetNatDeathDate() << endl;
+//	cout << yetAnotherPerson->GetNatDeathDate() << endl;
+//	
+//	cout << endl;
+//	cout << thePop->Susceptible.at(0).size() << endl;
+//	cout << endl;
+//	
+//		//Attempt a swap of theOtherPerson;
+//	cout << theOtherPerson->GetPersonIndex() << endl;
+//	cout << thePop->Susceptible.at(0)[theOtherPerson->GetPersonIndex()]->GetNatDeathDate() << endl;
+//	
+//	
+//		//THE POP BACK.
+//		//	thePop->Susceptible.at(0).pop_back();
+//		//	thePop->Susceptible.at(0).pop_back();
+//	cout << thePop->Susceptible.at(0).empty() << " = empty." << endl;
+//	cout << endl;
+//	
+//		//THE SWITCH.
+//		// Steps:
+//		// 1. Replace otherPerson with anotherPerson;
+//		// 2. pop_back();
+//		// 3. Bro down?
+//	thePop->Susceptible.at(0).at(theOtherPerson->GetPersonIndex()) = yetAnotherPerson;
+//	yetAnotherPerson->SetPersonIndex(theOtherPerson->GetPersonIndex());
+//	thePop->Susceptible.at(0).pop_back();
+//	cout << thePop->Susceptible.at(0).size() << endl;
+//	cout << thePop->Susceptible.at(0).at(yetAnotherPerson->GetPersonIndex())->GetNatDeathDate() << endl;
+
 	
 	
 	

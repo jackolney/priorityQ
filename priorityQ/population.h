@@ -23,16 +23,17 @@ public:
 	
 	/* Methods */
 	void Generate(const double theSize);
-	void AddPerson(person * me);
-	void AddToVector(person * me);
+	void AddPerson(person * thePerson);
+	void RemovePerson(person * thePerson);
 	
 	/* Vector methods */
-	void UpdateVector();
+	void UpdateVector(person * theOld);
+	void PushIn(person * thePerson);
+	void SwapOut(person * theOld);
 	
 		//Vector of vectors (neater).
-	vector<vector<person *> > Susceptible;
-	vector<vector<person *> > Infected;
-	void InitialiseVectors();
+	vector<vector<person *> > people;
+	void InitialiseVector();
 	
 		//34 rows (17 for Female then 17 for Male);
 		//100 columns? Can be pushed back using matrix.at(theRow).push_back(*someGuy);
