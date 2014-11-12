@@ -14,6 +14,8 @@
 #include "eventQ.h"
 #include "output.h"
 
+#include "person.h"
+
 using namespace std;
 
 /* Pointers to core stuff */
@@ -70,8 +72,32 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0);
 
 	new population(10);
+	
+			//	cout << thePop->Susceptible.at(0).size() << endl;
+			//	thePop->Susceptible.at(0).push_back(theGuy);
+			//	cout << thePop->Susceptible.at(0).size() << endl;
+				
+			//	cout << thePop->Susceptible[0].size() << endl;
+				
+			//	cout << thePop->Susceptible.at(0)->push_back(theGuy) << endl;
+	
+			//	int num_of_col = 5;
+			//	int num_of_row = 9;
+			//	double init_value = 10;
+			//	
+			//	vector< vector<double> > matrix;
+			//		//now we have an empty 2D-matrix of size (0,0). Resizing it with one single command:
+			//	matrix.resize( num_of_col , vector<double>( num_of_row , init_value ) );
+			//		// and we are good to go ...
+			//	cout << matrix.size() << endl;
+			//	cout << matrix.at(0).size() << endl;
+			//	matrix.at(0).push_back(1);
+			//	cout << matrix.at(0).size() << endl;
+			//	matrix.at(0).erase(matrix.at(0).begin());
+			//	cout << matrix.at(0).size() << endl;
+			//	cout << matrix[0][0] << endl;
 
-	theQ->RunEvents();
+//	theQ->RunEvents();
 	
 	delete theQ;
 	delete theRng;

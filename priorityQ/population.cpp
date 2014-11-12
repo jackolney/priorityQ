@@ -21,6 +21,7 @@ Cd4Counter * theCd4Counter;
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
 	Generate(sizeAdjustment);
+	InitialiseVectors();
 	CreateOutputArray();
 	theInc = new Incidence;
 	theTrans = new Transmission;
@@ -69,6 +70,12 @@ void population::Generate(const double theSize)
 
 /////////////////////
 /////////////////////
+
+void population::InitialiseVectors()
+{
+	Susceptible.resize(34,vector<person *>(100));
+	Infected.resize(34,vector<person *>(100));
+}
 
 void population::AddPerson(person * me)
 {
