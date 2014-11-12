@@ -33,7 +33,7 @@ extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
-person::person(const double Time) : //can use Time to specify the start time for the individual.
+person::person(population * thePop,const double Time) : //can use Time to specify the start time for the individual.
 gender(0),
 currentAge(0),
 initialAge(0),
@@ -79,12 +79,14 @@ iLabCd4TestCost(0),
 iPocCd4TestCost(0),
 iAnnualArtCost(0),
 iAdherenceCost(0),
-iOutreachCost(0)
+iOutreachCost(0),
+iPop(thePop)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
 	D(cout << "Gender is = " << gender << endl);
 	natDeathDate = AssignNatDeathDate(Time);
+	iPop->AddPerson(this);
 	SeedHiv(this);
 	SeedOutput(this);
 	SeedInterventions(this);

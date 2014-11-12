@@ -71,7 +71,17 @@ int main(int argc, const char * argv[])
 
 	theQ = new eventQ(0);
 
-	new population(10);
+	population * thePop = new population(10);
+	
+	person * thePerson = new person(thePop,1);
+	person * theOtherPerson = new person(thePop,1);
+	person * yetAnotherPerson = new person(thePop,1);
+	
+	cout << thePerson->GetIndex() << endl;
+	cout << theOtherPerson->GetIndex() << endl;
+	cout << yetAnotherPerson->GetIndex() << endl;
+	
+	
 	
 			//	cout << thePop->Susceptible.at(0).size() << endl;
 			//	thePop->Susceptible.at(0).push_back(theGuy);

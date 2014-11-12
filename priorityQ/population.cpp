@@ -55,7 +55,7 @@ void population::Generate(const double theSize)
 //	}
 //
 //	for(int i = 0; i < 60; i++)
-//		new cohort(popSize[i],i * 365.25);
+//		new cohort(this,popSize[i],i * 365.25);
 
 	
 		//TEMPORARY TESTING PLATFORM//
@@ -63,7 +63,7 @@ void population::Generate(const double theSize)
 	int cohortArray [1] = {1};
 	
 	for(int i = 0; i < 1; i++) {
-		new cohort(cohortArray[i],yr);
+		new cohort(this,cohortArray[i],yr);
 		yr += 365;
 	}
 }
@@ -73,8 +73,8 @@ void population::Generate(const double theSize)
 
 void population::InitialiseVectors()
 {
-	Susceptible.resize(34,vector<person *>(100));
-	Infected.resize(34,vector<person *>(100));
+	Susceptible.resize(34,vector<person *>(0));
+	Infected.resize(34,vector<person *>(0));
 }
 
 void population::AddPerson(person * me)
@@ -88,16 +88,18 @@ void population::AddToVector(person * me)
 	// 0to4,5to9,to14,to19,to24,to29,to34,to39,to44,to49,to54,to59,to64,to69,to74,to79,80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
-	while(me->GetAge() > ageCatMax[i] && i < 17)
+	while(me->GetAge() / 365.25 > ageCatMax[i] && i < 17)
 		i++;
 	
 	if(me->GetGender())
 		i += 17;
-
-	if(!me->GetSeroStatus())
+	
+	if(!me->GetSeroStatus()) {
+		me->SetIndex(Susceptible.at(i).size());
 		Susceptible.at(i).push_back(me);
-	else
+	} else {
 		Infected.at(i).push_back(me);
+	}
 }
 
 /////////////////////

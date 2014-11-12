@@ -16,10 +16,10 @@
 #include "rng.h"
 
 extern Rng * theRng;
-
 extern eventQ * theQ;
 
-cohort::cohort(const unsigned int Size, const unsigned int StartTime) :
+cohort::cohort(population * const thePop, const unsigned int Size, const unsigned int StartTime) :
+iPop(thePop),
 cohortSize(Size),
 cohortStartTime(StartTime)
 {
@@ -51,5 +51,5 @@ void cohort::ScheduleNewPerson(const double Time)
 void cohort::GenerateNewPerson()
 {
 	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
-	new person(theQ->GetTime());
+	new person(iPop,theQ->GetTime());
 }

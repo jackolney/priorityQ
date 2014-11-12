@@ -11,7 +11,8 @@
 
 #include <stdio.h>
 #include <vector>
-#include "person.h"
+
+class person;
 
 using namespace std;
 

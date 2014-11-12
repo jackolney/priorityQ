@@ -10,10 +10,11 @@
 #define __priorityQ__person__
 
 #include <stdio.h>
+#include "population.h"
 
 class person {
 public:
-	person(const double Time); //constuctor
+	person(population * thePop,const double Time); //constuctor
 	virtual ~person(); //destructor
 	
 	/* Initialiser functions */
@@ -81,6 +82,9 @@ public:
 	void SetOutreachCost(const double theCost) { iOutreachCost += theCost; }
 	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
 	
+	/* Vector functions */
+	void SetIndex(const size_t theIndex) { iIndex = theIndex; }
+	
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////
@@ -142,6 +146,9 @@ public:
 	bool GetHivDeath() const { return hivDeath; }
 	bool GetArtDeath() const { return artDeath; }
 	unsigned int GetCd4AtArt() const { return cd4AtArt; }
+	
+	/* Vector function */
+	size_t GetIndex() const { return iIndex; }
 	
 private:
 	/* basic characteristics */
@@ -212,6 +219,11 @@ private:
 	double iAnnualArtCost;
 	double iAdherenceCost;
 	double iOutreachCost;
+	
+	/* Data */
+	population * const iPop;
+	size_t iIndex;
+	
 };
 
 #endif /* defined(__priorityQ__person__) */
