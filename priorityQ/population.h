@@ -27,9 +27,9 @@ public:
 	void RemovePerson(person * thePerson);
 	
 	/* Vector methods */
-	void UpdateVector(person * theOld);
+	void UpdateVector(person * thePerson);
 	void PushIn(person * thePerson);
-	void SwapOut(person * theOld);
+	void SwapOut(person * thePerson);
 	
 		//Vector of vectors (neater).
 	vector<vector<person *> > people;

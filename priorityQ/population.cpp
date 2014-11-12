@@ -115,32 +115,32 @@ void population::RemovePerson(person * thePerson)
 	populationSize--;
 }
 
-void population::UpdateVector(person * theOld)
+void population::UpdateVector(person * thePerson)
 {
-	SwapOut(theOld);
-	PushIn(theOld);
+	SwapOut(thePerson);
+	PushIn(thePerson);
 }
 
-void population::SwapOut(person * theOld)
+void population::SwapOut(person * thePerson)
 {
-	cout << endl << "people.at(" << theOld->GetRowIndex() << ").size() = " << people.at(theOld->GetRowIndex()).size() << endl;
-	cout << "theOld->GetRowIndex() = " << theOld->GetRowIndex() << endl;
-	cout << "theOld->GetPersonIndex() = " << theOld->GetPersonIndex() << endl;
-	cout << "people.at(theOld->GetRowIndex()).back()->GetRowIndex() = " << 	people.at(theOld->GetRowIndex()).back()->GetRowIndex() << endl;
-	cout << "people.at(theOld->GetRowIndex()).back()->GetPersonIndex() = " << people.at(theOld->GetRowIndex()).back()->GetPersonIndex() << endl;
-	cout << "NatDeath (switch check) = " << people.at(theOld->GetRowIndex()).back()->GetNatDeathDate() << endl;
+	cout << endl << "people.at(" << thePerson->GetRowIndex() << ").size() = " << people.at(thePerson->GetRowIndex()).size() << endl;
+	cout << "thePerson->GetRowIndex() = " << thePerson->GetRowIndex() << endl;
+	cout << "thePerson->GetPersonIndex() = " << thePerson->GetPersonIndex() << endl;
+	cout << "people.at(thePerson->GetRowIndex()).back()->GetRowIndex() = " << 	people.at(thePerson->GetRowIndex()).back()->GetRowIndex() << endl;
+	cout << "people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
+	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).back()->GetNatDeathDate() << endl;
 	
-	people.at(theOld->GetRowIndex()).at(theOld->GetPersonIndex()) = people.at(theOld->GetRowIndex()).back();
-	people.at(theOld->GetRowIndex()).back()->SetRowIndex(theOld->GetRowIndex());
-	people.at(theOld->GetRowIndex()).back()->SetPersonIndex(theOld->GetPersonIndex());
-	people.at(theOld->GetRowIndex()).pop_back();
-
+	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
+	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
+	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
+	people.at(thePerson->GetRowIndex()).pop_back();
+	
 	cout << "Update..." << endl;
-	cout << "people.at(" << theOld->GetRowIndex() << ").size() = " << people.at(theOld->GetRowIndex()).size() << endl;
-	cout << "NatDeath (switch check) = " << people.at(theOld->GetRowIndex()).at(theOld->GetPersonIndex())->GetNatDeathDate() << endl;
+	cout << "people.at(" << thePerson->GetRowIndex() << ").size() = " << people.at(thePerson->GetRowIndex()).size() << endl;
+	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
 	
-	theOld->SetRowIndex(NULL); //Doesn't actually set them to NULL
-	theOld->SetPersonIndex(NULL); //Doesn't actually set them to NULL
+	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
+	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL
 }
 
 /////////////////////
