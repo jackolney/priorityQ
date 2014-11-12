@@ -30,12 +30,7 @@ void Transmission::UpdateVector(person * const thePerson)
 {
 	RemoveFromVector(thePerson);
 	PushToVector(thePerson);
-	
-	D(cout << "pPersonCounter_Art.size() = " << pPersonCounter_Art.size() << endl);
-	D(cout << "pPersonCounter_Cd4_4.size() = " << pPersonCounter_Cd4_4.size() << endl);
-	D(cout << "pPersonCounter_Cd4_3.size() = " << pPersonCounter_Cd4_3.size() << endl);
-	D(cout << "pPersonCounter_Cd4_2.size() = " << pPersonCounter_Cd4_2.size() << endl);
-	D(cout << "pPersonCounter_Cd4_1.size() = " << pPersonCounter_Cd4_1.size() << endl);}
+}
 
 void Transmission::PushToVector(person * const thePerson)
 {

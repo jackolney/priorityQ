@@ -31,7 +31,8 @@ public:
 	void PushIn(person * thePerson);
 	void SwapOut(person * thePerson);
 	
-		//Vector of vectors (neater).
+//	void GetVectorSize();
+	
 	vector<vector<person *> > people;
 	void InitialiseVector();
 	

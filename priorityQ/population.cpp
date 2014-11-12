@@ -128,7 +128,7 @@ void population::SwapOut(person * thePerson)
 	cout << "thePerson->GetPersonIndex() = " << thePerson->GetPersonIndex() << endl;
 	cout << "people.at(thePerson->GetRowIndex()).back()->GetRowIndex() = " << 	people.at(thePerson->GetRowIndex()).back()->GetRowIndex() << endl;
 	cout << "people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
-	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).back()->GetNatDeathDate() << endl;
+//	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).back()->GetNatDeathDate() << endl;
 	
 	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
@@ -137,7 +137,7 @@ void population::SwapOut(person * thePerson)
 	
 	cout << "Update..." << endl;
 	cout << "people.at(" << thePerson->GetRowIndex() << ").size() = " << people.at(thePerson->GetRowIndex()).size() << endl;
-	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
+//	cout << "NatDeath (switch check) = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
 	
 	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
 	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL

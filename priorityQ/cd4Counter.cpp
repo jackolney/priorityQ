@@ -25,11 +25,7 @@ void Cd4Counter::UpdateVector(person * const thePerson)
 {
 	RemoveFromVector(thePerson);
 	PushToVector(thePerson);
-	
-	D(cout << "pCd4Counter_4.size() = " << pCd4Counter_4.size() << endl);
-	D(cout << "pCd4Counter_3.size() = " << pCd4Counter_3.size() << endl);
-	D(cout << "pCd4Counter_2.size() = " << pCd4Counter_2.size() << endl);
-	D(cout << "pCd4Counter_1.size() = " << pCd4Counter_1.size() << endl);}
+}
 
 void Cd4Counter::PushToVector(person * const thePerson)
 {
