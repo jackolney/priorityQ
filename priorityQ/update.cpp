@@ -44,14 +44,6 @@ void SeedHiv(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void UpdateAge(person * const thePerson)
-{
-	thePerson->SetAge(theQ->GetTime());
-}
-
-////////////////////
-////////////////////
-
 void ScheduleCd4Update(person * const thePerson)
 {
 	D(cout << "ScheduleCd4Update called." << endl);

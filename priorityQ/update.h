@@ -14,8 +14,6 @@
 
 void SeedHiv(person * const thePerson);
 
-void UpdateAge(person * const thePerson);
-
 void ScheduleCd4Update(person * const thePerson);
 
 void ScheduleWhoUpdate(person * const thePerson);

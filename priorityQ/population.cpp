@@ -18,9 +18,9 @@ Transmission * theTrans;
 Incidence * theInc;
 Cd4Counter * theCd4Counter;
 
-population::population(const double theSize) : populationSize(theSize)
+population::population(const double theSize) : sizeAdjustment(theSize)
 {
-	Generate(populationSize);
+	Generate(sizeAdjustment);
 	CreateOutputArray();
 	theInc = new Incidence;
 	theTrans = new Transmission;
@@ -29,6 +29,9 @@ population::population(const double theSize) : populationSize(theSize)
 
 population::~population()
 {}
+
+/////////////////////
+/////////////////////
 
 void population::Generate(const double theSize)
 {
@@ -63,3 +66,26 @@ void population::Generate(const double theSize)
 		yr += 365;
 	}
 }
+
+/////////////////////
+/////////////////////
+
+void population::AddPerson(person * me)
+{
+	AddToVector(me);
+	populationSize++;
+}
+
+void population::AddToVector(person * me)
+{
+	if(me->GetGender()) {
+			//Male
+		me->GetAge();
+	} else {
+			//Female
+		
+	}
+}
+
+/////////////////////
+/////////////////////

@@ -60,7 +60,6 @@ void WritePop(person * const thePerson)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
-		thePerson->SetAge(theQ->GetTime());
 		if(thePerson->GetAge() > 15 * 365.25)
 			thePOP_15plus[i] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
@@ -82,7 +81,6 @@ void WriteHiv(person * const thePerson)
 		i++;
 	
 	if(thePerson->Alive()) {
-		thePerson->SetAge(theQ->GetTime());
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
 			theHIV_15to49[i] += thePerson->GetSeroStatus();
 	}
@@ -102,7 +100,6 @@ void WriteArt(person * const thePerson)
 		i++;
 	
 	if(thePerson->Alive()) {
-		thePerson->SetAge(theQ->GetTime());
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
 			theART_15to49[i] += thePerson->GetArtInitiationState();
 	}
@@ -150,7 +147,6 @@ void WriteAidsDeath(person * const thePerson)
 void Write2007(person * const thePerson)
 {
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
-		thePerson->SetAge(theQ->GetTime());
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
 			const unsigned int ageCatMax [10] = {19,24,29,34,39,44,49,54,59,64};
 			unsigned int i = 0;
@@ -165,13 +161,13 @@ void Write2007(person * const thePerson)
 				theHIV_AgeSex_2007[i] += thePerson->GetSeroStatus();
 				if(!thePerson->GetArtInitiationState()) {
 					if(thePerson->GetCurrentCd4() == 1)
-						thePOP_NoArtCd4_2007[0] += 1;
+						thePOP_NoArtCd4_2007[0]++;
 					else if(thePerson->GetCurrentCd4() == 2)
-						thePOP_NoArtCd4_2007[1] += 1;
+						thePOP_NoArtCd4_2007[1]++;
 					else if(thePerson->GetCurrentCd4() == 3)
-						thePOP_NoArtCd4_2007[2] += 1;
+						thePOP_NoArtCd4_2007[2]++;
 					else if(thePerson->GetCurrentCd4() == 4)
-						thePOP_NoArtCd4_2007[3] += 1;
+						thePOP_NoArtCd4_2007[3]++;
 				}
 			}
 		}
@@ -184,7 +180,6 @@ void Write2007(person * const thePerson)
 void Write2012(person * const thePerson)
 {
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
-		thePerson->SetAge(theQ->GetTime());
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
 			const unsigned int ageCatMax [8] = {19,24,29,34,39,44,49,64};
 			unsigned int i = 0;
@@ -206,9 +201,7 @@ void Write2012(person * const thePerson)
 
 void Write2014(person * const thePerson)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
-		thePerson->SetAge(theQ->GetTime());
-		
+	if(theQ->GetTime() > thePerson->GetBirthDay()) {		
 		const unsigned int ageCatMax [5] = {14,21,29,46,200};
 		unsigned int i = 0;
 		while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 4)

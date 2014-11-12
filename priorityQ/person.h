@@ -44,9 +44,9 @@ public:
 	void AssignHivDeathDate(); //function creates the Death event.
 	
 	/* Hiv Care Functions */
-	void SetDiagnosedState(const bool theState,unsigned int theRoute) { diagnosed = theState; diagnosisCount += 1; diagnosisRoute = theRoute; }
-	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount += 1; }
-	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount +=1; }
+	void SetDiagnosedState(const bool theState,unsigned int theRoute) { diagnosed = theState; diagnosisCount++; diagnosisRoute = theRoute; }
+	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount++; }
+	void SetEverCD4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount++; }
 	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
@@ -87,7 +87,7 @@ public:
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
-	double GetAge() const;
+	double GetAge();
 	const double GetBirthDay() const { return birthDay; }
 	unsigned int GetCurrentCd4() const { return currentCd4; }
 	unsigned int GetCurrentWho() const { return currentWho; }

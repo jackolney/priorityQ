@@ -236,8 +236,9 @@ void person::Kill(const double Time, const bool theCause)
 /////////////////////
 /////////////////////
 
-double person::GetAge() const
+double person::GetAge()
 {
+	SetAge(theQ->GetTime());
 	return currentAge;
 }
 
@@ -258,7 +259,7 @@ bool person::CheckHiv(const double Time)
 {
 	if(Time >= 1826) {
 		D(cout << "CheckHIV executed." << endl);
-		bool HivResult = Hiv(currentAge,gender,Time);
+		bool HivResult = Hiv(GetAge(),gender,Time);
 		if(HivResult) {
 			D(cout << "HIV+" << endl);
 			SetSeroStatus(true);
