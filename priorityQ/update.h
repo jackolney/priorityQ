@@ -18,4 +18,6 @@ void ScheduleCd4Update(person * const thePerson);
 
 void ScheduleWhoUpdate(person * const thePerson);
 
+void ScheduleVectorUpdate(person * const thePerson, const double theTime);
+
 #endif /* defined(__priorityQ__update__) */

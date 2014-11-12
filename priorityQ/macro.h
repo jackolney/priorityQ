@@ -11,7 +11,7 @@
 
 	/* Macro header file */
 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 #ifdef DEBUG_MODE
 #define D(x) x

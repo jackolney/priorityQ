@@ -13,6 +13,7 @@
 #include "transmission.h"
 #include "incidence.h"
 #include "cd4Counter.h"
+#include "update.h"
 
 Transmission * theTrans;
 Incidence * theInc;
@@ -93,16 +94,19 @@ void population::PushIn(person * thePerson)
 	while(theAge > ageCatMax[i] && i < 17)
 		i++;
 	
+	if(i < 16)
+		ScheduleVectorUpdate(thePerson,(ageCatMax[i] - theAge) * 365.25);
+	
+//	cout << "HIV+ = " << thePerson->GetSeroStatus() << endl;
+//	cout << "i = " << i << endl;
+//	cout << "Gender = " << thePerson->GetGender() << endl;
+//	cout << "Age = " << thePerson->GetAge() / 365.25 << endl << endl;
+	
 	if(thePerson->GetGender()) // If Male then i += 17;
 		i += 17;
 	
 	if(thePerson->GetSeroStatus()) // If HIV-positive then i += 34;
 		i += 34;
-
-	cout << "HIV+ = " << thePerson->GetSeroStatus() << endl;
-	cout << "i = " << i << endl;
-	cout << "Gender = " << thePerson->GetGender() << endl;
-	cout << "Age = " << thePerson->GetAge() / 365.25 << endl << endl;
 	
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
 	thePerson->SetPersonIndex(people.at(i).size());

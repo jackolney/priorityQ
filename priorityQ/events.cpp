@@ -49,6 +49,29 @@ void CohortStart::Execute()
 /////////////////////
 /////////////////////
 
+VectorUpdate::VectorUpdate(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "VectorUpdate on day = " << Time << endl);
+}
+
+VectorUpdate::~VectorUpdate()
+{}
+
+bool VectorUpdate::CheckValid()
+{
+	return pPerson->Alive();
+}
+
+void VectorUpdate::Execute()
+{
+	pPerson->UpdatePopulation();
+}
+
+/////////////////////
+/////////////////////
+
 PersonStart::PersonStart(cohort * const iCohort, const double Time) :
 event(Time),
 pCohort(iCohort)
@@ -96,7 +119,6 @@ bool Death::CheckValid()
 
 void Death::Execute()
 {
-	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
 	theTrans->UpdateVector(pPerson);
@@ -158,7 +180,6 @@ bool Cd4Decline::CheckValid()
 
 void Cd4Decline::Execute()
 {
-	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	D(cout << "Cd4Decline executed." << endl);
 	D(cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ");
@@ -193,7 +214,6 @@ bool Cd4Recover::CheckValid()
 
 void Cd4Recover::Execute()
 {
-	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	D(cout << "Cd4Recover executed." << endl);
 	D(cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ");
@@ -228,7 +248,6 @@ bool WhoDecline::CheckValid()
 
 void WhoDecline::Execute()
 {
-	pPerson->UpdatePopulation();
 	UpdateDaly(pPerson);
 	D(cout << "WhoDecline executed." << endl);
 	D(cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ");
@@ -263,7 +282,6 @@ bool WhoRecover::CheckValid()
 
 void WhoRecover::Execute()
 {
-	pPerson->UpdatePopulation();	
 	UpdateDaly(pPerson);
 	D(cout << "WhoRecover executed." << endl);
 	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");

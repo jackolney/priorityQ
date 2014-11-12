@@ -33,6 +33,22 @@ private:
 /////////////////////
 /////////////////////
 
+class VectorUpdate : public event {
+public:
+	VectorUpdate(person * const thePerson, const double Time); //constructor
+	~VectorUpdate(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class PersonStart : public event {
 public:
 	PersonStart(cohort * const iCohort, const double Time); //constructor
