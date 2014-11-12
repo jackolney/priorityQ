@@ -35,11 +35,6 @@ unsigned int cohort::GetCohortSize() const
 	return cohortSize;
 }
 
-void cohort::PushToVector(person * const thePerson)
-{
-	cohortContainer.push_back(thePerson);
-}
-
 void cohort::GenerateCohort()
 {
 	D(cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl);
@@ -56,6 +51,5 @@ void cohort::ScheduleNewPerson(const double Time)
 void cohort::GenerateNewPerson()
 {
 	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
-	person * iPerson = new person(theQ->GetTime());
-	PushToVector(iPerson); //redundant now?
+	new person(theQ->GetTime());
 }

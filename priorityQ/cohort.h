@@ -28,12 +28,6 @@ public:
 	/* accessor methods */
 	unsigned int GetCohortSize() const;
 	
-	/* vector */
-	vector<person*> cohortContainer;
-	
-	/* vector methods */
-	void PushToVector(person * const thePerson);
-	
 private:
 	unsigned int cohortSize; //Unsigned denotes type can only contain positive values.
 	unsigned int cohortStartTime; //Specifies the time that the cohort will enter the model.
