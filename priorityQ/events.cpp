@@ -15,10 +15,12 @@
 #include "cascadeUpdate.h"
 #include "cohort.h"
 #include "impact.h"
-#include "output.h"
+#include "outputUpdate.h"
 #include "transmission.h"
+#include "cd4Counter.h"
 
 extern Transmission * theTrans;
+extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
@@ -94,15 +96,18 @@ bool Death::CheckValid()
 
 void Death::Execute()
 {
-	if(hivRelated)
-		D(cout << "Death executed (HIV-related)." << endl);
-	else
-		D(cout << "Death executed (Natural)." << endl);
 	UpdateAge(pPerson);
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
 	theTrans->UpdateVector(pPerson);
+	theCd4Counter->UpdateVector(pPerson);
 	WriteCare(pPerson,GetTime());
+	if(hivRelated) {
+		D(cout << "Death executed (HIV-related)." << endl);
+		WriteAidsDeath(pPerson);
+	}
+	else
+		D(cout << "Death executed (Natural)." << endl);
 }
 
 /////////////////////
@@ -163,6 +168,7 @@ void Cd4Decline::Execute()
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 	theTrans->UpdateVector(pPerson);
+	theCd4Counter->UpdateVector(pPerson);
 }
 
 /////////////////////
@@ -197,6 +203,7 @@ void Cd4Recover::Execute()
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
 	theTrans->UpdateVector(pPerson);
+	theCd4Counter->UpdateVector(pPerson);
 }
 
 /////////////////////
@@ -258,7 +265,7 @@ bool WhoRecover::CheckValid()
 void WhoRecover::Execute()
 {
 	UpdateAge(pPerson);
-	UpdateDaly(pPerson);	
+	UpdateDaly(pPerson);
 	D(cout << "WhoRecover executed." << endl);
 	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);

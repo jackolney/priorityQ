@@ -23,11 +23,13 @@
 #include "discount.h"
 #include "transmission.h"
 #include "incidence.h"
+#include "cd4Counter.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
 extern Transmission * theTrans;
 extern Incidence * theInc;
+extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
@@ -115,7 +117,7 @@ void person::AssignInitialAge(const double Time)
 	//Assign age as per Kenya in 1970 if Time = 1970.
 	if(Time < 365.25) {
 		const double ageKenya1970 [36] = {0.101640654,0.18074287,0.24488321,0.296843465,0.33534196,0.362704406,0.387709503,0.411405909,0.43137522,0.447971405,0.461838232,0.473612273,0.4832219,0.490165978,0.494779544,0.497326542,0.49881466,0.49881466,0.60001381,0.679748066,0.744514936,0.797175037,0.836087485,0.863900411,0.889576027,0.913307092,0.932633878,0.948053875,0.961023832,0.971869188,0.981102987,0.988755443,0.994329865,0.997681397,1,1};
-
+		
 		const double u = theRng->doub();
 		unsigned int i = 0;
 		
@@ -132,7 +134,7 @@ void person::AssignInitialAge(const double Time)
 	} else {
 		initialAge = theRng->doub() * 365.25;
 	}
-
+	
 	currentAge = initialAge;
 	D(cout << "Initial age = " << initialAge << ". (year = " << initialAge / 365.25 << ")" << endl);
 }
@@ -208,14 +210,14 @@ double person::GenerateNatDeathAge()
 double person::AssignNatDeathDate(const double Time)
 {
 	double deathAge = 0;
-	
-	/* Ensure that deathDate is not < initialAge */
+	/* Ensure that deathAge is not < initialAge */
 	while(deathAge < initialAge)
 		deathAge = GenerateNatDeathAge();
 	
 	/* Create Natural Death Date Event & Add to eventQ */
 	new Death(this,Time + deathAge - initialAge,false);
 	D(cout << "NatDeathDate = " << Time + deathAge - initialAge << " (year = " << (Time + deathAge - initialAge) / 365.25 << ")" << endl);
+	
 	return Time + deathAge - initialAge;
 }
 
@@ -271,12 +273,12 @@ bool person::CheckHiv(const double Time)
 		return false;
 	
 	//For development purposes.
-//	D(cout << "HIV+" << endl);
-//	SetSeroStatus(true);
-//	SetSeroconversionDay(Time);
-//	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
-//	return true;
+	//	D(cout << "HIV+" << endl);
+	//	SetSeroStatus(true);
+	//	SetSeroconversionDay(Time);
+	//	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+	//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
+	//	return true;
 }
 
 /////////////////////
@@ -288,6 +290,7 @@ void person::SetHivIndicators()
 	SetInitialWhoStage();
 	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
 	theTrans->UpdateVector(this);
+	theCd4Counter->UpdateVector(this);
 }
 
 /////////////////////

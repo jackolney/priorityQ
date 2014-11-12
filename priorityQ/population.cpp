@@ -12,16 +12,19 @@
 #include "output.h"
 #include "transmission.h"
 #include "incidence.h"
+#include "cd4Counter.h"
 
 Transmission * theTrans;
 Incidence * theInc;
+Cd4Counter * theCd4Counter;
 
 population::population(const double theSize) : populationSize(theSize)
 {
 	Generate(populationSize);
 	CreateOutputArray();
 	theInc = new Incidence;
-	theTrans = new Transmission;	
+	theTrans = new Transmission;
+	theCd4Counter = new Cd4Counter;
 }
 
 population::~population()

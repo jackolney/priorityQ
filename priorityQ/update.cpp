@@ -28,7 +28,7 @@ using namespace std;
 void SeedHiv(person * const thePerson)
 {
 	D(cout << "Seeding Hiv." << endl);
-
+	
 	/* HivIncidence function run every year from 1975 (theRng->doub() allows the exact time to vary within the year) */
 	double yr [55];
 	for(size_t i = 0; i < 55; i++) {
@@ -36,9 +36,9 @@ void SeedHiv(person * const thePerson)
 		if(thePerson->GetBirthDay() < yr[i])
 			new HivIncidence(thePerson,yr[i]);
 	}
-
-		//For development purposes.
-//	new HivIncidence(thePerson,theQ->GetTime());
+	
+	//For development purposes.
+	//	new HivIncidence(thePerson,theQ->GetTime());
 }
 
 ////////////////////
@@ -82,7 +82,7 @@ void ScheduleCd4Update(person * const thePerson)
 		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		D(cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
 	}
-
+	
 }
 
 ////////////////////

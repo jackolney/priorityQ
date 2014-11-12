@@ -165,7 +165,7 @@ bool SecondaryCd4Test(person * const thePerson)
 		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
 		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
 		default: return false;
-		}
+	}
 	
 }
 
@@ -183,12 +183,12 @@ void ScheduleArtInitiation(person * const thePerson)
 void ScheduleArtDropout(person * const thePerson)
 {
 	const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear);
-
+	
 	if(artDropoutDate < 365.25)
 		new ArtDropout(thePerson,theQ->GetTime() + artDropoutDate);
 	else
 		new ArtDropout(thePerson,theQ->GetTime() + 365.25 + theRng->SampleExpDist(artDropoutTimeTwoYear));
-
+	
 }
 
 ////////////////////

@@ -39,4 +39,3 @@ size_t Incidence::GetIncidenceVectorSize() const
 {
 	return pIncidence.size();
 }
-

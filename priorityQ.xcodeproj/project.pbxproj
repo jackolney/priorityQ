@@ -24,6 +24,7 @@
 		0478C5C61A03FD1D00656B9F /* toolbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0478C5C51A03FD1D00656B9F /* toolbox.cpp */; };
 		047D3B251A0A967900037AB5 /* incidence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047D3B231A0A967900037AB5 /* incidence.cpp */; };
 		049A06DC19F16FEC006BFBCE /* population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049A06DA19F16FEC006BFBCE /* population.cpp */; };
+		04A56AA11A13687E000C9AC6 /* cd4Counter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A56A9F1A13687E000C9AC6 /* cd4Counter.cpp */; };
 		04B1C44B1A07D76100E84B4C /* interventionEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C4491A07D76100E84B4C /* interventionEvents.cpp */; };
 		04B1C44E1A07D8C200E84B4C /* interventionUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */; };
 		04CD81C719A9051C004432AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CD81C619A9051C004432AC /* main.cpp */; };
@@ -82,6 +83,8 @@
 		047D3B241A0A967900037AB5 /* incidence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = incidence.h; sourceTree = "<group>"; };
 		049A06DA19F16FEC006BFBCE /* population.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = population.cpp; sourceTree = "<group>"; };
 		049A06DB19F16FEC006BFBCE /* population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = population.h; sourceTree = "<group>"; };
+		04A56A9F1A13687E000C9AC6 /* cd4Counter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cd4Counter.cpp; sourceTree = "<group>"; };
+		04A56AA01A13687E000C9AC6 /* cd4Counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cd4Counter.h; sourceTree = "<group>"; };
 		04B1C4491A07D76100E84B4C /* interventionEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interventionEvents.cpp; sourceTree = "<group>"; };
 		04B1C44A1A07D76100E84B4C /* interventionEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interventionEvents.h; sourceTree = "<group>"; };
 		04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interventionUpdate.cpp; sourceTree = "<group>"; };
@@ -130,55 +133,57 @@
 		04CD81C519A9051C004432AC /* priorityQ */ = {
 			isa = PBXGroup;
 			children = (
-				04CD81C619A9051C004432AC /* main.cpp */,
-				049A06DA19F16FEC006BFBCE /* population.cpp */,
-				049A06DB19F16FEC006BFBCE /* population.h */,
-				04F71B6819EECC4600D72B67 /* cohort.cpp */,
-				04F71B6919EECC4600D72B67 /* cohort.h */,
-				04EAF85D19E58E0E0058B45A /* eventQ.cpp */,
-				04EAF85E19E58E0E0058B45A /* eventQ.h */,
-				040CC6FD19F0063700611C57 /* update.cpp */,
-				040CC6FE19F0063700611C57 /* update.h */,
-				040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */,
-				040C113919F7AA8D00210A47 /* cascadeUpdate.h */,
-				04EAF85A19E58A5F0058B45A /* event.cpp */,
-				04EAF85B19E58A5F0058B45A /* event.h */,
-				0447636D19E694AD001C5089 /* events.cpp */,
-				0447636E19E694AD001C5089 /* events.h */,
 				040C113519F7A93800210A47 /* cascadeEvents.cpp */,
 				040C113619F7A93800210A47 /* cascadeEvents.h */,
+				040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */,
+				040C113919F7AA8D00210A47 /* cascadeUpdate.h */,
+				04A56A9F1A13687E000C9AC6 /* cd4Counter.cpp */,
+				04A56AA01A13687E000C9AC6 /* cd4Counter.h */,
+				04F71B6819EECC4600D72B67 /* cohort.cpp */,
+				04F71B6919EECC4600D72B67 /* cohort.h */,
+				0421651A19FEB10700E47DB4 /* cost.cpp */,
+				0421651B19FEB10700E47DB4 /* cost.h */,
+				04076CD51A0A511F0046D09D /* discount.cpp */,
+				04076CD61A0A511F0046D09D /* discount.h */,
+				04EAF85A19E58A5F0058B45A /* event.cpp */,
+				04EAF85B19E58A5F0058B45A /* event.h */,
+				04EAF85D19E58E0E0058B45A /* eventQ.cpp */,
+				04EAF85E19E58E0E0058B45A /* eventQ.h */,
+				0447636D19E694AD001C5089 /* events.cpp */,
+				0447636E19E694AD001C5089 /* events.h */,
 				04CF95CA19F56FF900A061C8 /* hiv.cpp */,
 				04CF95CB19F56FF900A061C8 /* hiv.h */,
+				0421651019FE461D00E47DB4 /* impact.cpp */,
+				0421651119FE461D00E47DB4 /* impact.h */,
 				047D3B231A0A967900037AB5 /* incidence.cpp */,
 				047D3B241A0A967900037AB5 /* incidence.h */,
 				04593AEB1A0A98F900CEB3CD /* incidenceEvents.cpp */,
 				04593AEC1A0A98F900CEB3CD /* incidenceEvents.h */,
-				04076CD81A0A791F0046D09D /* transmission.cpp */,
-				04076CD91A0A791F0046D09D /* transmission.h */,
-				0400AE2819E817FE00357D2D /* rng.h */,
-				0400AE2219E707B500357D2D /* person.cpp */,
-				0400AE2319E707B500357D2D /* person.h */,
-				04CF95C919F51E7300A061C8 /* macro.h */,
-				0421651A19FEB10700E47DB4 /* cost.cpp */,
-				0421651B19FEB10700E47DB4 /* cost.h */,
-				0421651019FE461D00E47DB4 /* impact.cpp */,
-				0421651119FE461D00E47DB4 /* impact.h */,
-				04076CD51A0A511F0046D09D /* discount.cpp */,
-				04076CD61A0A511F0046D09D /* discount.h */,
-				0421651D19FFF80A00E47DB4 /* output.cpp */,
-				0421651E19FFF80A00E47DB4 /* output.h */,
-				0475975A1A0277B7008ADBCC /* outputUpdate.cpp */,
-				0475975B1A0277B7008ADBCC /* outputUpdate.h */,
-				04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */,
-				04B1C44D1A07D8C200E84B4C /* interventionUpdate.h */,
 				04B1C4491A07D76100E84B4C /* interventionEvents.cpp */,
 				04B1C44A1A07D76100E84B4C /* interventionEvents.h */,
 				0478C5C01A03D1C600656B9F /* interventions.cpp */,
 				0478C5C11A03D1C600656B9F /* interventions.h */,
-				047C252219F91B1F00F9CE73 /* toolbox.h */,
-				0478C5C51A03FD1D00656B9F /* toolbox.cpp */,
-				0421651819FE95D000E47DB4 /* rlib.cpp */,
+				04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */,
+				04B1C44D1A07D8C200E84B4C /* interventionUpdate.h */,
+				04CF95C919F51E7300A061C8 /* macro.h */,
+				04CD81C619A9051C004432AC /* main.cpp */,
+				0421651D19FFF80A00E47DB4 /* output.cpp */,
+				0421651E19FFF80A00E47DB4 /* output.h */,
+				0475975A1A0277B7008ADBCC /* outputUpdate.cpp */,
+				0475975B1A0277B7008ADBCC /* outputUpdate.h */,
+				0400AE2219E707B500357D2D /* person.cpp */,
+				0400AE2319E707B500357D2D /* person.h */,
+				049A06DA19F16FEC006BFBCE /* population.cpp */,
+				049A06DB19F16FEC006BFBCE /* population.h */,
 				04CD81C819A9051C004432AC /* priorityQ.1 */,
+				0421651819FE95D000E47DB4 /* rlib.cpp */,
+				0400AE2819E817FE00357D2D /* rng.h */,
+				0478C5C51A03FD1D00656B9F /* toolbox.cpp */,
+				047C252219F91B1F00F9CE73 /* toolbox.h */,
+				04076CD81A0A791F0046D09D /* transmission.cpp */,
+				04076CD91A0A791F0046D09D /* transmission.h */,
+				040CC6FD19F0063700611C57 /* update.cpp */,
+				040CC6FE19F0063700611C57 /* update.h */,
 			);
 			path = priorityQ;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				04593AED1A0A98F900CEB3CD /* incidenceEvents.cpp in Sources */,
 				04F71B6A19EECC4600D72B67 /* cohort.cpp in Sources */,
 				0421651C19FEB10700E47DB4 /* cost.cpp in Sources */,
+				04A56AA11A13687E000C9AC6 /* cd4Counter.cpp in Sources */,
 				049A06DC19F16FEC006BFBCE /* population.cpp in Sources */,
 				04EAF85C19E58A5F0058B45A /* event.cpp in Sources */,
 				0475975C1A0277B7008ADBCC /* outputUpdate.cpp in Sources */,

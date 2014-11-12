@@ -1,10 +1,10 @@
-	//
-	//  output.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 28/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  output.h
+//  priorityQ
+//
+//  Created by Jack Olney on 28/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__output__
 #define __priorityQ__output__
@@ -37,11 +37,6 @@ private:
 /* Population.cpp uses these functions. */
 
 void CreateOutputArray();
-
-/////////////////////
-/////////////////////
-
-void WriteCare(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////

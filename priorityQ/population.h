@@ -15,7 +15,7 @@ class population {
 public:
 	population(const double theSize); //constructor
 	~population(); //destructor
-
+	
 	/* Methods */
 	void Generate(const double theSize);
 	

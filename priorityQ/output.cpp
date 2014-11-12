@@ -1,10 +1,10 @@
-	//
-	//  output.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 28/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  output.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 28/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "output.h"
@@ -17,9 +17,34 @@ using namespace std;
 double * theCARE;
 double * theDALY;
 double * theCOST;
-double * thePOP;
-double * theHIV;
-double * theART;
+double * thePOP_15to49;
+double * theHIV_15to49;
+double * theART_15to49;
+double * thePOP_15plus;
+double * theAidsDeath_15plus;
+double * thePOP_AgeSex_2007;
+double * theHIV_AgeSex_2007;
+double * thePOP_NoArtCd4_2007;
+double * thePOP_AgeSex_2012;
+double * theHIV_AgeSex_2012;
+double * thePOP_AgeSex_2014;
+double * theHIV_AgeSex_2014;
+double * theCD4_200;
+double * theCD4_200350;
+double * theCD4_350500;
+double * theCD4_500;
+double * theCD4_200_Art;
+double * theCD4_200350_Art;
+double * theCD4_350500_Art;
+double * theCD4_500_Art;
+double * theWHO_1;
+double * theWHO_2;
+double * theWHO_3;
+double * theWHO_4;
+double * theWHO_1_Art;
+double * theWHO_2_Art;
+double * theWHO_3_Art;
+double * theWHO_4_Art;
 
 /////////////////////
 /////////////////////
@@ -59,6 +84,14 @@ void Output::Execute()
 	WritePop(pPerson);
 	WriteHiv(pPerson);
 	WriteArt(pPerson);
+	WriteCd4(pPerson);
+	WriteWho(pPerson);
+	if(GetTime() == 13879.5)
+		Write2007(pPerson);
+	if(GetTime() == 15705.75)
+		Write2012(pPerson);
+	if(GetTime() == 16436.25)
+		Write2014(pPerson);
 }
 
 /////////////////////
@@ -69,39 +102,75 @@ void CreateOutputArray()
 	theCARE = new double[5]; //NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
 	theDALY = new double[20];
 	theCOST = new double[20];
-	thePOP = new double[60];
-	theHIV = new double[60];
-	theART = new double[60];
+	thePOP_15to49 = new double[60];
+	theHIV_15to49 = new double[60];
+	theART_15to49 = new double[60];
+	thePOP_15plus = new double[60];
+	theAidsDeath_15plus = new double[60];
+	thePOP_AgeSex_2007 = new double[20];
+	theHIV_AgeSex_2007 = new double[20];
+	thePOP_NoArtCd4_2007 = new double[4];
+	thePOP_AgeSex_2012 = new double[16];
+	theHIV_AgeSex_2012 = new double[16];
+	thePOP_AgeSex_2014 = new double[10];
+	theHIV_AgeSex_2014 = new double[10];
+	theCD4_200 = new double[60];
+	theCD4_200350 = new double[60];
+	theCD4_350500 = new double[60];
+	theCD4_500 = new double[60];
+	theCD4_200_Art = new double[60];
+	theCD4_200350_Art = new double[60];
+	theCD4_350500_Art = new double[60];
+	theCD4_500_Art = new double[60];
+	theWHO_1 = new double[60];
+	theWHO_2 = new double[60];
+	theWHO_3 = new double[60];
+	theWHO_4 = new double[60];
+	theWHO_1_Art = new double[60];
+	theWHO_2_Art = new double[60];
+	theWHO_3_Art = new double[60];
+	theWHO_4_Art = new double[60];
 	
 	for(size_t i=0;i<60;i++) {
+		if(i<4)
+			thePOP_NoArtCd4_2007[i] = 0;
 		if(i<5)
 			theCARE[i] = 0;
-		if(i<20)
+		if(i<10) {
+			thePOP_AgeSex_2014[i] = 0;
+			theHIV_AgeSex_2014[i] = 0;
+		}
+		if(i<20) {
 			theDALY[i] = 0;
-		if(i<20)
 			theCOST[i] = 0;
-		thePOP[i] = 0;
-		theHIV[i] = 0;
-		theART[i] = 0;
-	}
-}
-
-/////////////////////
-/////////////////////
-
-void WriteCare(person * const thePerson, const double theTime)
-{
-	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
-			//NeverDiagnosed
-		theCARE[0] += !thePerson->GetDiagnosedState();
-			//DiagnosedButNeverInitiatedArt
-		theCARE[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverArt());
-			//ArtLate
-		theCARE[2] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
-			//ArtButDiedOffArt
-		theCARE[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
-			//ArtEarly
-		theCARE[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
+			thePOP_AgeSex_2007[i] = 0;
+			theHIV_AgeSex_2007[i] = 0;
+		}
+		if(i<16) {
+			thePOP_AgeSex_2012[i] = 0;
+			theHIV_AgeSex_2012[i] = 0;
+		}
+		thePOP_15to49[i] = 0;
+		theHIV_15to49[i] = 0;
+		theART_15to49[i] = 0;
+		thePOP_15plus[i] = 0;
+		theAidsDeath_15plus[i] = 0;
+		theCD4_200[i] = 0;
+		theCD4_200350[i] = 0;
+		theCD4_350500[i] = 0;
+		theCD4_500[i] = 0;
+		theCD4_200_Art[i] = 0;
+		theCD4_200350_Art[i] = 0;
+		theCD4_350500_Art[i] = 0;
+		theCD4_500_Art[i] = 0;
+		theWHO_1[i] = 0;
+		theWHO_2[i] = 0;
+		theWHO_3[i] = 0;
+		theWHO_4[i] = 0;
+		theWHO_1_Art[i] = 0;
+		theWHO_2_Art[i] = 0;
+		theWHO_3_Art[i] = 0;
+		theWHO_4_Art[i] = 0;
 	}
 }
 

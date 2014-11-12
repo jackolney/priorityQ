@@ -1,10 +1,10 @@
-	//
-	//  impact.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 27/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  impact.h
+//  priorityQ
+//
+//  Created by Jack Olney on 27/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__impact__
 #define __priorityQ__impact__

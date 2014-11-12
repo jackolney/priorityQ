@@ -229,7 +229,7 @@ void PocCd4Test::Execute()
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCD4TestResultState(true);
-	pPerson->SetInCareState(true);	
+	pPerson->SetInCareState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {

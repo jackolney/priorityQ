@@ -302,12 +302,12 @@ bool ArtDropout::CheckValid()
 void ArtDropout::Execute()
 {
 	UpdateAge(pPerson);
-	UpdateDaly(pPerson);	
+	UpdateDaly(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
-	theTrans->UpdateVector(pPerson);	
+	theTrans->UpdateVector(pPerson);
 }
 
 /////////////////////

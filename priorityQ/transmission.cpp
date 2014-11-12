@@ -73,7 +73,6 @@ void Transmission::CalculateBeta()
 	if(theInc->GetIncidenceVectorSize()) {
 		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
 		D(cout << "beta = " << beta << endl);
-		GetIncidenceWeight();
 	}
 }
 

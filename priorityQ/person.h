@@ -27,7 +27,7 @@ public:
 	/////////////
 	void Kill(const double Time, const bool theCause);
 	void SetAge(const double Time);
-
+	
 	/* Hiv Acquisition Functions */
 	bool CheckHiv(const double Time);
 	void SetSeroStatus(const bool theState) { seroStatus = theState; }
@@ -50,14 +50,14 @@ public:
 	void SetInCareState(const bool theState) { inCare = theState; }
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
-
+	
 	/* Natural History Date Setting Functions */
 	void SetHivDeathDate(double theDate) { hivDeathDate = theDate; }
 	void SetCd4DeclineDate(double theDate) { cd4DeclineDate = theDate; }
 	void SetCd4RecoverDate(double theDate) { cd4RecoverDate = theDate; }
 	void SetWhoDeclineDate(double theDate) { whoDeclineDate = theDate; }
 	void SetWhoRecoverDate(double theDate) { whoRecoverDate = theDate; }
-
+	
 	/* Hiv Care Date Setting Functions */
 	void SetHctHivTestDate(double theDate) { hctHivTestDate = theDate; }
 	void SetVctHivTestDate(double theDate) { vctHivTestDate = theDate; }

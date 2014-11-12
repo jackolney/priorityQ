@@ -85,9 +85,9 @@ void Interventions::Execute()
 	
 	if(*p_Vct) {
 		if(*p_Vct == 1)
-			vctHivTestTime *= 0.5; //2.9 yrs
+			vctHivTestTime = 2.9 * 365.25;
 		else
-			vctHivTestTime *= 0.8; //4.64 yrs
+			vctHivTestTime = 4.64 * 365.25;
 		D(cout << "VctHivTest Intervention. vctHivTestTime = " << vctHivTestTime << endl);
 		ScheduleVctHivTest(pPerson);
 	}
@@ -100,13 +100,13 @@ void Interventions::Execute()
 		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),true);
-
+		
 		if(*p_HbctPocCd4 == 1) {
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
 		} else {
-			hctProbLink += (1-hctProbLink)*0.5;
-			hctProbLinkPreviouslyDiagnosed += (1-hctProbLinkPreviouslyDiagnosed)*0.5;
+			hctProbLink = 0.527;
+			hctProbLinkPreviouslyDiagnosed = 0.6;
 		}
 	}
 
@@ -121,10 +121,10 @@ void Interventions::Execute()
 			vctProbLink = 1;
 			pictProbLink = 1;
 		} else {
-			hctProbLink += (1-hctProbLink)*0.5;
-			hctProbLinkPreviouslyDiagnosed += (1-hctProbLinkPreviouslyDiagnosed)*0.5;
-			vctProbLink += (1-vctProbLink)*0.5;
-			pictProbLink += (1-pictProbLink)*0.5;
+			hctProbLink = 0.527;
+			hctProbLinkPreviouslyDiagnosed = 0.6;
+			vctProbLink = 0.795;
+			pictProbLink = 0.77;
 		}
 	}
 	
@@ -157,16 +157,16 @@ void Interventions::Execute()
 			vctProbSecondaryCd4Test = 1;
 			pictProbSecondaryCd4Test = 1;
 		} else {
-			cd4ResultProbAttend += (1-cd4ResultProbAttend)*0.5;
-			hctShortTermRetention += (1-hctShortTermRetention)*0.5;
-			hctLongTermRetention += (1-hctLongTermRetention)*0.5;
-			vctShortTermRetention += (1-vctShortTermRetention)*0.5;
-			vctLongTermRetention += (1-vctLongTermRetention)*0.5;
-			pictShortTermRetention += (1-pictShortTermRetention)*0.5;
-			pictLongTermRetention += (1-pictLongTermRetention)*0.5;
-			hctProbSecondaryCd4Test += (1-hctProbSecondaryCd4Test)*0.5;
-			vctProbSecondaryCd4Test += (1-vctProbSecondaryCd4Test)*0.5;
-			pictProbSecondaryCd4Test += (1-pictProbSecondaryCd4Test)*0.5;
+			cd4ResultProbAttend = 0.9;
+			hctShortTermRetention = 0.8096;
+			hctLongTermRetention = 0.8096;
+			vctShortTermRetention = 0.7663;
+			vctLongTermRetention = 0.7663;
+			pictShortTermRetention = 0.77035;
+			pictLongTermRetention = 0.77035;
+			hctProbSecondaryCd4Test = 0.71665;
+			vctProbSecondaryCd4Test = 0.65525;
+			pictProbSecondaryCd4Test = 0.65645;
 		}
 	}
 
@@ -236,6 +236,6 @@ void Interventions::Execute()
 /////////////////////
 	
 }
-	
+
 /////////////////////
 /////////////////////

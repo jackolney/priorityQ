@@ -18,4 +18,18 @@ void WriteHiv(person * const thePerson);
 
 void WriteArt(person * const thePerson);
 
+void WriteCare(person * const thePerson, const double theTime);
+
+void WriteAidsDeath(person * const thePerson);
+
+void Write2007(person * const thePerson);
+
+void Write2012(person * const thePerson);
+
+void Write2014(person * const thePerson);
+
+void WriteCd4(person * const thePerson);
+
+void WriteWho(person * const thePerson);
+
 #endif /* defined(__priorityQ__outputUpdate__) */

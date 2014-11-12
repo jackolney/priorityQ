@@ -1,10 +1,10 @@
-	//
-	//  cost.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 27/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cost.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 27/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "cost.h"
@@ -120,11 +120,11 @@ void WriteCost(person * const thePerson)
 		while(theQ->GetTime() > yr[i])
 			i++;
 		
-	if(theQ->GetTime() > 14610)
-		theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
-	
-	if(theQ->GetTime() == 14610)
-		thePerson->ResetCost();
+		if(theQ->GetTime() > 14610)
+			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
+		
+		if(theQ->GetTime() == 14610)
+			thePerson->ResetCost();
 	}
 }
 

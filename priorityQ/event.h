@@ -20,10 +20,10 @@ public:
 	/* Methods */
 	virtual void Execute() = 0; //This is a PURE virtual function - as it is not defined in event.cpp but differently in derived classes.
 	virtual bool CheckValid() = 0;
-
+	
 	/*Accessor methods*/
 	double GetTime() const { return eventTime; }
-
+	
 	/* Can include cancelling methods here */
 	void Cancel() { cancelled = true; }
 	
@@ -31,7 +31,7 @@ public:
 protected:
 	const double eventTime;
 	bool cancelled;
-		
+	
 };
 
 #endif /* defined(__priorityQ__event__) */
