@@ -85,6 +85,7 @@ public:
 	/* Vector functions */
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
 	void SetRowIndex(const size_t theIndex) { rowIndex = theIndex; }
+	void SetVectorUpdateDate(const double theDate) { vectorUpdateDate = theDate; }
 	
 	/* Population function */
 	void UpdatePopulation() { iPop->UpdateVector(this); }
@@ -154,6 +155,7 @@ public:
 	/* Vector function */
 	size_t GetPersonIndex() const { return personIndex; }
 	size_t GetRowIndex() const { return rowIndex; }
+	double GetVectorUpdateDate() const { return vectorUpdateDate; }
 	
 private:
 	/* basic characteristics */
@@ -183,6 +185,7 @@ private:
 	double cd4RecoverDate;
 	double whoDeclineDate;
 	double whoRecoverDate;
+	double vectorUpdateDate;
 	
 	/* Hiv test dates */
 	double hctHivTestDate;

@@ -54,6 +54,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "VectorUpdate on day = " << Time << endl);
+	pPerson->SetVectorUpdateDate(Time);
 }
 
 VectorUpdate::~VectorUpdate()
@@ -61,7 +62,10 @@ VectorUpdate::~VectorUpdate()
 
 bool VectorUpdate::CheckValid()
 {
-	return pPerson->Alive();
+	if(pPerson->GetVectorUpdateDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void VectorUpdate::Execute()
@@ -100,7 +104,7 @@ pPerson(thePerson),
 hivRelated(hivCause)
 {
 	if(hivCause)
-		thePerson->SetHivDeathDate(Time);
+		pPerson->SetHivDeathDate(Time);
 }
 
 Death::~Death()
@@ -164,7 +168,7 @@ Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	thePerson->SetCd4DeclineDate(Time);
+	pPerson->SetCd4DeclineDate(Time);
 }
 
 Cd4Decline::~Cd4Decline()
@@ -198,7 +202,7 @@ Cd4Recover::Cd4Recover(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	thePerson->SetCd4RecoverDate(Time);
+	pPerson->SetCd4RecoverDate(Time);
 }
 
 Cd4Recover::~Cd4Recover()
@@ -232,7 +236,7 @@ WhoDecline::WhoDecline(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	thePerson->SetWhoDeclineDate(Time);
+	pPerson->SetWhoDeclineDate(Time);
 }
 
 WhoDecline::~WhoDecline()
@@ -266,7 +270,7 @@ WhoRecover::WhoRecover(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	thePerson->SetWhoRecoverDate(Time);
+	pPerson->SetWhoRecoverDate(Time);
 }
 
 WhoRecover::~WhoRecover()
