@@ -14,10 +14,12 @@
 #include "incidence.h"
 #include "cd4Counter.h"
 #include "update.h"
+#include "eventQ.h"
 
 Transmission * theTrans;
 Incidence * theInc;
 Cd4Counter * theCd4Counter;
+extern eventQ * theQ;
 
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
@@ -102,7 +104,7 @@ void population::PushIn(person * thePerson)
 	
 	if(thePerson->GetSeroStatus()) // If HIV-positive then i += 34;
 		i += 34;
-	
+
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
 	thePerson->SetPersonIndex(people.at(i).size());
 	thePerson->SetRowIndex(i);
@@ -138,8 +140,9 @@ void population::SwapOut(person * thePerson)
 	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
 	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
-	people.at(thePerson->GetRowIndex()).pop_back();
-	
+	if(!people.at(thePerson->GetRowIndex()).empty())
+		people.at(thePerson->GetRowIndex()).pop_back();
+
 		//Neccessary?
 	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
 	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL
@@ -150,8 +153,9 @@ void population::SwapOut(person * thePerson)
 
 void population::CalculateIncidence()
 {
-		//Need IRR(a,s)
-	
+	/* IRR (0 to 16 are Female, 17 to 33 are Male */
+	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
+
 	/* Create incidence array (contains age and sex) */
 	unsigned int incidence[34] = {};
 	for(size_t j=0;j<34;j++)
@@ -174,7 +178,8 @@ void population::CalculateIncidence()
 		incidence[j] = i * people.at(j).size() * IRR[j];
 	
 	// Then we need to randomly pick these buggers and schedule infection in them!
-	
+	for(size_t j=0;j<34;j++)
+		cout << "Incidence[" << j << "] = " << incidence[j] << endl;
 }
 
 /////////////////////

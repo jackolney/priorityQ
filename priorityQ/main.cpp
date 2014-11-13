@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
 	theQ = new eventQ(0);
 
 	new population(10);
-
+	
 	theQ->RunEvents();
 	
 	delete theQ;

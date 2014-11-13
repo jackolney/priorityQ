@@ -35,13 +35,13 @@ public:
 	
 	/* Incidence */
 	void CalculateIncidence();
-
+	vector<vector<person *> > people;
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
 	
 	/* VectorVector */
-	vector<vector<person *> > people;
+//	vector<vector<person *> > people;
 
 };
 
