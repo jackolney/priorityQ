@@ -76,6 +76,27 @@ void VectorUpdate::Execute()
 /////////////////////
 /////////////////////
 
+IncidentCases::IncidentCases(population * const thePopulation, const double Time) :
+event(Time),
+pPopulation(thePopulation)
+{}
+
+IncidentCases::~IncidentCases()
+{}
+
+bool IncidentCases::CheckValid()
+{
+	return true;
+}
+
+void IncidentCases::Execute()
+{
+	pPopulation->CalculateIncidence();
+}
+
+/////////////////////
+/////////////////////
+
 PersonStart::PersonStart(cohort * const iCohort, const double Time) :
 event(Time),
 pCohort(iCohort)

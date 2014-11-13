@@ -49,6 +49,22 @@ private:
 /////////////////////
 /////////////////////
 
+class IncidentCases : public event {
+public:
+	IncidentCases(population * const thePopulation, const double Time); //constructor
+	~IncidentCases(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	population * const pPopulation;
+};
+
+/////////////////////
+/////////////////////
+
 class PersonStart : public event {
 public:
 	PersonStart(cohort * const iCohort, const double Time); //constructor

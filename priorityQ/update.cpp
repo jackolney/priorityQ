@@ -131,3 +131,12 @@ void ScheduleVectorUpdate(person * const thePerson, const double theTime)
 
 ////////////////////
 ////////////////////
+
+void ScheduleIncidence(population * thePopulation)
+{
+	for(size_t i=5; i<60; i++)
+		new IncidentCases(thePopulation,i * 365.25);
+}
+
+////////////////////
+////////////////////

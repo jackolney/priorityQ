@@ -26,6 +26,7 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	Generate(sizeAdjustment);
 	InitialiseVector();
 	CreateOutputArray();
+	ScheduleIncidence(this);
 	theInc = new Incidence;
 	theTrans = new Transmission;
 	theCd4Counter = new Cd4Counter;
@@ -166,20 +167,26 @@ void population::CalculateIncidence()
 	for(size_t j=34;j<68;j++) {
 		I += people.at(j).size();
 	}
+
+	cout << I << " = I." << endl;
 	
+
 	/* Calculate little i */
 	unsigned int i = 0;
 	for(size_t j=0;j<34;j++)
 		i += people.at(j).size() * IRR[j];
-	i /= I;
 	
-	/* Find Inc(a,s) */
-	for(size_t j=0;j<34;j++)
-		incidence[j] = i * people.at(j).size() * IRR[j];
-	
-	// Then we need to randomly pick these buggers and schedule infection in them!
-	for(size_t j=0;j<34;j++)
-		cout << "Incidence[" << j << "] = " << incidence[j] << endl;
+	if(i != 0 && I != 0) {
+		i /= I;
+
+		/* Find Inc(a,s) */
+		for(size_t j=0;j<34;j++)
+			incidence[j] = i * people.at(j).size() * IRR[j];
+		
+			// Then we need to randomly pick these buggers and schedule infection in them!
+		for(size_t j=0;j<34;j++)
+			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
+	}
 }
 
 /////////////////////
