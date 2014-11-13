@@ -27,8 +27,8 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
-	theInc = new Incidence;
-	theTrans = new Transmission;
+	theInc = new Incidence; //Need to be removed... but first kill all of the functions it calls downstream.
+	theTrans = new Transmission; //Need to be removed... but first kill all of the functions it calls downstream.
 	theCd4Counter = new Cd4Counter;
 }
 
@@ -184,8 +184,9 @@ void population::CalculateIncidence()
 		/* Find Inc(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = i * people.at(j).size() * IRR[j];
-		
 			// Then we need to randomly pick these buggers and schedule infection in them!
+		
+		/* A whole bunch of checks */
 		for(size_t j=0;j<34;j++)
 			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
 		

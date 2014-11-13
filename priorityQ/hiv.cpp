@@ -179,5 +179,6 @@ bool Hiv(const double Age, const bool Sex, const double Time)
 	
 	D(cout << "Serum is: " << serum << endl;)
 	
-	return serum;
+//	return serum;
+	return false;
 }
