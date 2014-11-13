@@ -176,6 +176,8 @@ void population::CalculateIncidence()
 	for(size_t j=0;j<34;j++)
 		i += people.at(j).size() * IRR[j];
 	
+	cout << i << " = i." << endl;
+	
 	if(i != 0 && I != 0) {
 		i /= I;
 
@@ -186,6 +188,18 @@ void population::CalculateIncidence()
 			// Then we need to randomly pick these buggers and schedule infection in them!
 		for(size_t j=0;j<34;j++)
 			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
+		
+		unsigned int S = 0;
+		for(size_t j=0;j<34;j++)
+			S += people.at(j).size();
+		
+		unsigned int Inf = 0;
+		for(size_t j=0;j<34;j++)
+			Inf += incidence[j];
+		
+		cout << S << " = S." << endl;
+		cout << Inf << " = Inf." << endl;
+		
 	}
 }
 
