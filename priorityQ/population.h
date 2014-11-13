@@ -32,6 +32,9 @@ public:
 	void PushIn(person * thePerson);
 	void SwapOut(person * thePerson);
 //	void GetVectorSize();
+	
+	/* Incidence */
+	void CalculateIncidence();
 
 private:
 	const double sizeAdjustment;
