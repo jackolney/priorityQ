@@ -163,8 +163,17 @@ void population::CalculateIncidence()
 		I += people.at(j).size();
 	}
 	
+	/* Calculate little i */
+	unsigned int i = 0;
+	for(size_t j=0;j<34;j++)
+		i += people.at(j).size() * IRR[j];
+	i /= I;
 	
-		
+	/* Find Inc(a,s) */
+	for(size_t j=0;j<34;j++)
+		incidence[j] = i * people.at(j).size() * IRR[j];
+	
+	// Then we need to randomly pick these buggers and schedule infection in them!
 	
 }
 
