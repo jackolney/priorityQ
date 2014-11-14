@@ -92,7 +92,7 @@ void population::AddPerson(person * thePerson)
 
 void population::PushIn(person * thePerson)
 {
-	// 0to4,5to9,to14,to19,to24,to29,to34,to39,to44,to49,to54,to59,to64,to69,to74,to79,80
+	// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
 	const double theAge = thePerson->GetAge() / 365.25;
@@ -114,8 +114,6 @@ void population::PushIn(person * thePerson)
 	thePerson->SetRowIndex(i);
 	people.at(i).push_back(thePerson);
 	
-	
-
 		//Test print of people array.
 //	if(thePerson->GetSeroStatus()) {
 //		cout << endl;
