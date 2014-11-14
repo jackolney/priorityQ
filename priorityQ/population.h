@@ -35,6 +35,9 @@ public:
 	
 	/* Incidence */
 	void CalculateIncidence();
+//	double Random(int i);
+	void GetCases(const int theSize, vector<person *> * theVector);
+	
 	vector<vector<person *> > people;
 private:
 	const double sizeAdjustment;

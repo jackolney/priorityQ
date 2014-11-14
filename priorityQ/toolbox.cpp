@@ -8,6 +8,9 @@
 
 #include <stdio.h>
 #include "toolbox.h"
+#include "rng.h"
+
+extern Rng * theRng;
 
 	////////////////////
 	//PARAMETER VALUES//
@@ -118,3 +121,19 @@ double outreachCost = 19.55;
 	//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
 	//Clinic visit = $28 (Result visit)
 	//Clinic visit + POC-CD4 test = 28 + 42 = $70
+
+/* Random */
+double Random(const int i)
+{
+	unsigned long long r = theRng->int64();
+	return r % i;
+}
+
+
+int Round(const double theDouble)
+{
+	if((theDouble + 0.5) >= (int(theDouble) + 1))
+		return int(theDouble)+1;
+	else
+		return int(theDouble);
+}

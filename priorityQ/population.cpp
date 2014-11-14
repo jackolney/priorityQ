@@ -15,10 +15,13 @@
 #include "cd4Counter.h"
 #include "update.h"
 #include "eventQ.h"
+#include "events.h"
+#include "toolbox.h"
 
 Transmission * theTrans;
-Incidence * theInc;
+//Incidence * theInc;
 Cd4Counter * theCd4Counter;
+
 extern eventQ * theQ;
 
 population::population(const double theSize) : sizeAdjustment(theSize)
@@ -27,7 +30,7 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
-	theInc = new Incidence; //Need to be removed... but first kill all of the functions it calls downstream.
+//	theInc = new Incidence; //Need to be removed... but first kill all of the functions it calls downstream.
 	theTrans = new Transmission; //Need to be removed... but first kill all of the functions it calls downstream.
 	theCd4Counter = new Cd4Counter;
 }
@@ -107,13 +110,9 @@ void population::PushIn(person * thePerson)
 		i += 34;
 
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
-	thePerson->SetPersonIndex(people.at(0).size());
-	thePerson->SetRowIndex(0);
-	people.at(0).push_back(thePerson);
-	
-//	thePerson->SetPersonIndex(people.at(i).size());
-//	thePerson->SetRowIndex(i);
-//	people.at(i).push_back(thePerson);
+	thePerson->SetPersonIndex(people.at(i).size());
+	thePerson->SetRowIndex(i);
+	people.at(i).push_back(thePerson);
 	
 		//Test print of people array.
 //	if(thePerson->GetSeroStatus()) {
@@ -162,12 +161,17 @@ void population::CalculateIncidence()
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 
 	/* Create incidence array (contains age and sex) */
-	double incidence[34] = {};
+	double incidence[34];
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
 	
 	/* Find total number of infected (I) */
-	unsigned int I = 1;
+	unsigned int I = 0;
+
+	/* Seed initial infection */
+	if(theQ->GetTime() == 1826.25)
+		I = 100;
+	
 	for(size_t j=34;j<68;j++) {
 		I += people.at(j).size();
 	}
@@ -182,7 +186,7 @@ void population::CalculateIncidence()
 	
 	cout << S << " = S." << endl;
 	
-	if(S != 0 && I != 0) {
+	if(S != 0 || I != 0) {
 		
 		/* Calculate little i */
 		double i = 0;
@@ -190,26 +194,53 @@ void population::CalculateIncidence()
 
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
-			incidence[j] = i * people.at(j).size() * IRR[j];
-			// Then we need to randomly pick these buggers and schedule infection in them!
+			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
 		
 		/* A whole bunch of checks */
 		for(size_t j=0;j<34;j++)
 			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
 		
+		/* Randomly pick cases */
+		for(size_t j=0;j<34;j++)
+			if(incidence[j] != 0)
+				GetCases(incidence[j],&people.at(j));
+		
+		// Then we need to randomly pick these buggers.
+		// Schedule infection in them.
+		
 		/* Printing out for convenience */
-		double Sus = 0;
-		for(size_t j=0;j<34;j++)
-			Sus += people.at(j).size();
-		
-		double Inf = 0;
-		for(size_t j=0;j<34;j++)
-			Inf += incidence[j];
-		
-		cout << S << " = S." << endl;
-		cout << Inf << " = Inf." << endl;
-		
+//		double Sus = 0;
+//		for(size_t j=0;j<34;j++)
+//			Sus += people.at(j).size();
+//		
+//		double Inf = 0;
+//		for(size_t j=0;j<34;j++)
+//			Inf += incidence[j];
+//		
+//		cout << S << " = S." << endl;
+//		cout << Inf << " = Inf." << endl;
 	}
+}
+
+/////////////////////
+/////////////////////
+
+void population::GetCases(const int theSize, vector<person *> * theVector)
+{
+		//Setup output array values.
+	unsigned long output[theSize];
+	
+	cout << theSize << " = theSize." << endl;
+	cout << theVector->size() <<  " = theVector->size()." << endl;
+	random_shuffle(theVector->begin(),theVector->end(),Random);
+	
+//	for(size_t i=0;i<theSize;i++) {
+//		output[i] = theVector->at(i)->GetPersonIndex();
+//		new Infection(people.at(i).at(output[i]),theQ->GetTime());
+//		cout << output[i] << " ";
+//	}
+//	cout << " = output[i]" << endl;
+	
 }
 
 /////////////////////

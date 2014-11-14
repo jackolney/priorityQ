@@ -76,22 +76,43 @@ void VectorUpdate::Execute()
 /////////////////////
 /////////////////////
 
-IncidentCases::IncidentCases(population * const thePopulation, const double Time) :
+Incidence::Incidence(population * const thePopulation, const double Time) :
 event(Time),
 pPopulation(thePopulation)
 {}
 
-IncidentCases::~IncidentCases()
+Incidence::~Incidence()
 {}
 
-bool IncidentCases::CheckValid()
+bool Incidence::CheckValid()
 {
 	return true;
 }
 
-void IncidentCases::Execute()
+void Incidence::Execute()
 {
 	pPopulation->CalculateIncidence();
+}
+
+/////////////////////
+/////////////////////
+
+Infection::Infection(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{}
+
+Infection::~Infection()
+{}
+
+bool Infection::CheckValid()
+{
+	return true;
+}
+
+void Infection::Execute()
+{
+	pPerson->CheckHiv();
 }
 
 /////////////////////

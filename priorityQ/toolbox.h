@@ -118,4 +118,9 @@ extern double outreachCost;
 	//Clinic visit = $28 (Result visit)
 	//Clinic visit + POC-CD4 test = 28 + 42 = $70
 
+/* Fun Functions */
+double Random(const int i);
+
+int Round(const double theDouble);
+
 #endif

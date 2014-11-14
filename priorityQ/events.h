@@ -49,10 +49,10 @@ private:
 /////////////////////
 /////////////////////
 
-class IncidentCases : public event {
+class Incidence : public event {
 public:
-	IncidentCases(population * const thePopulation, const double Time); //constructor
-	~IncidentCases(); //destructor
+	Incidence(population * const thePopulation, const double Time); //constructor
+	~Incidence(); //destructor
 	
 	/* Methods */
 	bool CheckValid();
@@ -60,6 +60,22 @@ public:
 	
 private:
 	population * const pPopulation;
+};
+
+/////////////////////
+/////////////////////
+
+class Infection : public event {
+public:
+	Infection(person * const thePerson, const double Time); //constructor
+	~Infection(); // destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * pPerson;
 };
 
 /////////////////////

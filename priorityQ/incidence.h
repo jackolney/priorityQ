@@ -15,21 +15,21 @@
 
 using namespace std;
 
-class Incidence {
-public:
-	Incidence(); //constructor
-	~Incidence(); //destructor
-	
-	/* Methods */
-	void UpdateIncidence(person * const thePerson);
-	void ScheduleIncidenceReset(Incidence * const theInc);
-	void ResetIncidence();
-	
-	/* Accessor Methods */
-	size_t GetIncidenceVectorSize() const;
-	
-private:
-	vector<person*> pIncidence;
-};
+//class Incidence {
+//public:
+//	Incidence(); //constructor
+//	~Incidence(); //destructor
+//	
+//	/* Methods */
+//	void UpdateIncidence(person * const thePerson);
+//	void ScheduleIncidenceReset(Incidence * const theInc);
+//	void ResetIncidence();
+//	
+//	/* Accessor Methods */
+//	size_t GetIncidenceVectorSize() const;
+//	
+//private:
+//	vector<person*> pIncidence;
+//};
 
 #endif /* defined(__priorityQ__incidence__) */

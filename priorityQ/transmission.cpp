@@ -13,7 +13,7 @@
 
 using namespace std;
 
-extern Incidence * theInc;
+//extern Incidence * theInc;
 
 /////////////////////
 /////////////////////
@@ -65,18 +65,18 @@ void Transmission::RemoveFromVector(person * const thePerson)
 void Transmission::CalculateBeta()
 {
 	D(cout << "Beta calculation..." << endl);
-	if(theInc->GetIncidenceVectorSize()) {
-		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
-		D(cout << "beta = " << beta << endl);
-	}
+//	if(theInc->GetIncidenceVectorSize()) {
+//		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
+//		D(cout << "beta = " << beta << endl);
+//	}
 }
 
 
 double Transmission::GetIncidenceWeight() const
 {
-	if(theInc->GetIncidenceVectorSize())
-		return GetBeta() * GetWeightedTotal() / theInc->GetIncidenceVectorSize();
-	else
+//	if(theInc->GetIncidenceVectorSize())
+//		return GetBeta() * GetWeightedTotal() / theInc->GetIncidenceVectorSize();
+//	else
 		return 1;
 }
 

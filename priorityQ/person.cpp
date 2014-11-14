@@ -28,7 +28,7 @@
 extern Rng * theRng;
 extern eventQ * theQ;
 extern Transmission * theTrans;
-extern Incidence * theInc;
+//extern Incidence * theInc;
 extern Cd4Counter * theCd4Counter;
 
 using namespace std;
@@ -259,24 +259,16 @@ void person::SetAge(const double Time)
 /////////////////////
 /////////////////////
 
-bool person::CheckHiv(const double Time)
+void person::CheckHiv()
 {
-	if(Time >= 1826) {
-		D(cout << "CheckHIV executed." << endl);
-		bool HivResult = false;
-		if(HivResult) {
-			D(cout << "HIV+" << endl);
-			SetSeroStatus(true);
-			SetSeroconversionDay(Time);
-			SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-			ScheduleHivIndicatorUpdate();
-			UpdatePopulation();
-			theInc->UpdateIncidence(this);
-		}
-		return HivResult;
-	}
-	else
-		return false;
+	D(cout << "HIV+" << endl);
+	SetSeroStatus(true);
+	SetSeroconversionDay(theQ->GetTime());
+	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
+	ScheduleHivIndicatorUpdate();
+	UpdatePopulation();
+	
+//		theInc->UpdateIncidence(this);
 	
 	//For development purposes.
 	//	D(cout << "HIV+" << endl);

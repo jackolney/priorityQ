@@ -13,17 +13,17 @@
 #include "event.h"
 #include "incidence.h"
 
-class SeedIncidence : public event {
-public:
-	SeedIncidence(Incidence * theIncidence, const double Time); //constructor
-	~SeedIncidence(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	Incidence * pInc;
-};
+//class SeedIncidence : public event {
+//public:
+//	SeedIncidence(Incidence * theIncidence, const double Time); //constructor
+//	~SeedIncidence(); //destructor
+//	
+//	/* Methods */
+//	bool CheckValid();
+//	void Execute();
+//	
+//private:
+//	Incidence * pInc;
+//};
 
 #endif /* defined(__priorityQ__incidenceEvents__) */
