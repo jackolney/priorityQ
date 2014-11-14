@@ -10,16 +10,12 @@
 #include "population.h"
 #include "cohort.h"
 #include "output.h"
-#include "transmission.h"
-#include "incidence.h"
 #include "cd4Counter.h"
 #include "update.h"
 #include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
 
-Transmission * theTrans;
-//Incidence * theInc;
 Cd4Counter * theCd4Counter;
 
 extern eventQ * theQ;
@@ -30,8 +26,6 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
-//	theInc = new Incidence; //Need to be removed... but first kill all of the functions it calls downstream.
-	theTrans = new Transmission; //Need to be removed... but first kill all of the functions it calls downstream.
 	theCd4Counter = new Cd4Counter;
 }
 

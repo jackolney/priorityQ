@@ -16,10 +16,8 @@
 #include "cohort.h"
 #include "impact.h"
 #include "outputUpdate.h"
-#include "transmission.h"
 #include "cd4Counter.h"
 
-extern Transmission * theTrans;
 extern Cd4Counter * theCd4Counter;
 
 using namespace std;
@@ -112,7 +110,7 @@ bool Infection::CheckValid()
 
 void Infection::Execute()
 {
-	pPerson->CheckHiv();
+	pPerson->Hiv();
 }
 
 /////////////////////
@@ -167,7 +165,6 @@ void Death::Execute()
 {
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
-	theTrans->UpdateVector(pPerson);
 	theCd4Counter->UpdateVector(pPerson);
 	WriteCare(pPerson,GetTime());
 	if(hivRelated) {
@@ -208,7 +205,6 @@ void Cd4Decline::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theTrans->UpdateVector(pPerson);
 	theCd4Counter->UpdateVector(pPerson);
 }
 
@@ -242,7 +238,6 @@ void Cd4Recover::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theTrans->UpdateVector(pPerson);
 	theCd4Counter->UpdateVector(pPerson);
 }
 
