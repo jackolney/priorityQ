@@ -109,11 +109,13 @@ void population::PushIn(person * thePerson)
 	if(thePerson->GetSeroStatus()) // If HIV-positive then i += 34;
 		i += 34;
 
-	
+	cout << "Guy in. PersonIndex = " << people.at(i).size() << " RowIndex = " << i << endl;
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
 	thePerson->SetPersonIndex(people.at(i).size());
 	thePerson->SetRowIndex(i);
 	people.at(i).push_back(thePerson);
+	
+	
 
 		//Test print of people array.
 //	if(thePerson->GetSeroStatus()) {
@@ -134,6 +136,7 @@ void population::PushIn(person * thePerson)
 
 void population::RemovePerson(person * thePerson)
 {
+	cout << "DEATH." << endl;
 	SwapOut(thePerson);
 	populationSize--;
 }
@@ -147,20 +150,26 @@ void population::UpdateVector(person * thePerson)
 void population::SwapOut(person * thePerson)
 {
 //	if(thePerson->GetSeroStatus()) {
-//	cout << "Guy to go out ..." << endl;
-//	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-//	cout << "RowIndex = " << thePerson->GetRowIndex() << endl;
-//	cout << "PersonIndex = " << thePerson->GetPersonIndex() << endl;
-//	cout << "NatDeathDate = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
-//	cout << "RowSize = " << people.at(thePerson->GetRowIndex()).size() << endl << endl;
+	cout << "Guy to go out ..." << endl;
+	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
+	cout << "RowIndex = " << thePerson->GetRowIndex() << endl;
+	if(thePerson->GetPersonIndex() >= people.at(thePerson->GetRowIndex()).size())
+	   cout << "BIG ERROR." << endl;
+	cout << "PersonIndex = " << thePerson->GetPersonIndex() << endl;
+	cout << "NatDeathDate = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
+	cout << "RowSize = " << people.at(thePerson->GetRowIndex()).size() << endl << endl;
 //	}
 
-	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
+	cout << "oldPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
 	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
-	if(!people.at(thePerson->GetRowIndex()).empty())
-		people.at(thePerson->GetRowIndex()).pop_back();
+	cout << "newPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
+	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
+	people.at(thePerson->GetRowIndex()).pop_back();
 
+//	people.at(thePerson->GetRowIndex()).
+	cout << "RowSizeNow = " << people.at(thePerson->GetRowIndex()).size() << endl << endl;
+	
 		//Neccessary?
 	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
 	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL
