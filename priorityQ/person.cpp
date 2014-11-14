@@ -89,7 +89,6 @@ rowIndex(0)
 	D(cout << "Gender is = " << gender << endl);
 	natDeathDate = AssignNatDeathDate(Time);
 	iPop->AddPerson(this);
-	SeedHiv(this);
 	SeedOutput(this);
 	SeedInterventions(this);
 	SeedDiscount(this);
@@ -264,7 +263,7 @@ bool person::CheckHiv(const double Time)
 {
 	if(Time >= 1826) {
 		D(cout << "CheckHIV executed." << endl);
-		bool HivResult = Hiv(GetAge(),gender,Time);
+		bool HivResult = false;
 		if(HivResult) {
 			D(cout << "HIV+" << endl);
 			SetSeroStatus(true);

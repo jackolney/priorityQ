@@ -160,31 +160,6 @@ void Death::Execute()
 /////////////////////
 /////////////////////
 
-
-HivIncidence::HivIncidence(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
-{}
-
-HivIncidence::~HivIncidence()
-{}
-
-bool HivIncidence::CheckValid()
-{
-	if(pPerson->Alive() && !pPerson->GetSeroStatus())
-		return true;
-	else
-		return false;
-}
-
-void HivIncidence::Execute()
-{
-	pPerson->CheckHiv(GetTime());
-}
-
-/////////////////////
-/////////////////////
-
 Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)

@@ -95,22 +95,6 @@ private:
 	const bool hivRelated;
 };
 
-/////////////////////
-/////////////////////
-
-class HivIncidence : public event {
-public:
-	HivIncidence(person * const thePerson, const double Time); //constructor
-	~HivIncidence(); //destructor
-	
-	/* Methods */
-	bool CheckValid();
-	void Execute();
-	
-private:
-	person * const pPerson;
-};
-
 ///////////////////////
 ///////////////////////
 
