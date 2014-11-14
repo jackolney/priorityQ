@@ -114,17 +114,22 @@ void population::PushIn(person * thePerson)
 	thePerson->SetRowIndex(i);
 	people.at(i).push_back(thePerson);
 	
+
 		//Test print of people array.
-//	if(thePerson->GetSeroStatus()) {
-//		cout << endl;
-//		cout << "Susceptible..." << endl;
-//		for(size_t i=0;i<34;i++)
-//			cout << people.at(i).size() << endl;
-//		cout << "Infected..." << endl;
-//		for(size_t i=34;i<68;i++)
-//			cout << people.at(i).size() << endl;
-//		cout << endl;
-//	}
+	if(thePerson->GetSeroStatus()) {
+		cout << endl;
+		cout << "theAge = " << theAge << endl;
+		cout << "Gender = " << thePerson->GetGender() << endl;
+		cout << "i = " << i << endl;
+		cout << "i - 34 = " << i - 34 << endl;
+		cout << "Susceptible..." << endl;
+		for(size_t i=0;i<34;i++)
+			cout << people.at(i).size() << endl;
+		cout << "Infected..." << endl;
+		for(size_t i=34;i<68;i++)
+			cout << people.at(i).size() << endl;
+		cout << endl;
+	}
 }
 
 void population::RemovePerson(person * thePerson)
@@ -141,6 +146,15 @@ void population::UpdateVector(person * thePerson)
 
 void population::SwapOut(person * thePerson)
 {
+	if(thePerson->GetSeroStatus()) {
+		cout << "Guy to go out ..." << endl;
+		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
+		cout << "RowIndex = " << thePerson->GetRowIndex() << endl;
+		cout << "PersonIndex = " << thePerson->GetPersonIndex() << endl;
+		cout << "NatDeathDate = " << people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex())->GetNatDeathDate() << endl;
+		cout << "RowSize = " << people.at(thePerson->GetRowIndex()).size() << endl;
+	}
+		
 	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
 	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
@@ -167,27 +181,19 @@ void population::CalculateIncidence()
 	
 	/* Find total number of infected (I) */
 	unsigned int I = 0;
-
-	/* Seed initial infection */
-	if(theQ->GetTime() == 1826.25)
-		I = 100;
-	
 	for(size_t j=34;j<68;j++) {
 		I += people.at(j).size();
 	}
-
-	cout << I << " = I." << endl;
 	
-
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
 	for(size_t j=0;j<34;j++)
 		S += people.at(j).size() * IRR[j];
 	
-	cout << S << " = S." << endl;
+	cout << "PopSize = " << populationSize << endl;
 	
-	if(S != 0 || I != 0) {
-		
+	if(S != 0) {
+	
 		/* Calculate little i */
 		double i = 0;
 		i = I / S;
@@ -196,29 +202,37 @@ void population::CalculateIncidence()
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
 		
+		/* Seed initial infection in 1975 */
+		if(theQ->GetTime() == 5 * 365.25)
+			for(size_t j=0;j<34;j++)
+				incidence[j] += 10;
+		
 		/* A whole bunch of checks */
-		for(size_t j=0;j<34;j++)
-			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
-		
-		/* Randomly pick cases */
-		for(size_t j=0;j<34;j++)
-			if(incidence[j] != 0)
-				GetCases(incidence[j],&people.at(j));
-		
+//		cout << "Incidence";
+//		for(size_t j=0;j<34;j++)
+//			cout << " [" << j << "] = " << incidence[j];
+//		cout << endl;
+	
 		// Then we need to randomly pick these buggers.
 		// Schedule infection in them.
 		
 		/* Printing out for convenience */
-//		double Sus = 0;
-//		for(size_t j=0;j<34;j++)
-//			Sus += people.at(j).size();
-//		
-//		double Inf = 0;
-//		for(size_t j=0;j<34;j++)
-//			Inf += incidence[j];
-//		
-//		cout << S << " = S." << endl;
-//		cout << Inf << " = Inf." << endl;
+		double Sus = 0;
+		double Inf = 0;
+		for(size_t j=0;j<34;j++) {
+			Sus += people.at(j).size();
+			Inf += incidence[j];
+		}
+		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
+		cout << I << " = Total infections." << endl;
+		cout << Sus << " = S." << endl;
+		cout << Inf << " = NewInfections." << endl;
+		cout << endl;
+
+		/* Randomly pick cases */
+		for(size_t j=0;j<34;j++)
+			if(incidence[j] != 0)
+				GetCases(incidence[j],&people.at(j));
 	}
 }
 
@@ -229,17 +243,14 @@ void population::GetCases(const int theSize, vector<person *> * theVector)
 {
 		//Setup output array values.
 	unsigned long output[theSize];
+//	cout << theSize << " = theSize." << endl;
+//	cout << theVector->size() <<  " = theVector->size()." << endl;
+//	random_shuffle(theVector->begin(),theVector->end(),Random);
 	
-	cout << theSize << " = theSize." << endl;
-	cout << theVector->size() <<  " = theVector->size()." << endl;
-	random_shuffle(theVector->begin(),theVector->end(),Random);
-	
-//	for(size_t i=0;i<theSize;i++) {
-//		output[i] = theVector->at(i)->GetPersonIndex();
-//		new Infection(people.at(i).at(output[i]),theQ->GetTime());
-//		cout << output[i] << " ";
-//	}
-//	cout << " = output[i]" << endl;
+	for(size_t i=0;i<theSize;i++) {
+		output[i] = theVector->at(i)->GetPersonIndex();
+		new Infection(people.at(i).at(output[i]),theQ->GetTime());
+	}
 	
 }
 

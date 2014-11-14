@@ -262,6 +262,9 @@ void person::SetAge(const double Time)
 void person::CheckHiv()
 {
 	D(cout << "HIV+" << endl);
+	cout << "HIV" << endl;
+	cout << "guy to go IN..." << endl;
+	cout << "NatDeathDate = " << GetNatDeathDate() << endl;
 	SetSeroStatus(true);
 	SetSeroconversionDay(theQ->GetTime());
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
