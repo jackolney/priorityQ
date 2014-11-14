@@ -57,7 +57,7 @@ void eventQ::RunEvents()
 		delete nextEvent;
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcurrentTime is = " << currentTime << " (year = " << currentTime / 365.25 << ")" <<  endl);
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttheQ size is = " << theQ->Size() << endl);
-		if(theQ->GetTime() == 7 * 365.25)
+		if(GetTime() == 9 * 365.25)
 			break;
 	}
 	return;
