@@ -110,6 +110,7 @@ void population::PushIn(person * thePerson)
 		i += 34;
 
 	cout << "Guy in. PersonIndex = " << people.at(i).size() << " RowIndex = " << i << endl;
+	
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
 	thePerson->SetPersonIndex(people.at(i).size());
 	thePerson->SetRowIndex(i);
@@ -160,12 +161,20 @@ void population::SwapOut(person * thePerson)
 	cout << "RowSize = " << people.at(thePerson->GetRowIndex()).size() << endl << endl;
 //	}
 
-	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
-	cout << "oldPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
-	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
-	cout << "newPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
-	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
-	people.at(thePerson->GetRowIndex()).pop_back();
+	if(thePerson->GetPersonIndex() == people.at(thePerson->GetRowIndex()).back()->GetPersonIndex()) {
+		people.at(thePerson->GetRowIndex()).back() = NULL;
+		people.at(thePerson->GetRowIndex()).pop_back();
+	} else {
+		people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
+		cout << "oldPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
+		people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
+		cout << "newPersonIndex = " << people.at(thePerson->GetRowIndex()).back()->GetPersonIndex() << endl;
+		people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
+		people.at(thePerson->GetRowIndex()).pop_back();
+	}
+	
+	if(thePerson->GetPersonIndex() >= people.at(thePerson->GetRowIndex()).size())
+		cout << "ALERT." << endl;
 
 //	people.at(thePerson->GetRowIndex()).
 	cout << "RowSizeNow = " << people.at(thePerson->GetRowIndex()).size() << endl << endl;
@@ -214,7 +223,8 @@ void population::CalculateIncidence()
 		/* Seed initial infection in 1975 */
 		if(theQ->GetTime() == 5 * 365.25)
 			for(size_t j=0;j<34;j++)
-				incidence[j] += 10;
+				if(people.at(j).size() > 10)
+					incidence[j] += 10;
 		
 		/* A whole bunch of checks */
 //		cout << "Incidence";

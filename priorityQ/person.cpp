@@ -264,6 +264,7 @@ void person::CheckHiv()
 	if(GetSeroStatus())
 		cout << "HEY WAIT A MINUTE, I'M ALREADY INFECTED, DICK!" << endl;
 	D(cout << "HIV+" << endl);
+	cout << "HIV" << endl;
 	SetSeroStatus(true);
 	SetSeroconversionDay(theQ->GetTime());
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
