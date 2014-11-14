@@ -158,12 +158,12 @@ void population::CalculateIncidence()
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 
 	/* Create incidence array (contains age and sex) */
-	unsigned int incidence[34] = {};
+	double incidence[34] = {};
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
 	
 	/* Find total number of infected (I) */
-	unsigned int I = 0;
+	unsigned int I = 1;
 	for(size_t j=34;j<68;j++) {
 		I += people.at(j).size();
 	}
@@ -171,17 +171,20 @@ void population::CalculateIncidence()
 	cout << I << " = I." << endl;
 	
 
-	/* Calculate little i */
-	unsigned int i = 0;
+	/* Calculate sum of S(a,s) and IRR(a,s) */
+	double S = 0;
 	for(size_t j=0;j<34;j++)
-		i += people.at(j).size() * IRR[j];
+		S += people.at(j).size() * IRR[j];
 	
-	cout << i << " = i." << endl;
+	cout << S << " = S." << endl;
 	
-	if(i != 0 && I != 0) {
-		i /= I;
+	if(S != 0 && I != 0) {
+		
+		/* Calculate little i */
+		double i = 0;
+		i = I / S;
 
-		/* Find Inc(a,s) */
+		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = i * people.at(j).size() * IRR[j];
 			// Then we need to randomly pick these buggers and schedule infection in them!
@@ -190,11 +193,12 @@ void population::CalculateIncidence()
 		for(size_t j=0;j<34;j++)
 			cout << "Incidence[" << j << "] = " << incidence[j] << endl;
 		
-		unsigned int S = 0;
+		/* Printing out for convenience */
+		double Sus = 0;
 		for(size_t j=0;j<34;j++)
-			S += people.at(j).size();
+			Sus += people.at(j).size();
 		
-		unsigned int Inf = 0;
+		double Inf = 0;
 		for(size_t j=0;j<34;j++)
 			Inf += incidence[j];
 		
