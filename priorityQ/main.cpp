@@ -39,7 +39,7 @@ int const * p_Adherence;
 
 
 double t(int i) {
-	int r = theRng->doub() * 1000;
+	unsigned long long r = theRng->int64();
 	return r % i;
 }
 
