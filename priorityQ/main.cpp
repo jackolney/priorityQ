@@ -15,6 +15,7 @@
 #include "output.h"
 
 #include "person.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -36,6 +37,25 @@ int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
 int const * p_Adherence;
 
+
+double t(int i) {
+	int r = theRng->doub() * 1000;
+	return r % i;
+}
+
+void testFunction(int theSize, vector<person *> * theVector)
+{
+		//Setup output array values.
+	unsigned long output[theSize];
+	
+	random_shuffle(theVector->begin(),theVector->end(),t);
+	
+	for(size_t i=0;i<theSize;i++) {
+		output[i] = theVector->at(i)->GetPersonIndex();
+		cout << output[i] << " = output[" << i << "]" << endl;
+	}
+	
+}
 
 int main(int argc, const char * argv[])
 {
@@ -70,10 +90,41 @@ int main(int argc, const char * argv[])
 	theRng = new Rng(mach_absolute_time());
 
 	theQ = new eventQ(0);
-
-	new population(10);
 	
-	theQ->RunEvents();
+	population * thePop = new population(10);
+	
+//	theQ->RunEvents();
+
+	person * aGuy = new person(thePop,1);
+	person * aGirl = new person(thePop,1);
+	person * bGuy = new person(thePop,1);
+	person * bGirl = new person(thePop,1);
+	person * cGuy = new person(thePop,1);
+	person * cGirl = new person(thePop,1);
+	person * dGuy = new person(thePop,1);
+	person * dGirl = new person(thePop,1);
+	
+
+	cout << "people.at(0).size() = " << thePop->people.at(0).size() << endl;
+	
+	for(size_t i=0;i<thePop->people.at(0).size();i++)
+		cout << thePop->people.at(0).at(i)->GetPersonIndex() << endl;
+	
+	testFunction(3, &thePop->people.at(0));
+	
+//	cout << testArray[9] << endl;
+	
+		//Pick random number in a range.
+	
+	
+		//Pass vector with a pointer &testVector
+	
+		// So 'range' will be the size of the newInfections(s,a)
+		// Then once Ive picked one... need to remove it and pick from the remainder.
+	
+		//Need a function that takes the size of the number of values to return, the vector row and then spits back the personIndex of the relevant people.
+	
+	
 	
 	delete theQ;
 	delete theRng;

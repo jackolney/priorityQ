@@ -107,9 +107,13 @@ void population::PushIn(person * thePerson)
 		i += 34;
 
 		// Therefore, i (rows) covers AGE and Susceptible/Infected.
-	thePerson->SetPersonIndex(people.at(i).size());
-	thePerson->SetRowIndex(i);
-	people.at(i).push_back(thePerson);
+	thePerson->SetPersonIndex(people.at(0).size());
+	thePerson->SetRowIndex(0);
+	people.at(0).push_back(thePerson);
+	
+//	thePerson->SetPersonIndex(people.at(i).size());
+//	thePerson->SetRowIndex(i);
+//	people.at(i).push_back(thePerson);
 	
 		//Test print of people array.
 //	if(thePerson->GetSeroStatus()) {
