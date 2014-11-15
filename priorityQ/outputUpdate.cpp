@@ -9,12 +9,10 @@
 #include <iostream>
 #include "outputUpdate.h"
 #include "eventQ.h"
-#include "cd4Counter.h"
 
 using namespace std;
 
 extern eventQ * theQ;
-extern Cd4Counter * theCd4Counter;
 
 extern double * theCARE;
 extern double * thePOP_15to49;
@@ -228,11 +226,18 @@ void WriteCd4(person * const thePerson)
 	unsigned int i = 0;
 	while(theQ->GetTime() > yr[i] && i < 59)
 		i++;
+
+	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+		if(thePerson->GetCurrentCd4() == 1)
+			theCD4_200[i] += thePerson->Alive();
+		else if(thePerson->GetCurrentCd4() == 2)
+			theCD4_200350[i] += thePerson->Alive();
+		else if(thePerson->GetCurrentCd4() == 3)
+			theCD4_350500[i] += thePerson->Alive();
+		else if(thePerson->GetCurrentCd4() == 4)
+			theCD4_500[i] += thePerson->Alive();
+	}
 	
-	theCD4_200[i] = theCd4Counter->GetCd4VectorSize_1();
-	theCD4_200350[i] = theCd4Counter->GetCd4VectorSize_2();
-	theCD4_350500[i] = theCd4Counter->GetCd4VectorSize_3();
-	theCD4_500[i] = theCd4Counter->GetCd4VectorSize_4();
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay() && thePerson->Alive()) {
 		if(thePerson->GetCurrentCd4() == 1)

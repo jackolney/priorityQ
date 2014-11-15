@@ -20,11 +20,9 @@
 #include "output.h"
 #include "interventions.h"
 #include "discount.h"
-#include "cd4Counter.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
@@ -280,7 +278,6 @@ void person::SetHivIndicators()
 	SetInitialCd4Count();
 	SetInitialWhoStage();
 	AssignHivDeathDate();
-	theCd4Counter->UpdateVector(this);
 }
 
 /////////////////////

@@ -16,9 +16,6 @@
 #include "cohort.h"
 #include "impact.h"
 #include "outputUpdate.h"
-#include "cd4Counter.h"
-
-extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
@@ -165,7 +162,6 @@ void Death::Execute()
 {
 	UpdateDaly(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
-	theCd4Counter->UpdateVector(pPerson);
 	WriteCare(pPerson,GetTime());
 	if(hivRelated) {
 		D(cout << "Death executed (HIV-related)." << endl);
@@ -205,7 +201,6 @@ void Cd4Decline::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theCd4Counter->UpdateVector(pPerson);
 }
 
 /////////////////////
@@ -238,7 +233,6 @@ void Cd4Recover::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theCd4Counter->UpdateVector(pPerson);
 }
 
 /////////////////////

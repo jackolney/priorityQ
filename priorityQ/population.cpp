@@ -10,13 +10,11 @@
 #include "population.h"
 #include "cohort.h"
 #include "output.h"
-#include "cd4Counter.h"
 #include "update.h"
 #include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
 
-Cd4Counter * theCd4Counter;
 
 extern eventQ * theQ;
 
@@ -26,7 +24,6 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
-	theCd4Counter = new Cd4Counter;
 }
 
 population::~population()
