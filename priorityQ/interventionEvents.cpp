@@ -17,10 +17,12 @@
 #include "rng.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
+#include "eventQ.h"
 
 using namespace std;
 
 extern Rng * theRng;
+extern eventQ * theQ;
 
 /////////////////////
 /////////////////////
@@ -268,6 +270,8 @@ bool ArtOutreach::CheckValid()
 void ArtOutreach::Execute()
 {
 	D(cout << "ArtOutreach executed." << endl);
+	if(!pPerson->GetEverArt())
+		cout << "GOTCHA!" << endl;
 	ChargeOutreach(pPerson);
 	if(theRng->Sample(probReturn))
 		new ArtInitiation(pPerson,GetTime());
