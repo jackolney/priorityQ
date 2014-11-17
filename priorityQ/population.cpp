@@ -81,6 +81,21 @@ void population::AddPerson(person * thePerson)
 	populationSize++;
 }
 
+void population::RemovePerson(person * thePerson)
+{
+	SwapOut(thePerson);
+	populationSize--;
+}
+
+void population::UpdateVector(person * thePerson)
+{
+	SwapOut(thePerson);
+	PushIn(thePerson);
+}
+
+/////////////////////
+/////////////////////
+
 void population::PushIn(person * thePerson)
 {
 	// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
@@ -122,17 +137,8 @@ void population::PushIn(person * thePerson)
 //	}
 }
 
-void population::RemovePerson(person * thePerson)
-{
-	SwapOut(thePerson);
-	populationSize--;
-}
-
-void population::UpdateVector(person * thePerson)
-{
-	SwapOut(thePerson);
-	PushIn(thePerson);
-}
+/////////////////////
+/////////////////////
 
 void population::SwapOut(person * thePerson)
 {

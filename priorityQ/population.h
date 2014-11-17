@@ -31,21 +31,17 @@ public:
 	void UpdateVector(person * thePerson);
 	void PushIn(person * thePerson);
 	void SwapOut(person * thePerson);
-//	void GetVectorSize();
 	
 	/* Incidence */
 	void CalculateIncidence();
-//	double Random(int i);
 	void GetCases(const int theSize, const size_t theRow, vector<person *> theVector);
-	
-	vector<vector<person *> > people;
+
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
 	
 	/* VectorVector */
-//	vector<vector<person *> > people;
-
+	vector<vector<person *> > people;
 };
 
 #endif /* defined(__priorityQ__population__) */
