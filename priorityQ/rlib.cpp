@@ -65,13 +65,13 @@
 //int const * p_PocCd4;
 //int const * p_VctPocCd4;
 //int const * p_ArtOutreach;
+//int const * p_Adherence;
 //int const * p_ImmediateArt;
 //int const * p_UniversalTestAndTreat;
-//int const * p_Adherence;
 //
 //extern "C" {
 //	
-//	/////////////////////
+//		/////////////////////
 //	
 //	SEXP CallCascade(SEXP s_pop,
 //					 SEXP s_Hbct,
@@ -79,13 +79,13 @@
 //					 SEXP s_HbctPocCd4,
 //					 SEXP s_Linkage,
 //					 SEXP s_VctPocCd4,
-//		 		 SEXP s_PreOutreach,
-//		 		 SEXP s_ImprovedCare,
-//		 		 SEXP s_PocCd4,
-//		 		 SEXP s_ArtOutreach,
-//		 		 SEXP s_ImmediateArt,
-//		 		 SEXP s_UniversalTestAndTreat,
-//		 		 SEXP s_Adherence) {
+//					 SEXP s_PreOutreach,
+//					 SEXP s_ImprovedCare,
+//					 SEXP s_PocCd4,
+//					 SEXP s_ArtOutreach,
+//					 SEXP s_Adherence,
+//					 SEXP s_ImmediateArt,
+//					 SEXP s_UniversalTestAndTreat) {
 //		
 //		PROTECT(s_pop = coerceVector(s_pop, REALSXP));
 //		PROTECT(s_Hbct = coerceVector(s_Hbct, INTSXP));
@@ -97,9 +97,9 @@
 //		PROTECT(s_ImprovedCare = coerceVector(s_ImprovedCare, INTSXP));
 //		PROTECT(s_PocCd4 = coerceVector(s_PocCd4, INTSXP));
 //		PROTECT(s_ArtOutreach = coerceVector(s_ArtOutreach, INTSXP));
+//		PROTECT(s_Adherence = coerceVector(s_Adherence, INTSXP));
 //		PROTECT(s_ImmediateArt = coerceVector(s_ImmediateArt, INTSXP));
 //		PROTECT(s_UniversalTestAndTreat = coerceVector(s_UniversalTestAndTreat, INTSXP));
-//		PROTECT(s_Adherence = coerceVector(s_Adherence, INTSXP));
 //		
 //		/* Assigning Pointers */
 //		p_Hbct = INTEGER(s_Hbct);
@@ -111,9 +111,9 @@
 //		p_ImprovedCare = INTEGER(s_ImprovedCare);
 //		p_PocCd4 = INTEGER(s_PocCd4);
 //		p_ArtOutreach = INTEGER(s_ArtOutreach);
+//		p_Adherence = INTEGER(s_Adherence);
 //		p_ImmediateArt = INTEGER(s_ImmediateArt);
 //		p_UniversalTestAndTreat = INTEGER(s_UniversalTestAndTreat);
-//		p_Adherence = INTEGER(s_Adherence);
 //		
 //		/* THE MODEL */
 //		cout << "Hello, Jack - the model is running..." << endl;
@@ -307,6 +307,6 @@
 //		return(sOUT);
 //	}
 //	
-//	/////////////////////
+//		/////////////////////
 //	
 //}
