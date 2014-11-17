@@ -69,7 +69,7 @@ int main(int argc, const char * argv[])
 	/* THE MODEL */
 	theRng = new Rng(mach_absolute_time());
 
-	theQ = new eventQ(0);
+	theQ = new eventQ(0,60*365.25);
 	
 	new population(10);
 	
