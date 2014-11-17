@@ -270,8 +270,6 @@ bool ArtOutreach::CheckValid()
 void ArtOutreach::Execute()
 {
 	D(cout << "ArtOutreach executed." << endl);
-	if(!pPerson->GetEverArt())
-		cout << "GOTCHA!" << endl;
 	ChargeOutreach(pPerson);
 	if(theRng->Sample(probReturn))
 		new ArtInitiation(pPerson,GetTime());

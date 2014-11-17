@@ -14,8 +14,11 @@
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 #include "toolbox.h"
+#include "eventQ.h"
 
 using namespace std;
+
+extern eventQ * theQ;
 
 /* Intervention Pointers */
 extern int const * p_Hbct;
