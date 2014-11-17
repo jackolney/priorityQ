@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "rng.h"
 #include "population.h"
 #include "cohort.h"
 #include "output.h"
@@ -15,8 +16,8 @@
 #include "events.h"
 #include "toolbox.h"
 
-
 extern eventQ * theQ;
+extern Rng * theRng;
 
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
@@ -147,7 +148,7 @@ void population::SwapOut(person * thePerson)
 	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).pop_back();
 	
-		//Neccessary?
+		//Neccessary? as these guys get popped back anyway.
 	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
 	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL
 }
@@ -222,7 +223,7 @@ void population::GetCases(const int theSize, const size_t theRow, vector<person 
 	random_shuffle(theVector.begin(),theVector.end(),Random);
 	
 	for(size_t i=0;i<theSize;i++) {
-		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime());
+		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime() + (theRng->doub() * 365.25));
 	}
 }
 
