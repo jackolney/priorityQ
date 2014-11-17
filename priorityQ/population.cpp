@@ -156,7 +156,9 @@ void population::CalculateIncidence()
 
 	/* Find total number of infected (I) */
 	unsigned int I = 0;
+	
 	if(theQ->GetTime() < 32 * 365.25) {
+	
 		double yr [32];
 		for(size_t i = 0; i<32; i++)
 			yr[i] = 365.25 + (i * 365.25);
@@ -183,6 +185,8 @@ void population::CalculateIncidence()
 		double i = 0;
 		i = I / S;
 
+			//I need a BETA in here don't I?
+		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
@@ -190,13 +194,18 @@ void population::CalculateIncidence()
 		/* Printing out for convenience */
 		double Sus = 0;
 		double Inf = 0;
+		double Cases = 0;
 		for(size_t j=0;j<34;j++) {
 			Sus += people.at(j).size();
 			Inf += incidence[j];
 		}
+		for(size_t j=34;j<68;j++)
+			Cases += people.at(j).size();
+		
 		cout << "PopSize = " << populationSize << endl;
 		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-		cout << I << " = Total infections." << endl;
+		cout << I << " = I (changes pre/post 2002)." << endl;
+		cout << Cases << " = Total infections." << endl;
 		cout << Sus << " = S." << endl;
 		cout << Inf << " = NewInfections." << endl;
 		cout << endl;
