@@ -216,8 +216,9 @@ void population::CalculateIncidence()
 
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
-	for(size_t j=0;j<34;j++)
+	for(size_t j=0;j<34;j++) {
 		incidence[j] = 0;
+	}
 	
 	/* Find total number of infected (I) */
 	double I = 0;
@@ -234,26 +235,24 @@ void population::CalculateIncidence()
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
 		
-	} else {
-		
+	} else
 		for(size_t j=34;j<68;j++)
-			I += GetBeta() * people.at(j).size();
-	}
+			I += people.at(j).size();
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
 	for(size_t j=0;j<34;j++)
 		S += people.at(j).size() * IRR[j];
 	
-	if(S != 0) {
+	if(S > 0) {
 	
-		/* Calculate little i */
-		double i = 0;
-		i = I / S;
+		/* Calculate lambda */
+		double lambda = 0;
+		lambda = (GetBeta() * I) / S;
 		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
-			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
+			incidence[j] = Round(lambda * people.at(j).size() * IRR[j]);
 		
 		/* Printing out for convenience */
 		double Susceptibles = 0;
@@ -270,7 +269,7 @@ void population::CalculateIncidence()
 		cout << "PopSize = " << populationSize << endl;
 		cout << "I = " << I << endl;
 		cout << "S*IRR = " << S << endl;
-		cout << "i = " << i << endl;
+		cout << "lambda = " << lambda << endl;
 		cout << "Infections = " << Infections << endl;
 		cout << "S = " << Susceptibles << endl;
 		cout << "Incidence = " << Inc << endl;
@@ -282,6 +281,7 @@ void population::CalculateIncidence()
 				RandomiseInfection(incidence[j],j,people.at(j));
 	}
 	
+	/* Reset incidence count */
 	incidentCases = 0;
 }
 
