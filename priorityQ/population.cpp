@@ -27,7 +27,7 @@ sizeAdjustment(theSize),
 populationSize(0),
 incidentCases(0),
 referenceYear(11688),
-beta(0)
+beta(1)
 {
 	Generate();
 	InitialiseVector();
@@ -120,7 +120,6 @@ void population::PushInVector(person * thePerson)
 	thePerson->SetPersonIndex(people.at(i).size());
 	thePerson->SetRowIndex(i);
 	people.at(i).push_back(thePerson);
-
 }
 
 /////////////////////
@@ -197,12 +196,6 @@ void population::CalculateBeta()
 {
 	D(cout << "Beta calculation..." << endl);
 	beta = incidentCases / GetWeightedTotal();
-	
-	cout << "Time is = " << theQ->GetTime() << endl;
-	cout << "InfectedCases (Array) = " << infectiousness[0] + infectiousness[1] + infectiousness[2] + infectiousness[3] + infectiousness[4] << endl;
-	cout << "IncidentCases = " << incidentCases << endl;
-	cout << "Weighted total = " << GetWeightedTotal() << endl;
-	cout << "Beta is = " << beta << endl;
 }
 
 /////////////////////
@@ -222,7 +215,6 @@ void population::CalculateIncidence()
 	
 	/* Find total number of infected (I) */
 	double I = 0;
-	
 	if(theQ->GetTime() < 32 * 365.25) {
 	
 		double yr [32];
@@ -245,35 +237,13 @@ void population::CalculateIncidence()
 		S += people.at(j).size() * IRR[j];
 	
 	if(S > 0) {
-	
 		/* Calculate lambda */
 		double lambda = 0;
 		lambda = (GetBeta() * I) / S;
-		
+
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(lambda * people.at(j).size() * IRR[j]);
-		
-		/* Printing out for convenience */
-		double Susceptibles = 0;
-		double Inc = 0;
-		double Infections = 0;
-		for(size_t j=0;j<34;j++) {
-			Susceptibles += people.at(j).size();
-			Inc += incidence[j];
-		}
-		for(size_t j=34;j<68;j++)
-			Infections += people.at(j).size();
-		
-		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-		cout << "PopSize = " << populationSize << endl;
-		cout << "I = " << I << endl;
-		cout << "S*IRR = " << S << endl;
-		cout << "lambda = " << lambda << endl;
-		cout << "Infections = " << Infections << endl;
-		cout << "S = " << Susceptibles << endl;
-		cout << "Incidence = " << Inc << endl;
-		cout << endl;
 
 		/* Randomly pick cases */
 		for(size_t j=0;j<34;j++)
