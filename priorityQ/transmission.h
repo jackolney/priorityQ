@@ -13,12 +13,13 @@
 #include <stdio.h>
 #include "person.h"
 #include "event.h"
+#include "population.h"
 
 using namespace std;
 
 class Transmission {
 public:
-	Transmission(); //constructor
+	Transmission(population * thePop); //constructor
 	~Transmission(); //destructor
 	
 	/* Methods */
@@ -27,30 +28,19 @@ public:
 	void SwapOut(person * const thePerson);
 	
 	void CalculateBeta();
-	void SetBeta(const double theValue) { beta = theValue; }
 	
-	/* Accessor Methods */
-	size_t GetVectorSize_Art() const;
-	size_t GetVectorSize_Cd4_4() const;
-	size_t GetVectorSize_Cd4_3() const;
-	size_t GetVectorSize_Cd4_2() const;
-	size_t GetVectorSize_Cd4_1() const;
-	
+	/* Accessor Methods */	
 	double GetReferenceYear() const { return referenceYear; }
 	double GetWeightedTotal() const;
 	double GetBeta() const { return beta; }
 	
 private:
-	/* Vectors */
-	vector<person*> pPersonCounter_Art;
-	vector<person*> pPersonCounter_Cd4_4;
-	vector<person*> pPersonCounter_Cd4_3;
-	vector<person*> pPersonCounter_Cd4_2;
-	vector<person*> pPersonCounter_Cd4_1;
+	/* Array */
+	unsigned int PersonCounter[5];
 	
+	population * pPop;
 	double const referenceYear;
 	double beta;
 };
-
 
 #endif /* defined(__priorityQ__transmission__) */

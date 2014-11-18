@@ -16,6 +16,9 @@
 #include "cohort.h"
 #include "impact.h"
 #include "outputUpdate.h"
+#include "transmission.h"
+
+extern Transmission * theTransmission;
 
 using namespace std;
 
@@ -201,6 +204,7 @@ void Cd4Decline::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
+	theTransmission->UpdateVector(pPerson);
 }
 
 /////////////////////
@@ -233,6 +237,7 @@ void Cd4Recover::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
+	theTransmission->UpdateVector(pPerson);
 }
 
 /////////////////////

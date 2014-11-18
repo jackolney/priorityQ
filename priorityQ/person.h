@@ -86,6 +86,7 @@ public:
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
 	void SetRowIndex(const size_t theIndex) { rowIndex = theIndex; }
 	void SetVectorUpdateDate(const double theDate) { vectorUpdateDate = theDate; }
+	void SetInfectiousnessIndex(const size_t theIndex) { infectiousnessIndex = theIndex; }
 	
 	/* Population function */
 	void UpdatePopulation() { iPop->UpdateVector(this); }
@@ -155,6 +156,7 @@ public:
 	/* Vector function */
 	size_t GetPersonIndex() const { return personIndex; }
 	size_t GetRowIndex() const { return rowIndex; }
+	size_t GetInfectiousnessIndex() const { return infectiousnessIndex; }
 	double GetVectorUpdateDate() const { return vectorUpdateDate; }
 	
 private:
@@ -232,6 +234,7 @@ private:
 	population * const iPop;
 	size_t personIndex;
 	size_t rowIndex;
+	size_t infectiousnessIndex;
 	
 };
 

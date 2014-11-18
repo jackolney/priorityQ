@@ -15,9 +15,12 @@
 #include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
+#include "transmission.h"
 
 extern eventQ * theQ;
 extern Rng * theRng;
+
+Transmission * theTransmission;
 
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
@@ -25,6 +28,7 @@ population::population(const double theSize) : sizeAdjustment(theSize)
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
+	theTransmission = new Transmission(this);
 }
 
 population::~population()
@@ -143,6 +147,17 @@ void population::SwapOut(person * thePerson)
 /////////////////////
 /////////////////////
 
+unsigned int population::GetInfectedCases()
+{
+	unsigned int InfectedCases = 0;
+	for(size_t j=34;j<68;j++)
+		InfectedCases += people.at(j).size();
+	return InfectedCases;
+}
+
+/////////////////////
+/////////////////////
+
 void population::CalculateIncidence()
 {
 	/* IncidenceCases (M+F Total - Spectrum2014) & IRR (0 to 16 are Female, 17 to 33 are Male */
@@ -170,8 +185,9 @@ void population::CalculateIncidence()
 		I = IncCases[j] / sizeAdjustment;
 		
 	} else {
-		for(size_t j=34;j<68;j++)
-			I += people.at(j).size();
+		I += theTransmission->GetBeta() * theTransmission->GetWeightedTotal();
+//		for(size_t j=34;j<68;j++)
+//			I += theTransmission->GetBeta() * people.at(j).size();
 	}
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
@@ -190,6 +206,8 @@ void population::CalculateIncidence()
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
+
+//		theTrans->GetBeta();
 		
 		/* Printing out for convenience */
 		double Sus = 0;
@@ -213,14 +231,14 @@ void population::CalculateIncidence()
 		/* Randomly pick cases */
 		for(size_t j=0;j<34;j++)
 			if(incidence[j] != 0 && incidence[j] < people.at(j).size())
-				GetCases(incidence[j],j,people.at(j));
+				RandomiseInfection(incidence[j],j,people.at(j));
 	}
 }
 
 /////////////////////
 /////////////////////
 
-void population::GetCases(const int theSize, const size_t theRow, vector<person *> theVector)
+void population::RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector)
 {
 	/* Shuffle theVector (by value ONLY, not by reference) */
 	random_shuffle(theVector.begin(),theVector.end(),Random);

@@ -34,7 +34,8 @@ public:
 	
 	/* Incidence */
 	void CalculateIncidence();
-	void GetCases(const int theSize, const size_t theRow, vector<person *> theVector);
+	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
+	unsigned int GetInfectedCases();
 
 private:
 	const double sizeAdjustment;

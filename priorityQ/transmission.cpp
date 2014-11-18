@@ -1,5 +1,5 @@
 //
-//  transmission.cpp
+//  transmissionProbability.cpp
 //  priorityQ
 //
 //  Created by Jack Olney on 05/11/2014.
@@ -9,16 +9,22 @@
 #include <iostream>
 #include "macro.h"
 #include "transmission.h"
+#include "update.h"
 
 using namespace std;
 
 /////////////////////
 /////////////////////
 
-Transmission::Transmission() :
+Transmission::Transmission(population * thePop) :
+pPop(thePop),
 referenceYear(11688),
 beta(0)
-{}
+{
+	for(size_t i=0;i<5;i++)
+		PersonCounter[i] = 0;
+	ScheduleBetaCalculation();
+}
 
 Transmission::~Transmission()
 {}
@@ -27,79 +33,43 @@ void Transmission::UpdateVector(person * const thePerson)
 {
 	SwapOut(thePerson);
 	PushIn(thePerson);
-	
-	D(cout << "pPersonCounter_Art.size() = " << pPersonCounter_Art.size() << endl);
-	D(cout << "pPersonCounter_Cd4_4.size() = " << pPersonCounter_Cd4_4.size() << endl);
-	D(cout << "pPersonCounter_Cd4_3.size() = " << pPersonCounter_Cd4_3.size() << endl);
-	D(cout << "pPersonCounter_Cd4_2.size() = " << pPersonCounter_Cd4_2.size() << endl);
-	D(cout << "pPersonCounter_Cd4_1.size() = " << pPersonCounter_Cd4_1.size() << endl);}
+}
 
 void Transmission::PushIn(person * const thePerson)
 {
-	if(thePerson->Alive()) {
+	if(thePerson->Alive() && thePerson->GetSeroStatus()) {
+		size_t index = 0;
 		if(thePerson->GetArtInitiationState())
-			pPersonCounter_Art.push_back(thePerson);
-		else if(thePerson->GetCurrentCd4() == 4)
-			pPersonCounter_Cd4_4.push_back(thePerson);
-		else if(thePerson->GetCurrentCd4() == 3)
-			pPersonCounter_Cd4_3.push_back(thePerson);
-		else if(thePerson->GetCurrentCd4() == 2)
-			pPersonCounter_Cd4_2.push_back(thePerson);
-		else if(thePerson->GetCurrentCd4() == 1)
-			pPersonCounter_Cd4_1.push_back(thePerson);
+			index = 0;
+		else switch(thePerson->GetCurrentCd4()) {
+			case 1: index = 1; break;
+			case 2: index = 2; break;
+			case 3: index = 3; break;
+			case 4: index = 4; break;
+		}
+		PersonCounter[index]++;
+		thePerson->SetInfectiousnessIndex(index);
 	}
 }
 
 void Transmission::SwapOut(person * const thePerson)
 {
-	if(find(pPersonCounter_Art.begin(),pPersonCounter_Art.end(),thePerson) != pPersonCounter_Art.end())
-		pPersonCounter_Art.erase(remove(pPersonCounter_Art.begin(),pPersonCounter_Art.end(),thePerson),pPersonCounter_Art.end());
-	else if(find(pPersonCounter_Cd4_4.begin(),pPersonCounter_Cd4_4.end(),thePerson) != pPersonCounter_Cd4_4.end())
-		pPersonCounter_Cd4_4.erase(remove(pPersonCounter_Cd4_4.begin(),pPersonCounter_Cd4_4.end(),thePerson),pPersonCounter_Cd4_4.end());
-	else if(find(pPersonCounter_Cd4_3.begin(),pPersonCounter_Cd4_3.end(),thePerson) != pPersonCounter_Cd4_3.end())
-		pPersonCounter_Cd4_3.erase(remove(pPersonCounter_Cd4_3.begin(),pPersonCounter_Cd4_3.end(),thePerson),pPersonCounter_Cd4_3.end());
-	else if(find(pPersonCounter_Cd4_2.begin(),pPersonCounter_Cd4_2.end(),thePerson) != pPersonCounter_Cd4_2.end())
-		pPersonCounter_Cd4_2.erase(remove(pPersonCounter_Cd4_2.begin(),pPersonCounter_Cd4_2.end(),thePerson),pPersonCounter_Cd4_2.end());
-	else if(find(pPersonCounter_Cd4_1.begin(),pPersonCounter_Cd4_1.end(),thePerson) != pPersonCounter_Cd4_1.end())
-		pPersonCounter_Cd4_1.erase(remove(pPersonCounter_Cd4_1.begin(),pPersonCounter_Cd4_1.end(),thePerson),pPersonCounter_Cd4_1.end());
+	if(thePerson->GetInfectiousnessIndex() != -1)
+		PersonCounter[thePerson->GetInfectiousnessIndex()]--;
 }
 
 void Transmission::CalculateBeta()
 {
 	D(cout << "Beta calculation..." << endl);
-//	if(theInc->GetIncidenceVectorSize()) {
-//		SetBeta(theInc->GetIncidenceVectorSize() / GetWeightedTotal());
-//		D(cout << "beta = " << beta << endl);
-//	}
+	beta = pPop->GetInfectedCases() / GetWeightedTotal();
+	cout << "Inf = " << pPop->GetInfectedCases() << endl;
+	cout << "WeightedTotal = " << GetWeightedTotal() << endl;
+	cout << "Total array = " << PersonCounter[0] + PersonCounter[1] + PersonCounter[2] + PersonCounter[3] + PersonCounter[4] << endl;
+	cout << "Beta is = " << beta << endl;
 }
 
 /////////////////////
 /////////////////////
-
-size_t Transmission::GetVectorSize_Art() const
-{
-	return pPersonCounter_Art.size();
-}
-
-size_t Transmission::GetVectorSize_Cd4_4() const
-{
-	return pPersonCounter_Cd4_4.size();
-}
-
-size_t Transmission::GetVectorSize_Cd4_3() const
-{
-	return pPersonCounter_Cd4_3.size();
-}
-
-size_t Transmission::GetVectorSize_Cd4_2() const
-{
-	return pPersonCounter_Cd4_2.size();
-}
-
-size_t Transmission::GetVectorSize_Cd4_1() const
-{
-	return pPersonCounter_Cd4_1.size();
-}
 
 double Transmission::GetWeightedTotal() const
 {
@@ -111,11 +81,11 @@ double Transmission::GetWeightedTotal() const
 	double w200 = 5.17;
 	
 	/* Calculate individual weights */
-	double tArt = wArt * pPersonCounter_Art.size();
-	double t500 = w500 * pPersonCounter_Cd4_4.size();
-	double t350500 = w350500 * pPersonCounter_Cd4_3.size();
-	double t200350 = w200350 * pPersonCounter_Cd4_2.size();
-	double t200 = w200 * pPersonCounter_Cd4_1.size();
+	double tArt = wArt * PersonCounter[0];
+	double t200 = w200 * PersonCounter[1];
+	double t200350 = w200350 * PersonCounter[2];
+	double t350500 = w350500 * PersonCounter[3];
+	double t500 = w500 * PersonCounter[4];
 	
 	return(tArt + t500 + t350500 + t200350 + t200);
 }
