@@ -50,10 +50,8 @@ void population::Generate()
 		/* Function to schedule cohorts over time (not being used until I scale everything up) */
 	const double popSize [60] = {11252466,11657477,12083159,12529800,12997438,13486241,13995996,14527242,15081677,15661480,16267906,16901167,17559844,18241424,18942464,19660018,20392312,21138372,21896890,22666720,23446439,24237056,25036941,25839132,26634659,27418077,28186224,28943647,29702246,30478597,31285050,32126351,33000524,33905011,34834606,35785718,36757498,37752304,38773277,39824734,40909194,42027891,43178141,44359872,45573945,46821246,48102684,49419194,50771734,52161292,53588880,55055540,56562340,58110380,59700787,61334722,63013375,64737971,66509767,68330055};
 
-	for(int i = 0; i < 60; i++) {
+	for(int i = 0; i < 60; i++)
 		new cohort(this,popSize[i] / sizeAdjustment,i * 365.25);
-		cout << popSize[i] / sizeAdjustment << endl;
-	}
 
 	
 		//TEMPORARY TESTING PLATFORM//
@@ -209,9 +207,8 @@ void population::CalculateIncidence()
 
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
-	for(size_t j=0;j<34;j++) {
+	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
-	}
 	
 	/* Find total number of infected (I) */
 	double I = 0;
