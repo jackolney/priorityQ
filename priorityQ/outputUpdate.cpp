@@ -15,6 +15,7 @@ using namespace std;
 extern eventQ * theQ;
 
 extern double * theCARE;
+extern double * thePOP;
 extern double * thePOP_15to49;
 extern double * theHIV_15to49;
 extern double * theART_15to49;
@@ -58,6 +59,7 @@ void WritePop(person * const thePerson)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+		thePOP[i] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25)
 			thePOP_15plus[i] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
