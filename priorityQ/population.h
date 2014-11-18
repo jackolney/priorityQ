@@ -22,7 +22,7 @@ public:
 	~population(); //destructor
 	
 	/* Methods */
-	void Generate(const double theSize);
+	void Generate();
 	void AddPerson(person * thePerson);
 	void RemovePerson(person * thePerson);
 	

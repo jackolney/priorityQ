@@ -71,7 +71,7 @@ int main(int argc, const char * argv[])
 
 	theQ = new eventQ(0,60*365.25);
 	
-	new population(10);
+	new population(10000);
 	
 	theQ->RunEvents();
 	

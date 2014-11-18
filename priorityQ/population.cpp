@@ -21,7 +21,7 @@ extern Rng * theRng;
 
 population::population(const double theSize) : sizeAdjustment(theSize)
 {
-	Generate(sizeAdjustment);
+	Generate();
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
@@ -33,28 +33,15 @@ population::~population()
 /////////////////////
 /////////////////////
 
-void population::Generate(const double theSize)
-{
-		//Function to generate list of cohorts to be created.
-	
+void population::Generate()
+{	
 		/* Function to schedule cohorts over time (not being used until I scale everything up) */
-	double popIncrease [61] = {1,1.0360,1.0365,1.0370,1.0373,1.0376,1.0378,1.0380,1.0382,1.0384,1.0387,1.0389,1.0390,1.0388,1.0384,1.0379,1.0373,1.0366,1.0359,1.0352,1.0344,1.0337,1.0330,1.0320,1.0308,1.0294,1.0280,1.0269,1.0262,1.0261,1.0265,1.0269,1.0272,1.0274,1.0274,1.0273,1.0272,1.0271,1.0270,1.0271,1.0272,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274,1.0274};
+	const double popSize [60] = {11252466,11657477,12083159,12529800,12997438,13486241,13995996,14527242,15081677,15661480,16267906,16901167,17559844,18241424,18942464,19660018,20392312,21138372,21896890,22666720,23446439,24237056,25036941,25839132,26634659,27418077,28186224,28943647,29702246,30478597,31285050,32126351,33000524,33905011,34834606,35785718,36757498,37752304,38773277,39824734,40909194,42027891,43178141,44359872,45573945,46821246,48102684,49419194,50771734,52161292,53588880,55055540,56562340,58110380,59700787,61334722,63013375,64737971,66509767,68330055};
 
-	unsigned int cumulativeTotal [61];
-	unsigned int popSize [61];
-	
-	for(size_t i = 0; i < 60; i++) {
-		if(i == 0) {
-			cumulativeTotal[i] = theSize * 1000;
-			popSize[i] = theSize * 1000;
-		} else {
-			cumulativeTotal[i] = cumulativeTotal[i-1] * popIncrease[i];
-			popSize[i] = cumulativeTotal[i] - cumulativeTotal[i-1];
-		}
+	for(int i = 0; i < 60; i++) {
+		new cohort(this,popSize[i] / sizeAdjustment,i * 365.25);
+		cout << popSize[i] / sizeAdjustment << endl;
 	}
-
-	for(int i = 0; i < 60; i++)
-		new cohort(this,popSize[i],i * 365.25);
 
 	
 		//TEMPORARY TESTING PLATFORM//
@@ -158,18 +145,33 @@ void population::SwapOut(person * thePerson)
 
 void population::CalculateIncidence()
 {
-	/* IRR (0 to 16 are Female, 17 to 33 are Male */
+	/* IncidenceCases (M+F Total - Spectrum2014) & IRR (0 to 16 are Female, 17 to 33 are Male */
+	const double IncCases[32] = {0,0,0,0,0,0,0,0,0,140,355,1134,1791,3418,6444,11887,21704,38623,66784,108993,165074,226131,269547,275327,243681,195612,152571,121318,101327,99767,93594,90036};
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
-	
+
 	/* Find total number of infected (I) */
 	unsigned int I = 0;
-	for(size_t j=34;j<68;j++) {
-		I += people.at(j).size();
+	
+	if(theQ->GetTime() < 32 * 365.25) {
+	
+		double yr [32];
+		for(size_t i = 0; i<32; i++)
+			yr[i] = 365.25 + (i * 365.25);
+		
+		unsigned int j = 0;
+		while(theQ->GetTime() > yr[j] && j < 32)
+			j++;
+		
+		I = IncCases[j] / sizeAdjustment;
+		
+	} else {
+		for(size_t j=34;j<68;j++)
+			I += people.at(j).size();
 	}
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
@@ -183,26 +185,27 @@ void population::CalculateIncidence()
 		double i = 0;
 		i = I / S;
 
+			//I need a BETA in here don't I?
+		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
 		
-		/* Seed initial infection in 1975 */
-		if(theQ->GetTime() == 5 * 365.25)
-			for(size_t j=0;j<34;j++)
-				if(people.at(j).size() > 10)
-					incidence[j] += 10;
-		
 		/* Printing out for convenience */
 		double Sus = 0;
 		double Inf = 0;
+		double Cases = 0;
 		for(size_t j=0;j<34;j++) {
 			Sus += people.at(j).size();
 			Inf += incidence[j];
 		}
+		for(size_t j=34;j<68;j++)
+			Cases += people.at(j).size();
+		
 		cout << "PopSize = " << populationSize << endl;
 		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-		cout << I << " = Total infections." << endl;
+		cout << I << " = I (changes pre/post 2002)." << endl;
+		cout << Cases << " = Total infections." << endl;
 		cout << Sus << " = S." << endl;
 		cout << Inf << " = NewInfections." << endl;
 		cout << endl;
