@@ -25,6 +25,7 @@ extern Rng * theRng;
 population::population(const double theSize) :
 sizeAdjustment(theSize),
 populationSize(0),
+incidentCases(0),
 referenceYear(11688),
 beta(0)
 {
@@ -34,7 +35,7 @@ beta(0)
 	ScheduleIncidence(this);
 	ScheduleBetaCalculation(this);
 	for(size_t i=0;i<5;i++)
-		PersonCounter[i] = 0;
+		infectiousness[i] = 0;
 }
 
 population::~population()
@@ -155,7 +156,7 @@ void population::PushInArray(person * const thePerson)
 			case 3: index = 3; break;
 			case 4: index = 4; break;
 		}
-		PersonCounter[index]++;
+		infectiousness[index]++;
 		thePerson->SetInfectiousnessIndex(index);
 	}
 }
@@ -163,7 +164,7 @@ void population::PushInArray(person * const thePerson)
 void population::SwapOutArray(person * const thePerson)
 {
 	if(thePerson->GetInfectiousnessIndex() != -1)
-		PersonCounter[thePerson->GetInfectiousnessIndex()]--;
+		infectiousness[thePerson->GetInfectiousnessIndex()]--;
 }
 
 ///////////////////////////
@@ -180,24 +181,13 @@ double population::GetWeightedTotal() const
 	double w200 = 5.17;
 	
 	/* Calculate individual weights */
-	double tArt = wArt * PersonCounter[0];
-	double t200 = w200 * PersonCounter[1];
-	double t200350 = w200350 * PersonCounter[2];
-	double t350500 = w350500 * PersonCounter[3];
-	double t500 = w500 * PersonCounter[4];
+	double tArt = wArt * infectiousness[0];
+	double t200 = w200 * infectiousness[1];
+	double t200350 = w200350 * infectiousness[2];
+	double t350500 = w350500 * infectiousness[3];
+	double t500 = w500 * infectiousness[4];
 	
 	return(tArt + t500 + t350500 + t200350 + t200);
-}
-
-/////////////////////
-/////////////////////
-
-unsigned int population::GetInfectedCases()
-{
-	unsigned int InfectedCases = 0;
-	for(size_t j=34;j<68;j++)
-		InfectedCases += people.at(j).size();
-	return InfectedCases;
 }
 
 /////////////////////
@@ -206,11 +196,12 @@ unsigned int population::GetInfectedCases()
 void population::CalculateBeta()
 {
 	D(cout << "Beta calculation..." << endl);
-	beta = GetInfectedCases() / GetWeightedTotal();
+	beta = incidentCases / GetWeightedTotal();
 	
 	cout << "Time is = " << theQ->GetTime() << endl;
-	cout << "InfectedCases (Vector) = " << GetInfectedCases() << endl;
-	cout << "InfectedCases (Array) = " << PersonCounter[0] + PersonCounter[1] + PersonCounter[2] + PersonCounter[3] + PersonCounter[4] << endl;
+	cout << "InfectedCases (Array) = " << infectiousness[0] + infectiousness[1] + infectiousness[2] + infectiousness[3] + infectiousness[4] << endl;
+	cout << "IncidentCases = " << incidentCases << endl;
+	cout << "Weighted total = " << GetWeightedTotal() << endl;
 	cout << "Beta is = " << beta << endl;
 }
 
@@ -220,16 +211,16 @@ void population::CalculateBeta()
 void population::CalculateIncidence()
 {
 	/* IncidenceCases (M+F Total - Spectrum2014) & IRR (0 to 16 are Female, 17 to 33 are Male */
-	const double IncCases[32] = {0,0,0,0,0,0,0,0,0,140,355,1134,1791,3418,6444,11887,21704,38623,66784,108993,165074,226131,269547,275327,243681,195612,152571,121318,101327,99767,93594,90036};
+	const double SpectrumIncidence[32] = {0,0,0,0,0,0,0,0,0,140,355,1134,1791,3418,6444,11887,21704,38623,66784,108993,165074,226131,269547,275327,243681,195612,152571,121318,101327,99767,93594,90036};
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
-
+	
 	/* Find total number of infected (I) */
-	unsigned int I = 0;
+	double I = 0;
 	
 	if(theQ->GetTime() < 32 * 365.25) {
 	
@@ -241,12 +232,12 @@ void population::CalculateIncidence()
 		while(theQ->GetTime() > yr[j] && j < 32)
 			j++;
 		
-		I = IncCases[j] / sizeAdjustment;
+		I = SpectrumIncidence[j] / sizeAdjustment;
 		
 	} else {
-		I += GetBeta() * GetWeightedTotal();
-//		for(size_t j=34;j<68;j++)
-//			I += theTransmission->GetBeta() * people.at(j).size();
+		
+		for(size_t j=34;j<68;j++)
+			I += GetBeta() * people.at(j).size();
 	}
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
@@ -259,30 +250,30 @@ void population::CalculateIncidence()
 		/* Calculate little i */
 		double i = 0;
 		i = I / S;
-
-			//I need a BETA in here don't I?
 		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
 		
 		/* Printing out for convenience */
-		double Sus = 0;
-		double Inf = 0;
-		double Cases = 0;
+		double Susceptibles = 0;
+		double Inc = 0;
+		double Infections = 0;
 		for(size_t j=0;j<34;j++) {
-			Sus += people.at(j).size();
-			Inf += incidence[j];
+			Susceptibles += people.at(j).size();
+			Inc += incidence[j];
 		}
 		for(size_t j=34;j<68;j++)
-			Cases += people.at(j).size();
+			Infections += people.at(j).size();
 		
-		cout << "PopSize = " << populationSize << endl;
 		cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-		cout << I << " = I (changes pre/post 2002)." << endl;
-		cout << Cases << " = Total infections." << endl;
-		cout << Sus << " = S." << endl;
-		cout << Inf << " = NewInfections." << endl;
+		cout << "PopSize = " << populationSize << endl;
+		cout << "I = " << I << endl;
+		cout << "S*IRR = " << S << endl;
+		cout << "i = " << i << endl;
+		cout << "Infections = " << Infections << endl;
+		cout << "S = " << Susceptibles << endl;
+		cout << "Incidence = " << Inc << endl;
 		cout << endl;
 
 		/* Randomly pick cases */
@@ -290,6 +281,8 @@ void population::CalculateIncidence()
 			if(incidence[j] != 0 && incidence[j] < people.at(j).size())
 				RandomiseInfection(incidence[j],j,people.at(j));
 	}
+	
+	incidentCases = 0;
 }
 
 /////////////////////

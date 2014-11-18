@@ -261,6 +261,7 @@ void person::Hiv()
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 	ScheduleHivIndicatorUpdate();
 	UpdatePopulation();
+	iPop->AddCase();
 	iPop->UpdateArray(this);
 	
 	//For development purposes.

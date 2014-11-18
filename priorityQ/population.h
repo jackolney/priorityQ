@@ -47,6 +47,7 @@ public:
 	void CalculateBeta();
 	void CalculateIncidence();
 	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
+	void AddCase() { incidentCases++; }
 
 private:
 	const double sizeAdjustment;
@@ -56,8 +57,9 @@ private:
 	vector<vector<person *> > people;
 	
 	/* Infectiousness Array */
-	unsigned int PersonCounter[5];
+	unsigned int infectiousness[5];
 	
+	unsigned int incidentCases;
 	double const referenceYear;
 	double beta;
 };
