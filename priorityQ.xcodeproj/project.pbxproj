@@ -17,6 +17,7 @@
 		0421651C19FEB10700E47DB4 /* cost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0421651A19FEB10700E47DB4 /* cost.cpp */; };
 		0421651F19FFF80A00E47DB4 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0421651D19FFF80A00E47DB4 /* output.cpp */; };
 		0447636F19E694AD001C5089 /* events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0447636D19E694AD001C5089 /* events.cpp */; };
+		0453666B1A1B529B002B3047 /* transmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 045366691A1B529B002B3047 /* transmission.cpp */; };
 		0475975C1A0277B7008ADBCC /* outputUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0475975A1A0277B7008ADBCC /* outputUpdate.cpp */; };
 		0478C5C21A03D1C600656B9F /* interventions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0478C5C01A03D1C600656B9F /* interventions.cpp */; };
 		0478C5C61A03FD1D00656B9F /* toolbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0478C5C51A03FD1D00656B9F /* toolbox.cpp */; };
@@ -64,6 +65,8 @@
 		0421651E19FFF80A00E47DB4 /* output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output.h; sourceTree = "<group>"; };
 		0447636D19E694AD001C5089 /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = events.cpp; sourceTree = "<group>"; };
 		0447636E19E694AD001C5089 /* events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = events.h; sourceTree = "<group>"; };
+		045366691A1B529B002B3047 /* transmission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transmission.cpp; sourceTree = "<group>"; };
+		0453666A1A1B529B002B3047 /* transmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transmission.h; sourceTree = "<group>"; };
 		0475975A1A0277B7008ADBCC /* outputUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = outputUpdate.cpp; sourceTree = "<group>"; };
 		0475975B1A0277B7008ADBCC /* outputUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = outputUpdate.h; sourceTree = "<group>"; };
 		0478C5C01A03D1C600656B9F /* interventions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interventions.cpp; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				0400AE2819E817FE00357D2D /* rng.h */,
 				0478C5C51A03FD1D00656B9F /* toolbox.cpp */,
 				047C252219F91B1F00F9CE73 /* toolbox.h */,
+				045366691A1B529B002B3047 /* transmission.cpp */,
+				0453666A1A1B529B002B3047 /* transmission.h */,
 				040CC6FD19F0063700611C57 /* update.cpp */,
 				040CC6FE19F0063700611C57 /* update.h */,
 			);
@@ -216,6 +221,7 @@
 			files = (
 				0478C5C21A03D1C600656B9F /* interventions.cpp in Sources */,
 				0447636F19E694AD001C5089 /* events.cpp in Sources */,
+				0453666B1A1B529B002B3047 /* transmission.cpp in Sources */,
 				04F71B6A19EECC4600D72B67 /* cohort.cpp in Sources */,
 				0421651C19FEB10700E47DB4 /* cost.cpp in Sources */,
 				049A06DC19F16FEC006BFBCE /* population.cpp in Sources */,
