@@ -20,11 +20,9 @@
 #include "output.h"
 #include "interventions.h"
 #include "discount.h"
-#include "transmission.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern Transmission * theTransmission;
 
 using namespace std;
 
@@ -229,7 +227,6 @@ void person::Kill(const double Time, const bool theCause)
 	hivDeath = theCause;
 	artDeath = art;
 	iPop->RemovePerson(this);
-	theTransmission->UpdateVector(this);
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
@@ -264,7 +261,7 @@ void person::Hiv()
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 	ScheduleHivIndicatorUpdate();
 	UpdatePopulation();
-	theTransmission->UpdateVector(this);
+	iPop->UpdateArray(this);
 	
 	//For development purposes.
 	//	D(cout << "HIV+" << endl);

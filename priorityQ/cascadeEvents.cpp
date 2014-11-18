@@ -19,9 +19,6 @@
 #include "cost.h"
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
-#include "transmission.h"
-
-extern Transmission * theTransmission;
 
 using namespace std;
 
@@ -273,7 +270,7 @@ void ArtInitiation::Execute()
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
-	theTransmission->UpdateVector(pPerson);
+	pPerson->UpdateInfectiousnessArray();
 }
 
 /////////////////////
@@ -301,7 +298,7 @@ void ArtDropout::Execute()
 	pPerson->SetArtInitiationState(false,GetTime());
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
-	theTransmission->UpdateVector(pPerson);	
+	pPerson->UpdateInfectiousnessArray();
 }
 
 /////////////////////

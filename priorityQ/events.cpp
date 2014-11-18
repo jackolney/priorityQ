@@ -16,9 +16,6 @@
 #include "cohort.h"
 #include "impact.h"
 #include "outputUpdate.h"
-#include "transmission.h"
-
-extern Transmission * theTransmission;
 
 using namespace std;
 
@@ -90,6 +87,29 @@ bool Incidence::CheckValid()
 void Incidence::Execute()
 {
 	pPopulation->CalculateIncidence();
+}
+
+/////////////////////
+/////////////////////
+
+BetaCalculation::BetaCalculation(population * const thePopulation, const double Time) :
+event(Time),
+pPopulation(thePopulation)
+{
+	cout << "BetaCalculation scheduled for = " << Time << endl;
+}
+
+BetaCalculation::~BetaCalculation()
+{}
+
+bool BetaCalculation::CheckValid()
+{
+	return true;
+}
+
+void BetaCalculation::Execute()
+{
+	pPopulation->CalculateBeta();
 }
 
 /////////////////////
@@ -204,7 +224,7 @@ void Cd4Decline::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theTransmission->UpdateVector(pPerson);
+	pPerson->UpdateInfectiousnessArray();
 }
 
 /////////////////////
@@ -237,7 +257,7 @@ void Cd4Recover::Execute()
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson);
 	pPerson->AssignHivDeathDate();
-	theTransmission->UpdateVector(pPerson);
+	pPerson->UpdateInfectiousnessArray();
 }
 
 /////////////////////

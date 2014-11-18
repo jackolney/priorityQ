@@ -16,7 +16,6 @@
 #include "cascadeEvents.h"
 #include "rng.h"
 #include "eventQ.h"
-#include "transmissionEvents.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -123,10 +122,10 @@ void ScheduleIncidence(population * thePopulation)
 ////////////////////
 ////////////////////
 
-void ScheduleBetaCalculation()
+void ScheduleBetaCalculation(population * thePopulation)
 {
-	if(theQ->GetTime() < 11688 - 1)
-		new BetaCalculation(11688 - 1);
+	if(theQ->GetTime() < thePopulation->GetReferenceYear() - 1)
+		new BetaCalculation(thePopulation,thePopulation->GetReferenceYear() - 1);
 }
 
 ////////////////////

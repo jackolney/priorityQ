@@ -90,6 +90,7 @@ public:
 	
 	/* Population function */
 	void UpdatePopulation() { iPop->UpdateVector(this); }
+	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
 	
 	//////////////////////
 	/* Accessor methods */

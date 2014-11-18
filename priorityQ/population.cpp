@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "macro.h"
 #include "rng.h"
 #include "population.h"
 #include "cohort.h"
@@ -15,27 +16,33 @@
 #include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
-#include "transmission.h"
+
+using namespace std;
 
 extern eventQ * theQ;
 extern Rng * theRng;
 
-Transmission * theTransmission;
-
-population::population(const double theSize) : sizeAdjustment(theSize)
+population::population(const double theSize) :
+sizeAdjustment(theSize),
+populationSize(0),
+referenceYear(11688),
+beta(0)
 {
 	Generate();
 	InitialiseVector();
 	CreateOutputArray();
 	ScheduleIncidence(this);
-	theTransmission = new Transmission(this);
+	ScheduleBetaCalculation(this);
+	for(size_t i=0;i<5;i++)
+		PersonCounter[i] = 0;
 }
 
 population::~population()
 {}
 
-/////////////////////
-/////////////////////
+/////////////
+// METHODS //
+/////////////
 
 void population::Generate()
 {	
@@ -58,8 +65,9 @@ void population::Generate()
 //	}
 }
 
-/////////////////////
-/////////////////////
+////////////////////
+// VECTOR METHODS //
+////////////////////
 
 void population::InitialiseVector()
 {
@@ -69,26 +77,27 @@ void population::InitialiseVector()
 
 void population::AddPerson(person * thePerson)
 {
-	PushIn(thePerson);
+	PushInVector(thePerson);
 	populationSize++;
 }
 
 void population::RemovePerson(person * thePerson)
 {
-	SwapOut(thePerson);
+	SwapOutVector(thePerson);
+	SwapOutArray(thePerson);
 	populationSize--;
 }
 
 void population::UpdateVector(person * thePerson)
 {
-	SwapOut(thePerson);
-	PushIn(thePerson);
+	SwapOutVector(thePerson);
+	PushInVector(thePerson);
 }
 
 /////////////////////
 /////////////////////
 
-void population::PushIn(person * thePerson)
+void population::PushInVector(person * thePerson)
 {
 	// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
@@ -107,41 +116,77 @@ void population::PushIn(person * thePerson)
 	if(thePerson->GetSeroStatus()) // If HIV-positive then i += 34;
 		i += 34;
 	
-		// Therefore, i (rows) covers AGE and Susceptible/Infected.
 	thePerson->SetPersonIndex(people.at(i).size());
 	thePerson->SetRowIndex(i);
 	people.at(i).push_back(thePerson);
-	
-		//Test print of people array.
-//	if(thePerson->GetSeroStatus()) {
-//		cout << endl;
-//		cout << "theAge = " << theAge << endl;
-//		cout << "Gender = " << thePerson->GetGender() << endl;
-//		cout << "i = " << i << endl;
-//		cout << "i - 34 = " << i - 34 << endl;
-//		cout << "Susceptible..." << endl;
-//		for(size_t i=0;i<34;i++)
-//			cout << people.at(i).size() << endl;
-//		cout << "Infected..." << endl;
-//		for(size_t i=34;i<68;i++)
-//			cout << people.at(i).size() << endl;
-//		cout << endl;
-//	}
+
 }
 
 /////////////////////
 /////////////////////
 
-void population::SwapOut(person * thePerson)
+void population::SwapOutVector(person * thePerson)
 {
 	people.at(thePerson->GetRowIndex()).back()->SetRowIndex(thePerson->GetRowIndex());
 	people.at(thePerson->GetRowIndex()).back()->SetPersonIndex(thePerson->GetPersonIndex());
 	people.at(thePerson->GetRowIndex()).at(thePerson->GetPersonIndex()) = people.at(thePerson->GetRowIndex()).back();
 	people.at(thePerson->GetRowIndex()).pop_back();
+}
+
+////////////////////////////
+// INFECTIOUSNESS METHODS //
+////////////////////////////
+
+void population::UpdateArray(person * const thePerson)
+{
+	SwapOutArray(thePerson);
+	PushInArray(thePerson);
+}
+
+void population::PushInArray(person * const thePerson)
+{
+	if(thePerson->Alive() && thePerson->GetSeroStatus()) {
+		size_t index = 0;
+		if(thePerson->GetArtInitiationState())
+			index = 0;
+		else switch(thePerson->GetCurrentCd4()) {
+			case 1: index = 1; break;
+			case 2: index = 2; break;
+			case 3: index = 3; break;
+			case 4: index = 4; break;
+		}
+		PersonCounter[index]++;
+		thePerson->SetInfectiousnessIndex(index);
+	}
+}
+
+void population::SwapOutArray(person * const thePerson)
+{
+	if(thePerson->GetInfectiousnessIndex() != -1)
+		PersonCounter[thePerson->GetInfectiousnessIndex()]--;
+}
+
+///////////////////////////
+// INCIDENCE CALCULATION //
+///////////////////////////
+
+double population::GetWeightedTotal() const
+{
+	/* Infectiousness weights */
+	double wArt = 0.1;
+	double w500 = 1.35;
+	double w350500 = 1;
+	double w200350 = 1.64;
+	double w200 = 5.17;
 	
-		//Neccessary? as these guys get popped back anyway.
-	thePerson->SetRowIndex(NULL); //Doesn't actually set them to NULL
-	thePerson->SetPersonIndex(NULL); //Doesn't actually set them to NULL
+	/* Calculate individual weights */
+	double tArt = wArt * PersonCounter[0];
+	double t200 = w200 * PersonCounter[1];
+	double t200350 = w200350 * PersonCounter[2];
+	double t350500 = w350500 * PersonCounter[3];
+	double t500 = w500 * PersonCounter[4];
+	
+	return(tArt + t500 + t350500 + t200350 + t200);
 }
 
 /////////////////////
@@ -153,6 +198,20 @@ unsigned int population::GetInfectedCases()
 	for(size_t j=34;j<68;j++)
 		InfectedCases += people.at(j).size();
 	return InfectedCases;
+}
+
+/////////////////////
+/////////////////////
+
+void population::CalculateBeta()
+{
+	D(cout << "Beta calculation..." << endl);
+	beta = GetInfectedCases() / GetWeightedTotal();
+	
+	cout << "Time is = " << theQ->GetTime() << endl;
+	cout << "InfectedCases (Vector) = " << GetInfectedCases() << endl;
+	cout << "InfectedCases (Array) = " << PersonCounter[0] + PersonCounter[1] + PersonCounter[2] + PersonCounter[3] + PersonCounter[4] << endl;
+	cout << "Beta is = " << beta << endl;
 }
 
 /////////////////////
@@ -185,7 +244,7 @@ void population::CalculateIncidence()
 		I = IncCases[j] / sizeAdjustment;
 		
 	} else {
-		I += theTransmission->GetBeta() * theTransmission->GetWeightedTotal();
+		I += GetBeta() * GetWeightedTotal();
 //		for(size_t j=34;j<68;j++)
 //			I += theTransmission->GetBeta() * people.at(j).size();
 	}
@@ -206,8 +265,6 @@ void population::CalculateIncidence()
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(i * people.at(j).size() * IRR[j]);
-
-//		theTrans->GetBeta();
 		
 		/* Printing out for convenience */
 		double Sus = 0;
