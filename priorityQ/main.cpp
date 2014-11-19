@@ -27,6 +27,7 @@ eventQ * theQ;
 extern double * thePOP_15to49;
 extern double * theHIV_15to49;
 extern double * thePOP;
+extern double * theHIV;
 extern double * theART_15to49;
 
 /* Intervention Pointers */
@@ -96,6 +97,11 @@ int main(int argc, const char * argv[])
 	cout << "Pop:" << endl;
 	for(size_t i=0;i<60;i++)
 		cout << thePOP[i] << endl;
+	
+	cout << endl;
+	
+	for(size_t i=0;i<60;i++)
+		cout << theHIV[i] << endl;
 	
 	cout << endl;
 	

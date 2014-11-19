@@ -50,7 +50,7 @@ void population::Generate()
 		/* Function to schedule cohorts over time (not being used until I scale everything up) */
 	const double popSize [60] = {11252466,11657477,12083159,12529800,12997438,13486241,13995996,14527242,15081677,15661480,16267906,16901167,17559844,18241424,18942464,19660018,20392312,21138372,21896890,22666720,23446439,24237056,25036941,25839132,26634659,27418077,28186224,28943647,29702246,30478597,31285050,32126351,33000524,33905011,34834606,35785718,36757498,37752304,38773277,39824734,40909194,42027891,43178141,44359872,45573945,46821246,48102684,49419194,50771734,52161292,53588880,55055540,56562340,58110380,59700787,61334722,63013375,64737971,66509767,68330055};
 
-//	const double popSizeSpectrum [60] = {4575558,4744715,4921963,5107606,5301913,5505649,5718946,5942258,6176019,6420818,6677180,6973254,7266783,7558708,7849714,8140797,8478491,8834243,9209426,9605149,10045426,10513498,11000855,11493621,11977746,12431065,12882402,13322893,13761153,14200107,14642941,15092722,15550667,16006201,16464932,16909064,17352152,17809340,18282489,18778567,19306962,19854912,20426473,21016695,21623264,22244501,22861319,23504519,24175739,24874963,25601156};
+//	const double popSizeSpectrumAll [60] = {11252466,11653161,12072791,12513032,12973337,13454455,13956681,14480389,15027062,15597909,16192118,16811300,17455742,18122818,18805615,19501240,20210650,20933141,21664272,22399180,23165081,23941680,24726053,25509128,26274354,26997312,27715841,28423951,29139406,29868767,30619430,31394794,32194766,33009355,33854958,34711022,35592109,36507978,37454707,38437769,39466361,40521914,41602357,42698936,43805499,44918079,46035724,47161767,48298133,49446272,50610060,51801239,53020455,54268366,55545649,56852995,58191110,59560720,60962566,62397406};
 	
 	for(int i = 0; i < 60; i++)
 		new cohort(this,popSize[i] / sizeAdjustment,i * 365.25);
@@ -205,13 +205,12 @@ void population::CalculateIncidence()
 	/* IncidenceCases (M+F Total - Spectrum2014) & IRR (0 to 16 are Female, 17 to 33 are Male */
 	const double SpectrumIncidence[32] = {0,0,0,0,0,0,0,0,0,140,355,1134,1791,3418,6444,11887,21704,38623,66784,108993,165074,226131,269547,275327,243681,195612,152571,121318,101327,99767,93594,90036};
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
-
+	
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
 	
-	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
 	/* Find total number of infected (I) */
 	double I = 0;
 	if(theQ->GetTime() < 32 * 365.25) {
@@ -223,26 +222,22 @@ void population::CalculateIncidence()
 		unsigned int j = 0;
 		while(theQ->GetTime() > yr[j] && j < 32)
 			j++;
-		cout << "Expected incidence = " << SpectrumIncidence[j] / sizeAdjustment << endl;
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
 		
 	} else
-		for(size_t j=34;j<68;j++)
-			I += people.at(j).size();
+		I = incidentCases;
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
 	for(size_t j=0;j<34;j++)
 		S += people.at(j).size() * IRR[j];
-	
+
 	if(S > 0) {
 		/* Calculate lambda */
 		double lambda = 0;
-		lambda = (GetBeta() * I) / S;
-
-		cout << "Beta = " << GetBeta() << endl;
-		cout << "Lambda = " << lambda << endl;
+//		lambda = (GetBeta() * I) / S;
+		lambda = I / S;
 		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
@@ -252,15 +247,6 @@ void population::CalculateIncidence()
 		for(size_t j=0;j<34;j++)
 			if(incidence[j] != 0 && incidence[j] < people.at(j).size())
 				RandomiseInfection(incidence[j],j,people.at(j));
-		
-		/* Printing out for convenience */
-		double INC = 0;
-		for(size_t j=0;j<34;j++)
-			INC += incidence[j];
-		
-		cout << "Incidence = " << INC << endl;
-		cout << endl;
-		
 	}
 	
 	/* Reset incidence count */

@@ -16,6 +16,7 @@ extern eventQ * theQ;
 
 extern double * theCARE;
 extern double * thePOP;
+extern double * theHIV;
 extern double * thePOP_15to49;
 extern double * theHIV_15to49;
 extern double * theART_15to49;
@@ -81,6 +82,7 @@ void WriteHiv(person * const thePerson)
 		i++;
 	
 	if(thePerson->Alive()) {
+		theHIV[i] += thePerson->GetSeroStatus();
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
 			theHIV_15to49[i] += thePerson->GetSeroStatus();
 	}
