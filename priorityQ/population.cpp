@@ -211,6 +211,7 @@ void population::CalculateIncidence()
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
 	
+	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
 	/* Find total number of infected (I) */
 	double I = 0;
 	if(theQ->GetTime() < 32 * 365.25) {
@@ -222,22 +223,30 @@ void population::CalculateIncidence()
 		unsigned int j = 0;
 		while(theQ->GetTime() > yr[j] && j < 32)
 			j++;
+		cout << "Expected incidence = " << SpectrumIncidence[j] / sizeAdjustment << endl;
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
 		
-	} else
+	} else {
 		I = incidentCases;
+		cout << "incidentCases = " << incidentCases << endl;
+	}
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
 	for(size_t j=0;j<34;j++)
 		S += people.at(j).size() * IRR[j];
-
+	
+	cout << "S = " << S << endl;
+	
 	if(S > 0) {
 		/* Calculate lambda */
 		double lambda = 0;
 //		lambda = (GetBeta() * I) / S;
 		lambda = I / S;
+
+		cout << "Beta = " << GetBeta() << endl;
+		cout << "Lambda = " << lambda << endl;
 		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
@@ -247,6 +256,15 @@ void population::CalculateIncidence()
 		for(size_t j=0;j<34;j++)
 			if(incidence[j] != 0 && incidence[j] < people.at(j).size())
 				RandomiseInfection(incidence[j],j,people.at(j));
+		
+		/* Printing out for convenience */
+		double INC = 0;
+		for(size_t j=0;j<34;j++)
+			INC += incidence[j];
+		
+		cout << "Incidence = " << INC << endl;
+		cout << endl;
+		
 	}
 	
 	/* Reset incidence count */
