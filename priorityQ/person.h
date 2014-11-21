@@ -53,6 +53,7 @@ public:
 	void SetArtAdherenceState(const double theProb);
 	
 	/* Natural History Date Setting Functions */
+	void SetHivDate(double theDate) { hivDate = theDate; }
 	void SetHivDeathDate(double theDate) { hivDeathDate = theDate; }
 	void SetCd4DeclineDate(double theDate) { cd4DeclineDate = theDate; }
 	void SetCd4RecoverDate(double theDate) { cd4RecoverDate = theDate; }
@@ -121,6 +122,7 @@ public:
 	double GetArtTime() const { return artTime; }
 	
 	/* Hiv Care Date Getting Functions */
+	double GetHivDate() const { return hivDate; }
 	double GetHivDeathDate() const { return hivDeathDate; }
 	double GetCd4DeclineDate() const { return cd4DeclineDate; }
 	double GetCd4RecoverDate() const { return cd4RecoverDate; }
@@ -183,6 +185,7 @@ private:
 	double artTime;		//Time spent on Art.
 	
 	/* Date = time an event will occur */
+	double hivDate;
 	double hivDeathDate;
 	double cd4DeclineDate;
 	double cd4RecoverDate;

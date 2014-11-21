@@ -118,14 +118,16 @@ void BetaCalculation::Execute()
 Infection::Infection(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	pPerson->SetHivDate(Time);
+}
 
 Infection::~Infection()
 {}
 
 bool Infection::CheckValid()
 {
-	return true;
+	return pPerson->Alive();
 }
 
 void Infection::Execute()

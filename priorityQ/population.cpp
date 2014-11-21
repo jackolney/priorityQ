@@ -159,7 +159,7 @@ void population::PushInArray(person * const thePerson)
 
 void population::SwapOutArray(person * const thePerson)
 {
-	if(thePerson->GetInfectiousnessIndex() != -1)
+	if(thePerson->GetInfectiousnessIndex() < 5)
 		infectiousness[thePerson->GetInfectiousnessIndex()]--;
 }
 
@@ -209,9 +209,6 @@ void population::CalculateIncidence()
 	for(size_t j=0;j<34;j++)
 		incidence[j] = 0;
 
-//	cout << "incidentCases = " << incidentCases << endl << endl << endl;
-//	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
-	
 	/* Find total number of infected (I) */
 	double I = 0;
 	if(theQ->GetTime() < 32 * 365.25) {
@@ -225,64 +222,28 @@ void population::CalculateIncidence()
 			j++;
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
-//		cout << "Expected incidence = " << SpectrumIncidence[j] / sizeAdjustment << endl;
-	} else {
-		I = incidentCases;
-//		cout << "incidentCases = " << incidentCases << endl;
-	}
+	} else
+		I = GetWeightedTotal();
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
-//	cout << "S[] = ";
-	for(size_t j=0;j<34;j++) {
-		S += people.at(j).size() * IRR[j];		
-//		cout << people.at(j).size() << " ";
-	}
-//	cout << endl;
-//	cout << "IRR[] = ";
-//	for(size_t j=0;j<34;j++) {
-//		cout << IRR[j] << " ";
-//	}
-//	cout << endl;
-//	cout << "S[] * IRR[] = ";
-//	for(size_t j=0;j<34;j++) {
-//		cout << people.at(j).size() * IRR[j] << " ";
-//	}
-//	cout << endl;
-	
-//	cout << "S = " << S << endl;
+	for(size_t j=0;j<34;j++)
+		S += people.at(j).size() * IRR[j];
 	
 	if(S > 0) {
+		
 		/* Calculate lambda */
 		double lambda = 0;
-//		lambda = (GetBeta() * I) / S;
-		lambda = I / S;
-
-//		cout << "Beta = " << GetBeta() << endl;
-//		cout << "Lambda = " << lambda << endl;
+		lambda = (GetBeta() * I) / S;
 		
 		/* Find Incidence(a,s) */
 		for(size_t j=0;j<34;j++)
 			incidence[j] = Round(lambda * people.at(j).size() * IRR[j]);
 
-//			incidence[j] = theRng->Sample( (lambda * people.at(j).size() * IRR[j]) - int(lambda * people.at(j).size() * IRR[j]) ) + int(lambda * people.at(j).size() * IRR[j]);
-
 		/* Randomly pick cases */
 		for(size_t j=0;j<34;j++)
 			if(incidence[j] != 0 && incidence[j] < people.at(j).size())
 				RandomiseInfection(incidence[j],j,people.at(j));
-		
-		/* Printing out for convenience */
-//		double INC = 0;
-//		for(size_t j=0;j<34;j++) {
-//			cout << "inc[] = ";
-//			INC += incidence[j];
-//			cout << incidence[j] << " ";
-//			cout << endl;
-//		}
-
-//		cout << "Incidence = " << INC << endl;
-		
 	}
 		
 	/* Reset incidence count */
@@ -299,6 +260,21 @@ void population::RandomiseInfection(const int theSize, const size_t theRow, vect
 	
 	for(size_t i=0;i<theSize;i++)
 		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime() + (theRng->doub() * 365.25));
+}
+
+/////////////////////
+/////////////////////
+
+void population::PassInfection(const size_t theRow)
+{
+	vector<person *> theVector = people.at(theRow);
+	random_shuffle(theVector.begin(),theVector.end(),Random);
+	
+	unsigned int i = 0;
+	while(people.at(theRow).at(theVector.at(i)->GetPersonIndex())->GetHivDate() != 0 && i < people.at(theRow).size())
+		i++;
+	
+	new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime());
 }
 
 /////////////////////

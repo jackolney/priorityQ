@@ -47,6 +47,7 @@ public:
 	void CalculateBeta();
 	void CalculateIncidence();
 	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
+	void PassInfection(const size_t theRow);
 	void AddCase() { incidentCases++; }
 	
 private:

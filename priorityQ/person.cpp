@@ -40,6 +40,7 @@ deathDay(0),
 birthDay(Time),
 artDay(0),
 artTime(0),
+hivDate(0),
 hivDeathDate(0),
 cd4DeclineDate(0),
 cd4RecoverDate(0),
@@ -76,7 +77,7 @@ iOutreachCost(0),
 iPop(thePop),
 personIndex(0),
 rowIndex(0),
-infectiousnessIndex(-1)
+infectiousnessIndex(5)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -227,6 +228,8 @@ void person::Kill(const double Time, const bool theCause)
 	hivDeath = theCause;
 	artDeath = art;
 	iPop->RemovePerson(this);
+	if(GetHivDate() && !GetSeroStatus())
+		iPop->PassInfection(GetRowIndex());
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
