@@ -61,6 +61,7 @@ void population::Generate()
 //		new cohort(this,cohortArray[i],yr);
 //		yr += 365;
 //	}
+	
 }
 
 ////////////////////
