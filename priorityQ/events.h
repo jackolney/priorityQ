@@ -65,6 +65,22 @@ private:
 /////////////////////
 /////////////////////
 
+class BetaCalculation : public event {
+public:
+	BetaCalculation(population * const thePopulation, const double Time); //constructor
+	~BetaCalculation(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+
+private:
+	population * const pPopulation;
+};
+
+/////////////////////
+/////////////////////
+
 class Infection : public event {
 public:
 	Infection(person * const thePerson, const double Time); //constructor

@@ -17,19 +17,12 @@
 #include "update.h"
 #include "cascadeUpdate.h"
 #include "cascadeEvents.h"
-#include "hiv.h"
 #include "output.h"
 #include "interventions.h"
 #include "discount.h"
-#include "transmission.h"
-#include "incidence.h"
-#include "cd4Counter.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
-extern Transmission * theTrans;
-//extern Incidence * theInc;
-extern Cd4Counter * theCd4Counter;
 
 using namespace std;
 
@@ -47,6 +40,7 @@ deathDay(0),
 birthDay(Time),
 artDay(0),
 artTime(0),
+hivDate(0),
 hivDeathDate(0),
 cd4DeclineDate(0),
 cd4RecoverDate(0),
@@ -82,7 +76,8 @@ iAdherenceCost(0),
 iOutreachCost(0),
 iPop(thePop),
 personIndex(0),
-rowIndex(0)
+rowIndex(0),
+infectiousnessIndex(5)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -233,6 +228,8 @@ void person::Kill(const double Time, const bool theCause)
 	hivDeath = theCause;
 	artDeath = art;
 	iPop->RemovePerson(this);
+	if(GetHivDate() && !GetSeroStatus())
+		iPop->PassInfection(GetRowIndex());
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
@@ -259,19 +256,16 @@ void person::SetAge(const double Time)
 /////////////////////
 /////////////////////
 
-void person::CheckHiv()
+void person::Hiv()
 {
-	if(GetSeroStatus())
-		cout << "HEY WAIT A MINUTE, I'M ALREADY INFECTED, DICK!" << endl;
 	D(cout << "HIV+" << endl);
-	cout << "HIV" << endl;
 	SetSeroStatus(true);
 	SetSeroconversionDay(theQ->GetTime());
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 	ScheduleHivIndicatorUpdate();
 	UpdatePopulation();
-	
-//		theInc->UpdateIncidence(this);
+	iPop->AddCase();
+	iPop->UpdateArray(this);
 	
 	//For development purposes.
 	//	D(cout << "HIV+" << endl);
@@ -289,9 +283,7 @@ void person::SetHivIndicators()
 {
 	SetInitialCd4Count();
 	SetInitialWhoStage();
-	AssignHivDeathDate(); //function will call GenerateHivDeathDate()
-	theTrans->UpdateVector(this);
-	theCd4Counter->UpdateVector(this);
+	AssignHivDeathDate();
 }
 
 /////////////////////

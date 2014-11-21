@@ -29,8 +29,9 @@ bool timeComparison::operator()(const event *lhs, const event *rhs) const
 }
 
 /* Define constructor */
-eventQ::eventQ(const double startTime) :
-currentTime(startTime),
+eventQ::eventQ(const double theStartTime, const double theStopTime) :
+currentTime(theStartTime),
+stopTime(theStopTime),
 incrementalTime(0)
 {}
 
@@ -47,7 +48,7 @@ void eventQ::AddEvent(event * const theEvent)
 /* Define RunEvents() */
 void eventQ::RunEvents()
 {
-	while(!Empty()) {
+	while(!Empty() && currentTime < stopTime) {
 		event * nextEvent = GetTop();
 		UpdateTime(nextEvent->GetTime());
 		PopTop();
@@ -58,8 +59,6 @@ void eventQ::RunEvents()
 		delete nextEvent;
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcurrentTime is = " << currentTime << " (year = " << currentTime / 365.25 << ")" <<  endl);
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttheQ size is = " << theQ->Size() << endl);
-		if(GetTime() == 9 * 365.25)
-			break;
 	}
 	return;
 }

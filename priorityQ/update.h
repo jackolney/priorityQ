@@ -21,4 +21,6 @@ void ScheduleVectorUpdate(person * const thePerson, const double theTime);
 
 void ScheduleIncidence(population * thePopulation);
 
+void ScheduleBetaCalculation(population * thePopulation);
+
 #endif /* defined(__priorityQ__update__) */

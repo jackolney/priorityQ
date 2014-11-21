@@ -133,7 +133,7 @@ double Random(const int i)
 int Round(const double theDouble)
 {
 	if((theDouble + 0.5) >= (int(theDouble) + 1))
-		return int(theDouble)+1;
+		return int(theDouble) + 1;
 	else
 		return int(theDouble);
 }

@@ -23,6 +23,13 @@ using namespace std;
 Rng * theRng;
 eventQ * theQ;
 
+/* Output */
+extern double * thePOP_15to49;
+extern double * theHIV_15to49;
+extern double * thePOP;
+extern double * theHIV;
+extern double * theART_15to49;
+
 /* Intervention Pointers */
 int const * p_Hbct;
 int const * p_Vct;
@@ -69,11 +76,39 @@ int main(int argc, const char * argv[])
 	/* THE MODEL */
 	theRng = new Rng(mach_absolute_time());
 
-	theQ = new eventQ(0);
+	theQ = new eventQ(0,61*365.25);
 	
-	new population(10);
+	new population(100);
 	
 	theQ->RunEvents();
+	
+	cout << "Pop15to49:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << thePOP_15to49[i] << endl;
+	
+	cout << endl;
+	
+	cout << "HIV15to49:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << theHIV_15to49[i] << endl;
+	
+	cout << endl;
+	
+	cout << "Pop:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << thePOP[i] << endl;
+	
+	cout << endl;
+	
+	cout << "Hiv:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << theHIV[i] << endl;
+	
+	cout << endl;
+	
+	cout << "Art15to49:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << theART_15to49[i] << endl;
 	
 	delete theQ;
 	delete theRng;

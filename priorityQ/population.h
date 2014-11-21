@@ -22,30 +22,47 @@ public:
 	~population(); //destructor
 	
 	/* Methods */
-	void Generate(const double theSize);
+	void Generate();
+	
+	/* Vector Methods */
+	void InitialiseVector();
 	void AddPerson(person * thePerson);
 	void RemovePerson(person * thePerson);
+	void UpdateVector(person * thePerson);		
+	void PushInVector(person * thePerson);
+	void SwapOutVector(person * thePerson);
 	
-	/* Vector methods */
-	void InitialiseVector();
-	void UpdateVector(person * thePerson);
-	void PushIn(person * thePerson);
-	void SwapOut(person * thePerson);
-//	void GetVectorSize();
+	/* Infectiousness Methods */
+	void UpdateArray(person * const thePerson);
+	void PushInArray(person * const thePerson);
+	void SwapOutArray(person * const thePerson);
 	
-	/* Incidence */
+	/* Accessor Methods */
+	double GetReferenceYear() const { return referenceYear; }
+	double GetBeta() const { return beta; }
+	
+	/* Incidence Calculation */
+	double GetWeightedTotal() const;
+	unsigned int GetInfectedCases();
+	void CalculateBeta();
 	void CalculateIncidence();
-//	double Random(int i);
-	void GetCases(const int theSize, const size_t theRow, vector<person *> & theVector);
+	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
+	void PassInfection(const size_t theRow);
+	void AddCase() { incidentCases++; }
 	
-	vector<vector<person *> > people;
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
 	
 	/* VectorVector */
-//	vector<vector<person *> > people;
-
+	vector<vector<person *> > people;
+	
+	/* Infectiousness Array */
+	unsigned int infectiousness[5];
+	
+	unsigned int incidentCases;
+	double const referenceYear;
+	double beta;
 };
 
 #endif /* defined(__priorityQ__population__) */
