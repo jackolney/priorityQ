@@ -17,10 +17,12 @@
 #include "rng.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
+#include "eventQ.h"
 
 using namespace std;
 
 extern Rng * theRng;
+extern eventQ * theQ;
 
 /////////////////////
 /////////////////////

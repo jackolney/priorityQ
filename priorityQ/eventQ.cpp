@@ -15,6 +15,7 @@
 #include "person.h"
 #include "cohort.h"
 #include "update.h"
+#include "toolbox.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
