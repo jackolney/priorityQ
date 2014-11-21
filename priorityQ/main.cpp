@@ -78,7 +78,7 @@ int main(int argc, const char * argv[])
 
 	theQ = new eventQ(0,61*365.25);
 	
-	new population(10000);
+	new population(100);
 	
 	theQ->RunEvents();
 	
@@ -100,6 +100,7 @@ int main(int argc, const char * argv[])
 	
 	cout << endl;
 	
+	cout << "Hiv:" << endl;
 	for(size_t i=0;i<60;i++)
 		cout << theHIV[i] << endl;
 	

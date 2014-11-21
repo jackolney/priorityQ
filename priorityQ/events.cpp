@@ -96,7 +96,7 @@ BetaCalculation::BetaCalculation(population * const thePopulation, const double 
 event(Time),
 pPopulation(thePopulation)
 {
-	cout << "BetaCalculation scheduled for = " << Time << endl;
+	D(cout << "BetaCalculation scheduled for = " << Time << endl);
 }
 
 BetaCalculation::~BetaCalculation()

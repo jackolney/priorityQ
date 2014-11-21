@@ -48,7 +48,7 @@ public:
 	void CalculateIncidence();
 	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
 	void AddCase() { incidentCases++; }
-
+	
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
