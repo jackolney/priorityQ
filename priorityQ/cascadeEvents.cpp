@@ -254,7 +254,7 @@ ArtInitiation::~ArtInitiation()
 
 bool ArtInitiation::CheckValid()
 {
-	if(!pPerson->GetArtInitiationState())
+	if(!pPerson->GetArtInitiationState() && !pPerson->GetEverArt())
 		return pPerson->Alive();
 	else
 		return false;

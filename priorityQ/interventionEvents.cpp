@@ -267,8 +267,15 @@ void ArtOutreach::Execute()
 {
 	D(cout << "ArtOutreach executed." << endl);
 	ChargeOutreach(pPerson);
-	if(theRng->Sample(probReturn))
-		new ArtInitiation(pPerson,GetTime());
+	if(pPerson->GetArtCount() < 2 && theRng->Sample(probReturn)) {
+		UpdateDaly(pPerson);
+		if(!pPerson->GetArtAdherenceState()) { D(cout << "NON-ADHERER to Art." << endl); }
+		pPerson->SetArtInitiationState(true,GetTime());
+		ScheduleCd4Update(pPerson);
+		ScheduleWhoUpdate(pPerson);
+		ScheduleArtDropout(pPerson);
+		pPerson->UpdateInfectiousnessArray();
+	}
 }
 
 /////////////////////

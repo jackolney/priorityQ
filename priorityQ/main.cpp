@@ -55,7 +55,7 @@ int main(int argc, const char * argv[])
 	int s_PreOutreach = 0;
 	int s_ImprovedCare = 0;
 	int s_PocCd4 = 0;
-	int s_ArtOutreach = 2;
+	int s_ArtOutreach = 1;
 	int s_Adherence = 0;
 	int s_ImmediateArt = 0;
 	int s_UniversalTestAndTreat = 0;
@@ -78,7 +78,7 @@ int main(int argc, const char * argv[])
 
 	theQ = new eventQ(0,61*365.25);
 	
-	new population(100);
+	new population(1000);
 	
 	theQ->RunEvents();
 	
@@ -91,19 +91,7 @@ int main(int argc, const char * argv[])
 	cout << "HIV15to49:" << endl;
 	for(size_t i=0;i<60;i++)
 		cout << theHIV_15to49[i] << endl;
-	
-	cout << endl;
-	
-	cout << "Pop:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << thePOP[i] << endl;
-	
-	cout << endl;
-	
-	cout << "Hiv:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << theHIV[i] << endl;
-	
+
 	cout << endl;
 	
 	cout << "Art15to49:" << endl;

@@ -155,6 +155,7 @@ public:
 	bool GetHivDeath() const { return hivDeath; }
 	bool GetArtDeath() const { return artDeath; }
 	unsigned int GetCd4AtArt() const { return cd4AtArt; }
+	unsigned int GetArtCount() const { return artCount; }
 	
 	/* Vector function */
 	size_t GetPersonIndex() const { return personIndex; }
@@ -209,6 +210,7 @@ private:
 	unsigned int cd4TestResultCount;
 	bool art;
 	bool everArt;
+	unsigned int artCount;
 	bool adherence;
 	
 	/* Ouput info */

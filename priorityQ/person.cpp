@@ -59,6 +59,7 @@ everCd4TestResult(false),
 cd4TestResultCount(0),
 art(false),
 everArt(false),
+artCount(0),
 adherence(theRng->Sample(0.75)),
 cd4AtArt(0),
 hivDeath(false),
@@ -369,6 +370,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		everArt = true;
 		artDay = theTime;
 		cd4AtArt = currentCd4;
+		artCount++;
 	} else if(theTime > 14610 && artDay <= 14610)
 		artTime = theTime - 14610;
 	else if(theTime > 14610)
