@@ -54,16 +54,15 @@ public:
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;
+	unsigned int incidentCases;
+	double const referenceYear;
+	double beta;
 	
 	/* VectorVector */
 	vector<vector<person *> > people;
 	
 	/* Infectiousness Array */
 	unsigned int infectiousness[5];
-	
-	unsigned int incidentCases;
-	double const referenceYear;
-	double beta;
 };
 
 #endif /* defined(__priorityQ__population__) */
