@@ -348,7 +348,10 @@ double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous
 			}
 		};
 	
-	return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
+	if(GetArtAdherenceState())
+		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
+	else
+		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
 }
 
 /////////////////////

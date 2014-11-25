@@ -130,7 +130,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 		 case 1: return theRng->Sample(hctShortTermRetention);  break;
 		 case 2: return theRng->Sample(vctShortTermRetention);  break;
 		 case 3: return theRng->Sample(pictShortTermRetention); break;
-		 default: return false;
+		 default: thePerson->SetInCareState(false); return false;
 	 }
 	}
 	else
@@ -138,7 +138,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 		 case 1: return theRng->Sample(hctLongTermRetention);  break;
 		 case 2: return theRng->Sample(vctLongTermRetention);  break;
 		 case 3: return theRng->Sample(pictLongTermRetention); break;
-		 default: return false;
+		 default: thePerson->SetInCareState(false); return false;
 	 }
 }
 
@@ -164,7 +164,7 @@ bool SecondaryCd4Test(person * const thePerson)
 		case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
 		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
 		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
-		default: return false;
+		default: thePerson->SetInCareState(false); return false;
 	}
 	
 }

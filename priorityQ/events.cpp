@@ -244,7 +244,7 @@ Cd4Recover::~Cd4Recover()
 
 bool Cd4Recover::CheckValid()
 {
-	if(pPerson->GetArtInitiationState() && pPerson->GetArtAdherenceState() && pPerson->GetCd4RecoverDate()	== GetTime())
+	if(pPerson->GetArtInitiationState() && pPerson->GetArtAdherenceState() && pPerson->GetCd4RecoverDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;

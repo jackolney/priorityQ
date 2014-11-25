@@ -76,7 +76,7 @@ void Interventions::Execute()
 		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);
-		
+
 		if(*p_Hbct == 1) {
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
@@ -182,8 +182,10 @@ void Interventions::Execute()
 /////////////////////
 	/* VctPocCd4 */
 	
-	if(*p_VctPocCd4)
+	if(*p_VctPocCd4) {
 		vctPocFlag = true;
+		ScheduleVctHivTest(pPerson);
+	}
 	
 /////////////////////
 	/* ArtOutreach */

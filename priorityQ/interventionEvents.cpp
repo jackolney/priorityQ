@@ -116,7 +116,7 @@ void HctPocCd4Test::Execute()
 	ChargePocCd4Test(pPerson);
 	D(cout << "HctPocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
-	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
@@ -185,7 +185,7 @@ void VctPocCd4Test::Execute()
 	ChargePreArtClinicVisit(pPerson);
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
-	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
@@ -226,7 +226,7 @@ void PocCd4Test::Execute()
 	ChargePreArtClinicVisit(pPerson);
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
-	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);

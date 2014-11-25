@@ -225,7 +225,7 @@ void Cd4TestResult::Execute()
 	UpdateDaly(pPerson);
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
-	pPerson->SetEverCD4TestResultState(true);
+	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
