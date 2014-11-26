@@ -225,6 +225,7 @@ void Cd4TestResult::Execute()
 	UpdateDaly(pPerson);
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
+	FastTrackArt(pPerson);
 	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);

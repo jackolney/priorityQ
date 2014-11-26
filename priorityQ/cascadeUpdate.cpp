@@ -51,18 +51,18 @@ void SchedulePictHivTest(person * const thePerson)
 	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418 && thePerson->GetSeroStatus()) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
-			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())
+			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticNoCd4Result));
-			else if(thePerson->GetEverCd4ResultState() && (thePerson->GetCurrentCd4() > thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() < thePerson->GetWhoTxGuideline()))
+			else if(thePerson->GetEverCd4TestResultState() && (thePerson->GetCurrentCd4() > thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() < thePerson->GetWhoTxGuideline()))
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultNotEligible));
-			else if(thePerson->GetEverCd4ResultState() && (thePerson->GetCurrentCd4() <= thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() >= thePerson->GetWhoTxGuideline()))
+			else if(thePerson->GetEverCd4TestResultState() && (thePerson->GetCurrentCd4() <= thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() >= thePerson->GetWhoTxGuideline()))
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultEligible));
 		} else {
 			if(!thePerson->GetDiagnosedState())
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticOblivious));
-			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4ResultState())
+			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticNoCd4Result));
-			else if(thePerson->GetEverCd4ResultState())
+			else if(thePerson->GetEverCd4TestResultState())
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticCd4Result));
 		}
 	}
@@ -167,6 +167,15 @@ bool SecondaryCd4Test(person * const thePerson)
 		default: thePerson->SetInCareState(false); return false;
 	}
 	
+}
+
+////////////////////
+////////////////////
+
+void FastTrackArt(person * const thePerson)
+{
+	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1)
+		new ArtInitiation(thePerson,theQ->GetTime());
 }
 
 ////////////////////

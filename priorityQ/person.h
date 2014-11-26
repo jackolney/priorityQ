@@ -110,7 +110,7 @@ public:
 	unsigned int GetDiagnosisRoute() const { return diagnosisRoute; }
 	bool GetEverCd4TestState() const { return everCd4Test; }
 	unsigned int GetCd4TestCount() const { return cd4TestCount; }
-	bool GetEverCd4ResultState() const { return everCd4TestResult; }
+	bool GetEverCd4TestResultState() const { return everCd4TestResult; }
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
 	bool GetInCareState() const { return inCare; }
 	bool GetArtInitiationState() const { return art; }

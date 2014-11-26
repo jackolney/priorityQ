@@ -39,6 +39,8 @@ bool AttendCd4TestResult(person * const thePerson);
 
 bool SecondaryCd4Test(person * const thePerson);
 
+void FastTrackArt(person * const thePerson);
+
 /* Art Care */
 void ScheduleArtInitiation(person * const thePerson);
 
