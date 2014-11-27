@@ -45,6 +45,7 @@ extern double * theWHO_1_Art;
 extern double * theWHO_2_Art;
 extern double * theWHO_3_Art;
 extern double * theWHO_4_Art;
+extern int * theINCIDENCE;
 
 /////////////////////
 /////////////////////
@@ -289,6 +290,22 @@ void WriteWho(person * const thePerson)
 		else if(thePerson->GetCurrentWho() == 4)
 			theWHO_4_Art[i] += thePerson->GetArtInitiationState();
 	}
+}
+
+/////////////////////
+/////////////////////
+
+void WriteIncidence(unsigned int const &theIncidentCases)
+{
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
+		yr[i] = 365.25 + (i * 365.25);
+	
+	unsigned int i = 0;
+	while(theQ->GetTime() > yr[i] && i < 59)
+		i++;
+	
+	theINCIDENCE[i] = theIncidentCases;
 }
 
 /////////////////////

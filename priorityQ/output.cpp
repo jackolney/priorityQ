@@ -47,6 +47,7 @@ double * theWHO_1_Art;
 double * theWHO_2_Art;
 double * theWHO_3_Art;
 double * theWHO_4_Art;
+int * theINCIDENCE;
 
 /////////////////////
 /////////////////////
@@ -134,6 +135,7 @@ void CreateOutputArray()
 	theWHO_2_Art = new double[60];
 	theWHO_3_Art = new double[60];
 	theWHO_4_Art = new double[60];
+	theINCIDENCE = new int[60];
 	
 	for(size_t i=0;i<60;i++) {
 		if(i<4)
@@ -177,6 +179,7 @@ void CreateOutputArray()
 		theWHO_2_Art[i] = 0;
 		theWHO_3_Art[i] = 0;
 		theWHO_4_Art[i] = 0;
+		theINCIDENCE[i] = 0;
 	}
 }
 

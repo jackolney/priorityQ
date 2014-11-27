@@ -16,6 +16,7 @@
 #include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
+#include "outputUpdate.h"
 
 using namespace std;
 
@@ -256,8 +257,9 @@ void population::CalculateIncidence()
 	for(size_t j=0;j<34;j++)
 		if(incidence[j] != 0 && incidence[j] < people.at(j).size())
 			RandomiseInfection(incidence[j],j,people.at(j));
-		
-	/* Reset incidence count */
+	
+	/* Record incidence and reset */
+	WriteIncidence(incidentCases);
 	incidentCases = 0;
 }
 

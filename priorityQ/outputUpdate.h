@@ -32,4 +32,6 @@ void WriteCd4(person * const thePerson);
 
 void WriteWho(person * const thePerson);
 
+void WriteIncidence(unsigned int const &theIncidentCases);
+
 #endif /* defined(__priorityQ__outputUpdate__) */

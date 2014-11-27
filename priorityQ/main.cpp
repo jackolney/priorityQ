@@ -29,6 +29,7 @@ extern double * theHIV_15to49;
 extern double * thePOP;
 extern double * theHIV;
 extern double * theART_15to49;
+extern int * theINCIDENCE;
 
 /* Intervention Pointers */
 int const * p_Hbct;
@@ -97,6 +98,12 @@ int main(int argc, const char * argv[])
 	cout << "Art15to49:" << endl;
 	for(size_t i=0;i<60;i++)
 		cout << theART_15to49[i] << endl;
+	
+	cout << endl;
+	
+	cout << "Incidence:" << endl;
+	for(size_t i=0;i<60;i++)
+		cout << theINCIDENCE[i] << endl;
 	
 	delete theQ;
 	delete theRng;
