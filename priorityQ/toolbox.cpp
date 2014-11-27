@@ -67,9 +67,6 @@ double artInitiationTime = 217.07;
 double artDropoutTimeOneYear = 11.99 * 365.25; //0.08/100py
 double artDropoutTimeTwoYear = 19.49 * 365.25; //0.05/100py
 
-/* Time between being lost from Art care and returning */
-double artReturnTime = 3 * 365.25;
-
 	//////////////////////
 	//Intervention Flags//
 	//////////////////////

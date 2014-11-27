@@ -64,9 +64,6 @@ extern double artInitiationTime;
 extern double artDropoutTimeOneYear;
 extern double artDropoutTimeTwoYear;
 
-/* Time between being lost from Art care and returning */
-extern double artReturnTime;
-
 	////////////////
 /* Intervention Flags */
 extern bool pocFlag;
