@@ -35,7 +35,9 @@ void ChargeArtCare(person * const thePerson);
 
 void ChargeAdherence(person * const thePerson);
 
-void ChargeOutreach(person * const thePerson);
+void ChargePreArtOutreach(person * const thePerson);
+
+void ChargeArtOutreach(person * const thePerson);
 
 /////////////////////
 /////////////////////

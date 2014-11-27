@@ -155,6 +155,7 @@ bool PreArtOutreach::CheckValid()
 void PreArtOutreach::Execute()
 {
 	D(cout << "PreArtOutreach executed." << endl);
+	ChargePreArtOutreach(pPerson);
 	if(theRng->Sample(probReturn))
 		new Cd4Test(pPerson,GetTime());
 }
@@ -266,7 +267,7 @@ bool ArtOutreach::CheckValid()
 void ArtOutreach::Execute()
 {
 	D(cout << "ArtOutreach executed." << endl);
-	ChargeOutreach(pPerson);
+	ChargeArtOutreach(pPerson);
 	if(pPerson->GetArtCount() < 2 && theRng->Sample(probReturn)) {
 		UpdateDaly(pPerson);
 		if(!pPerson->GetArtAdherenceState()) { D(cout << "NON-ADHERER to Art." << endl); }

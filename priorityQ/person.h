@@ -80,8 +80,9 @@ public:
 	void SetPocCd4TestCost(const double theCost) { iPocCd4TestCost += theCost; }
 	void SetAnnualArtCost(const double theCost) { iAnnualArtCost = theCost; }
 	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost = theCost; }
-	void SetOutreachCost(const double theCost) { iOutreachCost += theCost; }
-	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iOutreachCost = 0; }
+	void SetArtOutreachCost(const double theCost) { iArtOutreachCost += theCost; }
+	void SetPreArtOutreachCost(const double theCost) { iPreArtOutreachCost += theCost; }
+	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iArtOutreachCost = 0; iPreArtOutreachCost = 0; }
 	
 	/* Vector functions */
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
@@ -149,7 +150,8 @@ public:
 	double GetPocCd4TestCost() const { return iPocCd4TestCost; }
 	double GetAnnualArtCost() const { return iAnnualArtCost; }
 	double GetAnnualAdherenceCost() const { return iAdherenceCost; }
-	double GetOutreachCost() const { return iOutreachCost; }
+	double GetArtOutreachCost() const { return iArtOutreachCost; }
+	double GetPreArtOutreachCost() const { return iPreArtOutreachCost; }
 	
 	/* Output functions */
 	bool GetHivDeath() const { return hivDeath; }
@@ -234,7 +236,8 @@ private:
 	double iPocCd4TestCost;
 	double iAnnualArtCost;
 	double iAdherenceCost;
-	double iOutreachCost;
+	double iArtOutreachCost;
+	double iPreArtOutreachCost;
 	
 	/* Data */
 	population * const iPop;

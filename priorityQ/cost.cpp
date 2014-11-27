@@ -16,6 +16,10 @@ using namespace std;
 
 extern eventQ * theQ;
 extern double * theCOST;
+extern double * thePreArtCOST;
+extern double * theArtCOST;
+extern double * thePreArtCOST_Hiv;
+extern double * theArtCOST_Hiv;
 
 /////////////////////
 /////////////////////
@@ -97,9 +101,17 @@ void ChargeAdherence(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void ChargeOutreach(person * const thePerson)
+void ChargePreArtOutreach(person * const thePerson)
 {
-	thePerson->SetOutreachCost(outreachCost);
+	thePerson->SetPreArtOutreachCost(outreachCost);
+}
+
+/////////////////////
+/////////////////////
+
+void ChargeArtOutreach(person * const thePerson)
+{
+	thePerson->SetArtOutreachCost(outreachCost);
 }
 
 /////////////////////
@@ -120,8 +132,20 @@ void WriteCost(person * const thePerson)
 		while(theQ->GetTime() > yr[i])
 			i++;
 		
-		if(theQ->GetTime() > 14610)
-			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetOutreachCost();
+		if(theQ->GetTime() > 14610) {
+			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
+			
+			thePreArtCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
+			
+			theArtCOST[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
+			
+			if(thePerson->GetSeroStatus()) {
+				thePreArtCOST_Hiv[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
+				
+				theArtCOST_Hiv[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
+			}
+			
+		}
 		
 		if(theQ->GetTime() == 14610)
 			thePerson->ResetCost();

@@ -45,7 +45,7 @@ extern double * theWHO_1_Art;
 extern double * theWHO_2_Art;
 extern double * theWHO_3_Art;
 extern double * theWHO_4_Art;
-extern int * theINCIDENCE;
+extern double * theINCIDENCE;
 
 /////////////////////
 /////////////////////
