@@ -78,11 +78,11 @@ public:
 	void SetPreArtClinicVisitCost(const double theCost) { iPreArtClinicVisitCost += theCost; }
 	void SetLabCd4TestCost(const double theCost) { iLabCd4TestCost += theCost; }
 	void SetPocCd4TestCost(const double theCost) { iPocCd4TestCost += theCost; }
-	void SetAnnualArtCost(const double theCost) { iAnnualArtCost = theCost; }
-	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost = theCost; }
+	void SetAnnualArtCost(const double theCost) { iAnnualArtCost += theCost; }
+	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost += theCost; }
 	void SetArtOutreachCost(const double theCost) { iArtOutreachCost += theCost; }
 	void SetPreArtOutreachCost(const double theCost) { iPreArtOutreachCost += theCost; }
-	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iArtOutreachCost = 0; iPreArtOutreachCost = 0; }
+	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iArtOutreachCost = 0; iPreArtOutreachCost = 0; artTime = 0; }
 	
 	/* Vector functions */
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }

@@ -16,21 +16,17 @@ using namespace std;
 /////////////////////
 /////////////////////
 
-void SeedDiscount(person * const thePerson)
+void SeedDiscount()
 {
 	for(size_t i=0;i<19;i++)
-		if(thePerson->GetBirthDay() <= 14975.25 + (i * 365.25))
-			new AnnualDiscount(thePerson,14975.25 + (i * 365.25));
-		else
-			Discount(thePerson);
+		new AnnualDiscount(14975.25 + (i * 365.25));
 }
 
 /////////////////////
 /////////////////////
 
-AnnualDiscount::AnnualDiscount(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
+AnnualDiscount::AnnualDiscount(const double Time) :
+event(Time)
 {}
 
 AnnualDiscount::~AnnualDiscount()
@@ -38,18 +34,18 @@ AnnualDiscount::~AnnualDiscount()
 
 bool AnnualDiscount::CheckValid()
 {
-	return pPerson->Alive();
+	return true;
 }
 
 void AnnualDiscount::Execute()
 {
-	Discount(pPerson);
+	Discount();
 }
 
 /////////////////////
 /////////////////////
 
-void Discount(person * const thePerson)
+void Discount()
 {
 	/* DALY weights */
 	dalyWeight_Cd4_3 *= 0.94;

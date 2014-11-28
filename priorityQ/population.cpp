@@ -17,6 +17,7 @@
 #include "events.h"
 #include "toolbox.h"
 #include "outputUpdate.h"
+#include "discount.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ beta(1)
 	CreateOutputArray();
 	ScheduleIncidence(this);
 	ScheduleBetaCalculation(this);
+	SeedDiscount();
 	for(size_t i=0;i<5;i++)
 		infectiousness[i] = 0;
 }
@@ -238,6 +240,7 @@ double population::CalculateLambda(const double * theIRR)
 void population::CalculateIncidence()
 {
 	cout << "Time = " << theQ->GetTime() / 365.25 << endl;
+	cout << "Incidence = " << incidentCases << endl;
 	/* Define IRR's */
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 	

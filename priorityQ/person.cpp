@@ -19,7 +19,6 @@
 #include "cascadeEvents.h"
 #include "output.h"
 #include "interventions.h"
-#include "discount.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -88,7 +87,6 @@ infectiousnessIndex(5)
 	iPop->AddPerson(this);
 	SeedOutput(this);
 	SeedInterventions(this);
-	SeedDiscount(this);
 	if(Time > 12418) {
 		new SeedInitialHivTests(this,Time);
 		new SeedTreatmentGuidelinesUpdate(this,Time);
@@ -375,10 +373,20 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artDay = theTime;
 		cd4AtArt = currentCd4;
 		artCount++;
-	} else if(theTime > 14610 && artDay <= 14610)
-		artTime = theTime - 14610;
-	else if(theTime > 14610)
-		artTime = theTime - artDay;
+	} else if(theTime > 14610) {
+		double yr [22];
+		for(size_t i = 0; i<22; i++)
+			yr[i] = 14610 + (i * 365.25);
+		
+		unsigned int i = 0;
+		while(theTime > yr[i] && i < 21)
+			i++;
+		
+		if(artDay > yr[i-1])
+			artTime += theTime - artDay;
+		else
+			artTime += theTime - yr[i-1];
+	}
 }
 
 /////////////////////

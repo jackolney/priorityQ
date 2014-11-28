@@ -46,6 +46,10 @@ extern double * theWHO_2_Art;
 extern double * theWHO_3_Art;
 extern double * theWHO_4_Art;
 extern double * theINCIDENCE;
+extern double * thePreArtCOST;
+extern double * theArtCOST;
+extern double * thePreArtCOST_Hiv;
+extern double * theArtCOST_Hiv;
 
 /////////////////////
 /////////////////////

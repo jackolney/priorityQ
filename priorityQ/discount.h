@@ -11,33 +11,29 @@
 
 #include <stdio.h>
 #include "event.h"
-#include "person.h"
 
 /////////////////////
 /////////////////////
 
-void SeedDiscount(person * const thePerson);
+void SeedDiscount();
 
 /////////////////////
 /////////////////////
 
 class AnnualDiscount : public event {
 public:
-	AnnualDiscount(person * const thePerson, const double Time); //constructor
+	AnnualDiscount(const double Time); //constructor
 	~AnnualDiscount(); //destructor
 	
 	/* Methods */
 	bool CheckValid();
 	void Execute();
-	
-private:
-	person * const pPerson;
 };
 
 /////////////////////
 /////////////////////
 
-void Discount(person * const thePerson);
+void Discount();
 
 /////////////////////
 /////////////////////

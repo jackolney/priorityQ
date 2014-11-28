@@ -34,6 +34,8 @@ extern double * theINCIDENCE;
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;
+extern double * thePreArtCOST_Hiv;
+extern double * theArtCOST_Hiv;
 
 /* Intervention Pointers */
 int const * p_Hbct;
@@ -107,21 +109,7 @@ int main(int argc, const char * argv[])
 	
 	cout << "Incidence:" << endl;
 	for(size_t i=0;i<60;i++)
-		cout << theINCIDENCE[i] << endl;
-	
-	cout << endl;
-	
-	cout << "COST:" << endl;
-	for(size_t i=0;i<20;i++)
-		cout << theCOST[i] << endl;
-	
-	cout << "PreArtCOST:" << endl;
-	for(size_t i=0;i<20;i++)
-		cout << thePreArtCOST[i] << endl;
-	
-	cout << "ARTCOST:" << endl;
-	for(size_t i=0;i<20;i++)
-		cout << theArtCOST[i] << endl;
+		cout << theINCIDENCE[i] << endl;	
 	
 	delete theQ;
 	delete theRng;
