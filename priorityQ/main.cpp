@@ -81,20 +81,25 @@ int main(int argc, const char * argv[])
 	p_ImmediateArt = &s_ImmediateArt;
 	p_UniversalTestAndTreat = &s_UniversalTestAndTreat;
 	
-	/* THE MODEL */
-	theRng = new Rng(mach_absolute_time());
 
-	theQ = new eventQ(0,(60*365.25)+1);
-	
-	thePop = new population(10000);
-	
-	theQ->RunEvents();
-	
-	thePop->Clear();
-	
-	delete theQ;
-	delete theRng;
-	delete thePop;
+	for(size_t runNumber=0;runNumber<2;runNumber++) {
+		
+		/* THE MODEL */
+		theRng = new Rng(mach_absolute_time());
+
+		theQ = new eventQ(0,(60*365.25)+1);
+		
+		thePop = new population(10000);
+		
+		theQ->RunEvents();
+		
+		thePop->Clear();
+		
+		delete theQ;
+		delete theRng;
+		delete thePop;
+		
+	}
 
     return 0;
 }
