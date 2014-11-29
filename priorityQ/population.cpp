@@ -295,3 +295,17 @@ void population::PassInfection(const size_t theRow)
 
 /////////////////////
 /////////////////////
+
+void population::Clear()
+{
+	for(size_t i=0;i<people.size();i++)
+		for(size_t j=people.at(i).size();j > 0;j--) {
+			delete people.at(i).at(j-1);
+			people.at(i).pop_back();
+		}
+	people.clear();
+}
+
+/////////////////////
+/////////////////////
+

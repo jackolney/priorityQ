@@ -51,6 +51,9 @@ public:
 	void PassInfection(const size_t theRow);
 	void AddCase() { incidentCases++; }
 	
+	/* Clear population */
+	void Clear();
+	
 private:
 	const double sizeAdjustment;
 	unsigned int populationSize;

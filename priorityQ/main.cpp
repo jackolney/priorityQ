@@ -22,6 +22,7 @@ using namespace std;
 /* Pointers to core stuff */
 Rng * theRng;
 eventQ * theQ;
+population * thePop;
 
 /* Output */
 extern double * thePOP_15to49;
@@ -83,36 +84,17 @@ int main(int argc, const char * argv[])
 	/* THE MODEL */
 	theRng = new Rng(mach_absolute_time());
 
-	theQ = new eventQ(0,61*365.25);
+	theQ = new eventQ(0,(60*365.25)+1);
 	
-	new population(1000);
+	thePop = new population(10000);
 	
 	theQ->RunEvents();
 	
-	cout << "Pop15to49:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << thePOP_15to49[i] << endl;
-	
-	cout << endl;
-	
-	cout << "HIV15to49:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << theHIV_15to49[i] << endl;
-
-	cout << endl;
-	
-	cout << "Art15to49:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << theART_15to49[i] << endl;
-	
-	cout << endl;
-	
-	cout << "Incidence:" << endl;
-	for(size_t i=0;i<60;i++)
-		cout << theINCIDENCE[i] << endl;	
+	thePop->Clear();
 	
 	delete theQ;
 	delete theRng;
+	delete thePop;
 
     return 0;
 }
