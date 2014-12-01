@@ -93,7 +93,7 @@ public:
 	/* Population function */
 	void UpdatePopulation() { iPop->UpdateVector(this); }
 	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
-	
+		
 	//////////////////////
 	/* Accessor methods */
 	//////////////////////
@@ -165,6 +165,27 @@ public:
 	size_t GetInfectiousnessIndex() const { return infectiousnessIndex; }
 	double GetVectorUpdateDate() const { return vectorUpdateDate; }
 	
+	/* Calibration functions */
+	void ResetCalibration();
+	bool GetCalSerostatus() const { return calSerostatus; }
+	double GetCalDiagDay() const { return calDiagDay; }
+	unsigned int GetCalDiagRoute() const { return calDiagRoute; }
+	bool GetCalEverCare() const { return calEverCare; }
+	double GetCalCareDay() const { return calCareDay; }
+	unsigned int GetCalCareRoute() const { return calCareRoute; }
+	unsigned int GetCalCd4EntryCare() const { return calCd4EntryCare; }
+	unsigned int GetCalCd4TestCount() const { return calCd4TestCount; }
+	unsigned int GetCalSecondaryCd4TestCount() const { return calSecondaryCd4TestCount; }
+	bool GetCalEverArt() const { return calEverArt; }
+	double GetCalArtDay() const { return calArtDay; }
+	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
+	unsigned int GetCalAtArtPreArtVisitCount() const { return calAtArtPreArtVisitCount; }
+	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostCare; }
+	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnCare; }
+	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnCare; }
+	bool GetCalArtAtEnrollment() const { return calArtAtEnrollment; }
+	bool GetCalEverReturnArt() const { return calEverReturnArt; }
+	
 private:
 	/* basic characteristics */
 	bool gender;
@@ -180,7 +201,6 @@ private:
 	unsigned int initialCd4;
 	unsigned int currentWho;
 	unsigned int initialWho;
-	
 	/* Day = time an event occured */
 	double deathDay;
 	const double birthDay;
@@ -245,6 +265,25 @@ private:
 	size_t rowIndex;
 	size_t infectiousnessIndex;
 	
+	/* Calibration */
+	bool calSerostatus;
+	double calDiagDay;
+	unsigned int calDiagRoute;
+	bool calEverCare;
+	double calCareDay;
+	unsigned int calCareRoute;
+	unsigned int calCd4EntryCare;
+	unsigned int calCd4TestCount;
+	unsigned int calSecondaryCd4TestCount;
+	bool calEverArt;
+	double calArtDay;
+	unsigned int calCd4AtArt;
+	unsigned int calAtArtPreArtVisitCount;
+	bool calAtArtEverLostCare;
+	bool calAtArtEverReturnCare;
+	bool calAtArtEligibleAtReturnCare;
+	bool calArtAtEnrollment;
+	bool calEverReturnArt;
 };
 
 #endif /* defined(__priorityQ__person__) */

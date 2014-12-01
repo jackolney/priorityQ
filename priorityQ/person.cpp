@@ -19,6 +19,7 @@
 #include "cascadeEvents.h"
 #include "output.h"
 #include "interventions.h"
+#include "calibration.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -78,7 +79,25 @@ iPreArtOutreachCost(0),
 iPop(thePop),
 personIndex(0),
 rowIndex(0),
-infectiousnessIndex(5)
+infectiousnessIndex(5),
+calSerostatus(false),
+calDiagDay(0),
+calDiagRoute(0),
+calEverCare(false),
+calCareDay(0),
+calCareRoute(0),
+calCd4EntryCare(0),
+calCd4TestCount(0),
+calSecondaryCd4TestCount(0),
+calEverArt(false),
+calArtDay(0),
+calCd4AtArt(0),
+calAtArtPreArtVisitCount(0),
+calAtArtEverLostCare(false),
+calAtArtEverReturnCare(false),
+calAtArtEligibleAtReturnCare(false),
+calArtAtEnrollment(false),
+calEverReturnArt(false)
 {
 	gender = AssignGender();
 	AssignInitialAge(Time);
@@ -86,6 +105,7 @@ infectiousnessIndex(5)
 	natDeathDate = AssignNatDeathDate(Time);
 	iPop->AddPerson(this);
 	SeedOutput(this);
+	SeedCalibration(this,13514.25,14609,14974,16225);
 	SeedInterventions(this);
 	if(Time > 12418) {
 		new SeedInitialHivTests(this,Time);
@@ -395,6 +415,31 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 void person::SetArtAdherenceState(const double theProb)
 {
 	adherence = theRng->Sample(theProb);
+}
+
+/////////////////////
+/////////////////////
+
+void person::ResetCalibration()
+{
+	calSerostatus = false;
+	calDiagDay = 0;
+	calDiagRoute = 0;
+	calEverCare = false;
+	calCareDay = 0;
+	calCareRoute = 0;
+	calCd4EntryCare = 0;
+	calCd4TestCount = 0;
+	calSecondaryCd4TestCount = 0;
+	calEverArt = false;
+	calArtDay = 0;
+	calCd4AtArt = 0;
+	calAtArtPreArtVisitCount = 0;
+	calAtArtEverLostCare = false;
+	calAtArtEverReturnCare = false;
+	calAtArtEligibleAtReturnCare = false;
+	calArtAtEnrollment = false;
+	calEverReturnArt = false;
 }
 
 /////////////////////

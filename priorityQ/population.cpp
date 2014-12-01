@@ -18,6 +18,7 @@
 #include "toolbox.h"
 #include "outputUpdate.h"
 #include "discount.h"
+#include "calibration.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ beta(1)
 	Generate();
 	InitialiseVector();
 	CreateOutputArray();
+	CreateCalibrationArray();
 	ScheduleIncidence(this);
 	ScheduleBetaCalculation(this);
 	SeedDiscount();
