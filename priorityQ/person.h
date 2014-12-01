@@ -31,7 +31,7 @@ public:
 	
 	/* Hiv Acquisition Functions */
 	void Hiv();
-	void SetSeroStatus(const bool theState) { seroStatus = theState; calSerostatus = theState; }
+	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
 	void SetHivIndicators();
 	void SetInitialCd4Count();
@@ -167,18 +167,19 @@ public:
 	
 	/* Calibration functions */
 	void ResetCalibration();
-	bool GetCalSerostatus() const { return calSerostatus; }
 	bool GetCalEverDiag() const { return calEverDiag; }
-	double GetCareDiagDay() const { return calDiagDay; }
+	double GetCalDiagDay() const { return calDiagDay; }
 	unsigned int GetCalDiagRoute() const { return calDiagRoute; }
 	bool GetCalEverCare() const { return calEverCare; }
 	double GetCalCareDay() const { return calCareDay; }
 	unsigned int GetCalCd4EntryCare() const { return calCd4EntryCare; }
 	unsigned int GetCalCd4TestCount() const { return calCd4TestCount; }
 	unsigned int GetCalSecondaryCd4TestCount() const { return calSecondaryCd4TestCount; }
+	unsigned int GetCalCd4SecondaryCd4Test() const { return calCd4SecondaryCd4Test; }
 	bool GetCalEverArt() const { return calEverArt; }
 	double GetCalArtDay() const { return calArtDay; }
 	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
+	unsigned int GetCalAtArtDiagRoute() const { return calAtArtDiagRoute; }
 	unsigned int GetCalAtArtPreArtVisitCount() const { return calAtArtPreArtVisitCount; }
 	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostPreArtCare; }
 	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnPreArtCare; }
@@ -272,7 +273,6 @@ private:
 	size_t infectiousnessIndex;
 	
 	/* Calibration */
-	bool calSerostatus;
 	bool calEverDiag;
 	double calDiagDay;
 	unsigned int calDiagRoute;
@@ -281,9 +281,12 @@ private:
 	unsigned int calCd4EntryCare;
 	unsigned int calCd4TestCount;
 	unsigned int calSecondaryCd4TestCount;
+	unsigned int calCd4SecondaryCd4Test;
+	
 	bool calEverArt;
 	double calArtDay;
 	unsigned int calCd4AtArt;
+	unsigned int calAtArtDiagRoute;
 	unsigned int calAtArtPreArtVisitCount;
 	bool calAtArtEverLostPreArtCare;
 	bool calAtArtEverReturnPreArtCare;

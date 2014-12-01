@@ -84,10 +84,10 @@ private:
 
 void CreateCalibrationArray();
 
-void UpdateCalibrationArrayOne();
+void UpdateCalibrationArrayOne(person * const thePerson);
 
-void UpdateCalibrationArrayTwo();
+void UpdateCalibrationArrayTwo(person * const thePerson);
 
-void UpdateCalibrationArrayThree();
+void UpdateCalibrationArrayThree(person * const thePerson);
 
 #endif /* defined(__priorityQ__calibration__) */

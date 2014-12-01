@@ -86,7 +86,6 @@ iPop(thePop),
 personIndex(0),
 rowIndex(0),
 infectiousnessIndex(5),
-calSerostatus(false),
 calEverDiag(false),
 calDiagDay(0),
 calDiagRoute(0),
@@ -95,9 +94,11 @@ calCareDay(0),
 calCd4EntryCare(0),
 calCd4TestCount(0),
 calSecondaryCd4TestCount(0),
+calCd4SecondaryCd4Test(0),
 calEverArt(false),
 calArtDay(0),
 calCd4AtArt(0),
+calAtArtDiagRoute(0),
 calAtArtPreArtVisitCount(0),
 calAtArtEverLostPreArtCare(false),
 calAtArtEverReturnPreArtCare(false),
@@ -424,6 +425,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		calEverArt = true;
 		calArtDay = theTime;
 		calCd4AtArt = currentCd4;
+		calAtArtDiagRoute = diagnosisRoute;
 		calAtArtPreArtVisitCount = cd4TestCount + cd4TestResultCount;
 		calAtArtEverLostPreArtCare = everLostPreArtCare;
 		calAtArtEverReturnPreArtCare = everReturnPreArtCare;
@@ -459,7 +461,6 @@ void person::SetArtAdherenceState(const double theProb)
 
 void person::ResetCalibration()
 {
-	calSerostatus = false;
 	calEverDiag = false;
 	calDiagDay = 0;
 	calDiagRoute = 0;
@@ -468,9 +469,11 @@ void person::ResetCalibration()
 	calCd4EntryCare = 0;
 	calCd4TestCount = 0;
 	calSecondaryCd4TestCount = 0;
+	calCd4SecondaryCd4Test = 0;
 	calEverArt = false;
 	calArtDay = 0;
 	calCd4AtArt = 0;
+	calAtArtDiagRoute = 0;
 	calAtArtPreArtVisitCount = 0;
 	calAtArtEverLostPreArtCare = false;
 	calAtArtEverReturnPreArtCare = false;

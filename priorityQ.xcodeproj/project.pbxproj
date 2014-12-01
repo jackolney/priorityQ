@@ -121,6 +121,8 @@
 		04CD81C519A9051C004432AC /* priorityQ */ = {
 			isa = PBXGroup;
 			children = (
+				0481DF3D1A2C6B8800B29DCB /* calibration.cpp */,
+				0481DF3E1A2C6B8800B29DCB /* calibration.h */,
 				040C113519F7A93800210A47 /* cascadeEvents.cpp */,
 				040C113619F7A93800210A47 /* cascadeEvents.h */,
 				040C113819F7AA8D00210A47 /* cascadeUpdate.cpp */,
@@ -140,8 +142,6 @@
 				0421651019FE461D00E47DB4 /* impact.cpp */,
 				0421651119FE461D00E47DB4 /* impact.h */,
 				04B1C4491A07D76100E84B4C /* interventionEvents.cpp */,
-				0481DF3D1A2C6B8800B29DCB /* calibration.cpp */,
-				0481DF3E1A2C6B8800B29DCB /* calibration.h */,
 				04B1C44A1A07D76100E84B4C /* interventionEvents.h */,
 				0478C5C01A03D1C600656B9F /* interventions.cpp */,
 				0478C5C11A03D1C600656B9F /* interventions.h */,

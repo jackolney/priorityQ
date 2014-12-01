@@ -92,7 +92,7 @@ int main(int argc, const char * argv[])
 
 		theQ = new eventQ(0,(60*365.25)+1);
 		
-		thePop = new population(1000);
+		thePop = new population(10000);
 		
 		theQ->RunEvents();
 		
