@@ -33,6 +33,22 @@ private:
 /////////////////////
 /////////////////////
 
+class SeedPerpetualHct : public event {
+public:
+	SeedPerpetualHct(person * const thePerson, const double Time); //constructor
+	~SeedPerpetualHct(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+/////////////////////
+/////////////////////
+
 class HctHivTest : public event {
 public:
 	HctHivTest(person * const thePerson, const double Time, const bool poc); //constructor

@@ -51,6 +51,7 @@ int const * p_ArtOutreach;
 int const * p_Adherence;
 int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
+int const * p_Calibration;
 
 int main(int argc, const char * argv[])
 {
@@ -67,6 +68,7 @@ int main(int argc, const char * argv[])
 	int s_Adherence = 0;
 	int s_ImmediateArt = 0;
 	int s_UniversalTestAndTreat = 0;
+	int s_Calibration = 1;
 
 	p_Hbct = &s_Hbct;
 	p_Vct = &s_Vct;
@@ -80,16 +82,17 @@ int main(int argc, const char * argv[])
 	p_Adherence = &s_Adherence;
 	p_ImmediateArt = &s_ImmediateArt;
 	p_UniversalTestAndTreat = &s_UniversalTestAndTreat;
+	p_Calibration = &s_Calibration;
 	
 
-	for(size_t runNumber=0;runNumber<2;runNumber++) {
+	for(size_t runNumber=0;runNumber<1;runNumber++) {
 		
 		/* THE MODEL */
 		theRng = new Rng(mach_absolute_time());
 
 		theQ = new eventQ(0,(60*365.25)+1);
 		
-		thePop = new population(10000);
+		thePop = new population(1000);
 		
 		theQ->RunEvents();
 		

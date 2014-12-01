@@ -18,6 +18,8 @@
 
 void ScheduleHctHivTest(person * const thePerson,const bool poc);
 
+void SchedulePerpetualHctHivTest(person * const thePerson);
+
 bool HctLinkage(person * const thePerson);
 
 /////////////////////

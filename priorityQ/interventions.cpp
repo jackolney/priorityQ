@@ -33,13 +33,14 @@ extern int const * p_ArtOutreach;
 extern int const * p_ImmediateArt;
 extern int const * p_UniversalTestAndTreat;
 extern int const * p_Adherence;
+extern int const * p_Calibration;
 
 /////////////////////
 /////////////////////
 
 void SeedInterventions(person * const thePerson)
 {
-	if(*p_Hbct || *p_Vct || *p_HbctPocCd4 || *p_Linkage || *p_PreOutreach || *p_ImprovedCare || *p_PocCd4 || *p_VctPocCd4 || *p_ArtOutreach || *p_ImmediateArt || *p_UniversalTestAndTreat || *p_Adherence) {
+	if(*p_Hbct || *p_Vct || *p_HbctPocCd4 || *p_Linkage || *p_PreOutreach || *p_ImprovedCare || *p_PocCd4 || *p_VctPocCd4 || *p_ArtOutreach || *p_ImmediateArt || *p_UniversalTestAndTreat || *p_Adherence || *p_Calibration) {
 		if(thePerson->GetBirthDay() < 14610)
 			new Interventions(thePerson,14610);
 		else
@@ -236,6 +237,15 @@ void Interventions::Execute()
 			pPerson->SetArtAdherenceState(1);
 		else
 			pPerson->SetArtAdherenceState(0.875);
+	}
+	
+/////////////////////
+	/* Calibration */
+	
+	if(*p_Calibration) {
+		for(size_t i=0;i<20;i++)
+			if(GetTime() <= 14610 + (i * 365.25))
+				new SeedPerpetualHct(pPerson, 14610 + (i * 365.25));
 	}
 	
 /////////////////////

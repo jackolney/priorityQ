@@ -36,6 +36,15 @@ void ScheduleHctHivTest(person * const thePerson, const bool poc)
 ////////////////////
 ////////////////////
 
+void SchedulePerpetualHctHivTest(person * const thePerson)
+{
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915)
+		new HctHivTest(thePerson,theQ->GetTime() + (theRng->doub() * 365.25),0);
+}
+
+////////////////////
+////////////////////
+
 bool HctLinkage(person * const thePerson)
 {
 	if(thePerson->GetDiagnosisCount() > 1) {

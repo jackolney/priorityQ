@@ -54,6 +54,32 @@ void SeedHct::Execute()
 /////////////////////
 /////////////////////
 
+SeedPerpetualHct::SeedPerpetualHct(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	D(cout << "PerpetualHct seeded for deployment on day = " << Time << endl);
+}
+
+SeedPerpetualHct::~SeedPerpetualHct()
+{}
+
+bool SeedPerpetualHct::CheckValid()
+{
+	if(!pPerson->GetEverArt())
+		return pPerson->Alive();
+	else
+		return false;
+}
+
+void SeedPerpetualHct::Execute()
+{
+	SchedulePerpetualHctHivTest(pPerson);
+}
+
+/////////////////////
+/////////////////////
+
 HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
 pPerson(thePerson),
