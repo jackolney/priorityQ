@@ -78,7 +78,7 @@ void ScheduleImmediateArt(person * const thePerson)
 			if(theRng->Sample(0.8)) //80% are linked to ART
 				new ArtInitiation(thePerson,theQ->GetTime());
 			else
-				thePerson->SetInCareState(false);
+				thePerson->SetInCareState(false,theQ->GetTime());
 	else
 		SchedulePreArtCd4Test(thePerson);
 }

@@ -31,7 +31,7 @@ public:
 	
 	/* Hiv Acquisition Functions */
 	void Hiv();
-	void SetSeroStatus(const bool theState) { seroStatus = theState; }
+	void SetSeroStatus(const bool theState) { seroStatus = theState; calSerostatus = theState; }
 	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
 	void SetHivIndicators();
 	void SetInitialCd4Count();
@@ -45,10 +45,10 @@ public:
 	void AssignHivDeathDate(); //function creates the Death event.
 	
 	/* Hiv Care Functions */
-	void SetDiagnosedState(const bool theState,unsigned int theRoute) { diagnosed = theState; diagnosisCount++; diagnosisRoute = theRoute; }
-	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount++; }
+	void SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime) { diagnosed = theState; diagnosisCount++; diagnosisRoute = theRoute; calEverDiag = theState; calDiagRoute = theRoute; calDiagDay = theTime; }
+	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount++; calCd4TestCount++; if(cd4TestCount == 1) { calCd4EntryCare = currentCd4;} if(cd4TestCount > 1) {calSecondaryCd4TestCount++;} }
 	void SetEverCd4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount++; }
-	void SetInCareState(const bool theState) { inCare = theState; }
+	void SetInCareState(const bool theState, const double theTime);
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
 	
@@ -168,11 +168,11 @@ public:
 	/* Calibration functions */
 	void ResetCalibration();
 	bool GetCalSerostatus() const { return calSerostatus; }
-	double GetCalDiagDay() const { return calDiagDay; }
+	bool GetCalEverDiag() const { return calEverDiag; }
+	double GetCareDiagDay() const { return calDiagDay; }
 	unsigned int GetCalDiagRoute() const { return calDiagRoute; }
 	bool GetCalEverCare() const { return calEverCare; }
 	double GetCalCareDay() const { return calCareDay; }
-	unsigned int GetCalCareRoute() const { return calCareRoute; }
 	unsigned int GetCalCd4EntryCare() const { return calCd4EntryCare; }
 	unsigned int GetCalCd4TestCount() const { return calCd4TestCount; }
 	unsigned int GetCalSecondaryCd4TestCount() const { return calSecondaryCd4TestCount; }
@@ -180,9 +180,9 @@ public:
 	double GetCalArtDay() const { return calArtDay; }
 	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
 	unsigned int GetCalAtArtPreArtVisitCount() const { return calAtArtPreArtVisitCount; }
-	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostCare; }
-	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnCare; }
-	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnCare; }
+	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostPreArtCare; }
+	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnPreArtCare; }
+	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnPreArtCare; }
 	bool GetCalArtAtEnrollment() const { return calArtAtEnrollment; }
 	bool GetCalEverReturnArt() const { return calEverReturnArt; }
 	
@@ -230,9 +230,15 @@ private:
 	unsigned int cd4TestCount;
 	bool everCd4TestResult;
 	unsigned int cd4TestResultCount;
+	bool everLostPreArtCare;
+	bool everReturnPreArtCare;
+	bool eligibleAtReturnPreArtCare;
 	bool art;
 	bool everArt;
+	bool artAtEnrollment;
 	unsigned int artCount;
+	bool everLostArt;
+	bool everReturnArt;
 	bool adherence;
 	
 	/* Ouput info */
@@ -267,11 +273,11 @@ private:
 	
 	/* Calibration */
 	bool calSerostatus;
+	bool calEverDiag;
 	double calDiagDay;
 	unsigned int calDiagRoute;
 	bool calEverCare;
 	double calCareDay;
-	unsigned int calCareRoute;
 	unsigned int calCd4EntryCare;
 	unsigned int calCd4TestCount;
 	unsigned int calSecondaryCd4TestCount;
@@ -279,9 +285,9 @@ private:
 	double calArtDay;
 	unsigned int calCd4AtArt;
 	unsigned int calAtArtPreArtVisitCount;
-	bool calAtArtEverLostCare;
-	bool calAtArtEverReturnCare;
-	bool calAtArtEligibleAtReturnCare;
+	bool calAtArtEverLostPreArtCare;
+	bool calAtArtEverReturnPreArtCare;
+	bool calAtArtEligibleAtReturnPreArtCare;
 	bool calArtAtEnrollment;
 	bool calEverReturnArt;
 };

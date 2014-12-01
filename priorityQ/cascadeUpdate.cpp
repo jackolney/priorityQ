@@ -130,7 +130,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 		 case 1: return theRng->Sample(hctShortTermRetention);  break;
 		 case 2: return theRng->Sample(vctShortTermRetention);  break;
 		 case 3: return theRng->Sample(pictShortTermRetention); break;
-		 default: thePerson->SetInCareState(false); return false;
+		 default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
 	 }
 	}
 	else
@@ -138,7 +138,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 		 case 1: return theRng->Sample(hctLongTermRetention);  break;
 		 case 2: return theRng->Sample(vctLongTermRetention);  break;
 		 case 3: return theRng->Sample(pictLongTermRetention); break;
-		 default: thePerson->SetInCareState(false); return false;
+		 default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
 	 }
 }
 
@@ -150,7 +150,7 @@ bool AttendCd4TestResult(person * const thePerson)
 	if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
 		return thePerson->Alive();
 	else {
-		thePerson->SetInCareState(false);
+		thePerson->SetInCareState(false,theQ->GetTime());
 		return false;
 	}
 }
@@ -164,7 +164,7 @@ bool SecondaryCd4Test(person * const thePerson)
 		case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
 		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
 		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
-		default: thePerson->SetInCareState(false); return false;
+		default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
 	}
 	
 }
@@ -174,7 +174,7 @@ bool SecondaryCd4Test(person * const thePerson)
 
 void FastTrackArt(person * const thePerson)
 {
-	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1)
+	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1 && thePerson->GetEligible())
 		new ArtInitiation(thePerson,theQ->GetTime());
 }
 

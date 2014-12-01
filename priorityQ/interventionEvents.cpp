@@ -106,7 +106,7 @@ void HctHivTest::Execute()
 	ChargeHctVisit(pPerson);
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
-		pPerson->SetDiagnosedState(true,1);
+		pPerson->SetDiagnosedState(true,1,GetTime());
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(immediateArtFlag)
 			ScheduleImmediateArt(pPerson);
@@ -213,7 +213,7 @@ void VctPocCd4Test::Execute()
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
-	pPerson->SetInCareState(true);
+	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
@@ -254,7 +254,7 @@ void PocCd4Test::Execute()
 	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
-	pPerson->SetInCareState(true);
+	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
