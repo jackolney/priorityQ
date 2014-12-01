@@ -53,6 +53,9 @@ int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
 int const * p_Calibration;
 
+/* Calibration pointers */
+extern double * C1;
+
 int main(int argc, const char * argv[])
 {
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
@@ -95,6 +98,12 @@ int main(int argc, const char * argv[])
 		thePop = new population(10000);
 		
 		theQ->RunEvents();
+		
+		/* PLAYGROUND */
+		
+		for(size_t i=0;i<9;i++)
+			cout << C1[i] << endl;
+		
 		
 		thePop->Clear();
 		

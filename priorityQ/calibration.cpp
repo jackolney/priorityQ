@@ -241,7 +241,6 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 			case 4: i = 3; break;
 			default: i = 0;
 		}
-		
 		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
 		ART1[i]++;
 	}
@@ -311,7 +310,98 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 
 void UpdateCalibrationArrayTwo(person * const thePerson)
 {
-
+	// C1 - Proportion of individuals that ever enter care.
+	if(thePerson->GetCalEverDiag())
+		C1[3 + (thePerson->GetCalDiagRoute()-1)]++; //1 = Hct, 2 = Vct, 3 = Pict.
+	
+	// L2.1 - CD4 count at first CD4 measurement.
+	if(thePerson->GetCalEverCare()) {
+		unsigned int i = 0;
+		switch(thePerson->GetCalCd4EntryCare()) {
+			case 1: i = 0; break;
+			case 2: i = 1; break;
+			case 3: i = 2; break;
+			case 4: i = 3; break;
+			default: i = 0;
+		}
+		i += (thePerson->GetCalDiagRoute()-1) * 4;
+		L21[12 + i]++;
+	}
+	
+	// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
+	if(thePerson->GetCalEverArt()) {
+		R3[3 + (thePerson->GetCalAtArtDiagRoute()-1)] += thePerson->GetCalSecondaryCd4TestCount();
+		R3_Counter[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	}
+	
+	// R8 - Mean CD4 count when receiving secondary CD4 test results.
+	if(thePerson->GetCalEverCare()) {
+		R8[3 + (thePerson->GetCalDiagRoute()-1)] += thePerson->GetCalCd4SecondaryCd4Test();
+		R8_Counter[3 + (thePerson->GetCalDiagRoute()-1)]++;
+	}
+	
+	// ART1 - CD4 count at ART initiation.
+	if(thePerson->GetCalEverArt()) {
+		unsigned int i = 0;
+		switch(thePerson->GetCalCd4AtArt()) {
+			case 1: i = 0; break;
+			case 2: i = 1; break;
+			case 3: i = 2; break;
+			case 4: i = 3; break;
+			default: i = 0;
+		}
+		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
+		ART1[16 + i]++;
+	}
+	
+	// ART4 - Mean number of pre-ART clinic visits prior to ART initiation.
+	if(thePerson->GetCalEverArt())
+		ART4[1] += thePerson->GetCalAtArtPreArtVisitCount();
+	
+	// ART5 - Proportion of ppl initiating ART after diagnosis and successful retention in care until becoming eligible for treatment.
+	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverLostCare())
+		ART5[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART6 - Mean time from diagnosis to ART initiation for ppl successfully retained in care. (HCT ONLY)
+	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverLostCare()) {
+		ART6[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART6_Counter[1]++;
+	}
+	
+	// ART9 - Proportion of ppl initiating ART, loss but return prior to becoming eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
+		ART9[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART10 - Mean time from diagnosis to ART initiation for ppl lost but returned prior to becoming eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare()) {
+		ART10[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART10_Counter[1]++;
+	}
+	
+	// ART11 - Proportion of ppl initiating ART, loss andd return when eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
+		ART11[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	
+	// ART12 - Mean time from diagnosis to ART initiation for ppl lost and returned when eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare()) {
+		ART12[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART12_Counter[1]++;
+	}
+	
+	// ART13 - Proportion of ppl initiating ART who had already been on it.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
+		ART13[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART14 - Proportion of ppl initiating ART at enrollment visit (FastTrackArt).
+	if(thePerson->GetCalEverArt() && thePerson->GetCalArtAtEnrollment())
+		ART14[3 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// HIV-positive individuals initiating ART per year;
+	if(thePerson->GetSeroStatus())
+		HivArray[1]++;
+	if(thePerson->GetArtInitiationState())
+		ArtArray[1]++;
 }
 
 /////////////////////
@@ -319,7 +409,98 @@ void UpdateCalibrationArrayTwo(person * const thePerson)
 
 void UpdateCalibrationArrayThree(person * const thePerson)
 {
+	// C1 - Proportion of individuals that ever enter care.
+	if(thePerson->GetCalEverDiag())
+		C1[6 + (thePerson->GetCalDiagRoute()-1)]++; //1 = Hct, 2 = Vct, 3 = Pict.
 	
+	// L2.1 - CD4 count at first CD4 measurement.
+	if(thePerson->GetCalEverCare()) {
+		unsigned int i = 0;
+		switch(thePerson->GetCalCd4EntryCare()) {
+			case 1: i = 0; break;
+			case 2: i = 1; break;
+			case 3: i = 2; break;
+			case 4: i = 3; break;
+			default: i = 0;
+		}
+		i += (thePerson->GetCalDiagRoute()-1) * 4;
+		L21[24 + i]++;
+	}
+	
+	// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
+	if(thePerson->GetCalEverArt()) {
+		R3[6 + (thePerson->GetCalAtArtDiagRoute()-1)] += thePerson->GetCalSecondaryCd4TestCount();
+		R3_Counter[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	}
+	
+	// R8 - Mean CD4 count when receiving secondary CD4 test results.
+	if(thePerson->GetCalEverCare()) {
+		R8[6 + (thePerson->GetCalDiagRoute()-1)] += thePerson->GetCalCd4SecondaryCd4Test();
+		R8_Counter[6 + (thePerson->GetCalDiagRoute()-1)]++;
+	}
+	
+	// ART1 - CD4 count at ART initiation.
+	if(thePerson->GetCalEverArt()) {
+		unsigned int i = 0;
+		switch(thePerson->GetCalCd4AtArt()) {
+			case 1: i = 0; break;
+			case 2: i = 1; break;
+			case 3: i = 2; break;
+			case 4: i = 3; break;
+			default: i = 0;
+		}
+		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
+		ART1[32 + i]++;
+	}
+	
+	// ART4 - Mean number of pre-ART clinic visits prior to ART initiation.
+	if(thePerson->GetCalEverArt())
+		ART4[2] += thePerson->GetCalAtArtPreArtVisitCount();
+	
+	// ART5 - Proportion of ppl initiating ART after diagnosis and successful retention in care until becoming eligible for treatment.
+	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverLostCare())
+		ART5[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART6 - Mean time from diagnosis to ART initiation for ppl successfully retained in care. (HCT ONLY)
+	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverLostCare()) {
+		ART6[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART6_Counter[2]++;
+	}
+	
+	// ART9 - Proportion of ppl initiating ART, loss but return prior to becoming eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
+		ART9[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART10 - Mean time from diagnosis to ART initiation for ppl lost but returned prior to becoming eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare()) {
+		ART10[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART10_Counter[2]++;
+	}
+	
+	// ART11 - Proportion of ppl initiating ART, loss andd return when eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
+		ART11[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	
+	// ART12 - Mean time from diagnosis to ART initiation for ppl lost and returned when eligible.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare()) {
+		ART12[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART12_Counter[2]++;
+	}
+	
+	// ART13 - Proportion of ppl initiating ART who had already been on it.
+	if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
+		ART13[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// ART14 - Proportion of ppl initiating ART at enrollment visit (FastTrackArt).
+	if(thePerson->GetCalEverArt() && thePerson->GetCalArtAtEnrollment())
+		ART14[6 + (thePerson->GetCalAtArtDiagRoute()-1)]++;
+	
+	// HIV-positive individuals initiating ART per year;
+	if(thePerson->GetSeroStatus())
+		HivArray[2]++;
+	if(thePerson->GetArtInitiationState())
+		ArtArray[2]++;
 }
 
 /////////////////////
