@@ -221,8 +221,8 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 
 	// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
 	if(thePerson->GetCalEverArt()) {
-		R3[thePerson->GetCalDiagRoute()-1] += thePerson->GetCalSecondaryCd4TestCount();
-		R3_Counter[thePerson->GetCalDiagRoute()-1]++;
+		R3[thePerson->GetCalAtArtDiagRoute()-1] += thePerson->GetCalSecondaryCd4TestCount();
+		R3_Counter[thePerson->GetCalAtArtDiagRoute()-1]++;
 	}
 	
 	// R8 - Mean CD4 count when receiving secondary CD4 test results.
@@ -311,24 +311,7 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 
 void UpdateCalibrationArrayTwo(person * const thePerson)
 {
-	cout << "GetCalEverDiag = " <<  thePerson->GetCalEverDiag() << endl;
-	cout << "GetCalDiagDay = " <<  thePerson->GetCalDiagDay() << endl;
-	cout << "GetCalDiagRoute = " <<  thePerson->GetCalDiagRoute() << endl;
-	cout << "GetCalEverCare = " <<  thePerson->GetCalEverCare() << endl;
-	cout << "GetCalCareDay = " <<  thePerson->GetCalCareDay() << endl;
-	cout << "GetCalCd4EntryCare = " <<  thePerson->GetCalCd4EntryCare() << endl;
-	cout << "GetCalCd4TestCount = " <<  thePerson->GetCalCd4TestCount() << endl;
-	cout << "GetCalSecondaryCd4TestCount = " <<  thePerson->GetCalSecondaryCd4TestCount() << endl;
-	cout << "GetCalEverArt = " <<  thePerson->GetCalEverArt() << endl;
-	cout << "GetCalArtDay = " <<  thePerson->GetCalArtDay() << endl;
-	cout << "GetCalCd4AtArt = " <<  thePerson->GetCalCd4AtArt() << endl;
-	cout << "GetCalAtArtPreArtVisitCount = " <<  thePerson->GetCalAtArtPreArtVisitCount() << endl;
-	cout << "GetCalAtArtEverLostCare = " <<  thePerson->GetCalAtArtEverLostCare() << endl;
-	cout << "GetCalAtArtEverReturnCare = " <<  thePerson->GetCalAtArtEverReturnCare() << endl;
-	cout << "GetCalAtArtEligibleAtReturnCare = " <<  thePerson->GetCalAtArtEligibleAtReturnCare() << endl;
-	cout << "GetCalArtAtEnrollment = " <<  thePerson->GetCalArtAtEnrollment() << endl;
-	cout << "GetCalEverReturnArt = " <<  thePerson->GetCalEverReturnArt() << endl;
-	cout << endl;
+
 }
 
 /////////////////////
