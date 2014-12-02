@@ -454,7 +454,6 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artDay = theTime;
 		cd4AtArt = currentCd4;
 		artCount++;
-		if(!GetEverCd4TestResultState() && GetCd4TestCount() == 1 && GetDiagnosisRoute() > 1 && GetEligible()) { artAtEnrollment = true; calArtAtEnrollment = true; }
 		if(everLostArt) { everReturnArt = true; calEverReturnArt = true; }
 		
 		/* Calibration */

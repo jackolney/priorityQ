@@ -51,6 +51,7 @@ public:
 	void SetInCareState(const bool theState, const double theTime);
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
+	void SetArtAtEnrollment(const bool theState) { artAtEnrollment = theState; calArtAtEnrollment = theState; }
 	
 	/* Natural History Date Setting Functions */
 	void SetHivDate(double theDate) { hivDate = theDate; }

@@ -132,8 +132,7 @@ bool ReceiveCd4TestResult(person * const thePerson)
 		 case 3: return theRng->Sample(pictShortTermRetention); break;
 		 default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
 	 }
-	}
-	else
+	} else
 		switch(thePerson->GetDiagnosisRoute()) {
 		 case 1: return theRng->Sample(hctLongTermRetention);  break;
 		 case 2: return theRng->Sample(vctLongTermRetention);  break;
@@ -174,8 +173,10 @@ bool SecondaryCd4Test(person * const thePerson)
 
 void FastTrackArt(person * const thePerson)
 {
-	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1 && thePerson->GetEligible())
+	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1 && thePerson->GetEligible()) {
+		thePerson->SetArtAtEnrollment(true);
 		new ArtInitiation(thePerson,theQ->GetTime());
+	}
 }
 
 ////////////////////
