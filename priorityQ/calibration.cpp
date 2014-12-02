@@ -241,6 +241,7 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 			case 4: i = 3; break;
 			default: i = 0;
 		}
+		ART1[13 + i]++;
 		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
 		ART1[i]++;
 	}
@@ -349,6 +350,7 @@ void UpdateCalibrationArrayTwo(person * const thePerson)
 			case 4: i = 3; break;
 			default: i = 0;
 		}
+		ART1[29 + i]++;
 		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
 		ART1[16 + i]++;
 	}
@@ -448,6 +450,7 @@ void UpdateCalibrationArrayThree(person * const thePerson)
 			case 4: i = 3; break;
 			default: i = 0;
 		}
+		ART1[45 + i]++;
 		i += (thePerson->GetCalAtArtDiagRoute()-1) * 4;
 		ART1[32 + i]++;
 	}
