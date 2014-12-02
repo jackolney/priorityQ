@@ -51,7 +51,7 @@ public:
 	void SetInCareState(const bool theState, const double theTime);
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
-	void SetArtAtEnrollment(const bool theState) { artAtEnrollment = theState; calArtAtEnrollment = theState; }
+	void SetArtAtEnrollment(const bool theState) { artAtEnrollment = theState; }
 	
 	/* Natural History Date Setting Functions */
 	void SetHivDate(double theDate) { hivDate = theDate; }
@@ -185,7 +185,7 @@ public:
 	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostPreArtCare; }
 	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnPreArtCare; }
 	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnPreArtCare; }
-	bool GetCalArtAtEnrollment() const { return calArtAtEnrollment; }
+	bool GetArtAtEnrollment() const { return artAtEnrollment; }
 	bool GetCalEverReturnArt() const { return calEverReturnArt; }
 	
 private:
@@ -292,7 +292,6 @@ private:
 	bool calAtArtEverLostPreArtCare;
 	bool calAtArtEverReturnPreArtCare;
 	bool calAtArtEligibleAtReturnPreArtCare;
-	bool calArtAtEnrollment;
 	bool calEverReturnArt;
 };
 

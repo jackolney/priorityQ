@@ -104,7 +104,6 @@ calAtArtPreArtVisitCount(0),
 calAtArtEverLostPreArtCare(false),
 calAtArtEverReturnPreArtCare(false),
 calAtArtEligibleAtReturnPreArtCare(false),
-calArtAtEnrollment(false),
 calEverReturnArt(false)
 {
 	gender = AssignGender();
@@ -411,19 +410,21 @@ void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const
 
 void person::SetInCareState(const bool theState, const double theTime)
 {
-	if(theState && !GetInCareState()) {
-		calEverCare = theState;
-		calCareDay = theTime;
-		calCareRoute = lastDiagnosisRoute;
-		calCd4EntryCare = currentCd4;
+	inCare = theState;
+	if(theState) {
 		if(everLostPreArtCare) {
 			everReturnPreArtCare = true;
 			if(GetEligible())
 				eligibleAtReturnPreArtCare = true;
 		}
-	} else if(!theState && GetInCareState())
+	} else
 		everLostPreArtCare = true;
-	inCare = theState;
+	if(theState && !GetInCareState()) {
+		calEverCare = theState;
+		calCareDay = theTime;
+		calCareRoute = lastDiagnosisRoute;
+		calCd4EntryCare = currentCd4;
+	}
 }
 
 /////////////////////
@@ -455,7 +456,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		cd4AtArt = currentCd4;
 		artCount++;
 		if(everLostArt) { everReturnArt = true; calEverReturnArt = true; }
-		
+
 		/* Calibration */
 		calEverArt = true;
 		calArtDay = theTime;
@@ -512,7 +513,6 @@ void person::ResetCalibration()
 	calAtArtEverLostPreArtCare = false;
 	calAtArtEverReturnPreArtCare = false;
 	calAtArtEligibleAtReturnPreArtCare = false;
-	calArtAtEnrollment = false;
 	calEverReturnArt = false;
 }
 
