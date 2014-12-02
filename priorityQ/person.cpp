@@ -429,6 +429,23 @@ void person::SetInCareState(const bool theState, const double theTime)
 /////////////////////
 /////////////////////
 
+void person::SetEverCd4TestResultState(const bool theState)
+{
+	everCd4TestResult = theState;
+	cd4TestResultCount++;
+	if(cd4TestCount > 1)
+		switch(currentCd4) {
+			case 1: secondaryCd4 += 100; break;
+			case 2: secondaryCd4 += 275; break;
+			case 3: secondaryCd4 += 425; break;
+			case 4: secondaryCd4 += 750; break;
+			default: break;
+		}
+}
+
+/////////////////////
+/////////////////////
+
 void person::SetArtInitiationState(const bool theState, const double theTime)
 {
 	art = theState;
