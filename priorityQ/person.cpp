@@ -52,11 +52,13 @@ pictHivTestDate(0),
 diagnosed(false),
 diagnosisCount(0),
 diagnosisRoute(0),
+lastDiagnosisRoute(0),
 inCare(false),
 everCd4Test(false),
 cd4TestCount(0),
 everCd4TestResult(false),
 cd4TestResultCount(0),
+secondaryCd4(0),
 everLostPreArtCare(false),
 everReturnPreArtCare(false),
 eligibleAtReturnPreArtCare(false),
@@ -91,10 +93,9 @@ calDiagDay(0),
 calDiagRoute(0),
 calEverCare(false),
 calCareDay(0),
+calCareRoute(0),
 calCd4EntryCare(0),
 calCd4TestCount(0),
-calSecondaryCd4TestCount(0),
-calCd4SecondaryCd4Test(0),
 calEverArt(false),
 calArtDay(0),
 calCd4AtArt(0),
@@ -392,10 +393,29 @@ void person::ScheduleHivIndicatorUpdate()
 /////////////////////
 /////////////////////
 
+void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime)
+{
+	if(!GetDiagnosedState()) {
+		diagnosed = theState;
+		diagnosisRoute = theRoute;
+		calEverDiag = theState;
+		calDiagRoute = theRoute;
+		calDiagDay = theTime;
+	}
+	diagnosisCount++;
+	lastDiagnosisRoute = theRoute;
+}
+
+/////////////////////
+/////////////////////
+
 void person::SetInCareState(const bool theState, const double theTime)
 {
 	if(theState && !GetInCareState()) {
+		calEverCare = theState;
 		calCareDay = theTime;
+		calCareRoute = lastDiagnosisRoute;
+		calCd4EntryCare = currentCd4;
 		if(everLostPreArtCare) {
 			everReturnPreArtCare = true;
 			if(GetEligible())
@@ -404,7 +424,6 @@ void person::SetInCareState(const bool theState, const double theTime)
 	} else if(!theState && GetInCareState())
 		everLostPreArtCare = true;
 	inCare = theState;
-	calEverCare = theState;
 }
 
 /////////////////////
@@ -466,10 +485,9 @@ void person::ResetCalibration()
 	calDiagRoute = 0;
 	calEverCare = false;
 	calCareDay = 0;
+	calCareRoute = 0;
 	calCd4EntryCare = 0;
 	calCd4TestCount = 0;
-	calSecondaryCd4TestCount = 0;
-	calCd4SecondaryCd4Test = 0;
 	calEverArt = false;
 	calArtDay = 0;
 	calCd4AtArt = 0;

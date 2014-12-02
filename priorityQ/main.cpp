@@ -95,7 +95,7 @@ int main(int argc, const char * argv[])
 
 		theQ = new eventQ(0,(60*365.25)+1);
 		
-		thePop = new population(10000);
+		new population(10000);
 		
 		theQ->RunEvents();
 		
@@ -105,7 +105,7 @@ int main(int argc, const char * argv[])
 			cout << C1[i] << endl;
 		
 		
-		thePop->Clear();
+//		thePop->Clear();
 		
 		delete theQ;
 		delete theRng;

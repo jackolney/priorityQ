@@ -45,9 +45,9 @@ public:
 	void AssignHivDeathDate(); //function creates the Death event.
 	
 	/* Hiv Care Functions */
-	void SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime) { diagnosed = theState; diagnosisCount++; diagnosisRoute = theRoute; calEverDiag = theState; calDiagRoute = theRoute; calDiagDay = theTime; }
-	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount++; calCd4TestCount++; if(cd4TestCount == 1) { calCd4EntryCare = currentCd4;} if(cd4TestCount > 1) {calSecondaryCd4TestCount++;} }
-	void SetEverCd4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount++; }
+	void SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime);
+	void SetEverCd4TestState(const bool theState) { everCd4Test = theState; cd4TestCount++; calCd4TestCount++; }
+	void SetEverCd4TestResultState(const bool theState) { everCd4TestResult = theState; cd4TestResultCount++; if(cd4TestCount > 1) { secondaryCd4 += currentCd4; } }
 	void SetInCareState(const bool theState, const double theTime);
 	void SetArtInitiationState(const bool theState, const double theTime);
 	void SetArtAdherenceState(const double theProb);
@@ -172,10 +172,10 @@ public:
 	unsigned int GetCalDiagRoute() const { return calDiagRoute; }
 	bool GetCalEverCare() const { return calEverCare; }
 	double GetCalCareDay() const { return calCareDay; }
+	unsigned int GetCalCareRoute() const { return calCareRoute; }
 	unsigned int GetCalCd4EntryCare() const { return calCd4EntryCare; }
 	unsigned int GetCalCd4TestCount() const { return calCd4TestCount; }
-	unsigned int GetCalSecondaryCd4TestCount() const { return calSecondaryCd4TestCount; }
-	unsigned int GetCalCd4SecondaryCd4Test() const { return calCd4SecondaryCd4Test; }
+	unsigned int GetSecondaryCd4() const { return secondaryCd4; }
 	bool GetCalEverArt() const { return calEverArt; }
 	double GetCalArtDay() const { return calArtDay; }
 	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
@@ -226,11 +226,13 @@ private:
 	bool diagnosed;
 	unsigned int diagnosisCount;
 	unsigned int diagnosisRoute; //1 = Hct, 2 = Vct, 3 = Pict.
+	unsigned int lastDiagnosisRoute;
 	bool inCare;
 	bool everCd4Test;
 	unsigned int cd4TestCount;
 	bool everCd4TestResult;
 	unsigned int cd4TestResultCount;
+	unsigned int secondaryCd4;
 	bool everLostPreArtCare;
 	bool everReturnPreArtCare;
 	bool eligibleAtReturnPreArtCare;
@@ -278,11 +280,9 @@ private:
 	unsigned int calDiagRoute;
 	bool calEverCare;
 	double calCareDay;
+	unsigned int calCareRoute;
 	unsigned int calCd4EntryCare;
 	unsigned int calCd4TestCount;
-	unsigned int calSecondaryCd4TestCount;
-	unsigned int calCd4SecondaryCd4Test;
-	
 	bool calEverArt;
 	double calArtDay;
 	unsigned int calCd4AtArt;

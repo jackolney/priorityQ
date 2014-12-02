@@ -44,7 +44,9 @@ beta(1)
 }
 
 population::~population()
-{}
+{
+	Clear();
+}
 
 /////////////
 // METHODS //
