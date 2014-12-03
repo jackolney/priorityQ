@@ -54,7 +54,7 @@ int const * p_UniversalTestAndTreat;
 int const * p_Calibration;
 
 /* Calibration pointers */
-extern double * C1;
+extern double * L21;
 
 int main(int argc, const char * argv[])
 {
@@ -101,8 +101,8 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-		for(size_t i=0;i<9;i++)
-			cout << C1[i] << endl;
+		for(size_t i=0;i<36;i++)
+			cout << L21[i] << endl;
 		
 		
 //		thePop->Clear();

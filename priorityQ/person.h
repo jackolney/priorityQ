@@ -171,6 +171,7 @@ public:
 	bool GetCalEverDiag() const { return calEverDiag; }
 	double GetCalDiagDay() const { return calDiagDay; }
 	unsigned int GetCalDiagRoute() const { return calDiagRoute; }
+	unsigned int GetLastDiagnosisRoute() const { return lastDiagnosisRoute; }
 	bool GetCalEverCare() const { return calEverCare; }
 	double GetCalCareDay() const { return calCareDay; }
 	unsigned int GetCalCareRoute() const { return calCareRoute; }
@@ -180,7 +181,7 @@ public:
 	bool GetCalEverArt() const { return calEverArt; }
 	double GetCalArtDay() const { return calArtDay; }
 	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
-	unsigned int GetCalAtArtDiagRoute() const { return calAtArtDiagRoute; }
+	unsigned int GetCalAtArtCareRoute() const { return calAtArtCareRoute; }
 	unsigned int GetCalAtArtPreArtVisitCount() const { return calAtArtPreArtVisitCount; }
 	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnPreArtCare; }
 	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnPreArtCare; }
@@ -286,7 +287,7 @@ private:
 	bool calEverArt;
 	double calArtDay;
 	unsigned int calCd4AtArt;
-	unsigned int calAtArtDiagRoute;
+	unsigned int calAtArtCareRoute;
 	unsigned int calAtArtPreArtVisitCount;
 	bool calAtArtEverReturnPreArtCare;
 	bool calAtArtEligibleAtReturnPreArtCare;
