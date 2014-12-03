@@ -101,14 +101,13 @@ calArtDay(0),
 calCd4AtArt(0),
 calAtArtDiagRoute(0),
 calAtArtPreArtVisitCount(0),
-calAtArtEverLostPreArtCare(false),
 calAtArtEverReturnPreArtCare(false),
 calAtArtEligibleAtReturnPreArtCare(false),
 calEverReturnArt(false)
 {
 	gender = AssignGender();
-	AssignInitialAge(Time);
 	D(cout << "Gender is = " << gender << endl);
+	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
 	iPop->AddPerson(this);
 	SeedOutput(this);
@@ -276,8 +275,6 @@ double person::GetAge()
 void person::SetAge(const double Time)
 {
 	currentAge = initialAge + (Time - birthDay);
-	if(currentAge < 0)
-		cout << "WARNING! (negative currentAge)." << endl;
 }
 
 /////////////////////
@@ -463,7 +460,6 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		calCd4AtArt = currentCd4;
 		calAtArtDiagRoute = diagnosisRoute;
 		calAtArtPreArtVisitCount = cd4TestCount + cd4TestResultCount;
-		calAtArtEverLostPreArtCare = everLostPreArtCare;
 		calAtArtEverReturnPreArtCare = everReturnPreArtCare;
 		calAtArtEligibleAtReturnPreArtCare = eligibleAtReturnPreArtCare;
 		
@@ -510,7 +506,6 @@ void person::ResetCalibration()
 	calCd4AtArt = 0;
 	calAtArtDiagRoute = 0;
 	calAtArtPreArtVisitCount = 0;
-	calAtArtEverLostPreArtCare = false;
 	calAtArtEverReturnPreArtCare = false;
 	calAtArtEligibleAtReturnPreArtCare = false;
 	calEverReturnArt = false;

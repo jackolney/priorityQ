@@ -182,7 +182,6 @@ public:
 	unsigned int GetCalCd4AtArt() const { return calCd4AtArt; }
 	unsigned int GetCalAtArtDiagRoute() const { return calAtArtDiagRoute; }
 	unsigned int GetCalAtArtPreArtVisitCount() const { return calAtArtPreArtVisitCount; }
-	bool GetCalAtArtEverLostCare() const { return calAtArtEverLostPreArtCare; }
 	bool GetCalAtArtEverReturnCare() const { return calAtArtEverReturnPreArtCare; }
 	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnPreArtCare; }
 	bool GetArtAtEnrollment() const { return artAtEnrollment; }
@@ -289,7 +288,6 @@ private:
 	unsigned int calCd4AtArt;
 	unsigned int calAtArtDiagRoute;
 	unsigned int calAtArtPreArtVisitCount;
-	bool calAtArtEverLostPreArtCare;
 	bool calAtArtEverReturnPreArtCare;
 	bool calAtArtEligibleAtReturnPreArtCare;
 	bool calEverReturnArt;
