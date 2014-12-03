@@ -17,6 +17,7 @@
 /* Hiv testing times */
 extern double hctHivTestTime ;
 extern double vctHivTestTime;
+extern double pictHivTestTime_AsymptomaticOblivious;
 extern double pictHivTestTime_AsymptomaticNoCd4Result;
 extern double pictHivTestTime_AsymptomaticCd4ResultNotEligible;
 extern double pictHivTestTime_AsymptomaticCd4ResultEligible;

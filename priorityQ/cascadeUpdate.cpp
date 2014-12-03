@@ -48,10 +48,12 @@ void ScheduleVctHivTest(person * const thePerson)
 
 void SchedulePictHivTest(person * const thePerson)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418 && thePerson->GetSeroStatus()) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
-			if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
+			if(!thePerson->GetDiagnosedState())
+				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticOblivious));
+			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticNoCd4Result));
 			else if(thePerson->GetEverCd4TestResultState() && (thePerson->GetCurrentCd4() > thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() < thePerson->GetWhoTxGuideline()))
 				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultNotEligible));
