@@ -71,7 +71,7 @@ int main(int argc, const char * argv[])
 	int s_Adherence = 0;
 	int s_ImmediateArt = 0;
 	int s_UniversalTestAndTreat = 0;
-	int s_Calibration = 1;
+	int s_Calibration = 0;
 
 	p_Hbct = &s_Hbct;
 	p_Vct = &s_Vct;
@@ -95,17 +95,22 @@ int main(int argc, const char * argv[])
 
 		theQ = new eventQ(0,(60*365.25)+1);
 		
-		new population(10000);
+		new population(1000);
 		
 		theQ->RunEvents();
 		
 		/* PLAYGROUND */
 		
-		for(size_t i=0;i<36;i++)
-			cout << L21[i] << endl;
+		cout << "thePOP_15to49:" << endl;
+		for(size_t i=0;i<60;i++)
+			cout << thePOP_15to49[i] << endl;
+
+		cout << endl;
 		
-		
-//		thePop->Clear();
+		cout << "theHIV_15to49:" << endl;
+		for(size_t i=0;i<60;i++)
+			cout << theHIV_15to49[i] << endl;
+
 		
 		delete theQ;
 		delete theRng;
