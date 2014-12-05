@@ -122,6 +122,8 @@ public:
 	double GetSeroconversionDay() const { return seroconversionDay; }
 	double GetArtDay() const { return artDay; }
 	double GetArtTime() const { return artTime; }
+	bool GetEverReturnCare() const { return everReturnPreArtCare; }
+	bool GetEligibleAtReturnCare() const { return eligibleAtReturnPreArtCare; }
 	
 	/* Hiv Care Date Getting Functions */
 	double GetHivDate() const { return hivDate; }

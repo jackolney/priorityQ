@@ -52,6 +52,7 @@ double * thePreArtCOST;
 double * theArtCOST;
 double * thePreArtCOST_Hiv;
 double * theArtCOST_Hiv;
+double * theCLINIC;
 
 /////////////////////
 /////////////////////
@@ -144,10 +145,13 @@ void CreateOutputArray()
 	theArtCOST = new double[20];
 	thePreArtCOST_Hiv = new double[20];
 	theArtCOST_Hiv = new double[20];
+	theCLINIC = new double[4];
 	
 	for(size_t i=0;i<60;i++) {
-		if(i<4)
+		if(i<4) {
 			thePOP_NoArtCd4_2007[i] = 0;
+			theCLINIC[i] = 0;
+		}
 		if(i<5)
 			theCARE[i] = 0;
 		if(i<10) {

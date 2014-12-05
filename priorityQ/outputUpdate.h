@@ -20,6 +20,8 @@ void WriteArt(person * const thePerson);
 
 void WriteCare(person * const thePerson, const double theTime);
 
+void WriteClinic(person * const thePerson, const double theTime);
+
 void WriteAidsDeath(person * const thePerson);
 
 void Write2007(person * const thePerson);

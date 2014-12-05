@@ -20,6 +20,7 @@
 #include "output.h"
 #include "interventions.h"
 #include "calibration.h"
+#include "outputUpdate.h"
 
 extern Rng * theRng;
 extern eventQ * theQ;
@@ -452,6 +453,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artDay = theTime;
 		cd4AtArt = currentCd4;
 		artCount++;
+		WriteClinic(this,theTime);
 		if(everLostArt) { everReturnArt = true; calEverReturnArt = true; }
 
 		/* Calibration */

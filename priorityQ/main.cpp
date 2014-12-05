@@ -37,6 +37,7 @@ extern double * thePreArtCOST;
 extern double * theArtCOST;
 extern double * thePreArtCOST_Hiv;
 extern double * theArtCOST_Hiv;
+extern double * theCLINIC;
 
 /* Intervention Pointers */
 int const * p_Hbct;
@@ -101,15 +102,9 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-		cout << "thePOP_15to49:" << endl;
-		for(size_t i=0;i<60;i++)
-			cout << thePOP_15to49[i] << endl;
-
-		cout << endl;
-		
-		cout << "theHIV_15to49:" << endl;
-		for(size_t i=0;i<60;i++)
-			cout << theHIV_15to49[i] << endl;
+		cout << "theCLINIC:" << endl;
+		for(size_t i=0;i<4;i++)
+			cout << theCLINIC[i] << endl;
 
 		
 		delete theQ;

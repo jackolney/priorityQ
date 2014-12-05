@@ -50,6 +50,7 @@ extern double * thePreArtCOST;
 extern double * theArtCOST;
 extern double * thePreArtCOST_Hiv;
 extern double * theArtCOST_Hiv;
+extern double * theCLINIC;
 
 /////////////////////
 /////////////////////
@@ -128,6 +129,27 @@ void WriteCare(person * const thePerson, const double theTime)
 		theCARE[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
 			// ArtEarly
 		theCARE[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
+	}
+}
+
+/////////////////////
+/////////////////////
+
+void WriteClinic(person * const thePerson, const double theTime)
+{
+	if(thePerson->GetArtInitiationState() && theTime >= 14610 && theTime < 21915) {
+			// FrontDoor - successful retention in care
+		if(!thePerson->GetEverReturnCare() && !thePerson->GetArtAtEnrollment())
+			theCLINIC[0]++;
+			// ArtAtEnrollment
+		if(thePerson->GetArtAtEnrollment())
+			theCLINIC[1]++;
+			// Lost from pre-ART care but returned prior to becoming eligible
+		if(thePerson->GetEverReturnCare() && !thePerson->GetEligibleAtReturnCare())
+			theCLINIC[2]++;
+			// Lost from pre-ART care but returned eligible
+		if(thePerson->GetEverReturnCare() && thePerson->GetEligibleAtReturnCare())
+			theCLINIC[3]++;
 	}
 }
 
