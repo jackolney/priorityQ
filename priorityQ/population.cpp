@@ -273,7 +273,7 @@ void population::CalculateIncidence()
 /////////////////////
 /////////////////////
 
-void population::RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector)
+void population::RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector)
 {
 	/* Shuffle theVector (by value ONLY, not by reference) */
 	random_shuffle(theVector.begin(),theVector.end(),Random);

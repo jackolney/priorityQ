@@ -47,7 +47,7 @@ public:
 	void CalculateBeta();
 	double CalculateLambda(const double * theIRR);
 	void CalculateIncidence();
-	void RandomiseInfection(const int theSize, const size_t theRow, vector<person *> theVector);
+	void RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector);
 	void PassInfection(const size_t theRow);
 	void AddCase() { incidentCases++; }
 	
