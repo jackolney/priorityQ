@@ -15,7 +15,8 @@
 
 	////////////////////
 /* Hiv testing times */
-extern double hctHivTestTime ;
+extern double hctHivTestTime;
+extern double vctHivTestTimeOriginal;
 extern double vctHivTestTime;
 extern double pictHivTestTime_AsymptomaticOblivious;
 extern double pictHivTestTime_AsymptomaticNoCd4Result;
@@ -26,9 +27,13 @@ extern double pictHivTestTime_SymptomaticNoCd4Result;
 extern double pictHivTestTime_SymptomaticCd4Result;
 
 /* Linkage probabilities */
+extern double hctProbLinkOriginal;
 extern double hctProbLink;
+extern double hctProbLinkPreviouslyDiagnosedOriginal;
 extern double hctProbLinkPreviouslyDiagnosed;
+extern double vctProbLinkOriginal;
 extern double vctProbLink;
+extern double pictProbLinkOriginal;
 extern double pictProbLink;
 
 /* HCT time between Hiv test and Cd4 test [CD4-1] */
