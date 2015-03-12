@@ -39,6 +39,8 @@ extern double * thePreArtCOST_Hiv;
 extern double * theArtCOST_Hiv;
 extern double * theCLINIC;
 
+extern int * theGuidelines_PopDist_HivNegative;
+
 /* Intervention Pointers */
 int const * p_Hbct;
 int const * p_Vct;
@@ -94,7 +96,7 @@ int main(int argc, const char * argv[])
 		/* THE MODEL */
 		theRng = new Rng(mach_absolute_time());
 
-		theQ = new eventQ(0,(60*365.25)+1);
+		theQ = new eventQ(0,(66 * 365.25) + 1);
 		
 		new population(1000);
 		
@@ -102,10 +104,9 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-//		cout << "theCLINIC:" << endl;
-//		for(size_t i=0;i<4;i++)
-//			cout << theCLINIC[i] << endl;
-
+		cout << "theGuidelines_PopDist_HivNegative:" << endl;
+		for(size_t i=0; i<36; i++)
+			cout << theGuidelines_PopDist_HivNegative[i] << endl;
 		
 		delete theQ;
 		delete theRng;

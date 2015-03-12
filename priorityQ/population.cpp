@@ -19,6 +19,7 @@
 #include "outputUpdate.h"
 #include "discount.h"
 #include "calibration.h"
+#include "wp19.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ beta(1)
 	Generate();
 	InitialiseVector();
 	CreateOutputArray();
+	CreateGuidelinesArray();
 	CreateCalibrationArray();
 	ScheduleIncidence(this);
 	ScheduleBetaCalculation(this);
@@ -262,6 +264,7 @@ void population::CalculateIncidence()
 	/* Record incidence and reset */
 	WriteIncidence(incidentCases);
 	incidentCases = 0;
+	cout << "Year " << 1970 + (theQ->GetTime() / 365.25) << endl;
 }
 
 	/////////////////////
