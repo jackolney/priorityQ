@@ -102,9 +102,9 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-		cout << "theCLINIC:" << endl;
-		for(size_t i=0;i<4;i++)
-			cout << theCLINIC[i] << endl;
+//		cout << "theCLINIC:" << endl;
+//		for(size_t i=0;i<4;i++)
+//			cout << theCLINIC[i] << endl;
 
 		
 		delete theQ;

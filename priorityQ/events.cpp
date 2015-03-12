@@ -1,10 +1,10 @@
-//
-//  events.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 09/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  events.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 09/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -20,8 +20,8 @@
 
 using namespace std;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 CohortStart::CohortStart(cohort * const iCohort, const double Time) :
 event(Time),
@@ -42,8 +42,8 @@ void CohortStart::Execute()
 	pCohort->GenerateCohort();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 VectorUpdate::VectorUpdate(person * const thePerson, const double Time) :
 event(Time),
@@ -69,8 +69,8 @@ void VectorUpdate::Execute()
 	pPerson->UpdatePopulation();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Incidence::Incidence(population * const thePopulation, const double Time) :
 event(Time),
@@ -90,8 +90,8 @@ void Incidence::Execute()
 	pPopulation->CalculateIncidence();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 BetaCalculation::BetaCalculation(population * const thePopulation, const double Time) :
 event(Time),
@@ -113,8 +113,8 @@ void BetaCalculation::Execute()
 	pPopulation->CalculateBeta();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Infection::Infection(person * const thePerson, const double Time) :
 event(Time),
@@ -136,12 +136,12 @@ void Infection::Execute()
 	pPerson->Hiv();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
-PersonStart::PersonStart(cohort * const iCohort, const double Time) :
+PersonStart::PersonStart(population * const iPop, const double Time) :
 event(Time),
-pCohort(iCohort)
+pPop(iPop)
 {}
 
 PersonStart::~PersonStart()
@@ -155,11 +155,11 @@ bool PersonStart::CheckValid()
 void PersonStart::Execute()
 {
 	D(cout << "PersonStart executed." << endl);
-	pCohort->GenerateNewPerson();
+	new person(pPop,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Death::Death(person * const thePerson, const double Time, const bool hivCause) :
 event(Time),
@@ -180,26 +180,28 @@ bool Death::CheckValid()
 			return pPerson->Alive();
 		else
 			return false;
-	else
-		return pPerson->Alive();
+		else
+			return pPerson->Alive();
 }
 
 void Death::Execute()
 {
 	UpdateDaly(pPerson);
-	WriteCost(pPerson);	
+	WriteCost(pPerson);
 	pPerson->Kill(GetTime(),hivRelated);
 	WriteCare(pPerson,GetTime());
+	WriteDeath(pPerson);
 	if(hivRelated) {
 		D(cout << "Death executed (HIV-related)." << endl);
 		WriteAidsDeath(pPerson);
+		WriteClinic(pPerson,GetTime());
 	}
 	else
 		D(cout << "Death executed (Natural)." << endl);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
 event(Time),
@@ -231,8 +233,8 @@ void Cd4Decline::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4Recover::Cd4Recover(person * const thePerson, const double Time) :
 event(Time),
@@ -264,8 +266,8 @@ void Cd4Recover::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 WhoDecline::WhoDecline(person * const thePerson, const double Time) :
 event(Time),
@@ -298,8 +300,8 @@ void WhoDecline::Execute()
 		SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 WhoRecover::WhoRecover(person * const thePerson, const double Time) :
 event(Time),
@@ -330,5 +332,5 @@ void WhoRecover::Execute()
 	pPerson->AssignHivDeathDate();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

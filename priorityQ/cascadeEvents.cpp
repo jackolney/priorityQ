@@ -1,10 +1,10 @@
-//
-//  cascadeEvents.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 22/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  cascadeEvents.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 22/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -22,8 +22,8 @@
 
 using namespace std;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedInitialHivTests::SeedInitialHivTests(person * const thePerson, const double Time) :
 event(Time),
@@ -48,8 +48,8 @@ void SeedInitialHivTests::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time) :
 event(Time),
@@ -74,8 +74,8 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 	UpdateTreatmentGuidelines(pPerson,2,3);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 VctHivTest::VctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -107,9 +107,7 @@ void VctHivTest::Execute()
 		pPerson->SetDiagnosedState(true,2,GetTime());
 		D(cout << "Diagnosed as HIV-positive." << endl);
 		SchedulePictHivTest(pPerson);
-		if(immediateArtFlag)
-			ScheduleImmediateArt(pPerson);
-		else if(pointOfCare)
+		if(pointOfCare)
 			new VctPocCd4Test(pPerson,GetTime());
 		else if(VctLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime());
@@ -119,8 +117,8 @@ void VctHivTest::Execute()
 	ScheduleVctHivTest(pPerson);
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PictHivTest::PictHivTest(person * const thePerson, const double Time) :
 event(Time),
@@ -150,9 +148,7 @@ void PictHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3,GetTime());
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		if(immediateArtFlag)
-			ScheduleImmediateArt(pPerson);
-		else if(PictLinkage(pPerson))
+		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime());
 		else
 			ChargePreArtClinicVisit(pPerson);
@@ -160,8 +156,8 @@ void PictHivTest::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4Test::Cd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -194,6 +190,7 @@ void Cd4Test::Execute()
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
+	FastTrackArt(pPerson);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(ReceiveCd4TestResult(pPerson)) {
@@ -202,8 +199,8 @@ void Cd4Test::Execute()
 	}
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4TestResult::Cd4TestResult(person * const thePerson, const double Time) :
 event(Time),
@@ -225,7 +222,6 @@ void Cd4TestResult::Execute()
 	UpdateDaly(pPerson);
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
-	FastTrackArt(pPerson);
 	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
@@ -240,8 +236,8 @@ void Cd4TestResult::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
@@ -274,8 +270,8 @@ void ArtInitiation::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtDropout::ArtDropout(person * const thePerson, const double Time) :
 event(Time),
@@ -293,7 +289,7 @@ bool ArtDropout::CheckValid()
 }
 
 void ArtDropout::Execute()
-{	
+{
 	UpdateDaly(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
@@ -302,5 +298,5 @@ void ArtDropout::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

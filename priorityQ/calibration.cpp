@@ -1,10 +1,10 @@
-//
-//  calibration.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 01/12/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  calibration.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 01/12/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "calibration.h"
@@ -38,107 +38,52 @@ unsigned int * ART12_Counter;
 void SeedCalibration(person * const thePerson, const double theTimeZero, const double theTimeOne, const double theTimeTwo, const double theTimeThree)
 {
 	if(thePerson->GetBirthDay() < theTimeZero)
-		new TimeSplitZero(thePerson,theTimeZero);
+		new TimeSplit(thePerson,theTimeZero);
 	
 	if(thePerson->GetBirthDay() < theTimeOne)
-		new TimeSplitOne(thePerson,theTimeOne);
+		new TimeSplit(thePerson,theTimeOne);
 	
 	if(thePerson->GetBirthDay() < theTimeTwo)
-		new TimeSplitTwo(thePerson,theTimeTwo);
+		new TimeSplit(thePerson,theTimeTwo);
 	
 	if(thePerson->GetBirthDay() < theTimeThree)
-		new TimeSplitThree(thePerson,theTimeThree);
+		new TimeSplit(thePerson,theTimeThree);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
-TimeSplitZero::TimeSplitZero(person * const thePerson, const double Time) :
+TimeSplit::TimeSplit(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {}
 
-TimeSplitZero::~TimeSplitZero()
+TimeSplit::~TimeSplit()
 {}
 
-bool TimeSplitZero::CheckValid()
+bool TimeSplit::CheckValid()
 {
 	return pPerson->Alive();
 }
 
-void TimeSplitZero::Execute()
+void TimeSplit::Execute()
 {
-	pPerson->ResetCalibration();
+	if(GetTime() == 13514.25)
+		pPerson->ResetCalibration();
+	else if(GetTime() == 14609) {
+		UpdateCalibrationArray(pPerson,0);
+		pPerson->ResetCalibration();
+	} else if(GetTime() == 14974) {
+		UpdateCalibrationArray(pPerson,1);
+		pPerson->ResetCalibration();
+	} else if(GetTime() == 16225) {
+		UpdateCalibrationArray(pPerson,2);
+		pPerson->ResetCalibration();
+	}
 }
 
-/////////////////////
-/////////////////////
-
-TimeSplitOne::TimeSplitOne(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
-{}
-
-TimeSplitOne::~TimeSplitOne()
-{}
-
-bool TimeSplitOne::CheckValid()
-{
-	return pPerson->Alive();
-}
-
-void TimeSplitOne::Execute()
-{
-	UpdateCalibrationArrayOne(pPerson);
-	pPerson->ResetCalibration();
-}
-
-/////////////////////
-/////////////////////
-
-TimeSplitTwo::TimeSplitTwo(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
-{}
-
-TimeSplitTwo::~TimeSplitTwo()
-{}
-
-bool TimeSplitTwo::CheckValid()
-{
-	return pPerson->Alive();
-}
-
-void TimeSplitTwo::Execute()
-{
-	UpdateCalibrationArrayTwo(pPerson);
-	pPerson->ResetCalibration();
-}
-
-/////////////////////
-/////////////////////
-
-TimeSplitThree::TimeSplitThree(person * const thePerson, const double Time) :
-event(Time),
-pPerson(thePerson)
-{}
-
-TimeSplitThree::~TimeSplitThree()
-{}
-
-bool TimeSplitThree::CheckValid()
-{
-	return pPerson->Alive();
-}
-
-void TimeSplitThree::Execute()
-{
-	UpdateCalibrationArrayThree(pPerson);
-	pPerson->ResetCalibration();
-}
-
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void CreateCalibrationArray()
 {
@@ -196,14 +141,14 @@ void CreateCalibrationArray()
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
-void UpdateCalibrationArrayOne(person * const thePerson)
+void UpdateCalibrationArray(person * const thePerson, const unsigned int theTimeIndex)
 {
 		// C1 - Proportion of individuals that ever enter care.
 	if(thePerson->GetCalEverCare())
-		C1[thePerson->GetCalCareRoute()-1]++; //1 = Hct, 2 = Vct, 3 = Pict.
+		C1[(theTimeIndex * 3) + (thePerson->GetCalCareRoute()-1)]++; //1 = Hct, 2 = Vct, 3 = Pict.
 	
 		// L2.1 - CD4 count at first CD4 measurement.
 	if(thePerson->GetCalEverCare()) {
@@ -216,19 +161,19 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 			default: break;
 		}
 		i += (thePerson->GetCalCareRoute()-1) * 4;
-		L21[i]++;
+		L21[(theTimeIndex * 12) + i]++;
 	}
 	
 		// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
 	if(thePerson->GetCalEverArt() && thePerson->GetCd4TestCount() > 1) {
-		R3[thePerson->GetCalAtArtCareRoute()-1] += thePerson->GetCd4TestCount() - 1;
-		R3_Counter[thePerson->GetCalAtArtCareRoute()-1]++;
+		R3[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
+		R3_Counter[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	}
 	
 		// R8 - Mean CD4 count when receiving secondary CD4 test results.
 	if(thePerson->GetCalEverCare() && thePerson->GetCd4TestCount() > 1) {
-		R8[thePerson->GetCalCareRoute()-1] += thePerson->GetSecondaryCd4();
-		R8_Counter[thePerson->GetCalCareRoute()-1] += thePerson->GetCd4TestCount() - 1;
+		R8[(theTimeIndex * 3) + (thePerson->GetCalCareRoute()-1)] += thePerson->GetSecondaryCd4();
+		R8_Counter[(theTimeIndex * 3) + (thePerson->GetCalCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
 	}
 	
 		// ART1 - CD4 count at ART initiation.
@@ -241,269 +186,71 @@ void UpdateCalibrationArrayOne(person * const thePerson)
 			case 4: i = 0; break;
 			default: break;
 		}
-		ART1[12 + i]++;
+		ART1[(theTimeIndex * 16) + 12 + i]++;
 		i += (thePerson->GetCalAtArtCareRoute()-1) * 4;
-		ART1[i]++;
+		ART1[(theTimeIndex * 16) + i]++;
 	}
 	
 		// ART4 - Mean number of pre-ART clinic visits prior to ART initiation.
 	if(thePerson->GetCalEverArt())
-		ART4[0] += thePerson->GetCalAtArtPreArtVisitCount();
+		ART4[theTimeIndex] += thePerson->GetCalAtArtPreArtVisitCount();
 	
 		// ART5 - Proportion of ppl initiating ART after diagnosis and successful retention in care until becoming eligible for treatment.
 	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetArtAtEnrollment())
-		ART5[thePerson->GetCalAtArtCareRoute()-1]++;
+		ART5[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 		// ART6 - Mean time from diagnosis to ART initiation for ppl successfully retained in care. (HCT ONLY)
 	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalCareRoute() == 1 && !thePerson->GetArtAtEnrollment()) {
-		ART6[0] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART6_Counter[0]++;
+		ART6[theTimeIndex] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART6_Counter[theTimeIndex]++;
 	}
 	
 		// ART9 - Proportion of ppl initiating ART, loss but return prior to becoming eligible.
 	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART9[thePerson->GetCalAtArtCareRoute()-1]++;
+		ART9[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 		// ART10 - Mean time from diagnosis to ART initiation for ppl lost but returned prior to becoming eligible.
 	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART10[0] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART10_Counter[0]++;
+		ART10[theTimeIndex] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART10_Counter[theTimeIndex]++;
 	}
 	
 		// ART11 - Proportion of ppl initiating ART, loss andd return when eligible.
 	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART11[thePerson->GetCalAtArtCareRoute()-1]++;
+		ART11[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 	
 		// ART12 - Mean time from diagnosis to ART initiation for ppl lost and returned when eligible.
 	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART12[0] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART12_Counter[0]++;
+		ART12[theTimeIndex] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
+		ART12_Counter[theTimeIndex]++;
 	}
 	
 		// ART13 - Proportion of ppl initiating ART who had already been on it.
 	if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
-		ART13[thePerson->GetCalAtArtCareRoute()-1]++;
+		ART13[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 		// ART14 - Proportion of ppl initiating ART at enrollment visit (FastTrackArt).
 	if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
-		ART14[thePerson->GetCalAtArtCareRoute()-1]++;
+		ART14[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 		// HIV-positive individuals initiating ART per year;
 	if(thePerson->GetSeroStatus())
-		HivArray[0]++;
+		HivArray[theTimeIndex]++;
 	if(thePerson->GetArtInitiationState())
-		ArtArray[0]++;
+		ArtArray[theTimeIndex]++;
 	
 		// Pre2010 - Dx levels pre-2010. (don't run this code after 2010)
-	if(thePerson->GetDiagnosedState()) {
-		Pre2010[0]++;
-		if(thePerson->GetDiagnosisRoute() == 2)
-			Pre2010[1]++;
-		else if(thePerson->GetDiagnosisRoute() == 3)
-			Pre2010[2]++;
+	if(theTimeIndex == 0) {
+		if(thePerson->GetDiagnosedState()) {
+			Pre2010[0]++;
+			if(thePerson->GetDiagnosisRoute() == 2)
+				Pre2010[1]++;
+			else if(thePerson->GetDiagnosisRoute() == 3)
+				Pre2010[2]++;
+		}
 	}
 }
 
-/////////////////////
-/////////////////////
-
-void UpdateCalibrationArrayTwo(person * const thePerson)
-{
-		// C1 - Proportion of individuals that ever enter care.
-	if(thePerson->GetCalEverCare())
-		C1[3 + (thePerson->GetCalCareRoute()-1)]++; //1 = Hct, 2 = Vct, 3 = Pict.
-	
-		// L2.1 - CD4 count at first CD4 measurement.
-	if(thePerson->GetCalEverCare()) {
-		unsigned int i = 0;
-		switch(thePerson->GetCalCd4EntryCare()) {
-			case 1: i = 3; break;
-			case 2: i = 2; break;
-			case 3: i = 1; break;
-			case 4: i = 0; break;
-			default: break;
-		}
-		i += (thePerson->GetCalCareRoute()-1) * 4;
-		L21[12 + i]++;
-	}
-	
-		// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
-	if(thePerson->GetCalEverArt() && thePerson->GetCd4TestCount() > 1) {
-		R3[3 + (thePerson->GetCalAtArtCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
-		R3_Counter[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	}
-	
-		// R8 - Mean CD4 count when receiving secondary CD4 test results.
-	if(thePerson->GetCalEverCare() && thePerson->GetCd4TestCount() > 1) {
-		R8[3 + (thePerson->GetCalCareRoute()-1)] += thePerson->GetSecondaryCd4();
-		R8_Counter[3 + (thePerson->GetCalCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
-	}
-	
-		// ART1 - CD4 count at ART initiation.
-	if(thePerson->GetCalEverArt()) {
-		unsigned int i = 0;
-		switch(thePerson->GetCalCd4AtArt()) {
-			case 1: i = 3; break;
-			case 2: i = 2; break;
-			case 3: i = 1; break;
-			case 4: i = 0; break;
-			default: break;
-		}
-		ART1[28 + i]++;
-		i += (thePerson->GetCalAtArtCareRoute()-1) * 4;
-		ART1[16 + i]++;
-	}
-	
-		// ART4 - Mean number of pre-ART clinic visits prior to ART initiation.
-	if(thePerson->GetCalEverArt())
-		ART4[1] += thePerson->GetCalAtArtPreArtVisitCount();
-	
-		// ART5 - Proportion of ppl initiating ART after diagnosis and successful retention in care until becoming eligible for treatment.
-	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetArtAtEnrollment())
-		ART5[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART6 - Mean time from diagnosis to ART initiation for ppl successfully retained in care. (HCT ONLY)
-	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalCareRoute() == 1 && !thePerson->GetArtAtEnrollment()) {
-		ART6[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART6_Counter[1]++;
-	}
-	
-		// ART9 - Proportion of ppl initiating ART, loss but return prior to becoming eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART9[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART10 - Mean time from diagnosis to ART initiation for ppl lost but returned prior to becoming eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART10[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART10_Counter[1]++;
-	}
-	
-		// ART11 - Proportion of ppl initiating ART, loss andd return when eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART11[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-	
-		// ART12 - Mean time from diagnosis to ART initiation for ppl lost and returned when eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART12[1] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART12_Counter[1]++;
-	}
-	
-		// ART13 - Proportion of ppl initiating ART who had already been on it.
-	if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
-		ART13[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART14 - Proportion of ppl initiating ART at enrollment visit (FastTrackArt).
-	if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
-		ART14[3 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// HIV-positive individuals initiating ART per year;
-	if(thePerson->GetSeroStatus())
-		HivArray[1]++;
-	if(thePerson->GetArtInitiationState())
-		ArtArray[1]++;
-}
-
-/////////////////////
-/////////////////////
-
-void UpdateCalibrationArrayThree(person * const thePerson)
-{
-		// C1 - Proportion of individuals that ever enter care.
-	if(thePerson->GetCalEverCare())
-		C1[6 + (thePerson->GetCalCareRoute()-1)]++; //1 = Hct, 2 = Vct, 3 = Pict.
-	
-		// L2.1 - CD4 count at first CD4 measurement.
-	if(thePerson->GetCalEverCare()) {
-		unsigned int i = 0;
-		switch(thePerson->GetCalCd4EntryCare()) {
-			case 1: i = 3; break;
-			case 2: i = 2; break;
-			case 3: i = 1; break;
-			case 4: i = 0; break;
-			default: break;
-		}
-		i += (thePerson->GetCalCareRoute()-1) * 4;
-		L21[24 + i]++;
-	}
-	
-		// R3 - Mean number of secondary CD4 appointments prior to becoming eligible for ART.
-	if(thePerson->GetCalEverArt() && thePerson->GetCd4TestCount() > 1) {
-		R3[6 + (thePerson->GetCalAtArtCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
-		R3_Counter[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	}
-	
-		// R8 - Mean CD4 count when receiving secondary CD4 test results.
-	if(thePerson->GetCalEverCare() && thePerson->GetCd4TestCount() > 1) {
-		R8[6 + (thePerson->GetCalCareRoute()-1)] += thePerson->GetSecondaryCd4();
-		R8_Counter[6 + (thePerson->GetCalCareRoute()-1)] += thePerson->GetCd4TestCount() - 1;
-	}
-	
-		// ART1 - CD4 count at ART initiation.
-	if(thePerson->GetCalEverArt()) {
-		unsigned int i = 0;
-		switch(thePerson->GetCalCd4AtArt()) {
-			case 1: i = 3; break;
-			case 2: i = 2; break;
-			case 3: i = 1; break;
-			case 4: i = 0; break;
-			default: break;
-		}
-		ART1[44 + i]++;
-		i += (thePerson->GetCalAtArtCareRoute()-1) * 4;
-		ART1[32 + i]++;
-	}
-	
-		// ART4 - Mean number of pre-ART clinic visits prior to ART initiation.
-	if(thePerson->GetCalEverArt())
-		ART4[2] += thePerson->GetCalAtArtPreArtVisitCount();
-	
-		// ART5 - Proportion of ppl initiating ART after diagnosis and successful retention in care until becoming eligible for treatment.
-	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetArtAtEnrollment())
-		ART5[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART6 - Mean time from diagnosis to ART initiation for ppl successfully retained in care. (HCT ONLY)
-	if(thePerson->GetCalEverArt() && !thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalCareRoute() == 1 && !thePerson->GetArtAtEnrollment()) {
-		ART6[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART6_Counter[2]++;
-	}
-	
-		// ART9 - Proportion of ppl initiating ART, loss but return prior to becoming eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART9[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART10 - Mean time from diagnosis to ART initiation for ppl lost but returned prior to becoming eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART10[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART10_Counter[2]++;
-	}
-	
-		// ART11 - Proportion of ppl initiating ART, loss andd return when eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
-		ART11[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-	
-		// ART12 - Mean time from diagnosis to ART initiation for ppl lost and returned when eligible.
-	if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare()) {
-		ART12[2] += thePerson->GetCalArtDay() - thePerson->GetCalDiagDay();
-		ART12_Counter[2]++;
-	}
-	
-		// ART13 - Proportion of ppl initiating ART who had already been on it.
-	if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
-		ART13[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// ART14 - Proportion of ppl initiating ART at enrollment visit (FastTrackArt).
-	if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
-		ART14[6 + (thePerson->GetCalAtArtCareRoute()-1)]++;
-	
-		// HIV-positive individuals initiating ART per year;
-	if(thePerson->GetSeroStatus())
-		HivArray[2]++;
-	if(thePerson->GetArtInitiationState())
-		ArtArray[2]++;
-}
-
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

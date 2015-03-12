@@ -1,10 +1,10 @@
-//
-//  interventionEvents.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 03/11/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  interventionEvents.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 03/11/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -24,8 +24,8 @@ using namespace std;
 extern Rng * theRng;
 extern eventQ * theQ;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -51,8 +51,8 @@ void SeedHct::Execute()
 	ScheduleHctHivTest(pPerson,pointOfCare);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedPerpetualHct::SeedPerpetualHct(person * const thePerson, const double Time) :
 event(Time),
@@ -77,8 +77,8 @@ void SeedPerpetualHct::Execute()
 	SchedulePerpetualHctHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -108,9 +108,7 @@ void HctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,1,GetTime());
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		if(immediateArtFlag)
-			ScheduleImmediateArt(pPerson);
-		else if(pointOfCare)
+		if(pointOfCare)
 			new HctPocCd4Test(pPerson,GetTime());
 		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
@@ -118,8 +116,8 @@ void HctHivTest::Execute()
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 HctPocCd4Test::HctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -143,9 +141,7 @@ void HctPocCd4Test::Execute()
 	D(cout << "HctPocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
-	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
-	else if(pPerson->GetEligible()) {
+	if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
@@ -156,8 +152,8 @@ void HctPocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PreArtOutreach::PreArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
@@ -186,8 +182,8 @@ void PreArtOutreach::Execute()
 		new Cd4Test(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 VctPocCd4Test::VctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -210,16 +206,17 @@ void VctPocCd4Test::Execute()
 	D(cout << "Entered care." << endl);
 	UpdateDaly(pPerson);
 	ChargePreArtClinicVisit(pPerson);
-	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
+		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
+		ChargePocCd4Test(pPerson);
 		D(cout << "Not eligible for ART." << endl);
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
@@ -227,8 +224,8 @@ void VctPocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -248,19 +245,20 @@ bool PocCd4Test::CheckValid()
 
 void PocCd4Test::Execute()
 {
-	D(cout << "PocCd4Test executed." << endl);	
+	D(cout << "PocCd4Test executed." << endl);
 	UpdateDaly(pPerson);
 	ChargePreArtClinicVisit(pPerson);
-	ChargePocCd4Test(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
+		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson);
 	} else {
+		ChargePocCd4Test(pPerson);
 		D(cout << "Not eligible for ART." << endl);
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
@@ -268,8 +266,8 @@ void PocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtOutreach::ArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
@@ -305,5 +303,5 @@ void ArtOutreach::Execute()
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

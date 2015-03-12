@@ -1,10 +1,10 @@
-//
-//  eventQ.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 08/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  eventQ.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 08/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"

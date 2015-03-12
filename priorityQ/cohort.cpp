@@ -1,10 +1,10 @@
-//
-//  cohort.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 15/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  cohort.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 15/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -39,17 +39,18 @@ void cohort::GenerateCohort()
 {
 	D(cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl);
 	for(size_t i = 0; i < cohortSize; i++)
-		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The arguement here specifies when an individual will enter the model.
+		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The argument here specifies when an individual will enter the model.
+	
+	SelfDestruct(); // This kills the cohort instance.
 }
 
 void cohort::ScheduleNewPerson(const double Time)
 {
 	D(cout << "ScheduleNewPerson on " << Time << endl);
-	new PersonStart(this,Time);
+	new PersonStart(iPop,Time);
 }
 
-void cohort::GenerateNewPerson()
+void cohort::SelfDestruct()
 {
-	D(cout << "GenerateNewPerson on " << theQ->GetTime() << endl);
-	new person(iPop,theQ->GetTime());
+	delete this;
 }

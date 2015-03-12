@@ -1,10 +1,10 @@
-//
-//  person.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 09/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  person.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 09/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -126,20 +126,20 @@ calEverReturnArt(false)
 person::~person()
 {}
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 bool person::GetGender() const
 {
 	return gender;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::AssignInitialAge(const double Time)
 {
-	//Assign age as per Kenya in 1970 if Time = 1970.
+		//Assign age as per Kenya in 1970 if Time = 1970.
 	if(Time < 365.25) {
 		const double ageKenya1970 [36] = {0.101640654,0.18074287,0.24488321,0.296843465,0.33534196,0.362704406,0.387709503,0.411405909,0.43137522,0.447971405,0.461838232,0.473612273,0.4832219,0.490165978,0.494779544,0.497326542,0.49881466,0.49881466,0.60001381,0.679748066,0.744514936,0.797175037,0.836087485,0.863900411,0.889576027,0.913307092,0.932633878,0.948053875,0.961023832,0.971869188,0.981102987,0.988755443,0.994329865,0.997681397,1,1};
 		
@@ -164,16 +164,16 @@ void person::AssignInitialAge(const double Time)
 	D(cout << "Initial age = " << initialAge << ". (year = " << initialAge / 365.25 << ")" << endl);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 double person::GetNatDeathDate() const
 {
 	return natDeathDate;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 bool person::Alive() const
 {
@@ -185,16 +185,16 @@ bool person::Alive() const
 	return aliveStatus;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 bool person::AssignGender()
 {
 	return theRng->Sample(0.5);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 double person::GenerateNatDeathAge()
 {
@@ -229,8 +229,8 @@ double person::GenerateNatDeathAge()
 	return j;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 double person::AssignNatDeathDate(const double Time)
 {
@@ -246,8 +246,8 @@ double person::AssignNatDeathDate(const double Time)
 	return Time + deathAge - initialAge;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::Kill(const double Time, const bool theCause)
 {
@@ -261,8 +261,8 @@ void person::Kill(const double Time, const bool theCause)
 	return;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 double person::GetAge()
 {
@@ -270,16 +270,16 @@ double person::GetAge()
 	return currentAge;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetAge(const double Time)
 {
 	currentAge = initialAge + (Time - birthDay);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::Hiv()
 {
@@ -291,18 +291,10 @@ void person::Hiv()
 	UpdatePopulation();
 	iPop->AddCase();
 	iPop->UpdateArray(this);
-	
-	//For development purposes.
-	//	D(cout << "HIV+" << endl);
-	//	SetSeroStatus(true);
-	//	SetSeroconversionDay(Time);
-	//	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-	//	ScheduleHivIndicatorUpdate(); //ScheduleHivIndicatorUpdate
-	//	return true;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetHivIndicators()
 {
@@ -311,8 +303,8 @@ void person::SetHivIndicators()
 	AssignHivDeathDate();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetInitialCd4Count()
 {
@@ -330,8 +322,8 @@ void person::SetInitialCd4Count()
 	D(cout << "\tInitialCd4 = " << i << endl);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetInitialWhoStage()
 {
@@ -340,8 +332,8 @@ void person::SetInitialWhoStage()
 	D(cout << "\tInitialWho = " << initialWho << endl);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::AssignHivDeathDate()
 {
@@ -349,28 +341,28 @@ void person::AssignHivDeathDate()
 	D(cout << "\tHivDeathDate = " << theEvent->GetTime() << endl);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous date in the line??
 {
-	//HivMortalityTime [ART] [WHO-1] [CD4-1];
+		//HivMortalityTime [ART] [WHO-1] [CD4-1];
 	const double HivMortalityTime [2] [4] [4] =
+	{
 		{
-			{
-				{10.89670749,18.89537630,145.12237880,4100.20238599},
-				{5.55555556,16.45278052,30.19225219,80.73449010},
-				{3.33333333,8.81927541,11.24427329,23.00614908},
-				{0.80895939,2.76601300,3.92628016,7.96693404}
-			},
-		
-			{
-				{12.18473104,21.12886652,162.27627978,4584.85862111},
-				{6.21223891,18.39754859,33.76106706,90.27754928},
-				{3.72734334,9.86174025,12.57338016,25.72554499},
-				{0.90458082,3.09296405,4.39037827,8.90864957}
-			}
-		};
+		{10.89670749,18.89537630,145.12237880,4100.20238599},
+		{5.55555556,16.45278052,30.19225219,80.73449010},
+		{3.33333333,8.81927541,11.24427329,23.00614908},
+		{0.80895939,2.76601300,3.92628016,7.96693404}
+		},
+	
+		{
+		{12.18473104,21.12886652,162.27627978,4584.85862111},
+		{6.21223891,18.39754859,33.76106706,90.27754928},
+		{3.72734334,9.86174025,12.57338016,25.72554499},
+		{0.90458082,3.09296405,4.39037827,8.90864957}
+		}
+	};
 	
 	if(GetArtAdherenceState())
 		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
@@ -378,8 +370,8 @@ double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous
 		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::ScheduleHivIndicatorUpdate()
 {
@@ -387,8 +379,8 @@ void person::ScheduleHivIndicatorUpdate()
 	ScheduleWhoUpdate(this);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime)
 {
@@ -403,8 +395,8 @@ void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const
 	lastDiagnosisRoute = theRoute;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetInCareState(const bool theState, const double theTime)
 {
@@ -425,8 +417,8 @@ void person::SetInCareState(const bool theState, const double theTime)
 	inCare = theState;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetEverCd4TestResultState(const bool theState)
 {
@@ -442,8 +434,8 @@ void person::SetEverCd4TestResultState(const bool theState)
 		}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetArtInitiationState(const bool theState, const double theTime)
 {
@@ -453,9 +445,8 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artDay = theTime;
 		cd4AtArt = currentCd4;
 		artCount++;
-		WriteClinic(this,theTime);
 		if(everLostArt) { everReturnArt = true; calEverReturnArt = true; }
-
+		
 		/* Calibration */
 		calEverArt = true;
 		calArtDay = theTime;
@@ -467,12 +458,12 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		
 	} else if(theTime > 14610) {
 		everLostArt = true;
-		double yr [22];
-		for(size_t i = 0; i<22; i++)
+		double yr [27];
+		for(size_t i = 0; i<27; i++)
 			yr[i] = 14610 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theTime > yr[i] && i < 21)
+		while(theTime > yr[i] && i<26)
 			i++;
 		
 		if(artDay > yr[i-1])
@@ -482,16 +473,16 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::SetArtAdherenceState(const double theProb)
 {
 	adherence = theRng->Sample(theProb);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void person::ResetCalibration()
 {
@@ -513,5 +504,5 @@ void person::ResetCalibration()
 	calEverReturnArt = false;
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

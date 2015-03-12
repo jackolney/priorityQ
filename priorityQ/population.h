@@ -1,10 +1,10 @@
-//
-//  population.h
-//  priorityQ
-//
-//  Created by Jack Olney on 17/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  population.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 17/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__population__
 #define __priorityQ__population__
@@ -28,11 +28,12 @@ public:
 	void InitialiseVector();
 	void AddPerson(person * thePerson);
 	void RemovePerson(person * thePerson);
-	void UpdateVector(person * thePerson);		
+	void UpdateVector(person * thePerson);
 	void PushInVector(person * thePerson);
 	void SwapOutVector(person * thePerson);
 	
 	/* Infectiousness Methods */
+	void InitialiseArray();
 	void UpdateArray(person * const thePerson);
 	void PushInArray(person * const thePerson);
 	void SwapOutArray(person * const thePerson);

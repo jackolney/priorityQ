@@ -1,10 +1,10 @@
-//
-//  person.h
-//  priorityQ
-//
-//  Created by Jack Olney on 09/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  person.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 09/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__person__
 #define __priorityQ__person__
@@ -23,9 +23,9 @@ public:
 	double GenerateNatDeathAge();
 	double AssignNatDeathDate(const double Time);
 	
-	/////////////
+		/////////////
 	/* Methods */
-	/////////////
+		/////////////
 	void Kill(const double Time, const bool theCause);
 	void SetAge(const double Time);
 	
@@ -94,10 +94,10 @@ public:
 	/* Population function */
 	void UpdatePopulation() { iPop->UpdateVector(this); }
 	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
-		
-	//////////////////////
+	
+		//////////////////////
 	/* Accessor methods */
-	//////////////////////
+		//////////////////////
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
@@ -114,6 +114,7 @@ public:
 	unsigned int GetCd4TestCount() const { return cd4TestCount; }
 	bool GetEverCd4TestResultState() const { return everCd4TestResult; }
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
+	bool GetWhoEligible() const { if(currentWho >= whoTx) return true; else return false; }
 	bool GetInCareState() const { return inCare; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetArtAdherenceState() const { return adherence; }
@@ -191,7 +192,7 @@ public:
 	bool GetCalEverReturnArt() const { return calEverReturnArt; }
 	
 private:
-	/* basic characteristics */
+	/* Basic characteristics */
 	bool gender;
 	double currentAge;
 	double initialAge;
@@ -200,16 +201,16 @@ private:
 	/* Hiv status */
 	bool seroStatus;
 	double seroconversionDay;
-	
 	unsigned int currentCd4;
 	unsigned int initialCd4;
 	unsigned int currentWho;
 	unsigned int initialWho;
+	
 	/* Day = time an event occured */
 	double deathDay;
 	const double birthDay;
-	double artDay;		//Art start day.
-	double artTime;		//Time spent on Art.
+	double artDay;
+	double artTime;
 	
 	/* Date = time an event will occur */
 	double hivDate;
@@ -251,7 +252,6 @@ private:
 	unsigned int cd4AtArt;
 	bool hivDeath;
 	bool artDeath;
-	
 	
 	/* Tx Guidelines */
 	unsigned int cd4Tx;
