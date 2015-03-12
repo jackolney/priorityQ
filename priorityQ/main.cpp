@@ -40,6 +40,13 @@ extern double * theArtCOST_Hiv;
 extern double * theCLINIC;
 
 extern int * theGuidelines_PopDist_HivNegative;
+extern int * theGuidelines_Death_200_ArtMoreSixMonths;
+extern int * theGuidelines_Death_200_OffArt;
+extern int * theGuidelines_Art_500;
+extern int * theGuidelines_NewInfectionsAdult;
+extern int * theGuidelines_NewDiagnoses;
+extern int * theGuidelines_PreArtDropout;
+extern int * theGuidelines_ArtDropout;
 
 /* Intervention Pointers */
 int const * p_Hbct;
@@ -107,6 +114,30 @@ int main(int argc, const char * argv[])
 		cout << "theGuidelines_PopDist_HivNegative:" << endl;
 		for(size_t i=0; i<36; i++)
 			cout << theGuidelines_PopDist_HivNegative[i] << endl;
+		
+//		cout << "theGuidelines_Death_200_OffArt:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_Death_200_OffArt[i] << endl;
+//		
+//		cout << "theGuidelines_Art_500:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_Art_500[i] << endl;
+//		
+//		cout << "theGuidelines_NewInfectionsAdult:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_NewInfectionsAdult[i] << endl;
+//		
+//		cout << "theGuidelines_NewDiagnoses:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_NewDiagnoses[i] << endl;
+//		
+//		cout << "theGuidelines_PreArtDropout:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_PreArtDropout[i] << endl;
+//		
+//		cout << "theGuidelines_ArtDropout:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_ArtDropout[i] << endl;
 		
 		delete theQ;
 		delete theRng;
