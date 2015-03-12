@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "person.h"
 
-void WriteGuidelinesPopDist(person * const thePerson, const int theIndex);
+void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex);
 
 void WriteGuidelinesDeath(person * const thePerson);
 

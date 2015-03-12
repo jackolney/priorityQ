@@ -79,7 +79,7 @@ extern int * theGuidelines_ArtDropout;
 	/////////////////////
 	/////////////////////
 
-void WriteGuidelinesPopDist(person * const thePerson, const int theIndex)
+void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex)
 {
 	if(!thePerson->GetSeroStatus()) {
 		theGuidelines_PopDist_HivNegative[theIndex]++;

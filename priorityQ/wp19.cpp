@@ -89,7 +89,7 @@ void SeedGuidelinesOutput(person * const thePerson)
 	/////////////////////
 	/////////////////////
 
-GuidelinesOutput::GuidelinesOutput(person * const thePerson, const double Time, const int theIndex) :
+GuidelinesOutput::GuidelinesOutput(person * const thePerson, const double Time, const size_t theIndex) :
 event(Time),
 pPerson(thePerson),
 index(theIndex)
