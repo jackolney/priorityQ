@@ -50,12 +50,12 @@ void WriteDaly(person * const thePerson)
 	UpdateDaly(thePerson);
 	
 	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-	double yr [25];
-	for(size_t i = 0; i<25; i++)
+	double yr [26];
+	for(size_t i = 0; i<26; i++)
 		yr[i] = 14975.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<25)
+	while(theQ->GetTime() > yr[i] && i<26)
 		i++;
 	
 	if(theQ->GetTime() > 14610)

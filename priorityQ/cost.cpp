@@ -81,7 +81,7 @@ void ChargeArtCare(person * const thePerson)
 			yr[i] = 14610 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<26)
+		while(theQ->GetTime() > yr[i] && i<27)
 			i++;
 		
 		if(thePerson->GetArtDay() <= yr[i-1])
@@ -104,7 +104,7 @@ void ChargeAdherence(person * const thePerson)
 			yr[i] = 14610 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<26)
+		while(theQ->GetTime() > yr[i] && i<27)
 			i++;
 		
 		if(thePerson->GetArtDay() <= yr[i-1])
@@ -139,12 +139,12 @@ void WriteCost(person * const thePerson)
 	if(thePerson->Alive()) {
 		
 		/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-		double yr [25];
-		for(size_t i=0; i<25; i++)
+		double yr [26];
+		for(size_t i=0; i<26; i++)
 			yr[i] = 14975.25 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<25)
+		while(theQ->GetTime() > yr[i] && i<26)
 			i++;
 		
 		if(theQ->GetTime() > 14610) {

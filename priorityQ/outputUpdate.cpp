@@ -61,12 +61,12 @@ extern double * theAidsDeath_2010_Age;
 
 void WritePop(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -83,12 +83,12 @@ void WritePop(person * const thePerson)
 
 void WriteHiv(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	if(thePerson->Alive()) {
@@ -103,12 +103,12 @@ void WriteHiv(person * const thePerson)
 
 void WriteArt(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	if(thePerson->Alive()) {
@@ -162,12 +162,12 @@ void WriteClinic(person * const thePerson, const double theTime)
 
 void WriteDeath(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	theDeath[i]++;
@@ -188,12 +188,12 @@ void WriteDeath(person * const thePerson)
 
 void WriteAidsDeath(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	theAidsDeath[i] += thePerson->GetSeroStatus();
@@ -292,12 +292,12 @@ void Write2014(person * const thePerson)
 
 void WriteCd4(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -329,12 +329,12 @@ void WriteCd4(person * const thePerson)
 
 void WriteWho(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -365,12 +365,12 @@ void WriteWho(person * const thePerson)
 
 void WriteIncidence(unsigned int const &theIncidentCases)
 {
-	double yr [65];
-	for(size_t i = 0; i<65; i++)
+	double yr [66];
+	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<65)
+	while(theQ->GetTime() > yr[i] && i<66)
 		i++;
 	
 	theINCIDENCE[i] = theIncidentCases;

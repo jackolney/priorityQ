@@ -19,6 +19,7 @@
 #include "cost.h"
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
+#include "wp19Update.h"
 
 using namespace std;
 
@@ -264,6 +265,7 @@ void ArtInitiation::Execute()
 	if(!pPerson->GetArtAdherenceState())
 		D(cout << "NON-ADHERER to Art." << endl);
 	pPerson->SetArtInitiationState(true,GetTime());
+	WriteGuidelinesArtInitiation(pPerson);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
@@ -293,6 +295,7 @@ void ArtDropout::Execute()
 	UpdateDaly(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
+	WriteGuidelinesArtDropout();
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	pPerson->UpdateInfectiousnessArray();

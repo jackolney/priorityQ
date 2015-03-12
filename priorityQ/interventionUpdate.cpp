@@ -26,7 +26,7 @@ using namespace std;
 
 void ScheduleHctHivTest(person * const thePerson, const bool poc)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 23741.25) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 24106.5) {
 		const double diagDay = theRng->SampleExpDist(hctHivTestTime);
 		if(diagDay <= 365.25)
 			new HctHivTest(thePerson,theQ->GetTime() + diagDay,poc);
@@ -38,7 +38,7 @@ void ScheduleHctHivTest(person * const thePerson, const bool poc)
 
 void SchedulePerpetualHctHivTest(person * const thePerson)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 23741.25)
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 24106.5)
 		new HctHivTest(thePerson,theQ->GetTime() + (theRng->doub() * 365.25),0);
 }
 

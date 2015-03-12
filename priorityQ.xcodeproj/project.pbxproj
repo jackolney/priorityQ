@@ -24,6 +24,8 @@
 		049A06DC19F16FEC006BFBCE /* population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049A06DA19F16FEC006BFBCE /* population.cpp */; };
 		04B1C44B1A07D76100E84B4C /* interventionEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C4491A07D76100E84B4C /* interventionEvents.cpp */; };
 		04B1C44E1A07D8C200E84B4C /* interventionUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */; };
+		04BB90751AB1FC3D0020E548 /* wp19.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04BB90731AB1FC3D0020E548 /* wp19.cpp */; };
+		04BB90781AB1FC5C0020E548 /* wp19Update.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04BB90761AB1FC5C0020E548 /* wp19Update.cpp */; };
 		04CD81C719A9051C004432AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CD81C619A9051C004432AC /* main.cpp */; };
 		04CD81C919A9051C004432AC /* priorityQ.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04CD81C819A9051C004432AC /* priorityQ.1 */; };
 		04EAF85C19E58A5F0058B45A /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF85A19E58A5F0058B45A /* event.cpp */; };
@@ -79,6 +81,10 @@
 		04B1C44A1A07D76100E84B4C /* interventionEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interventionEvents.h; sourceTree = "<group>"; };
 		04B1C44C1A07D8C200E84B4C /* interventionUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interventionUpdate.cpp; sourceTree = "<group>"; };
 		04B1C44D1A07D8C200E84B4C /* interventionUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interventionUpdate.h; sourceTree = "<group>"; };
+		04BB90731AB1FC3D0020E548 /* wp19.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wp19.cpp; sourceTree = "<group>"; };
+		04BB90741AB1FC3D0020E548 /* wp19.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wp19.h; sourceTree = "<group>"; };
+		04BB90761AB1FC5C0020E548 /* wp19Update.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wp19Update.cpp; sourceTree = "<group>"; };
+		04BB90771AB1FC5C0020E548 /* wp19Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wp19Update.h; sourceTree = "<group>"; };
 		04CD81C319A9051C004432AC /* priorityQ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = priorityQ; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CD81C619A9051C004432AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		04CD81C819A9051C004432AC /* priorityQ.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = priorityQ.1; sourceTree = "<group>"; };
@@ -164,6 +170,10 @@
 				047C252219F91B1F00F9CE73 /* toolbox.h */,
 				040CC6FD19F0063700611C57 /* update.cpp */,
 				040CC6FE19F0063700611C57 /* update.h */,
+				04BB90731AB1FC3D0020E548 /* wp19.cpp */,
+				04BB90741AB1FC3D0020E548 /* wp19.h */,
+				04BB90761AB1FC5C0020E548 /* wp19Update.cpp */,
+				04BB90771AB1FC5C0020E548 /* wp19Update.h */,
 			);
 			path = priorityQ;
 			sourceTree = "<group>";
@@ -231,6 +241,8 @@
 				04076CD71A0A511F0046D09D /* discount.cpp in Sources */,
 				04B1C44B1A07D76100E84B4C /* interventionEvents.cpp in Sources */,
 				0421651219FE461D00E47DB4 /* impact.cpp in Sources */,
+				04BB90781AB1FC5C0020E548 /* wp19Update.cpp in Sources */,
+				04BB90751AB1FC3D0020E548 /* wp19.cpp in Sources */,
 				0421651F19FFF80A00E47DB4 /* output.cpp in Sources */,
 				04CD81C719A9051C004432AC /* main.cpp in Sources */,
 				0478C5C61A03FD1D00656B9F /* toolbox.cpp in Sources */,

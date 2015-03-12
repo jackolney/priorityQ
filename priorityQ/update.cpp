@@ -115,7 +115,7 @@ void ScheduleVectorUpdate(person * const thePerson, const double theTime)
 
 void ScheduleIncidence(population * thePopulation)
 {
-	for(size_t i=0; i<65; i++)
+	for(size_t i=0; i<66; i++)
 		new Incidence(thePopulation,i * 365.25);
 }
 

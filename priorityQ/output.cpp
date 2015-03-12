@@ -63,8 +63,8 @@ double * theAidsDeath_2010_Age;
 
 void SeedOutput(person * const thePerson)
 {
-	double yr [65];
-	for(size_t i=0; i<65; i++) {
+	double yr [66];
+	for(size_t i=0; i<66; i++) {
 		yr[i] = 365.25 + (i * 365.25);
 		if(thePerson->GetBirthDay() < yr[i])
 			new Output(thePerson,yr[i]);
@@ -112,15 +112,15 @@ void Output::Execute()
 void CreateOutputArray()
 {
 	theCARE = new double[6]; // NeverDiagnosed, DiagnosedButNeverLinkedToCare, DiagnosedLinkedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
-	theDALY = new double[25];
-	theCOST = new double[25];
-	thePOP = new double[65];
-	theHIV = new double[65];
-	thePOP_15to49 = new double[65];
-	theHIV_15to49 = new double[65];
-	theART_15to49 = new double[65];
-	thePOP_15plus = new double[65];
-	theAidsDeath_15plus = new double[65];
+	theDALY = new double[26];
+	theCOST = new double[26];
+	thePOP = new double[66];
+	theHIV = new double[66];
+	thePOP_15to49 = new double[66];
+	theHIV_15to49 = new double[66];
+	theART_15to49 = new double[66];
+	thePOP_15plus = new double[66];
+	theAidsDeath_15plus = new double[66];
 	thePOP_AgeSex_2007 = new double[20];
 	theHIV_AgeSex_2007 = new double[20];
 	thePOP_NoArtCd4_2007 = new double[4];
@@ -128,34 +128,34 @@ void CreateOutputArray()
 	theHIV_AgeSex_2012 = new double[16];
 	thePOP_AgeSex_2014 = new double[10];
 	theHIV_AgeSex_2014 = new double[10];
-	theCD4_200 = new double[65];
-	theCD4_200350 = new double[65];
-	theCD4_350500 = new double[65];
-	theCD4_500 = new double[65];
-	theCD4_200_Art = new double[65];
-	theCD4_200350_Art = new double[65];
-	theCD4_350500_Art = new double[65];
-	theCD4_500_Art = new double[65];
-	theWHO_1 = new double[65];
-	theWHO_2 = new double[65];
-	theWHO_3 = new double[65];
-	theWHO_4 = new double[65];
-	theWHO_1_Art = new double[65];
-	theWHO_2_Art = new double[65];
-	theWHO_3_Art = new double[65];
-	theWHO_4_Art = new double[65];
-	theINCIDENCE = new double[65];
-	thePreArtCOST = new double[25];
-	theArtCOST = new double[25];
-	thePreArtCOST_Hiv = new double[25];
-	theArtCOST_Hiv = new double[25];
+	theCD4_200 = new double[66];
+	theCD4_200350 = new double[66];
+	theCD4_350500 = new double[66];
+	theCD4_500 = new double[66];
+	theCD4_200_Art = new double[66];
+	theCD4_200350_Art = new double[66];
+	theCD4_350500_Art = new double[66];
+	theCD4_500_Art = new double[66];
+	theWHO_1 = new double[66];
+	theWHO_2 = new double[66];
+	theWHO_3 = new double[66];
+	theWHO_4 = new double[66];
+	theWHO_1_Art = new double[66];
+	theWHO_2_Art = new double[66];
+	theWHO_3_Art = new double[66];
+	theWHO_4_Art = new double[66];
+	theINCIDENCE = new double[66];
+	thePreArtCOST = new double[26];
+	theArtCOST = new double[26];
+	thePreArtCOST_Hiv = new double[26];
+	theArtCOST_Hiv = new double[26];
 	theCLINIC = new double[5]; // NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
-	theDeath = new double[65];
-	theAidsDeath = new double[65];
+	theDeath = new double[66];
+	theAidsDeath = new double[66];
 	theDeath_2010_Age = new double[20];
 	theAidsDeath_2010_Age = new double[20];
 	
-	for(size_t i=0;i<65;i++) {
+	for(size_t i=0;i<66;i++) {
 		if(i<4)
 			thePOP_NoArtCd4_2007[i] = 0;
 		if(i<5)
@@ -176,7 +176,7 @@ void CreateOutputArray()
 			theDeath_2010_Age[i] = 0;
 			theAidsDeath_2010_Age[i] = 0;
 		}
-		if(i<25) {
+		if(i<26) {
 			theDALY[i] = 0;
 			theCOST[i] = 0;
 			thePreArtCOST[i] = 0;
