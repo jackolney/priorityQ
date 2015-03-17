@@ -117,12 +117,12 @@ calEverReturnArt(false)
 	SeedGuidelinesOutput(this);
 	SeedCalibration(this,13514.25,14609,14974,16225);
 	SeedInterventions(this);
-	if(Time > 12418) {
+	if(Time > 12418.5) {
 		new SeedInitialHivTests(this,Time);
 		new SeedTreatmentGuidelinesUpdate(this,Time);
 	} else {
-		new SeedInitialHivTests(this,12418);
-		new SeedTreatmentGuidelinesUpdate(this,14975);
+		new SeedInitialHivTests(this,12418.5);
+		new SeedTreatmentGuidelinesUpdate(this,14975.25);
 	}
 }
 
@@ -387,8 +387,6 @@ void person::ScheduleHivIndicatorUpdate()
 
 void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime)
 {
-	if(theQ->GetTime() < (34 * 365.25))
-		cout << "WARNING diagnosed in =" << 1970 + (theQ->GetTime() / 365.25) << endl;
 	if(!GetDiagnosedState()) {
 		diagnosed = theState;
 		diagnosisRoute = theRoute;
@@ -449,8 +447,6 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 {
 	art = theState;
 	if(theState) {
-		if(theQ->GetTime() < (34 * 365.25))
-			cout << "WARNING ART in =" << 1970 + (theQ->GetTime() / 365.25) << endl;
 		everArt = true;
 		artDay = theTime;
 		cd4AtArt = currentCd4;
