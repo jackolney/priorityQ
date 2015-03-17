@@ -38,6 +38,7 @@ unsigned int cohort::GetCohortSize() const
 void cohort::GenerateCohort()
 {
 	D(cout << "Individuals (n=" << cohortSize << ") being seeded into the model." << endl);
+	cout << "\tPeople = " << cohortSize << endl;
 	for(size_t i = 0; i < cohortSize; i++)
 		ScheduleNewPerson(theRng->doub() * 365.25 + theQ->GetTime()); //The argument here specifies when an individual will enter the model.
 	
