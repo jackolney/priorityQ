@@ -341,8 +341,7 @@ void person::SetInitialWhoStage()
 
 void person::AssignHivDeathDate()
 {
-	event * theEvent = new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
-	D(cout << "\tHivDeathDate = " << theEvent->GetTime() << endl);
+	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
 }
 
 	/////////////////////
@@ -388,6 +387,8 @@ void person::ScheduleHivIndicatorUpdate()
 
 void person::SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime)
 {
+	if(theQ->GetTime() < (34 * 365.25))
+		cout << "WARNING diagnosed in =" << 1970 + (theQ->GetTime() / 365.25) << endl;
 	if(!GetDiagnosedState()) {
 		diagnosed = theState;
 		diagnosisRoute = theRoute;
@@ -448,6 +449,8 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 {
 	art = theState;
 	if(theState) {
+		if(theQ->GetTime() < (34 * 365.25))
+			cout << "WARNING ART in =" << 1970 + (theQ->GetTime() / 365.25) << endl;
 		everArt = true;
 		artDay = theTime;
 		cd4AtArt = currentCd4;

@@ -48,12 +48,10 @@ void ScheduleCd4Update(person * const thePerson)
 	};
 	
 	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentCd4() > 1) {
-		event * theEvent = new Cd4Decline(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
-		D(cout << "\tCd4Decline from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
+		new Cd4Decline(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState() && thePerson->GetCurrentCd4() < 3) {
-		event * theEvent = new Cd4Recover(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		D(cout << "\tCd4Recover from " << thePerson->GetCurrentCd4() << " to occur on = " << theEvent->GetTime() << endl);
+		new Cd4Recover(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 	}
 	
 }
@@ -86,18 +84,15 @@ void ScheduleWhoUpdate(person * const thePerson)
 	
 	
 	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentWho() < 4) {
-		event * theEvent = new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		D(cout << "\tWhoDecline from " << thePerson->GetCurrentWho() << " to occur on = " << theEvent->GetTime() << endl);
+		new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState()) {
 		if(thePerson->GetCurrentWho() < 4) {
-			event * theDeclineEvent = new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-			D(cout << "\tWhoDecline (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theDeclineEvent->GetTime() << endl);
+			new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		}
 		
 		if(thePerson->GetCurrentWho() > 1) {
-			event * theRecoverEvent = new WhoRecover(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
-			D(cout << "\tWhoRecover (ART) from " << thePerson->GetCurrentWho() << " to occur on = " << theRecoverEvent->GetTime() << endl);
+			new WhoRecover(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
 		}
 	}
 }

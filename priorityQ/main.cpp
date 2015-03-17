@@ -71,7 +71,7 @@ int main(int argc, const char * argv[])
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
 	int s_Hbct = 0;
 	int s_Vct = 0;
-	int s_HbctPocCd4 = 2;
+	int s_HbctPocCd4 = 0;
 	int s_Linkage = 0;
 	int s_VctPocCd4 = 0;
 	int s_PreOutreach = 0;
@@ -111,9 +111,25 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-		cout << "theGuidelines_PopDist_HivNegative:" << endl;
-		for(size_t i=0; i<36; i++)
-			cout << theGuidelines_PopDist_HivNegative[i] << endl;
+//		cout << "hello" << endl;
+//		
+//		double theTime = 2004;
+//		
+//		if(theTime >= 2000) {
+//			double yr [36];
+//			for(size_t i=0; i<36; i++)
+//				yr[i] = 2001 + i;
+//			
+//			unsigned int i=0;
+//			while(theTime >= yr[i] && i<36)
+//				i++;
+//			
+//			cout << "i = " << i << endl;
+//		}
+		
+//		cout << "theGuidelines_PopDist_HivNegative:" << endl;
+//		for(size_t i=0; i<36; i++)
+//			cout << theGuidelines_PopDist_HivNegative[i] << endl;
 		
 //		cout << "theGuidelines_Death_200_OffArt:" << endl;
 //		for(size_t i=0; i<36; i++)
