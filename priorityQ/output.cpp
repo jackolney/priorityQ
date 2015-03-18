@@ -77,7 +77,9 @@ void SeedOutput(person * const thePerson)
 Output::Output(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+}
 
 Output::~Output()
 {}

@@ -33,6 +33,7 @@ pPerson(thePerson),
 pointOfCare(poc)
 {
 	D(cout << "Hct seeded for deployment on day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 SeedHct::~SeedHct()
@@ -59,6 +60,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "PerpetualHct seeded for deployment on day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 SeedPerpetualHct::~SeedPerpetualHct()
@@ -87,6 +89,7 @@ pointOfCare(poc)
 {
 	thePerson->SetHctHivTestDate(Time);
 	D(cout << "HctHivTest scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 HctHivTest::~HctHivTest()
@@ -124,6 +127,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "HctPocCd4Test scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 HctPocCd4Test::~HctPocCd4Test()
@@ -161,6 +165,7 @@ pPerson(thePerson),
 probReturn(theProb)
 {
 	D(cout << "PreArtOutreach scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 PreArtOutreach::~PreArtOutreach()
@@ -190,6 +195,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "VctPocCd4Test scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 VctPocCd4Test::~VctPocCd4Test()
@@ -232,6 +238,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "PocCd4Test scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 PocCd4Test::~PocCd4Test()
@@ -275,6 +282,7 @@ pPerson(thePerson),
 probReturn(theProb)
 {
 	D(cout << "ArtOutreach scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
 }
 
 ArtOutreach::~ArtOutreach()

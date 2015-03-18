@@ -56,7 +56,9 @@ void SeedCalibration(person * const thePerson, const double theTimeZero, const d
 TimeSplit::TimeSplit(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+}
 
 TimeSplit::~TimeSplit()
 {}

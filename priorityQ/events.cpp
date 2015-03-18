@@ -51,6 +51,7 @@ pPerson(thePerson)
 {
 	D(cout << "VectorUpdate on day = " << Time << endl);
 	pPerson->SetVectorUpdateDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 VectorUpdate::~VectorUpdate()
@@ -121,6 +122,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetHivDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Infection::~Infection()
@@ -196,8 +198,10 @@ void Death::Execute()
 		WriteAidsDeath(pPerson);
 		WriteClinic(pPerson,GetTime());
 	}
-	else
+	else {
 		D(cout << "Death executed (Natural)." << endl);
+		delete pPerson;
+	}
 }
 
 /////////////////////
@@ -208,6 +212,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetCd4DeclineDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Decline::~Cd4Decline()
@@ -241,6 +246,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetCd4RecoverDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Recover::~Cd4Recover()
@@ -274,6 +280,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetWhoDeclineDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 WhoDecline::~WhoDecline()
@@ -308,6 +315,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetWhoRecoverDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
 }
 
 WhoRecover::~WhoRecover()

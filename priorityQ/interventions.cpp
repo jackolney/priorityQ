@@ -56,6 +56,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Interventions scheduled for " << Time << " (year = " << Time / 365.25 << ")" << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
 }
 
 Interventions::~Interventions()

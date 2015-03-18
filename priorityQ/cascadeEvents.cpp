@@ -30,6 +30,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "InitialHivTests scheduled to begin in " <<  this->GetTime() << "." << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 };
 
 SeedInitialHivTests::~SeedInitialHivTests()
@@ -56,6 +57,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Treatment guidelines will update on " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 SeedTreatmentGuidelinesUpdate::~SeedTreatmentGuidelinesUpdate()
@@ -84,6 +86,7 @@ pointOfCare(poc)
 {
 	thePerson->SetVctHivTestDate(Time);
 	D(cout << "VctHivTest scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 VctHivTest::~VctHivTest()
@@ -126,6 +129,7 @@ pPerson(thePerson)
 {
 	thePerson->SetPictHivTestDate(Time);
 	D(cout << "PictHivTest scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 PictHivTest::~PictHivTest()
@@ -164,6 +168,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Cd4Test scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Test::~Cd4Test()
@@ -207,6 +212,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Cd4TestResult scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4TestResult::~Cd4TestResult()
@@ -244,6 +250,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "ArtInitiation scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 ArtInitiation::~ArtInitiation()
@@ -278,6 +285,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "ArtDropout scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
 }
 
 ArtDropout::~ArtDropout()

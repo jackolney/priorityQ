@@ -52,10 +52,9 @@ void eventQ::RunEvents()
 		event * nextEvent = GetTop();
 		UpdateTime(nextEvent->GetTime());
 		PopTop();
-		if(nextEvent->CheckValid())
-			nextEvent->Execute();
-		else
-			nextEvent->Cancel();
+		if(!nextEvent->Cancelled())
+			if(nextEvent->CheckValid())
+				nextEvent->Execute();
 		delete nextEvent;
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcurrentTime is = " << currentTime << " (year = " << currentTime / 365.25 << ")" <<  endl);
 		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttheQ size is = " << theQ->Size() << endl);
