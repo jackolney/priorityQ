@@ -1,10 +1,10 @@
-	//
-	//  impact.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 27/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  impact.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 27/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "impact.h"
@@ -18,8 +18,8 @@ using namespace std;
 extern eventQ * theQ;
 extern double * theDALY;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void UpdateDaly(person * const thePerson)
 {
@@ -42,20 +42,20 @@ void UpdateDaly(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteDaly(person * const thePerson)
 {
 	UpdateDaly(thePerson);
 	
 	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-	double yr [26];
-	for(size_t i = 0; i<26; i++)
+	double yr [20];
+	for(size_t i = 0; i<20; i++)
 		yr[i] = 14975.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<26)
+	while(theQ->GetTime() >= yr[i])
 		i++;
 	
 	if(theQ->GetTime() > 14610)
@@ -64,5 +64,5 @@ void WriteDaly(person * const thePerson)
 	thePerson->ResetDalys();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

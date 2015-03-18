@@ -1,10 +1,10 @@
-	//
-	//  output.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 28/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  output.h
+//  priorityQ
+//
+//  Created by Jack Olney on 28/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__output__
 #define __priorityQ__output__
@@ -15,8 +15,8 @@
 
 void SeedOutput(person * const thePerson);
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class Output : public event { //For reporting Outputs annually.
 public:
@@ -31,14 +31,14 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 /* Population.cpp uses these functions. */
 
 void CreateOutputArray();
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 #endif /* defined(__priorityQ__output__) */

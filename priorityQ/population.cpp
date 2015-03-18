@@ -1,10 +1,10 @@
-	//
-	//  population.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 17/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  population.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 17/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -19,7 +19,6 @@
 #include "outputUpdate.h"
 #include "discount.h"
 #include "calibration.h"
-#include "wp19.h"
 
 using namespace std;
 
@@ -36,7 +35,6 @@ beta(1)
 	Generate();
 	InitialiseVector();
 	CreateOutputArray();
-	CreateGuidelinesArray();
 	CreateCalibrationArray();
 	ScheduleIncidence(this);
 	ScheduleBetaCalculation(this);
@@ -49,26 +47,26 @@ population::~population()
 	Clear();
 }
 
-	/////////////
-	// METHODS //
-	/////////////
+/////////////
+// METHODS //
+/////////////
 
 void population::Generate()
 {
 	/* Function to schedule cohorts over time (not being used until I scale everything up) */
-	const double popSize[66] = {11252466,400695,419630,440241,460305,481118,502226,523708,546673,570847,594209,619182,644442,667076,682797,695625,709410,722491,731131,734908,765901,776599,784373,783075,765226,722958,718529,708110,715455,729361,750663,775364,799972,814589,845603,856064,881087,915869,946729,983062,1028592,1055553,1080443,1096579,1106563,1112580,1117645,1126043,1136366,1148139,1163788,1191180,1219216,1247912,1277283,1307346,1338116,1369610,1401846,1434841,1468612,1503177,1538557,1574769,1611833,1649770};
+	const double popSize[60] = {11252466,400695,419630,440241,460305,481118,502226,523708,546673,570847,594209,619182,644442,667076,682797,695625,709410,722491,731131,734908,765901,776599,784373,783075,765226,722958,718529,708110,715455,729361,750663,775364,799972,814589,845603,856064,881087,915869,946729,983062,1028592,1055553,1080443,1096579,1106563,1112580,1117645,1126043,1136366,1148139,1163788,1191180,1219216,1247912,1277283,1307346,1338116,1369610,1401846,1434841};
 	
-	for(int i=0; i<66; i++)
+	for(int i = 0; i < 60; i++)
 		new cohort(this,popSize[i] / sizeAdjustment,i * 365.25);
 }
 
-	////////////////////
-	// VECTOR METHODS //
-	////////////////////
+////////////////////
+// VECTOR METHODS //
+////////////////////
 
 void population::InitialiseVector()
 {
-		// Rows 0 to 33 are Susceptible. Rows 34 to 67 are Infected.
+	// Rows 0 to 33 are Susceptible. Rows 34 to 67 are Infected.
 	people.resize(68,vector<person *>(0));
 }
 
@@ -91,12 +89,12 @@ void population::UpdateVector(person * thePerson)
 	PushInVector(thePerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::PushInVector(person * thePerson)
 {
-		// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
+	// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
 	const double theAge = thePerson->GetAge() / 365.25;
@@ -118,8 +116,8 @@ void population::PushInVector(person * thePerson)
 	people.at(i).push_back(thePerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::SwapOutVector(person * thePerson)
 {
@@ -129,9 +127,9 @@ void population::SwapOutVector(person * thePerson)
 	people.at(thePerson->GetRowIndex()).pop_back();
 }
 
-	////////////////////////////
-	// INFECTIOUSNESS METHODS //
-	////////////////////////////
+////////////////////////////
+// INFECTIOUSNESS METHODS //
+////////////////////////////
 
 void population::InitialiseArray()
 {
@@ -168,9 +166,9 @@ void population::SwapOutArray(person * const thePerson)
 		infectiousness[thePerson->GetInfectiousnessIndex()]--;
 }
 
-	///////////////////////////
-	// INCIDENCE CALCULATION //
-	///////////////////////////
+///////////////////////////
+// INCIDENCE CALCULATION //
+///////////////////////////
 
 double population::GetWeightedTotal() const
 {
@@ -191,8 +189,8 @@ double population::GetWeightedTotal() const
 	return(tArt + t500 + t350500 + t200350 + t200);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::CalculateBeta()
 {
@@ -200,8 +198,8 @@ void population::CalculateBeta()
 	beta = incidentCases / GetWeightedTotal();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 double population::CalculateLambda(const double * theIRR)
 {
@@ -217,7 +215,7 @@ double population::CalculateLambda(const double * theIRR)
 			yr[i] = i * 365.25;
 		
 		unsigned int j = 0;
-		while(theQ->GetTime() > yr[j] && j < 32)
+		while(theQ->GetTime() >= yr[j] && j < 32)
 			j++;
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
@@ -236,8 +234,8 @@ double population::CalculateLambda(const double * theIRR)
 		return 0;
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::CalculateIncidence()
 {
@@ -267,8 +265,8 @@ void population::CalculateIncidence()
 	cout << "Year " << 1970 + (theQ->GetTime() / 365.25) << endl;
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector)
 {
@@ -279,8 +277,8 @@ void population::RandomiseInfection(const size_t theSize, const size_t theRow, v
 		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime() + (theRng->doub() * 365.25));
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::PassInfection(const size_t theRow)
 {
@@ -294,8 +292,8 @@ void population::PassInfection(const size_t theRow)
 	new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void population::Clear()
 {
@@ -307,6 +305,6 @@ void population::Clear()
 	people.clear();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 

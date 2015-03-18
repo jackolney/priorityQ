@@ -1,10 +1,10 @@
-	//
-	//  interventions.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 31/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  interventions.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 31/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -35,8 +35,8 @@ extern int const * p_UniversalTestAndTreat;
 extern int const * p_Adherence;
 extern int const * p_Calibration;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void SeedInterventions(person * const thePerson)
 {
@@ -48,8 +48,8 @@ void SeedInterventions(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Interventions::Interventions(person * const thePerson, const double Time) :
 event(Time),
@@ -69,12 +69,12 @@ bool Interventions::CheckValid()
 void Interventions::Execute()
 {
 	
-		/////////////////////
-		/////////////////////
+	/////////////////////
+	/////////////////////
 	/* Hbct */
 	
 	if(*p_Hbct) {
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);
 		
@@ -84,7 +84,7 @@ void Interventions::Execute()
 		}
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* Vct */
 	
 	if(*p_Vct) {
@@ -96,12 +96,12 @@ void Interventions::Execute()
 		ScheduleVctHivTest(pPerson);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* HbctPocCd4 */
 	
 	if(*p_HbctPocCd4) {
 		D(cout << "HbctPocCd4 Intervention." << endl);
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),true);
 		
@@ -114,7 +114,7 @@ void Interventions::Execute()
 		}
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* Linkage */
 	
 	if(*p_Linkage) {
@@ -132,19 +132,19 @@ void Interventions::Execute()
 		}
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* PreOutreach */
 	
 	if(*p_PreOutreach) {
 		double k = 0;
 		if(*p_PreOutreach == 1) { k = 1; } else { k = 0.2; }
 		
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14792.625 + (i * 365.25))
 				new PreArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* ImprovedCare */
 	
 	if(*p_ImprovedCare) {
@@ -174,13 +174,13 @@ void Interventions::Execute()
 		}
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* PocCd4 */
 	
 	if(*p_PocCd4)
 		pocFlag = true;
 	
-		/////////////////////
+	/////////////////////
 	/* VctPocCd4 */
 	
 	if(*p_VctPocCd4) {
@@ -188,19 +188,19 @@ void Interventions::Execute()
 		ScheduleVctHivTest(pPerson);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* ArtOutreach */
 	
 	if(*p_ArtOutreach) {
 		double k = 0;
 		if(*p_ArtOutreach == 1) { k = 1; } else { k = 0.4; }
 		
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14792.625 + (i * 365.25))
 				new ArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* ImmediateArt */
 	
 	if(*p_ImmediateArt) {
@@ -209,7 +209,7 @@ void Interventions::Execute()
 		UpdateTreatmentGuidelines(pPerson,4,1);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* UniversalTestAndTreat */
 	
 	if(*p_UniversalTestAndTreat) {
@@ -217,7 +217,7 @@ void Interventions::Execute()
 		immediateArtFlag = true;
 		UpdateTreatmentGuidelines(pPerson,4,1);
 		
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);
 		
@@ -227,7 +227,7 @@ void Interventions::Execute()
 		}
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* Adherence */
 	
 	if(*p_Adherence) {
@@ -239,18 +239,18 @@ void Interventions::Execute()
 			pPerson->SetArtAdherenceState(0.875);
 	}
 	
-		/////////////////////
+	/////////////////////
 	/* Calibration */
 	
 	if(*p_Calibration) {
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14610 + (i * 365.25))
 				new SeedPerpetualHct(pPerson, 14610 + (i * 365.25));
 	}
 	
-		/////////////////////
+	/////////////////////
 	
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

@@ -1,10 +1,10 @@
-	//
-	//  discount.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 05/11/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  discount.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 05/11/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -13,17 +13,17 @@
 
 using namespace std;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void SeedDiscount()
 {
-	for(size_t i=0;i<25;i++)
+	for(size_t i=0;i<19;i++)
 		new AnnualDiscount(14975.25 + (i * 365.25));
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 AnnualDiscount::AnnualDiscount(const double Time) :
 event(Time)
@@ -42,8 +42,8 @@ void AnnualDiscount::Execute()
 	Discount();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void Discount()
 {
@@ -66,5 +66,5 @@ void Discount()
 	outreachCost *= 0.94;
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

@@ -1,10 +1,10 @@
-	//
-	//  outputUpdate.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 30/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  outputUpdate.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 30/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "outputUpdate.h"
@@ -56,17 +56,17 @@ extern double * theAidsDeath;
 extern double * theDeath_2010_Age;
 extern double * theAidsDeath_2010_Age;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WritePop(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -78,17 +78,17 @@ void WritePop(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteHiv(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	if(thePerson->Alive()) {
@@ -98,17 +98,17 @@ void WriteHiv(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteArt(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	if(thePerson->Alive()) {
@@ -117,62 +117,62 @@ void WriteArt(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteCare(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
-			// NeverDiagnosed
+		// NeverDiagnosed
 		theCARE[0] += !thePerson->GetDiagnosedState();
-			// DiagnosedButNeverLinkedToCare
+		// DiagnosedButNeverLinkedToCare
 		theCARE[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestState() && !thePerson->GetEverArt());
-			// DiagnosedLinkedButNeverInitiatedArt
+		// DiagnosedLinkedButNeverInitiatedArt
 		theCARE[2] += (thePerson->GetDiagnosedState() && thePerson->GetEverCd4TestState() && !thePerson->GetEverArt());
-			// ArtLate
+		// ArtLate
 		theCARE[3] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
-			// ArtButDiedOffArt
+		// ArtButDiedOffArt
 		theCARE[4] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
-			// ArtEarly
+		// ArtEarly
 		theCARE[5] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteClinic(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetEverCd4TestState() && thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
-			// NeverDiagnosed
+		// NeverDiagnosed
 		theCLINIC[0] += !thePerson->GetDiagnosedState();
-			// DiagnosedButNeverInitiatedArt
+		// DiagnosedButNeverInitiatedArt
 		theCLINIC[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverArt());
-			// ArtLate
+		// ArtLate
 		theCLINIC[2] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
-			// ArtButDiedOffArt
+		// ArtButDiedOffArt
 		theCLINIC[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
-			// ArtEarly
+		// ArtEarly
 		theCLINIC[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteDeath(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	theDeath[i]++;
 	
-		// Age stratification for 2010 only
+	// Age stratification for 2010 only
 	if(theQ->GetTime() > 14610 && theQ->GetTime() <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
@@ -183,17 +183,17 @@ void WriteDeath(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteAidsDeath(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	theAidsDeath[i] += thePerson->GetSeroStatus();
@@ -201,7 +201,7 @@ void WriteAidsDeath(person * const thePerson)
 	if(thePerson->GetAge() > 15 * 365.25)
 		theAidsDeath_15plus[i] += thePerson->GetSeroStatus();
 	
-		// Age stratification for 2010 only
+	// Age stratification for 2010 only
 	if(theQ->GetTime() > 14610 && theQ->GetTime() <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
@@ -212,8 +212,8 @@ void WriteAidsDeath(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void Write2007(person * const thePerson)
 {
@@ -245,8 +245,8 @@ void Write2007(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void Write2012(person * const thePerson)
 {
@@ -267,8 +267,8 @@ void Write2012(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void Write2014(person * const thePerson)
 {
@@ -287,17 +287,17 @@ void Write2014(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteCd4(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -324,17 +324,17 @@ void WriteCd4(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteWho(person * const thePerson)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
@@ -360,21 +360,21 @@ void WriteWho(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteIncidence(unsigned int const &theIncidentCases)
 {
-	double yr [66];
-	for(size_t i = 0; i<66; i++)
+	double yr [60];
+	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() > yr[i] && i<66)
+	while(theQ->GetTime() >= yr[i] && i < 59)
 		i++;
 	
 	theINCIDENCE[i] = theIncidentCases;
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

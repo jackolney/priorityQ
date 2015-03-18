@@ -1,10 +1,10 @@
-	//
-	//  population.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 17/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  population.h
+//  priorityQ
+//
+//  Created by Jack Olney on 17/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__population__
 #define __priorityQ__population__

@@ -1,10 +1,10 @@
-	//
-	//  events.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 09/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  events.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 09/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -17,12 +17,11 @@
 #include "impact.h"
 #include "outputUpdate.h"
 #include "cost.h"
-#include "wp19Update.h"
 
 using namespace std;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 CohortStart::CohortStart(cohort * const iCohort, const double Time) :
 event(Time),
@@ -43,8 +42,8 @@ void CohortStart::Execute()
 	pCohort->GenerateCohort();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 VectorUpdate::VectorUpdate(person * const thePerson, const double Time) :
 event(Time),
@@ -70,8 +69,8 @@ void VectorUpdate::Execute()
 	pPerson->UpdatePopulation();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Incidence::Incidence(population * const thePopulation, const double Time) :
 event(Time),
@@ -91,8 +90,8 @@ void Incidence::Execute()
 	pPopulation->CalculateIncidence();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 BetaCalculation::BetaCalculation(population * const thePopulation, const double Time) :
 event(Time),
@@ -114,8 +113,8 @@ void BetaCalculation::Execute()
 	pPopulation->CalculateBeta();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Infection::Infection(person * const thePerson, const double Time) :
 event(Time),
@@ -137,8 +136,8 @@ void Infection::Execute()
 	pPerson->Hiv();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 PersonStart::PersonStart(population * const iPop, const double Time) :
 event(Time),
@@ -159,8 +158,8 @@ void PersonStart::Execute()
 	new person(pPop,GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Death::Death(person * const thePerson, const double Time, const bool hivCause) :
 event(Time),
@@ -192,7 +191,6 @@ void Death::Execute()
 	pPerson->Kill(GetTime(),hivRelated);
 	WriteCare(pPerson,GetTime());
 	WriteDeath(pPerson);
-	WriteGuidelinesDeath(pPerson);
 	if(hivRelated) {
 		D(cout << "Death executed (HIV-related)." << endl);
 		WriteAidsDeath(pPerson);
@@ -202,8 +200,8 @@ void Death::Execute()
 		D(cout << "Death executed (Natural)." << endl);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4Decline::Cd4Decline(person * const thePerson, const double Time) :
 event(Time),
@@ -235,8 +233,8 @@ void Cd4Decline::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4Recover::Cd4Recover(person * const thePerson, const double Time) :
 event(Time),
@@ -268,8 +266,8 @@ void Cd4Recover::Execute()
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 WhoDecline::WhoDecline(person * const thePerson, const double Time) :
 event(Time),
@@ -302,8 +300,8 @@ void WhoDecline::Execute()
 		SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 WhoRecover::WhoRecover(person * const thePerson, const double Time) :
 event(Time),
@@ -334,5 +332,5 @@ void WhoRecover::Execute()
 	pPerson->AssignHivDeathDate();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

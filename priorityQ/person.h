@@ -1,10 +1,10 @@
-	//
-	//  person.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 09/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  person.h
+//  priorityQ
+//
+//  Created by Jack Olney on 09/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__person__
 #define __priorityQ__person__
@@ -23,9 +23,9 @@ public:
 	double GenerateNatDeathAge();
 	double AssignNatDeathDate(const double Time);
 	
-		/////////////
+	/////////////
 	/* Methods */
-		/////////////
+	/////////////
 	void Kill(const double Time, const bool theCause);
 	void SetAge(const double Time);
 	
@@ -95,9 +95,9 @@ public:
 	void UpdatePopulation() { iPop->UpdateVector(this); }
 	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
 	
-		//////////////////////
+	//////////////////////
 	/* Accessor methods */
-		//////////////////////
+	//////////////////////
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;

@@ -1,10 +1,10 @@
-	//
-	//  cascadeEvents.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 22/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cascadeEvents.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 22/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -19,12 +19,11 @@
 #include "cost.h"
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
-#include "wp19Update.h"
 
 using namespace std;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedInitialHivTests::SeedInitialHivTests(person * const thePerson, const double Time) :
 event(Time),
@@ -49,8 +48,8 @@ void SeedInitialHivTests::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time) :
 event(Time),
@@ -75,8 +74,8 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 	UpdateTreatmentGuidelines(pPerson,2,3);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 VctHivTest::VctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -118,8 +117,8 @@ void VctHivTest::Execute()
 	ScheduleVctHivTest(pPerson);
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 PictHivTest::PictHivTest(person * const thePerson, const double Time) :
 event(Time),
@@ -157,8 +156,8 @@ void PictHivTest::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4Test::Cd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -200,8 +199,8 @@ void Cd4Test::Execute()
 	}
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4TestResult::Cd4TestResult(person * const thePerson, const double Time) :
 event(Time),
@@ -237,8 +236,8 @@ void Cd4TestResult::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
@@ -265,15 +264,14 @@ void ArtInitiation::Execute()
 	if(!pPerson->GetArtAdherenceState())
 		D(cout << "NON-ADHERER to Art." << endl);
 	pPerson->SetArtInitiationState(true,GetTime());
-	WriteGuidelinesArtInitiation(pPerson);
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	ScheduleArtDropout(pPerson);
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 ArtDropout::ArtDropout(person * const thePerson, const double Time) :
 event(Time),
@@ -295,11 +293,10 @@ void ArtDropout::Execute()
 	UpdateDaly(pPerson);
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
-	WriteGuidelinesArtDropout();
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

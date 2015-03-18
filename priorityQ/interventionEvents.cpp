@@ -1,10 +1,10 @@
-	//
-	//  interventionEvents.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 03/11/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  interventionEvents.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 03/11/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -24,8 +24,8 @@ using namespace std;
 extern Rng * theRng;
 extern eventQ * theQ;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -51,8 +51,8 @@ void SeedHct::Execute()
 	ScheduleHctHivTest(pPerson,pointOfCare);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedPerpetualHct::SeedPerpetualHct(person * const thePerson, const double Time) :
 event(Time),
@@ -77,8 +77,8 @@ void SeedPerpetualHct::Execute()
 	SchedulePerpetualHctHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -116,8 +116,8 @@ void HctHivTest::Execute()
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 HctPocCd4Test::HctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -152,8 +152,8 @@ void HctPocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 PreArtOutreach::PreArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
@@ -182,8 +182,8 @@ void PreArtOutreach::Execute()
 		new Cd4Test(pPerson,GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 VctPocCd4Test::VctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -224,8 +224,8 @@ void VctPocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -266,8 +266,8 @@ void PocCd4Test::Execute()
 	SchedulePictHivTest(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 ArtOutreach::ArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
@@ -303,5 +303,5 @@ void ArtOutreach::Execute()
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

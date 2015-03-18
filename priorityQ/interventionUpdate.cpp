@@ -1,10 +1,10 @@
-	//
-	//  interventionUpdate.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 03/11/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  interventionUpdate.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 03/11/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -21,29 +21,29 @@ extern Rng * theRng;
 
 using namespace std;
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleHctHivTest(person * const thePerson, const bool poc)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 24106.5) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915) {
 		const double diagDay = theRng->SampleExpDist(hctHivTestTime);
 		if(diagDay <= 365.25)
 			new HctHivTest(thePerson,theQ->GetTime() + diagDay,poc);
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void SchedulePerpetualHctHivTest(person * const thePerson)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 24106.5)
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915)
 		new HctHivTest(thePerson,theQ->GetTime() + (theRng->doub() * 365.25),0);
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool HctLinkage(person * const thePerson)
 {
@@ -60,13 +60,13 @@ bool HctLinkage(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleImmediateArt(person * const thePerson)
 {
 	new ArtInitiation(thePerson,theQ->GetTime());
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////

@@ -1,19 +1,19 @@
-	//
-	//  toolbox.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 23/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  toolbox.h
+//  priorityQ
+//
+//  Created by Jack Olney on 23/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef priorityQ_toolbox_h
 #define priorityQ_toolbox_h
 
-	////////////////////
-	//PARAMETER VALUES//
-	////////////////////
+////////////////////
+//PARAMETER VALUES//
+////////////////////
 
-	////////////////////
+////////////////////
 /* Hiv testing times */
 extern double hctHivTestTime;
 extern double vctHivTestTimeOriginal;
@@ -70,18 +70,18 @@ extern double artInitiationTime;
 extern double artDropoutTimeOneYear;
 extern double artDropoutTimeTwoYear;
 
-	////////////////
+////////////////
 /* Intervention Flags */
 extern bool pocFlag;
 extern bool vctPocFlag;
 extern bool immediateArtFlag;
 extern bool adherenceFlag;
 
-	////////////////
+////////////////
 
-	////////////////
-	//DALY WEIGHTS//
-	////////////////
+////////////////
+//DALY WEIGHTS//
+////////////////
 
 /* DALY weights */
 extern double dalyWeight_Cd4_3;
@@ -89,9 +89,9 @@ extern double dalyWeight_Cd4_2;
 extern double dalyWeight_Cd4_1;
 extern double dalyWeightArt;
 
-	//////////////
-	//UNIT COSTS//
-	//////////////
+//////////////
+//UNIT COSTS//
+//////////////
 
 /* Hiv care unit costs */
 extern double hctVisitCost;
@@ -105,20 +105,20 @@ extern double annualArtCost;
 extern double annualAdherenceCost;
 extern double outreachCost;
 
-	//How to use:
+//How to use:
 /* HBCT */
-	//HCT visit + HIV-test = 8 + 10 = $18
-	//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
+//HCT visit + HIV-test = 8 + 10 = $18
+//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
 
 /* VCT or PICT */
-	//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
-	//Clinic visit = $28 (Result visit)
-	//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
+//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
+//Clinic visit = $28 (Result visit)
+//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
 
 /* Pre-ART Care */
-	//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
-	//Clinic visit = $28 (Result visit)
-	//Clinic visit + POC-CD4 test = 28 + 42 = $70
+//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
+//Clinic visit = $28 (Result visit)
+//Clinic visit + POC-CD4 test = 28 + 42 = $70
 
 /* Fun Functions */
 double Random(const int i);

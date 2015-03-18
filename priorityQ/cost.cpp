@@ -1,10 +1,10 @@
-	//
-	//  cost.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 27/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cost.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 27/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "cost.h"
@@ -21,8 +21,8 @@ extern double * theArtCOST;
 extern double * thePreArtCOST_Hiv;
 extern double * theArtCOST_Hiv;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargeHctVisit(person * const thePerson)
 {
@@ -30,58 +30,58 @@ void ChargeHctVisit(person * const thePerson)
 	thePerson->SetRapidHivTestCost(rapidHivTestCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargeVctPictHivTest(person * const thePerson)
 {
 	thePerson->SetRapidHivTestCost(rapidHivTestCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargePreArtClinicVisit(person * const thePerson)
 {
 	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargePreArtClinicCd4Test(person * const thePerson)
 {
 	thePerson->SetLabCd4TestCost(labCd4TestCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargePreArtClinicCd4ResultVisit(person * const thePerson)
 {
 	thePerson->SetPreArtClinicVisitCost(preArtClinicVisitCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargePocCd4Test(person * const thePerson)
 {
 	thePerson->SetPocCd4TestCost(pocCd4TestCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargeArtCare(person * const thePerson)
 {
 	if(thePerson->GetArtInitiationState()) {
-		double yr [27];
-		for(size_t i=0; i<27; i++)
+		double yr [22];
+		for(size_t i = 0; i<22; i++)
 			yr[i] = 14610 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<27)
+		while(theQ->GetTime() >= yr[i] && i < 21)
 			i++;
 		
 		if(thePerson->GetArtDay() <= yr[i-1])
@@ -93,18 +93,18 @@ void ChargeArtCare(person * const thePerson)
 }
 
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargeAdherence(person * const thePerson)
 {
 	if(adherenceFlag && thePerson->GetArtInitiationState()) {
-		double yr [27];
-		for(size_t i=0; i<27; i++)
+		double yr [22];
+		for(size_t i = 0; i<22; i++)
 			yr[i] = 14610 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<27)
+		while(theQ->GetTime() >= yr[i] && i < 21)
 			i++;
 		
 		if(thePerson->GetArtDay() <= yr[i-1])
@@ -115,36 +115,36 @@ void ChargeAdherence(person * const thePerson)
 		thePerson->SetAnnualAdherenceCost((thePerson->GetArtTime() / 365.25) * annualAdherenceCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargePreArtOutreach(person * const thePerson)
 {
 	thePerson->SetPreArtOutreachCost(outreachCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void ChargeArtOutreach(person * const thePerson)
 {
 	thePerson->SetArtOutreachCost(outreachCost);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void WriteCost(person * const thePerson)
 {
 	if(thePerson->Alive()) {
 		
 		/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-		double yr [26];
-		for(size_t i=0; i<26; i++)
+		double yr [20];
+		for(size_t i = 0; i<20; i++)
 			yr[i] = 14975.25 + (i * 365.25);
 		
 		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<26)
+		while(theQ->GetTime() >= yr[i])
 			i++;
 		
 		if(theQ->GetTime() > 14610) {
@@ -168,5 +168,5 @@ void WriteCost(person * const thePerson)
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

@@ -1,10 +1,10 @@
-	//
-	//  cascadeEvents.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 22/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cascadeEvents.h
+//  priorityQ
+//
+//  Created by Jack Olney on 22/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__cascadeEvents__
 #define __priorityQ__cascadeEvents__
@@ -14,8 +14,8 @@
 #include "cohort.h"
 #include "event.h"
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class SeedInitialHivTests : public event {
 public:
@@ -30,8 +30,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class SeedTreatmentGuidelinesUpdate : public event {
 public:
@@ -46,8 +46,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class VctHivTest : public event {
 public:
@@ -63,8 +63,8 @@ private:
 	const bool pointOfCare;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class PictHivTest : public event {
 public:
@@ -79,8 +79,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class Cd4Test : public event {
 public:
@@ -95,8 +95,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class Cd4TestResult : public event {
 public:
@@ -111,8 +111,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class ArtInitiation : public event {
 public:
@@ -127,8 +127,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class ArtDropout : public event {
 public:
@@ -143,8 +143,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 
 #endif /* defined(__priorityQ__cascadeEvents__) */

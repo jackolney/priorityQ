@@ -1,10 +1,10 @@
-	//
-	//  updateCascade.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 22/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  updateCascade.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 22/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "macro.h"
@@ -23,8 +23,8 @@ extern eventQ * theQ;
 
 using namespace std;
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho)
 {
@@ -32,23 +32,23 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 	D(cout << "TxGuidelines Updated (Cd4 = " << theCd4 << ", Who = " << theWho << ")." << endl);
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleVctHivTest(person * const thePerson)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418.5) {
 		D(cout << "Scheduling VctHivTest." << endl);
 		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime),vctPocFlag);
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void SchedulePictHivTest(person * const thePerson)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418) {
+	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418.5) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
 			if(!thePerson->GetDiagnosedState())
@@ -70,8 +70,8 @@ void SchedulePictHivTest(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool VctLinkage(person * const thePerson)
 {
@@ -84,8 +84,8 @@ bool VctLinkage(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool PictLinkage(person * const thePerson)
 {
@@ -98,32 +98,32 @@ bool PictLinkage(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleInitialCd4TestAfterHct(person * const thePerson)
 {
 	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(hctCd4TestTime[thePerson->GetCurrentCd4()-1]));
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void SchedulePreArtCd4Test(person * const thePerson)
 {
 	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleCd4TestResult(person * const thePerson)
 {
 	new Cd4TestResult(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4ResultTime));
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool ReceiveCd4TestResult(person * const thePerson)
 {
@@ -143,8 +143,8 @@ bool ReceiveCd4TestResult(person * const thePerson)
 	 }
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool AttendCd4TestResult(person * const thePerson)
 {
@@ -156,8 +156,8 @@ bool AttendCd4TestResult(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 bool SecondaryCd4Test(person * const thePerson)
 {
@@ -170,8 +170,8 @@ bool SecondaryCd4Test(person * const thePerson)
 	
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void FastTrackArt(person * const thePerson)
 {
@@ -181,16 +181,16 @@ void FastTrackArt(person * const thePerson)
 	}
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleArtInitiation(person * const thePerson)
 {
 	new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
 
 void ScheduleArtDropout(person * const thePerson)
 {
@@ -203,5 +203,5 @@ void ScheduleArtDropout(person * const thePerson)
 	
 }
 
-	////////////////////
-	////////////////////
+////////////////////
+////////////////////
