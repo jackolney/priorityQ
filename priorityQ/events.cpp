@@ -238,7 +238,7 @@ void Cd4Decline::Execute()
 	D(cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	D(cout << pPerson->GetCurrentCd4() << endl);
-	ScheduleCd4Update(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
 	pPerson->AssignHivDeathDate();
 	pPerson->UpdateInfectiousnessArray();
 }
@@ -272,7 +272,7 @@ void Cd4Recover::Execute()
 	D(cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ");
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
 	D(cout << pPerson->GetCurrentCd4() << endl);
-	ScheduleCd4Update(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
 	pPerson->AssignHivDeathDate();
 	pPerson->UpdateInfectiousnessArray();
 }
@@ -306,7 +306,7 @@ void WhoDecline::Execute()
 	D(cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
 	D(cout << pPerson->GetCurrentWho() << endl);
-	ScheduleWhoUpdate(pPerson);
+	ScheduleWhoUpdate(pPerson,GetTime());
 	pPerson->AssignHivDeathDate();
 	if(pPerson->GetCurrentWho() > 2)
 		SchedulePictHivTest(pPerson,GetTime());
@@ -341,7 +341,7 @@ void WhoRecover::Execute()
 	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
 	D(cout << pPerson->GetCurrentWho() << endl);
-	ScheduleWhoUpdate(pPerson);
+	ScheduleWhoUpdate(pPerson,GetTime());
 	pPerson->AssignHivDeathDate();
 }
 

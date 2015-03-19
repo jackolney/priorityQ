@@ -25,7 +25,7 @@ using namespace std;
 ////////////////////
 ////////////////////
 
-void ScheduleCd4Update(person * const thePerson)
+void ScheduleCd4Update(person * const thePerson, const double theTime)
 {
 	D(cout << "ScheduleCd4Update called." << endl);
 	
@@ -48,10 +48,10 @@ void ScheduleCd4Update(person * const thePerson)
 	};
 	
 	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentCd4() > 1) {
-		new Cd4Decline(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
+		new Cd4Decline(thePerson, theTime + theRng->SampleExpDist(Cd4DeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-2] * 365.25));
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState() && thePerson->GetCurrentCd4() < 3) {
-		new Cd4Recover(thePerson, theQ->GetTime() + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+		new Cd4Recover(thePerson, theTime + theRng->SampleExpDist(Cd4RecoverTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 	}
 	
 }
@@ -59,7 +59,7 @@ void ScheduleCd4Update(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void ScheduleWhoUpdate(person * const thePerson)
+void ScheduleWhoUpdate(person * const thePerson, const double theTime)
 {
 	D(cout << "ScheduleWhoUpdate called." << endl);
 	
@@ -84,15 +84,15 @@ void ScheduleWhoUpdate(person * const thePerson)
 	
 	
 	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState())) && thePerson->GetCurrentWho() < 4) {
-		new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+		new WhoDecline(thePerson, theTime + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 	}
 	else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState()) {
 		if(thePerson->GetCurrentWho() < 4) {
-			new WhoDecline(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
+			new WhoDecline(thePerson, theTime + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		}
 		
 		if(thePerson->GetCurrentWho() > 1) {
-			new WhoRecover(thePerson, theQ->GetTime() + theRng->SampleExpDist(WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
+			new WhoRecover(thePerson, theTime + theRng->SampleExpDist(WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
 		}
 	}
 }

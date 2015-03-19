@@ -38,7 +38,7 @@ public:
 	void SetInitialWhoStage();
 	
 	/* Hiv Progression Functions */
-	void ScheduleHivIndicatorUpdate();
+	void ScheduleHivIndicatorUpdate(const double theTime);
 	void SetCurrentCd4Count(unsigned int theCount) { currentCd4 = theCount; }
 	void SetCurrentWhoStage(unsigned int theStage) { currentWho = theStage; }
 	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;

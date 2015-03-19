@@ -271,8 +271,8 @@ void ArtInitiation::Execute()
 	if(!pPerson->GetArtAdherenceState())
 		D(cout << "NON-ADHERER to Art." << endl);
 	pPerson->SetArtInitiationState(true,GetTime());
-	ScheduleCd4Update(pPerson);
-	ScheduleWhoUpdate(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
+	ScheduleWhoUpdate(pPerson,GetTime());
 	ScheduleArtDropout(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
@@ -301,8 +301,8 @@ void ArtDropout::Execute()
 	UpdateDaly(pPerson,GetTime());
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
-	ScheduleCd4Update(pPerson);
-	ScheduleWhoUpdate(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
+	ScheduleWhoUpdate(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 

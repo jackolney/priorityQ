@@ -13,9 +13,9 @@
 #include "person.h"
 #include "population.h"
 
-void ScheduleCd4Update(person * const thePerson);
+void ScheduleCd4Update(person * const thePerson, const double theTime);
 
-void ScheduleWhoUpdate(person * const thePerson);
+void ScheduleWhoUpdate(person * const thePerson, const double theTime);
 
 void ScheduleVectorUpdate(person * const thePerson, const double theTime);
 
