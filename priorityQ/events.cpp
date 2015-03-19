@@ -239,7 +239,7 @@ void Cd4Decline::Execute()
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson,GetTime());
-	pPerson->AssignHivDeathDate();
+	pPerson->AssignHivDeathDate(GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 
@@ -273,7 +273,7 @@ void Cd4Recover::Execute()
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
 	D(cout << pPerson->GetCurrentCd4() << endl);
 	ScheduleCd4Update(pPerson,GetTime());
-	pPerson->AssignHivDeathDate();
+	pPerson->AssignHivDeathDate(GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 
@@ -307,7 +307,7 @@ void WhoDecline::Execute()
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
 	D(cout << pPerson->GetCurrentWho() << endl);
 	ScheduleWhoUpdate(pPerson,GetTime());
-	pPerson->AssignHivDeathDate();
+	pPerson->AssignHivDeathDate(GetTime());
 	if(pPerson->GetCurrentWho() > 2)
 		SchedulePictHivTest(pPerson,GetTime());
 }
@@ -342,7 +342,7 @@ void WhoRecover::Execute()
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
 	D(cout << pPerson->GetCurrentWho() << endl);
 	ScheduleWhoUpdate(pPerson,GetTime());
-	pPerson->AssignHivDeathDate();
+	pPerson->AssignHivDeathDate(GetTime());
 }
 
 /////////////////////

@@ -18,10 +18,12 @@
 #include "outputUpdate.h"
 #include "discount.h"
 #include "calibration.h"
+#include "eventQ.h"
 
 using namespace std;
 
 extern Rng * theRng;
+extern eventQ * theQ;
 
 population::population(const double theSize) :
 sizeAdjustment(theSize),
@@ -95,13 +97,14 @@ void population::PushInVector(person * thePerson)
 	// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
-	const double theAge = thePerson->GetAge() / 365.25;
+	const double currentTime = theQ->GetTime();
+	const double theAge = thePerson->GetAge(currentTime) / 365.25;
 	
 	while(theAge > ageCatMax[i] && i < 17)
 		i++;
 	
 	if(i < 16)
-		ScheduleVectorUpdate(thePerson,(ageCatMax[i] - theAge) * 365.25);
+		ScheduleVectorUpdate(thePerson,currentTime + ((ageCatMax[i] - theAge) * 365.25));
 	
 	if(thePerson->GetGender()) // If Male then i += 17;
 		i += 17;

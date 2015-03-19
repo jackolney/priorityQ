@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include "person.h"
 
-void WritePop(person * const thePerson, const size_t theIndex);
+void WritePop(person * const thePerson, const double theTime, const size_t theIndex);
 
-void WriteHiv(person * const thePerson, const size_t theIndex);
+void WriteHiv(person * const thePerson, const double theTime, const size_t theIndex);
 
-void WriteArt(person * const thePerson, const size_t theIndex);
+void WriteArt(person * const thePerson, const double theTime, const size_t theIndex);
 
 void WriteCare(person * const thePerson, const double theTime);
 

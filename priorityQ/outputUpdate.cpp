@@ -56,13 +56,13 @@ extern double * theAidsDeath_2010_Age;
 /////////////////////
 /////////////////////
 
-void WritePop(person * const thePerson, const size_t theIndex)
+void WritePop(person * const thePerson, const double theTime, const size_t theIndex)
 {
 	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay()) {
 		thePOP[theIndex] += thePerson->Alive();
-		if(thePerson->GetAge() > 15 * 365.25)
+		if(thePerson->GetAge(theTime) > 15 * 365.25)
 			thePOP_15plus[theIndex] += thePerson->Alive();
-		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
+		if(thePerson->GetAge(theTime) > 15 * 365.25 && thePerson->GetAge(theTime) <= 49 * 365.25)
 			thePOP_15to49[theIndex] += thePerson->Alive();
 	}
 }
@@ -70,11 +70,11 @@ void WritePop(person * const thePerson, const size_t theIndex)
 /////////////////////
 /////////////////////
 
-void WriteHiv(person * const thePerson, const size_t theIndex)
+void WriteHiv(person * const thePerson, const double theTime, const size_t theIndex)
 {
 	if(thePerson->Alive()) {
 		theHIV[theIndex] += thePerson->GetSeroStatus();
-		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
+		if(thePerson->GetAge(theTime) > 15 * 365.25 && thePerson->GetAge(theTime) <= 49 * 365.25)
 			theHIV_15to49[theIndex] += thePerson->GetSeroStatus();
 	}
 }
@@ -82,10 +82,10 @@ void WriteHiv(person * const thePerson, const size_t theIndex)
 /////////////////////
 /////////////////////
 
-void WriteArt(person * const thePerson, const size_t theIndex)
+void WriteArt(person * const thePerson, const double theTime, const size_t theIndex)
 {
 	if(thePerson->Alive()) {
-		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
+		if(thePerson->GetAge(theTime) > 15 * 365.25 && thePerson->GetAge(theTime) <= 49 * 365.25)
 			theART_15to49[theIndex] += thePerson->GetArtInitiationState();
 	}
 }
@@ -149,7 +149,7 @@ void WriteDeath(person * const thePerson, const double theTime)
 	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
-		while(thePerson->GetAge() / 365.25 > ageCatMax[j] && j < 19)
+		while(thePerson->GetAge(theTime) / 365.25 > ageCatMax[j] && j < 19)
 			j++;
 		
 		theDeath_2010_Age[j]++;
@@ -171,14 +171,14 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 	
 	theAidsDeath[i] += thePerson->GetSeroStatus();
 	
-	if(thePerson->GetAge() > 15 * 365.25)
+	if(thePerson->GetAge(theTime) > 15 * 365.25)
 		theAidsDeath_15plus[i] += thePerson->GetSeroStatus();
 	
 	// Age stratification for 2010 only
 	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
-		while(thePerson->GetAge() / 365.25 > ageCatMax[j] && j < 19)
+		while(thePerson->GetAge(theTime) / 365.25 > ageCatMax[j] && j < 19)
 			j++;
 		
 		theAidsDeath_2010_Age[j]++;
@@ -191,10 +191,10 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 void Write2007(person * const thePerson)
 {
 	if(13879.5 > thePerson->GetBirthDay()) {
-		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
+		if(thePerson->GetAge(13879.5) > 15 * 365.25 && thePerson->GetAge(13879.5) <= 64 * 365.25) {
 			const unsigned int ageCatMax [10] = {19,24,29,34,39,44,49,54,59,64};
 			unsigned int i = 0;
-			while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 9)
+			while(thePerson->GetAge(13879.5) / 365.25 > ageCatMax[i] && i < 9)
 				i++;
 			
 			if(thePerson->GetGender())
@@ -224,10 +224,10 @@ void Write2007(person * const thePerson)
 void Write2012(person * const thePerson)
 {
 	if(15705.75 > thePerson->GetBirthDay()) {
-		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
+		if(thePerson->GetAge(15705.75) > 15 * 365.25 && thePerson->GetAge(15705.75) <= 64 * 365.25) {
 			const unsigned int ageCatMax [8] = {19,24,29,34,39,44,49,64};
 			unsigned int i = 0;
-			while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 7)
+			while(thePerson->GetAge(15705.75) / 365.25 > ageCatMax[i] && i < 7)
 				i++;
 			
 			if(thePerson->GetGender())
@@ -248,7 +248,7 @@ void Write2014(person * const thePerson)
 	if(16436.25 > thePerson->GetBirthDay()) {
 		const unsigned int ageCatMax [5] = {14,21,29,46,200};
 		unsigned int i = 0;
-		while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 4)
+		while(thePerson->GetAge(16436.25) / 365.25 > ageCatMax[i] && i < 4)
 			i++;
 		
 		if(thePerson->GetGender())

@@ -92,14 +92,13 @@ bool Output::CheckValid()
 
 void Output::Execute()
 {
-		// Pass the index to people.
 	if(GetTime() >= 14610) {
 		WriteDaly(pPerson,index - 39);
 		WriteCost(pPerson,GetTime());
 	}
-	WritePop(pPerson,index);
-	WriteHiv(pPerson,index);
-	WriteArt(pPerson,index);
+	WritePop(pPerson,GetTime(),index);
+	WriteHiv(pPerson,GetTime(),index);
+	WriteArt(pPerson,GetTime(),index);
 	WriteCd4(pPerson,index);
 	WriteWho(pPerson,index);
 	if(GetTime() == 13879.5)

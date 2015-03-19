@@ -264,9 +264,9 @@ void person::Kill(const double theTime, const bool theCause)
 /////////////////////
 /////////////////////
 
-double person::GetAge()
+double person::GetAge(const double theTime)
 {
-	SetAge(theQ->GetTime());
+	SetAge(theTime);
 	return currentAge;
 }
 
@@ -288,6 +288,7 @@ void person::Hiv(const double theTime)
 	SetSeroconversionDay(theTime);
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 	ScheduleHivIndicatorUpdate(theTime);
+	AssignHivDeathDate(theTime);
 	UpdatePopulation();
 	iPop->AddCase();
 	iPop->UpdateArray(this);
@@ -300,7 +301,6 @@ void person::SetHivIndicators()
 {
 	SetInitialCd4Count();
 	SetInitialWhoStage();
-	AssignHivDeathDate();
 }
 
 /////////////////////
@@ -335,15 +335,15 @@ void person::SetInitialWhoStage()
 /////////////////////
 /////////////////////
 
-void person::AssignHivDeathDate()
+void person::AssignHivDeathDate(const double theTime)
 {
-	new Death(this,GenerateHivDeathDate(),true); // true flag signifies that it is an HIV-related death.
+	new Death(this,GenerateHivDeathDate(theTime),true); // true flag signifies that it is an HIV-related death.
 }
 
 /////////////////////
 /////////////////////
 
-double person::GenerateHivDeathDate()
+double person::GenerateHivDeathDate(const double theTime)
 {
 	//HivMortalityTime [ART] [WHO-1] [CD4-1];
 	const double HivMortalityTime [2] [4] [4] =
@@ -364,9 +364,9 @@ double person::GenerateHivDeathDate()
 	};
 	
 	if(GetArtAdherenceState())
-		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
+		return theTime + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
 	else
-		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
+		return theTime + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
 }
 
 /////////////////////

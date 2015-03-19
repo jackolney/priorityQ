@@ -41,8 +41,8 @@ public:
 	void ScheduleHivIndicatorUpdate(const double theTime);
 	void SetCurrentCd4Count(unsigned int theCount) { currentCd4 = theCount; }
 	void SetCurrentWhoStage(unsigned int theStage) { currentWho = theStage; }
-	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
-	void AssignHivDeathDate(); //function creates the Death event.
+	double GenerateHivDeathDate(const double theTime); //function returns the HivDeathDate Value;
+	void AssignHivDeathDate(const double theTime); //function creates the Death event.
 	
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime);
@@ -101,7 +101,7 @@ public:
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
-	double GetAge();
+	double GetAge(const double theTime);
 	const double GetBirthDay() const { return birthDay; }
 	unsigned int GetCurrentCd4() const { return currentCd4; }
 	unsigned int GetCurrentWho() const { return currentWho; }

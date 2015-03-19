@@ -102,7 +102,7 @@ void ScheduleWhoUpdate(person * const thePerson, const double theTime)
 
 void ScheduleVectorUpdate(person * const thePerson, const double theTime)
 {
-	new VectorUpdate(thePerson,theQ->GetTime() + theTime+1); //+1 to get into the next time bracket.
+	new VectorUpdate(thePerson,theTime + 1); //+1 to get into the next time bracket.
 }
 
 ////////////////////
