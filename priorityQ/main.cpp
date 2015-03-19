@@ -105,7 +105,7 @@ int main(int argc, const char * argv[])
 
 		theQ = new eventQ(0,(66 * 365.25) + 1);
 		
-		new population(1000);
+		thePop = new population(1000);
 		
 		theQ->RunEvents();
 		
@@ -156,8 +156,8 @@ int main(int argc, const char * argv[])
 //			cout << theGuidelines_ArtDropout[i] << endl;
 		
 		delete theQ;
-		delete theRng;
 		delete thePop;
+		delete theRng;
 		
 	}
 
