@@ -309,7 +309,7 @@ void WhoDecline::Execute()
 	ScheduleWhoUpdate(pPerson);
 	pPerson->AssignHivDeathDate();
 	if(pPerson->GetCurrentWho() > 2)
-		SchedulePictHivTest(pPerson);
+		SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////

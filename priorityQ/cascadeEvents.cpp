@@ -46,7 +46,7 @@ void SeedInitialHivTests::Execute()
 	if(!immediateArtFlag)
 		UpdateTreatmentGuidelines(pPerson,1,4);
 	ScheduleVctHivTest(pPerson,GetTime());
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////
@@ -109,7 +109,7 @@ void VctHivTest::Execute()
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2,GetTime());
 		D(cout << "Diagnosed as HIV-positive." << endl);
-		SchedulePictHivTest(pPerson);
+		SchedulePictHivTest(pPerson,GetTime());
 		if(pointOfCare)
 			new VctPocCd4Test(pPerson,GetTime());
 		else if(VctLinkage(pPerson))
@@ -157,7 +157,7 @@ void PictHivTest::Execute()
 		else
 			ChargePreArtClinicVisit(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////
@@ -239,7 +239,7 @@ void Cd4TestResult::Execute()
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////

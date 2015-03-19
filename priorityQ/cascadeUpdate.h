@@ -17,7 +17,7 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 /* Hiv Testing */
 void ScheduleVctHivTest(person * const thePerson, const double theTime);
 
-void SchedulePictHivTest(person * const thePerson);
+void SchedulePictHivTest(person * const thePerson, const double theTime);
 
 /* Linkage */
 bool VctLinkage(person * const thePerson);

@@ -115,7 +115,7 @@ void HctHivTest::Execute()
 			new HctPocCd4Test(pPerson,GetTime());
 		else if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
-		SchedulePictHivTest(pPerson);
+		SchedulePictHivTest(pPerson,GetTime());
 	}
 }
 
@@ -153,7 +153,7 @@ void HctPocCd4Test::Execute()
 		if(HctLinkage(pPerson))
 			ScheduleInitialCd4TestAfterHct(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////
@@ -227,7 +227,7 @@ void VctPocCd4Test::Execute()
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////
@@ -270,7 +270,7 @@ void PocCd4Test::Execute()
 		if(SecondaryCd4Test(pPerson))
 			SchedulePreArtCd4Test(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
 /////////////////////

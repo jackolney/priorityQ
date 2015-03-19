@@ -46,26 +46,26 @@ void ScheduleVctHivTest(person * const thePerson, const double theTime)
 ////////////////////
 ////////////////////
 
-void SchedulePictHivTest(person * const thePerson)
+void SchedulePictHivTest(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418.5) {
+	if(thePerson->GetBirthDay() != 0 && theTime >= 12418.5) {
 		D(cout << "Scheduling PictHivTest." << endl);
 		if(thePerson->GetCurrentWho() < 3) {
 			if(!thePerson->GetDiagnosedState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticOblivious));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_AsymptomaticOblivious));
 			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticNoCd4Result));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_AsymptomaticNoCd4Result));
 			else if(thePerson->GetEverCd4TestResultState() && (thePerson->GetCurrentCd4() > thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() < thePerson->GetWhoTxGuideline()))
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultNotEligible));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultNotEligible));
 			else if(thePerson->GetEverCd4TestResultState() && (thePerson->GetCurrentCd4() <= thePerson->GetCd4TxGuideline() || thePerson->GetCurrentWho() >= thePerson->GetWhoTxGuideline()))
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultEligible));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_AsymptomaticCd4ResultEligible));
 		} else {
 			if(!thePerson->GetDiagnosedState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticOblivious));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_SymptomaticOblivious));
 			else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticNoCd4Result));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_SymptomaticNoCd4Result));
 			else if(thePerson->GetEverCd4TestResultState())
-				new PictHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(pictHivTestTime_SymptomaticCd4Result));
+				new PictHivTest(thePerson,theTime + theRng->SampleExpDist(pictHivTestTime_SymptomaticCd4Result));
 		}
 	}
 }
