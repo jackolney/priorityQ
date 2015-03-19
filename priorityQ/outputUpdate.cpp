@@ -8,11 +8,8 @@
 
 #include <iostream>
 #include "outputUpdate.h"
-#include "eventQ.h"
 
 using namespace std;
-
-extern eventQ * theQ;
 
 extern double * theCARE;
 extern double * thePOP;
@@ -193,7 +190,7 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 
 void Write2007(person * const thePerson)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if(13879.5 > thePerson->GetBirthDay()) {
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
 			const unsigned int ageCatMax [10] = {19,24,29,34,39,44,49,54,59,64};
 			unsigned int i = 0;
@@ -226,7 +223,7 @@ void Write2007(person * const thePerson)
 
 void Write2012(person * const thePerson)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if(15705.75 > thePerson->GetBirthDay()) {
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 64 * 365.25) {
 			const unsigned int ageCatMax [8] = {19,24,29,34,39,44,49,64};
 			unsigned int i = 0;
@@ -248,7 +245,7 @@ void Write2012(person * const thePerson)
 
 void Write2014(person * const thePerson)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if(16436.25 > thePerson->GetBirthDay()) {
 		const unsigned int ageCatMax [5] = {14,21,29,46,200};
 		unsigned int i = 0;
 		while(thePerson->GetAge() / 365.25 > ageCatMax[i] && i < 4)
