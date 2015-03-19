@@ -10,11 +10,9 @@
 #include "cost.h"
 #include "person.h"
 #include "toolbox.h"
-#include "eventQ.h"
 
 using namespace std;
 
-extern eventQ * theQ;
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;

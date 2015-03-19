@@ -13,10 +13,8 @@
 #include "cascadeUpdate.h"
 #include "cascadeEvents.h"
 #include "rng.h"
-#include "eventQ.h"
 #include "toolbox.h"
 
-extern eventQ * theQ;
 extern Rng * theRng;
 
 using namespace std;

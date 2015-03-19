@@ -12,11 +12,9 @@
 #include "person.h"
 #include "event.h"
 #include "events.h"
-#include "eventQ.h"
 #include "rng.h"
 
 extern Rng * theRng;
-extern eventQ * theQ;
 
 cohort::cohort(population * const thePop, const unsigned int Size, const unsigned int StartTime) :
 iPop(thePop),

@@ -13,7 +13,6 @@
 #include "cohort.h"
 #include "output.h"
 #include "update.h"
-#include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
 #include "outputUpdate.h"
@@ -22,7 +21,6 @@
 
 using namespace std;
 
-extern eventQ * theQ;
 extern Rng * theRng;
 
 population::population(const double theSize) :

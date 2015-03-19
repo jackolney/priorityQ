@@ -16,10 +16,8 @@
 #include "cascadeEvents.h"
 #include "interventionEvents.h"
 #include "rng.h"
-#include "eventQ.h"
 
 extern Rng * theRng;
-extern eventQ * theQ;
 
 using namespace std;
 
