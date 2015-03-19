@@ -16,7 +16,7 @@
 /////////////////////
 /////////////////////
 
-void UpdateDaly(person * const thePerson);
+void UpdateDaly(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////

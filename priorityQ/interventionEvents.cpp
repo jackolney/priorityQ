@@ -105,7 +105,7 @@ bool HctHivTest::CheckValid()
 
 void HctHivTest::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargeHctVisit(pPerson);
 	D(cout << "HctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
@@ -140,7 +140,7 @@ bool HctPocCd4Test::CheckValid()
 
 void HctPocCd4Test::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePocCd4Test(pPerson);
 	D(cout << "HctPocCd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
@@ -210,7 +210,7 @@ void VctPocCd4Test::Execute()
 {
 	D(cout << "VctPocCd4Test executed." << endl);
 	D(cout << "Entered care." << endl);
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicVisit(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
@@ -253,7 +253,7 @@ bool PocCd4Test::CheckValid()
 void PocCd4Test::Execute()
 {
 	D(cout << "PocCd4Test executed." << endl);
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicVisit(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetEverCd4TestResultState(true);
@@ -301,7 +301,7 @@ void ArtOutreach::Execute()
 	D(cout << "ArtOutreach executed." << endl);
 	ChargeArtOutreach(pPerson);
 	if(pPerson->GetArtCount() < 2 && theRng->Sample(probReturn)) {
-		UpdateDaly(pPerson);
+		UpdateDaly(pPerson,GetTime());
 		if(!pPerson->GetArtAdherenceState()) { D(cout << "NON-ADHERER to Art." << endl); }
 		pPerson->SetArtInitiationState(true,GetTime());
 		ScheduleCd4Update(pPerson);

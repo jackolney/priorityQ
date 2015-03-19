@@ -22,7 +22,7 @@ public:
 	~cohort(); //destructor
 	
 	/* methods */
-	void GenerateCohort(); // Create cohort of desired size...
+	void GenerateCohort(const double theTime);
 	void ScheduleNewPerson(const double Time);
 	void SelfDestruct();
 	

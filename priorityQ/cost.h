@@ -28,12 +28,12 @@ void ChargePreArtClinicCd4ResultVisit(person * const thePerson);
 
 void ChargePocCd4Test(person * const thePerson);
 
-void ChargeArtCare(person * const thePerson);
+void ChargeArtCare(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////
 
-void ChargeAdherence(person * const thePerson);
+void ChargeAdherence(person * const thePerson, const double theTime);
 
 void ChargePreArtOutreach(person * const thePerson);
 

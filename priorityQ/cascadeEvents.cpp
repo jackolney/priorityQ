@@ -103,7 +103,7 @@ bool VctHivTest::CheckValid()
 
 void VctHivTest::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargeVctPictHivTest(pPerson);
 	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
@@ -146,7 +146,7 @@ bool PictHivTest::CheckValid()
 
 void PictHivTest::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargeVctPictHivTest(pPerson);
 	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
@@ -189,7 +189,7 @@ bool Cd4Test::CheckValid()
 
 void Cd4Test::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicVisit(pPerson);
 	ChargePreArtClinicCd4Test(pPerson);
 	D(cout << "Entered care." << endl);
@@ -225,7 +225,7 @@ bool Cd4TestResult::CheckValid()
 
 void Cd4TestResult::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicCd4ResultVisit(pPerson);
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCd4TestResultState(true);
@@ -266,7 +266,7 @@ bool ArtInitiation::CheckValid()
 
 void ArtInitiation::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	D(cout << "ArtInitiation executed." << endl);
 	if(!pPerson->GetArtAdherenceState())
 		D(cout << "NON-ADHERER to Art." << endl);
@@ -298,7 +298,7 @@ bool ArtDropout::CheckValid()
 
 void ArtDropout::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	D(cout << "ArtDropout executed." << endl);
 	pPerson->SetArtInitiationState(false,GetTime());
 	ScheduleCd4Update(pPerson);
