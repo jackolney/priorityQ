@@ -30,7 +30,7 @@ public:
 	void SetAge(const double Time);
 	
 	/* Hiv Acquisition Functions */
-	void Hiv();
+	void Hiv(const double theTime);
 	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
 	void SetHivIndicators();

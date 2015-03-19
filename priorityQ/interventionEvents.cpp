@@ -49,7 +49,7 @@ bool SeedHct::CheckValid()
 
 void SeedHct::Execute()
 {
-	ScheduleHctHivTest(pPerson,pointOfCare);
+	ScheduleHctHivTest(pPerson,GetTime(),pointOfCare);
 }
 
 /////////////////////
@@ -76,7 +76,7 @@ bool SeedPerpetualHct::CheckValid()
 
 void SeedPerpetualHct::Execute()
 {
-	SchedulePerpetualHctHivTest(pPerson);
+	SchedulePerpetualHctHivTest(pPerson,GetTime());
 }
 
 /////////////////////
@@ -216,7 +216,7 @@ void VctPocCd4Test::Execute()
 	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
+		ScheduleImmediateArt(pPerson,GetTime());
 	else if(pPerson->GetEligible()) {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);
@@ -259,7 +259,7 @@ void PocCd4Test::Execute()
 	pPerson->SetEverCd4TestResultState(true);
 	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
+		ScheduleImmediateArt(pPerson,GetTime());
 	else if(pPerson->GetEligible()) {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);

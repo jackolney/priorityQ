@@ -197,7 +197,7 @@ void Cd4Test::Execute()
 	pPerson->SetEverCd4TestState(true);
 	FastTrackArt(pPerson,GetTime());
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
+		ScheduleImmediateArt(pPerson,GetTime());
 	else if(ReceiveCd4TestResult(pPerson,GetTime())) {
 		ScheduleCd4TestResult(pPerson,GetTime());
 		pPerson->SetInCareState(true,GetTime());
@@ -230,7 +230,7 @@ void Cd4TestResult::Execute()
 	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
+		ScheduleImmediateArt(pPerson,GetTime());
 	else if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
 		ScheduleArtInitiation(pPerson,GetTime());

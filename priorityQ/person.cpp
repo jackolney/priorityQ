@@ -281,11 +281,11 @@ void person::SetAge(const double Time)
 /////////////////////
 /////////////////////
 
-void person::Hiv()
+void person::Hiv(const double theTime)
 {
 	D(cout << "HIV+" << endl);
 	SetSeroStatus(true);
-	SetSeroconversionDay(theQ->GetTime());
+	SetSeroconversionDay(theTime);
 	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
 	ScheduleHivIndicatorUpdate();
 	UpdatePopulation();

@@ -16,16 +16,16 @@
 /////////////////////
 /////////////////////
 
-void ScheduleHctHivTest(person * const thePerson,const bool poc);
+void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc);
 
-void SchedulePerpetualHctHivTest(person * const thePerson);
+void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime);
 
 bool HctLinkage(person * const thePerson);
 
 /////////////////////
 /////////////////////
 
-void ScheduleImmediateArt(person * const thePerson);
+void ScheduleImmediateArt(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////

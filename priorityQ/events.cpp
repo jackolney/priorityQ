@@ -136,7 +136,7 @@ bool Infection::CheckValid()
 
 void Infection::Execute()
 {
-	pPerson->Hiv();
+	pPerson->Hiv(GetTime());
 }
 
 /////////////////////

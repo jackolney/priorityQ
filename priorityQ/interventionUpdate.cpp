@@ -24,22 +24,22 @@ using namespace std;
 ////////////////////
 ////////////////////
 
-void ScheduleHctHivTest(person * const thePerson, const bool poc)
+void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915) {
+	if(thePerson->GetBirthDay() != 0 && theTime >= 14610 && theTime < 21915) {
 		const double diagDay = theRng->SampleExpDist(hctHivTestTime);
 		if(diagDay <= 365.25)
-			new HctHivTest(thePerson,theQ->GetTime() + diagDay,poc);
+			new HctHivTest(thePerson,theTime + diagDay,poc);
 	}
 }
 
 ////////////////////
 ////////////////////
 
-void SchedulePerpetualHctHivTest(person * const thePerson)
+void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 14610 && theQ->GetTime() < 21915)
-		new HctHivTest(thePerson,theQ->GetTime() + (theRng->doub() * 365.25),0);
+	if(thePerson->GetBirthDay() != 0 && theTime >= 14610 && theTime < 21915)
+		new HctHivTest(thePerson,theTime + (theRng->doub() * 365.25),0);
 }
 
 ////////////////////
@@ -63,9 +63,9 @@ bool HctLinkage(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void ScheduleImmediateArt(person * const thePerson)
+void ScheduleImmediateArt(person * const thePerson, const double theTime)
 {
-	new ArtInitiation(thePerson,theQ->GetTime());
+	new ArtInitiation(thePerson,theTime);
 }
 
 ////////////////////
