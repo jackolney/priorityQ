@@ -20,7 +20,7 @@ void SeedOutput(person * const thePerson);
 
 class Output : public event { //For reporting Outputs annually.
 public:
-	Output(person * const thePerson, const double Time); //constructor
+	Output(person * const thePerson, const double Time, const size_t theIndex); //constructor
 	~Output(); //destructor
 	
 	/* Methods */
@@ -29,6 +29,7 @@ public:
 	
 private:
 	person * const pPerson;
+	const size_t index;
 };
 
 /////////////////////

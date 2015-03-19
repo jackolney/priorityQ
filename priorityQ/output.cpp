@@ -67,16 +67,17 @@ void SeedOutput(person * const thePerson)
 	for(size_t i=0;i<60;i++) {
 		yr[i] = 365.25 + (i * 365.25);
 		if(thePerson->GetBirthDay() < yr[i])
-			new Output(thePerson,yr[i]);
+			new Output(thePerson,yr[i],i);
 	}
 }
 
 /////////////////////
 /////////////////////
 
-Output::Output(person * const thePerson, const double Time) :
+Output::Output(person * const thePerson, const double Time, const size_t theIndex) :
 event(Time),
-pPerson(thePerson)
+pPerson(thePerson),
+index(theIndex)
 {
 	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
@@ -91,6 +92,7 @@ bool Output::CheckValid()
 
 void Output::Execute()
 {
+		// Pass the index to people.
 	if(GetTime() >= 14610) {
 		WriteDaly(pPerson);
 		WriteCost(pPerson);
