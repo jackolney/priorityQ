@@ -128,9 +128,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 //		
-//		cout << "theDALY:" << endl;
-//		for(size_t i=0; i<20; i++)
-//			cout << theDALY[i] << endl;
+		cout << "theCOST:" << endl;
+		for(size_t i=0; i<20; i++)
+			cout << theCOST[i] << endl;
 		
 		delete theQ;
 		delete thePop;

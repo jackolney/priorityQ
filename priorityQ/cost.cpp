@@ -71,19 +71,11 @@ void ChargePocCd4Test(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void ChargeArtCare(person * const thePerson, const double theTime)
+void ChargeArtCare(person * const thePerson, const double theTime, const double theArrayTime)
 {
 	if(thePerson->GetArtInitiationState()) {
-		double yr [22];
-		for(size_t i = 0; i<22; i++)
-			yr[i] = 14610 + (i * 365.25);
-		
-		unsigned int i = 0;
-		while(theTime > yr[i] && i < 21)
-			i++;
-		
-		if(thePerson->GetArtDay() <= yr[i-1])
-			thePerson->SetAnnualArtCost((((theTime - yr[i-1]) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
+		if(thePerson->GetArtDay() <= theArrayTime)
+			thePerson->SetAnnualArtCost((((theTime - theArrayTime) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
 		else
 			thePerson->SetAnnualArtCost((((theTime - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
 	} else
@@ -94,19 +86,11 @@ void ChargeArtCare(person * const thePerson, const double theTime)
 /////////////////////
 /////////////////////
 
-void ChargeAdherence(person * const thePerson, const double theTime)
+void ChargeAdherence(person * const thePerson, const double theTime, const double theArrayTime)
 {
 	if(adherenceFlag && thePerson->GetArtInitiationState()) {
-		double yr [22];
-		for(size_t i = 0; i<22; i++)
-			yr[i] = 14610 + (i * 365.25);
-		
-		unsigned int i = 0;
-		while(theTime > yr[i] && i < 21)
-			i++;
-		
-		if(thePerson->GetArtDay() <= yr[i-1])
-			thePerson->SetAnnualAdherenceCost((((theTime - yr[i-1]) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
+		if(thePerson->GetArtDay() <= theArrayTime)
+			thePerson->SetAnnualAdherenceCost((((theTime - theArrayTime) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
 		else
 			thePerson->SetAnnualAdherenceCost((((theTime - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
 	} else
@@ -135,33 +119,27 @@ void ChargeArtOutreach(person * const thePerson)
 void WriteCost(person * const thePerson, const double theTime)
 {
 	if(thePerson->Alive()) {
-		
-		/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-		double yr [20];
-		for(size_t i = 0; i<20; i++)
-			yr[i] = 14975.25 + (i * 365.25);
-
-		unsigned int i = 0;
-		while(theTime > yr[i])
-			i++;
-		
 		if(theTime > 14610) {
-			ChargeArtCare(thePerson,theTime);
-			ChargeAdherence(thePerson,theTime);
+			/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
+			double yr [20];
+			for(size_t i = 0; i<20; i++)
+				yr[i] = 14975.25 + (i * 365.25);
+
+			unsigned int i = 0;
+			while(theTime > yr[i] && i < 20)
+				i++;
+			
+			ChargeArtCare(thePerson,theTime,yr[i] - 365.25);
+			ChargeAdherence(thePerson,theTime,yr[i] - 365.25);
 			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
-			
 			thePreArtCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
-			
 			theArtCOST[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
 			
 			if(thePerson->GetSeroStatus()) {
 				thePreArtCOST_Hiv[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
-				
 				theArtCOST_Hiv[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
 			}
-			
 		}
-		
 		thePerson->ResetCost();
 	}
 }
