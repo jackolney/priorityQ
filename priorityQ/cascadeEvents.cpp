@@ -45,7 +45,7 @@ void SeedInitialHivTests::Execute()
 {
 	if(!immediateArtFlag)
 		UpdateTreatmentGuidelines(pPerson,1,4);
-	ScheduleVctHivTest(pPerson);
+	ScheduleVctHivTest(pPerson,GetTime());
 	SchedulePictHivTest(pPerson);
 }
 
@@ -117,7 +117,7 @@ void VctHivTest::Execute()
 		else
 			ChargePreArtClinicVisit(pPerson);
 	}
-	ScheduleVctHivTest(pPerson);
+	ScheduleVctHivTest(pPerson,GetTime());
 };
 
 /////////////////////

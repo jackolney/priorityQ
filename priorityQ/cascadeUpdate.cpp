@@ -35,11 +35,11 @@ void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, un
 ////////////////////
 ////////////////////
 
-void ScheduleVctHivTest(person * const thePerson)
+void ScheduleVctHivTest(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetBirthDay() != 0 && theQ->GetTime() >= 12418.5) {
+	if(thePerson->GetBirthDay() != 0 && theTime >= 12418.5) {
 		D(cout << "Scheduling VctHivTest." << endl);
-		new VctHivTest(thePerson,theQ->GetTime() + theRng->SampleExpDist(vctHivTestTime),vctPocFlag);
+		new VctHivTest(thePerson,theTime + theRng->SampleExpDist(vctHivTestTime),vctPocFlag);
 	}
 }
 

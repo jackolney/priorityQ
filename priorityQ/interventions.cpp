@@ -94,7 +94,7 @@ void Interventions::Execute()
 		else
 			vctHivTestTime = vctHivTestTimeOriginal * (1/1.25);
 		D(cout << "VctHivTest Intervention. vctHivTestTime = " << vctHivTestTime << endl);
-		ScheduleVctHivTest(pPerson);
+		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
 	/////////////////////
@@ -186,7 +186,7 @@ void Interventions::Execute()
 	
 	if(*p_VctPocCd4) {
 		vctPocFlag = true;
-		ScheduleVctHivTest(pPerson);
+		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
 	/////////////////////

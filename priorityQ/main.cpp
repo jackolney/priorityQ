@@ -104,7 +104,7 @@ int main(int argc, const char * argv[])
 		/* THE MODEL */
 		theRng = new Rng(mach_absolute_time());
 
-		theQ = new eventQ(0,(66 * 365.25) + 1);
+		theQ = new eventQ(0,(60 * 365.25) + 1);
 		
 		thePop = new population(1000);
 		
@@ -127,10 +127,10 @@ int main(int argc, const char * argv[])
 //			
 //			cout << "i = " << i << endl;
 //		}
-		
-		cout << "theDALY:" << endl;
-		for(size_t i=0; i<20; i++)
-			cout << theDALY[i] << endl;
+//		
+//		cout << "theDALY:" << endl;
+//		for(size_t i=0; i<20; i++)
+//			cout << theDALY[i] << endl;
 		
 		delete theQ;
 		delete thePop;

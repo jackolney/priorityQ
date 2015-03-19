@@ -15,7 +15,7 @@
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho);
 
 /* Hiv Testing */
-void ScheduleVctHivTest(person * const thePerson);
+void ScheduleVctHivTest(person * const thePerson, const double theTime);
 
 void SchedulePictHivTest(person * const thePerson);
 
