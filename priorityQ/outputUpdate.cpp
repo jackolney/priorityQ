@@ -61,7 +61,7 @@ extern double * theAidsDeath_2010_Age;
 
 void WritePop(person * const thePerson, const size_t theIndex)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay()) {
 		thePOP[theIndex] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25)
 			thePOP_15plus[theIndex] += thePerson->Alive();
@@ -136,20 +136,20 @@ void WriteClinic(person * const thePerson, const double theTime)
 /////////////////////
 /////////////////////
 
-void WriteDeath(person * const thePerson)
+void WriteDeath(person * const thePerson, const double theTime)
 {
 	double yr [60];
 	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
+	while(theTime >= yr[i] && i < 59)
 		i++;
 	
 	theDeath[i]++;
 	
 	// Age stratification for 2010 only
-	if(theQ->GetTime() > 14610 && theQ->GetTime() <= (14610 + 365.25)) {
+	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
 		while(thePerson->GetAge() / 365.25 > ageCatMax[j] && j < 19)
@@ -162,14 +162,14 @@ void WriteDeath(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void WriteAidsDeath(person * const thePerson)
+void WriteAidsDeath(person * const thePerson, const double theTime)
 {
 	double yr [60];
 	for(size_t i = 0; i<60; i++)
 		yr[i] = 365.25 + (i * 365.25);
 	
 	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
+	while(theTime >= yr[i] && i < 59)
 		i++;
 	
 	theAidsDeath[i] += thePerson->GetSeroStatus();
@@ -178,7 +178,7 @@ void WriteAidsDeath(person * const thePerson)
 		theAidsDeath_15plus[i] += thePerson->GetSeroStatus();
 	
 	// Age stratification for 2010 only
-	if(theQ->GetTime() > 14610 && theQ->GetTime() <= (14610 + 365.25)) {
+	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
 		while(thePerson->GetAge() / 365.25 > ageCatMax[j] && j < 19)
@@ -268,7 +268,7 @@ void Write2014(person * const thePerson)
 
 void WriteCd4(person * const thePerson, const size_t theIndex)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay()) {
 		if(thePerson->GetCurrentCd4() == 1)
 			theCD4_200[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentCd4() == 2)
@@ -280,7 +280,7 @@ void WriteCd4(person * const thePerson, const size_t theIndex)
 	}
 	
 	
-	if(theQ->GetTime() > thePerson->GetBirthDay() && thePerson->Alive()) {
+	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay() && thePerson->Alive()) {
 		if(thePerson->GetCurrentCd4() == 1)
 			theCD4_200_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentCd4() == 2)
@@ -297,7 +297,7 @@ void WriteCd4(person * const thePerson, const size_t theIndex)
 
 void WriteWho(person * const thePerson, const size_t theIndex)
 {
-	if(theQ->GetTime() > thePerson->GetBirthDay()) {
+	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay()) {
 		if(thePerson->GetCurrentWho() == 1)
 			theWHO_1[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentWho() == 2)
@@ -308,7 +308,7 @@ void WriteWho(person * const thePerson, const size_t theIndex)
 			theWHO_4[theIndex] += thePerson->Alive();
 	}
 	
-	if(theQ->GetTime() > thePerson->GetBirthDay() && thePerson->Alive()) {
+	if((theIndex + 1) * 365.25 > thePerson->GetBirthDay() && thePerson->Alive()) {
 		if(thePerson->GetCurrentWho() == 1)
 			theWHO_1_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentWho() == 2)
@@ -324,7 +324,7 @@ void WriteWho(person * const thePerson, const size_t theIndex)
 /////////////////////
 
 void WriteIncidence(unsigned int const &theIncidentCases, const size_t theIndex)
-{	
+{
 	theINCIDENCE[theIndex] = theIncidentCases;
 }
 

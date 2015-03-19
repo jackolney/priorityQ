@@ -197,10 +197,10 @@ void Death::Execute()
 	WriteCost(pPerson,GetTime());
 	pPerson->Kill(GetTime(),hivRelated);
 	WriteCare(pPerson,GetTime());
-	WriteDeath(pPerson);
+	WriteDeath(pPerson,GetTime());
 	if(hivRelated) {
 		D(cout << "Death executed (HIV-related)." << endl);
-		WriteAidsDeath(pPerson);
+		WriteAidsDeath(pPerson,GetTime());
 		WriteClinic(pPerson,GetTime());
 	}
 	else {
