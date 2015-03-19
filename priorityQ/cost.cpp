@@ -144,7 +144,7 @@ void WriteCost(person * const thePerson, const double theTime)
 			yr[i] = 14975.25 + (i * 365.25);
 
 		unsigned int i = 0;
-		while(theTime >= yr[i])
+		while(theTime > yr[i])
 			i++;
 		
 		if(theTime > 14610) {

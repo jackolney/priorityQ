@@ -32,6 +32,7 @@ extern double * theHIV;
 extern double * theART_15to49;
 extern double * theINCIDENCE;
 
+extern double * theDALY;
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;
@@ -127,9 +128,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 		
-		cout << "theINCIDENCE:" << endl;
-		for(size_t i=0; i<60; i++)
-			cout << theINCIDENCE[i] << endl;
+		cout << "theDALY:" << endl;
+		for(size_t i=0; i<20; i++)
+			cout << theDALY[i] << endl;
 		
 		delete theQ;
 		delete thePop;
