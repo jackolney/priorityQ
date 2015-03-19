@@ -49,7 +49,7 @@ void WriteDaly(person * const thePerson, const size_t theIndex)
 {
 	UpdateDaly(thePerson);
 	
-	if(theQ->GetTime() > 14610)
+	if((theIndex + 41) * 365.25 > 14610)
 		theDALY[theIndex] += thePerson->GetDalys();
 	
 	thePerson->ResetDalys();

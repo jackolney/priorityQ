@@ -147,7 +147,7 @@ void WriteCost(person * const thePerson, const double theTime)
 		while(theTime >= yr[i])
 			i++;
 		
-		if(theQ->GetTime() > 14610) {
+		if(theTime > 14610) {
 			ChargeArtCare(thePerson);
 			ChargeAdherence(thePerson);
 			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();

@@ -127,33 +127,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 		
-//		cout << "theGuidelines_PopDist_HivNegative:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_PopDist_HivNegative[i] << endl;
-		
-//		cout << "theGuidelines_Death_200_OffArt:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_Death_200_OffArt[i] << endl;
-//		
-//		cout << "theGuidelines_Art_500:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_Art_500[i] << endl;
-//		
-//		cout << "theGuidelines_NewInfectionsAdult:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_NewInfectionsAdult[i] << endl;
-//		
-//		cout << "theGuidelines_NewDiagnoses:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_NewDiagnoses[i] << endl;
-//		
-//		cout << "theGuidelines_PreArtDropout:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_PreArtDropout[i] << endl;
-//		
-//		cout << "theGuidelines_ArtDropout:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_ArtDropout[i] << endl;
+		cout << "theINCIDENCE:" << endl;
+		for(size_t i=0; i<60; i++)
+			cout << theINCIDENCE[i] << endl;
 		
 		delete theQ;
 		delete thePop;

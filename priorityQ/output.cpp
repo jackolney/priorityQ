@@ -94,7 +94,7 @@ void Output::Execute()
 {
 		// Pass the index to people.
 	if(GetTime() >= 14610) {
-		WriteDaly(pPerson,index - 40);
+		WriteDaly(pPerson,index - 39);
 		WriteCost(pPerson,GetTime());
 	}
 	WritePop(pPerson,index);
