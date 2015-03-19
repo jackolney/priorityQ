@@ -46,10 +46,10 @@ public:
 	double GetWeightedTotal() const;
 	unsigned int GetInfectedCases();
 	void CalculateBeta();
-	double CalculateLambda(const double * theIRR);
-	void CalculateIncidence(const size_t theIndex);
-	void RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector);
-	void PassInfection(const size_t theRow);
+	double CalculateLambda(const double * theIRR, const double theTime);
+	void CalculateIncidence(const size_t theIndex, const double theTime);
+	void RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector, const double theTime);
+	void PassInfection(const size_t theRow, const double theTime);
 	void AddCase() { incidentCases++; }
 	
 	/* Clear population */

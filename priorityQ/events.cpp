@@ -89,7 +89,7 @@ bool Incidence::CheckValid()
 
 void Incidence::Execute()
 {
-	pPopulation->CalculateIncidence(index);
+	pPopulation->CalculateIncidence(index,GetTime());
 }
 
 /////////////////////

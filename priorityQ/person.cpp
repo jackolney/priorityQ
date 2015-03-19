@@ -249,14 +249,14 @@ double person::AssignNatDeathDate(const double Time)
 /////////////////////
 /////////////////////
 
-void person::Kill(const double Time, const bool theCause)
+void person::Kill(const double theTime, const bool theCause)
 {
-	deathDay = Time;
+	deathDay = theTime;
 	hivDeath = theCause;
 	artDeath = art;
 	iPop->RemovePerson(this);
 	if(GetHivDate() && !GetSeroStatus())
-		iPop->PassInfection(GetRowIndex());
+		iPop->PassInfection(GetRowIndex(),theTime);
 	D(cout << "\tDeathDate = " << deathDay << endl);
 	return;
 }
@@ -273,9 +273,9 @@ double person::GetAge()
 /////////////////////
 /////////////////////
 
-void person::SetAge(const double Time)
+void person::SetAge(const double theTime)
 {
-	currentAge = initialAge + (Time - birthDay);
+	currentAge = initialAge + (theTime - birthDay);
 }
 
 /////////////////////
