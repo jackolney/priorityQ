@@ -101,57 +101,57 @@ bool PictLinkage(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void ScheduleInitialCd4TestAfterHct(person * const thePerson)
+void ScheduleInitialCd4TestAfterHct(person * const thePerson, const double theTime)
 {
-	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(hctCd4TestTime[thePerson->GetCurrentCd4()-1]));
+	new Cd4Test(thePerson,theTime + theRng->SampleExpDist(hctCd4TestTime[thePerson->GetCurrentCd4()-1]));
 }
 
 ////////////////////
 ////////////////////
 
-void SchedulePreArtCd4Test(person * const thePerson)
+void SchedulePreArtCd4Test(person * const thePerson, const double theTime)
 {
-	new Cd4Test(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4TestTime));
+	new Cd4Test(thePerson,theTime + theRng->SampleExpDist(cd4TestTime));
 }
 
 ////////////////////
 ////////////////////
 
-void ScheduleCd4TestResult(person * const thePerson)
+void ScheduleCd4TestResult(person * const thePerson, const double theTime)
 {
-	new Cd4TestResult(thePerson,theQ->GetTime() + theRng->SampleExpDist(cd4ResultTime));
+	new Cd4TestResult(thePerson,theTime + theRng->SampleExpDist(cd4ResultTime));
 }
 
 ////////////////////
 ////////////////////
 
-bool ReceiveCd4TestResult(person * const thePerson)
+bool ReceiveCd4TestResult(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetCd4TestCount() <= 1) {
 	 switch(thePerson->GetDiagnosisRoute()) {
 		 case 1: return theRng->Sample(hctShortTermRetention);  break;
 		 case 2: return theRng->Sample(vctShortTermRetention);  break;
 		 case 3: return theRng->Sample(pictShortTermRetention); break;
-		 default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
+		 default: thePerson->SetInCareState(false,theTime); return false;
 	 }
 	} else
 		switch(thePerson->GetDiagnosisRoute()) {
 		 case 1: return theRng->Sample(hctLongTermRetention);  break;
 		 case 2: return theRng->Sample(vctLongTermRetention);  break;
 		 case 3: return theRng->Sample(pictLongTermRetention); break;
-		 default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
+		 default: thePerson->SetInCareState(false,theTime); return false;
 	 }
 }
 
 ////////////////////
 ////////////////////
 
-bool AttendCd4TestResult(person * const thePerson)
+bool AttendCd4TestResult(person * const thePerson, const double theTime)
 {
 	if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
 		return thePerson->Alive();
 	else {
-		thePerson->SetInCareState(false,theQ->GetTime());
+		thePerson->SetInCareState(false,theTime);
 		return false;
 	}
 }
@@ -159,13 +159,13 @@ bool AttendCd4TestResult(person * const thePerson)
 ////////////////////
 ////////////////////
 
-bool SecondaryCd4Test(person * const thePerson)
+bool SecondaryCd4Test(person * const thePerson, const double theTime)
 {
 	switch(thePerson->GetDiagnosisRoute()) {
 		case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
 		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
 		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
-		default: thePerson->SetInCareState(false,theQ->GetTime()); return false;
+		default: thePerson->SetInCareState(false,theTime); return false;
 	}
 	
 }
@@ -173,33 +173,33 @@ bool SecondaryCd4Test(person * const thePerson)
 ////////////////////
 ////////////////////
 
-void FastTrackArt(person * const thePerson)
+void FastTrackArt(person * const thePerson, const double theTime)
 {
 	if(!thePerson->GetEverCd4TestResultState() && thePerson->GetCd4TestCount() == 1 && thePerson->GetDiagnosisRoute() > 1 && thePerson->GetWhoEligible()) {
 		thePerson->SetArtAtEnrollment(true);
-		new ArtInitiation(thePerson,theQ->GetTime());
+		new ArtInitiation(thePerson,theTime);
 	}
 }
 
 ////////////////////
 ////////////////////
 
-void ScheduleArtInitiation(person * const thePerson)
+void ScheduleArtInitiation(person * const thePerson, const double theTime)
 {
-	new ArtInitiation(thePerson,theQ->GetTime() + theRng->SampleExpDist(artInitiationTime));
+	new ArtInitiation(thePerson,theTime + theRng->SampleExpDist(artInitiationTime));
 }
 
 ////////////////////
 ////////////////////
 
-void ScheduleArtDropout(person * const thePerson)
+void ScheduleArtDropout(person * const thePerson, const double theTime)
 {
 	const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear);
 	
 	if(artDropoutDate < 365.25)
-		new ArtDropout(thePerson,theQ->GetTime() + artDropoutDate);
+		new ArtDropout(thePerson,theTime + artDropoutDate);
 	else
-		new ArtDropout(thePerson,theQ->GetTime() + 365.25 + theRng->SampleExpDist(artDropoutTimeTwoYear));
+		new ArtDropout(thePerson,theTime + 365.25 + theRng->SampleExpDist(artDropoutTimeTwoYear));
 	
 }
 

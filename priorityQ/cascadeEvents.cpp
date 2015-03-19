@@ -195,11 +195,11 @@ void Cd4Test::Execute()
 	D(cout << "Entered care." << endl);
 	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
-	FastTrackArt(pPerson);
+	FastTrackArt(pPerson,GetTime());
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson);
-	else if(ReceiveCd4TestResult(pPerson)) {
-		ScheduleCd4TestResult(pPerson);
+	else if(ReceiveCd4TestResult(pPerson,GetTime())) {
+		ScheduleCd4TestResult(pPerson,GetTime());
 		pPerson->SetInCareState(true,GetTime());
 	}
 };
@@ -220,7 +220,7 @@ Cd4TestResult::~Cd4TestResult()
 
 bool Cd4TestResult::CheckValid()
 {
-	return AttendCd4TestResult(pPerson);
+	return AttendCd4TestResult(pPerson,GetTime());
 }
 
 void Cd4TestResult::Execute()
@@ -233,11 +233,11 @@ void Cd4TestResult::Execute()
 		ScheduleImmediateArt(pPerson);
 	else if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
+		ScheduleArtInitiation(pPerson,GetTime());
 	} else {
 		D(cout << "Not eligible for ART." << endl);
-		if(SecondaryCd4Test(pPerson))
-			SchedulePreArtCd4Test(pPerson);
+		if(SecondaryCd4Test(pPerson,GetTime()))
+			SchedulePreArtCd4Test(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
 }
@@ -273,7 +273,7 @@ void ArtInitiation::Execute()
 	pPerson->SetArtInitiationState(true,GetTime());
 	ScheduleCd4Update(pPerson);
 	ScheduleWhoUpdate(pPerson);
-	ScheduleArtDropout(pPerson);
+	ScheduleArtDropout(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 

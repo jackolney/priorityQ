@@ -114,7 +114,7 @@ void HctHivTest::Execute()
 		if(pointOfCare)
 			new HctPocCd4Test(pPerson,GetTime());
 		else if(HctLinkage(pPerson))
-			ScheduleInitialCd4TestAfterHct(pPerson);
+			ScheduleInitialCd4TestAfterHct(pPerson,GetTime());
 		SchedulePictHivTest(pPerson,GetTime());
 	}
 }
@@ -147,11 +147,11 @@ void HctPocCd4Test::Execute()
 	pPerson->SetEverCd4TestResultState(true);
 	if(pPerson->GetEligible()) {
 		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
+		ScheduleArtInitiation(pPerson,GetTime());
 	} else {
 		D(cout << "Not eligible for ART." << endl);
 		if(HctLinkage(pPerson))
-			ScheduleInitialCd4TestAfterHct(pPerson);
+			ScheduleInitialCd4TestAfterHct(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
 }
@@ -220,12 +220,12 @@ void VctPocCd4Test::Execute()
 	else if(pPerson->GetEligible()) {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
+		ScheduleArtInitiation(pPerson,GetTime());
 	} else {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Not eligible for ART." << endl);
-		if(SecondaryCd4Test(pPerson))
-			SchedulePreArtCd4Test(pPerson);
+		if(SecondaryCd4Test(pPerson,GetTime()))
+			SchedulePreArtCd4Test(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
 }
@@ -263,12 +263,12 @@ void PocCd4Test::Execute()
 	else if(pPerson->GetEligible()) {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
+		ScheduleArtInitiation(pPerson,GetTime());
 	} else {
 		ChargePocCd4Test(pPerson);
 		D(cout << "Not eligible for ART." << endl);
-		if(SecondaryCd4Test(pPerson))
-			SchedulePreArtCd4Test(pPerson);
+		if(SecondaryCd4Test(pPerson,GetTime()))
+			SchedulePreArtCd4Test(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
 }
@@ -306,7 +306,7 @@ void ArtOutreach::Execute()
 		pPerson->SetArtInitiationState(true,GetTime());
 		ScheduleCd4Update(pPerson);
 		ScheduleWhoUpdate(pPerson);
-		ScheduleArtDropout(pPerson);
+		ScheduleArtDropout(pPerson,GetTime());
 		pPerson->UpdateInfectiousnessArray();
 	}
 }

@@ -25,25 +25,25 @@ bool VctLinkage(person * const thePerson);
 bool PictLinkage(person * const thePerson);
 
 /* Initial Cd4 test */
-void ScheduleInitialCd4TestAfterHct(person * const thePerson);
+void ScheduleInitialCd4TestAfterHct(person * const thePerson, const double theTime);
 
 /* Pre-Art Cd4 Test */
-void SchedulePreArtCd4Test(person * const thePerson);
+void SchedulePreArtCd4Test(person * const thePerson, const double theTime);
 
 /* Cd4 Test Result */
-void ScheduleCd4TestResult(person * const thePerson);
+void ScheduleCd4TestResult(person * const thePerson, const double theTime);
 
-bool ReceiveCd4TestResult(person * const thePerson);
+bool ReceiveCd4TestResult(person * const thePerson, const double theTime);
 
-bool AttendCd4TestResult(person * const thePerson);
+bool AttendCd4TestResult(person * const thePerson, const double theTime);
 
-bool SecondaryCd4Test(person * const thePerson);
+bool SecondaryCd4Test(person * const thePerson, const double theTime);
 
-void FastTrackArt(person * const thePerson);
+void FastTrackArt(person * const thePerson, const double theTime);
 
 /* Art Care */
-void ScheduleArtInitiation(person * const thePerson);
+void ScheduleArtInitiation(person * const thePerson, const double theTime);
 
-void ScheduleArtDropout(person * const thePerson);
+void ScheduleArtDropout(person * const thePerson, const double theTime);
 
 #endif /* defined(__priorityQ__updateCascade__) */
