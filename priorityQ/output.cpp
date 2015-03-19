@@ -94,14 +94,14 @@ void Output::Execute()
 {
 		// Pass the index to people.
 	if(GetTime() >= 14610) {
-		WriteDaly(pPerson);
-		WriteCost(pPerson);
+		WriteDaly(pPerson,index - 40);
+		WriteCost(pPerson,GetTime());
 	}
-	WritePop(pPerson);
-	WriteHiv(pPerson);
-	WriteArt(pPerson);
-	WriteCd4(pPerson);
-	WriteWho(pPerson);
+	WritePop(pPerson,index);
+	WriteHiv(pPerson,index);
+	WriteArt(pPerson,index);
+	WriteCd4(pPerson,index);
+	WriteWho(pPerson,index);
 	if(GetTime() == 13879.5)
 		Write2007(pPerson);
 	if(GetTime() == 15705.75)

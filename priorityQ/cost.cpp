@@ -134,7 +134,7 @@ void ChargeArtOutreach(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void WriteCost(person * const thePerson)
+void WriteCost(person * const thePerson, const double theTime)
 {
 	if(thePerson->Alive()) {
 		
@@ -142,9 +142,9 @@ void WriteCost(person * const thePerson)
 		double yr [20];
 		for(size_t i = 0; i<20; i++)
 			yr[i] = 14975.25 + (i * 365.25);
-		
+
 		unsigned int i = 0;
-		while(theQ->GetTime() >= yr[i])
+		while(theTime >= yr[i])
 			i++;
 		
 		if(theQ->GetTime() > 14610) {

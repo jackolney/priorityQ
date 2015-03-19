@@ -59,61 +59,37 @@ extern double * theAidsDeath_2010_Age;
 /////////////////////
 /////////////////////
 
-void WritePop(person * const thePerson)
+void WritePop(person * const thePerson, const size_t theIndex)
 {
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
-		thePOP[i] += thePerson->Alive();
+		thePOP[theIndex] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25)
-			thePOP_15plus[i] += thePerson->Alive();
+			thePOP_15plus[theIndex] += thePerson->Alive();
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
-			thePOP_15to49[i] += thePerson->Alive();
+			thePOP_15to49[theIndex] += thePerson->Alive();
 	}
 }
 
 /////////////////////
 /////////////////////
 
-void WriteHiv(person * const thePerson)
+void WriteHiv(person * const thePerson, const size_t theIndex)
 {
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
 	if(thePerson->Alive()) {
-		theHIV[i] += thePerson->GetSeroStatus();
+		theHIV[theIndex] += thePerson->GetSeroStatus();
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
-			theHIV_15to49[i] += thePerson->GetSeroStatus();
+			theHIV_15to49[theIndex] += thePerson->GetSeroStatus();
 	}
 }
 
 /////////////////////
 /////////////////////
 
-void WriteArt(person * const thePerson)
+void WriteArt(person * const thePerson, const size_t theIndex)
 {
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
 	if(thePerson->Alive()) {
 		if(thePerson->GetAge() > 15 * 365.25 && thePerson->GetAge() <= 49 * 365.25)
-			theART_15to49[i] += thePerson->GetArtInitiationState();
+			theART_15to49[theIndex] += thePerson->GetArtInitiationState();
 	}
 }
 
@@ -290,90 +266,66 @@ void Write2014(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void WriteCd4(person * const thePerson)
+void WriteCd4(person * const thePerson, const size_t theIndex)
 {
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
 		if(thePerson->GetCurrentCd4() == 1)
-			theCD4_200[i] += thePerson->Alive();
+			theCD4_200[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentCd4() == 2)
-			theCD4_200350[i] += thePerson->Alive();
+			theCD4_200350[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentCd4() == 3)
-			theCD4_350500[i] += thePerson->Alive();
+			theCD4_350500[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentCd4() == 4)
-			theCD4_500[i] += thePerson->Alive();
+			theCD4_500[theIndex] += thePerson->Alive();
 	}
 	
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay() && thePerson->Alive()) {
 		if(thePerson->GetCurrentCd4() == 1)
-			theCD4_200_Art[i] += thePerson->GetArtInitiationState();
+			theCD4_200_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentCd4() == 2)
-			theCD4_200350_Art[i] += thePerson->GetArtInitiationState();
+			theCD4_200350_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentCd4() == 3)
-			theCD4_350500_Art[i] += thePerson->GetArtInitiationState();
+			theCD4_350500_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentCd4() == 4)
-			theCD4_500_Art[i] += thePerson->GetArtInitiationState();
+			theCD4_500_Art[theIndex] += thePerson->GetArtInitiationState();
 	}
 }
 
 /////////////////////
 /////////////////////
 
-void WriteWho(person * const thePerson)
+void WriteWho(person * const thePerson, const size_t theIndex)
 {
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
 	if(theQ->GetTime() > thePerson->GetBirthDay()) {
 		if(thePerson->GetCurrentWho() == 1)
-			theWHO_1[i] += thePerson->Alive();
+			theWHO_1[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentWho() == 2)
-			theWHO_2[i] += thePerson->Alive();
+			theWHO_2[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentWho() == 3)
-			theWHO_3[i] += thePerson->Alive();
+			theWHO_3[theIndex] += thePerson->Alive();
 		else if(thePerson->GetCurrentWho() == 4)
-			theWHO_4[i] += thePerson->Alive();
+			theWHO_4[theIndex] += thePerson->Alive();
 	}
 	
 	if(theQ->GetTime() > thePerson->GetBirthDay() && thePerson->Alive()) {
 		if(thePerson->GetCurrentWho() == 1)
-			theWHO_1_Art[i] += thePerson->GetArtInitiationState();
+			theWHO_1_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentWho() == 2)
-			theWHO_2_Art[i] += thePerson->GetArtInitiationState();
+			theWHO_2_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentWho() == 3)
-			theWHO_3_Art[i] += thePerson->GetArtInitiationState();
+			theWHO_3_Art[theIndex] += thePerson->GetArtInitiationState();
 		else if(thePerson->GetCurrentWho() == 4)
-			theWHO_4_Art[i] += thePerson->GetArtInitiationState();
+			theWHO_4_Art[theIndex] += thePerson->GetArtInitiationState();
 	}
 }
 
 /////////////////////
 /////////////////////
 
-void WriteIncidence(unsigned int const &theIncidentCases)
-{
-	double yr [60];
-	for(size_t i = 0; i<60; i++)
-		yr[i] = 365.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i] && i < 59)
-		i++;
-	
-	theINCIDENCE[i] = theIncidentCases;
+void WriteIncidence(unsigned int const &theIncidentCases, const size_t theIndex)
+{	
+	theINCIDENCE[theIndex] = theIncidentCases;
 }
 
 /////////////////////

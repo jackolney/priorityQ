@@ -73,9 +73,10 @@ void VectorUpdate::Execute()
 /////////////////////
 /////////////////////
 
-Incidence::Incidence(population * const thePopulation, const double Time) :
+Incidence::Incidence(population * const thePopulation, const double Time, const size_t theIndex) :
 event(Time),
-pPopulation(thePopulation)
+pPopulation(thePopulation),
+index(theIndex)
 {}
 
 Incidence::~Incidence()
@@ -88,7 +89,7 @@ bool Incidence::CheckValid()
 
 void Incidence::Execute()
 {
-	pPopulation->CalculateIncidence();
+	pPopulation->CalculateIncidence(index);
 }
 
 /////////////////////
@@ -177,19 +178,23 @@ Death::~Death()
 
 bool Death::CheckValid()
 {
-	if(hivRelated)
+	if(hivRelated) {
 		if(pPerson->GetHivDeathDate() == GetTime())
 			return pPerson->Alive();
 		else
 			return false;
-		else
-			return pPerson->Alive();
+	} else if(pPerson->Alive()) {
+		return true;
+	} else {
+		delete pPerson;
+		return false;
+	}
 }
 
 void Death::Execute()
 {
 	UpdateDaly(pPerson);
-	WriteCost(pPerson);
+	WriteCost(pPerson,GetTime());
 	pPerson->Kill(GetTime(),hivRelated);
 	WriteCare(pPerson,GetTime());
 	WriteDeath(pPerson);

@@ -42,7 +42,7 @@ void ChargeArtOutreach(person * const thePerson);
 /////////////////////
 /////////////////////
 
-void WriteCost(person * const thePerson);
+void WriteCost(person * const thePerson, const double theTime);
 
 /////////////////////
 /////////////////////

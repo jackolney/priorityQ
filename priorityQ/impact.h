@@ -21,7 +21,7 @@ void UpdateDaly(person * const thePerson);
 /////////////////////
 /////////////////////
 
-void WriteDaly(person * const thePerson);
+void WriteDaly(person * const thePerson, const size_t theIndex);
 
 /////////////////////
 /////////////////////

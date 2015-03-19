@@ -45,21 +45,12 @@ void UpdateDaly(person * const thePerson)
 /////////////////////
 /////////////////////
 
-void WriteDaly(person * const thePerson)
+void WriteDaly(person * const thePerson, const size_t theIndex)
 {
 	UpdateDaly(thePerson);
 	
-	/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-	double yr [20];
-	for(size_t i = 0; i<20; i++)
-		yr[i] = 14975.25 + (i * 365.25);
-	
-	unsigned int i = 0;
-	while(theQ->GetTime() >= yr[i])
-		i++;
-	
 	if(theQ->GetTime() > 14610)
-		theDALY[i] += thePerson->GetDalys(); //+= should specify that DALYs can accumulate.
+		theDALY[theIndex] += thePerson->GetDalys();
 	
 	thePerson->ResetDalys();
 }
