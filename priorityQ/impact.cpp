@@ -47,10 +47,10 @@ void UpdateDaly(person * const thePerson, const double theTime)
 
 void WriteDaly(person * const thePerson, const size_t theIndex)
 {
-	UpdateDaly(thePerson,(theIndex + 40) * 365.25);
+	UpdateDaly(thePerson,(theIndex + 1) * 365.25);
 	
-	if((theIndex + 40) * 365.25 > 14610)
-		theDALY[theIndex] += thePerson->GetDalys();
+	if((theIndex + 1) * 365.25 > 14610)
+		theDALY[theIndex - 40] += thePerson->GetDalys();
 	
 	thePerson->ResetDalys();
 }

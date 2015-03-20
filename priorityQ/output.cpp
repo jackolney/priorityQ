@@ -93,7 +93,7 @@ bool Output::CheckValid()
 void Output::Execute()
 {
 	if(GetTime() >= 14610) {
-		WriteDaly(pPerson,index - 39);
+		WriteDaly(pPerson,index);
 		WriteCost(pPerson,GetTime());
 	}
 	WritePop(pPerson,GetTime(),index);
