@@ -63,9 +63,6 @@ int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
 int const * p_Calibration;
 
-/* Calibration pointers */
-extern double * L21;
-
 int main(int argc, const char * argv[])
 {
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
@@ -103,7 +100,7 @@ int main(int argc, const char * argv[])
 		/* THE MODEL */
 		theRng = new Rng(mach_absolute_time());
 
-		theQ = new eventQ(0,(66 * 365.25) + 1);
+		theQ = new eventQ(0,(140 * 365.25) + 1);
 		
 		new population(1000);
 		
@@ -111,49 +108,14 @@ int main(int argc, const char * argv[])
 		
 		/* PLAYGROUND */
 		
-//		cout << "hello" << endl;
-//		
-//		double theTime = 2004;
-//		
-//		if(theTime >= 2000) {
-//			double yr [36];
-//			for(size_t i=0; i<36; i++)
-//				yr[i] = 2001 + i;
-//			
-//			unsigned int i=0;
-//			while(theTime >= yr[i] && i<36)
-//				i++;
-//			
-//			cout << "i = " << i << endl;
-//		}
+		for(size_t i=0;i<140;i++)
+			cout << "Incidence = " << theINCIDENCE[i] << endl;
 		
-//		cout << "theGuidelines_PopDist_HivNegative:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_PopDist_HivNegative[i] << endl;
+		for(size_t i=0;i<140;i++)
+			cout << "thePOP_15to49 = " << thePOP_15to49[i] << endl;
 		
-//		cout << "theGuidelines_Death_200_OffArt:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_Death_200_OffArt[i] << endl;
-//		
-//		cout << "theGuidelines_Art_500:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_Art_500[i] << endl;
-//		
-//		cout << "theGuidelines_NewInfectionsAdult:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_NewInfectionsAdult[i] << endl;
-//		
-//		cout << "theGuidelines_NewDiagnoses:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_NewDiagnoses[i] << endl;
-//		
-//		cout << "theGuidelines_PreArtDropout:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_PreArtDropout[i] << endl;
-//		
-//		cout << "theGuidelines_ArtDropout:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_ArtDropout[i] << endl;
+		for(size_t i=0;i<140;i++)
+			cout << "theHIV_15to49 = " << theHIV_15to49[i] << endl;
 		
 		delete theQ;
 		delete theRng;
