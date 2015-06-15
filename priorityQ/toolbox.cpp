@@ -18,57 +18,61 @@ extern Rng * theRng;
 
 /* Hiv testing times */
 double hctHivTestTime = 0.4342945 * 365.25;
-double vctHivTestTimeOriginal = 7.2 * 365.25;
+double vctHivTestTimeOriginal = 7.8 * 365.25;
 double vctHivTestTime = vctHivTestTimeOriginal;
-double pictHivTestTime_AsymptomaticOblivious = 15.6 * 365.25;
-double pictHivTestTime_AsymptomaticNoCd4Result = 11 * 365.25;
-double pictHivTestTime_AsymptomaticCd4ResultNotEligible = 5 * 365.25;
-double pictHivTestTime_AsymptomaticCd4ResultEligible = 5 * 365.25;
-double pictHivTestTime_SymptomaticOblivious = 1.5 * 365.25;
-double pictHivTestTime_SymptomaticNoCd4Result = 1.5 * 365.25;
-double pictHivTestTime_SymptomaticCd4Result = 1.5 * 365.25;
-
+double pictHivTestTime_AsymptomaticOblivious = 40 * 365.25;
+double pictHivTestTime_AsymptomaticNoCd4Result = 30 * 365.25;
+double pictHivTestTime_AsymptomaticCd4ResultNotEligible = 10 * 365.25;
+double pictHivTestTime_AsymptomaticCd4ResultEligible = 10 * 365.25;
+double pictHivTestTime_SymptomaticOblivious = 1.525 * 365.25;
+double pictHivTestTime_SymptomaticNoCd4Result = 0.1 * 365.25;
+double pictHivTestTime_SymptomaticCd4Result = 0.1 * 365.25;
 
 /* Linkage probabilities */
-double hctProbLinkOriginal = 0.054;
-double hctProbLinkPreviouslyDiagnosedOriginal = 0.25;
-double vctProbLinkOriginal = 0.6;
-double pictProbLinkOriginal = 0.6;
+double hctProbLinkRollOutOriginal = 0.054;
+double hctProbLinkPreviouslyDiagnosedRollOutOriginal = 0.054;
+double hctProbLinkOriginal = 0.3;
+double hctProbLinkPreviouslyDiagnosedOriginal = 0.4;
 
+double vctProbLinkOriginal = 0.95;
+double pictProbLinkOriginal = 0.7;
+
+double hctProbLinkRollOut = hctProbLinkRollOutOriginal;
+double hctProbLinkPreviouslyDiagnosedRollOut = hctProbLinkPreviouslyDiagnosedRollOutOriginal;
 double hctProbLink = hctProbLinkOriginal;
 double hctProbLinkPreviouslyDiagnosed = hctProbLinkPreviouslyDiagnosedOriginal;
 double vctProbLink = vctProbLinkOriginal;
 double pictProbLink = pictProbLinkOriginal;
 
 /* HCT time between Hiv test and Cd4 test [CD4-1] */
-double hctCd4TestTime [4] = {142,152.5,97,93};
+double hctCd4TestTime [4] = {252.04,175.78,174.59,116.34};
 
 /* Time between Cd4 test and receiving results */
 double cd4ResultTime = 30;
 
 /* Time between receiving result Cd4 test and subsequent Cd4 test */
-double cd4TestTime = 335.25;
+double cd4TestTime = 278.88;
 
 /* Probability of attending Cd4 Test result visit */
-double cd4ResultProbAttend = 0.8;
+double cd4ResultProbAttend = 0.9486833;
 
 /* Pre-Art retention probability (between test and result) */
-double hctShortTermRetention = 0.6192;
-double hctLongTermRetention = 0.3290;
+double hctShortTermRetention = 0.9486833;
+double hctLongTermRetention = 0.9486833;
 
-double vctShortTermRetention = 0.5326;
-double vctLongTermRetention = 0.3909;
+double vctShortTermRetention = 0.9486833;
+double vctLongTermRetention = 0.9486833;
 
-double pictShortTermRetention = 0.5407;
-double pictLongTermRetention = 0.3780;
+double pictShortTermRetention = 0.9486833;
+double pictLongTermRetention = 0.9486833;
 
 /* Proportion returning for secondary Cd4 testing  */
-double hctProbSecondaryCd4Test = 0.4333;
-double vctProbSecondaryCd4Test = 0.3105;
-double pictProbSecondaryCd4Test = 0.3129;
+double hctProbSecondaryCd4Test = 0.75;
+double vctProbSecondaryCd4Test = 0.75;
+double pictProbSecondaryCd4Test = 0.75;
 
 /* Time between eligiblity and Art initiation */
-double artInitiationTime = 217.07;
+double artInitiationTime = 145.12;
 
 /* Art dropout times */
 double artDropoutTimeOneYear = 21.72 * 365.25; //0.045/100py

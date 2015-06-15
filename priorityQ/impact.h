@@ -16,12 +16,12 @@
 	/////////////////////
 	/////////////////////
 
-void UpdateDaly(person * const thePerson);
+void UpdateDaly(person * const thePerson, const double theTime);
 
 	/////////////////////
 	/////////////////////
 
-void WriteDaly(person * const thePerson);
+void WriteDaly(person * const thePerson, const size_t theIndex);
 
 	/////////////////////
 	/////////////////////

@@ -7,7 +7,6 @@
 	//
 
 #include <iostream>
-#include "macro.h"
 #include "discount.h"
 #include "toolbox.h"
 

@@ -51,15 +51,15 @@ void eventQ::RunEvents()
 	while(!Empty() && currentTime < stopTime) {
 		event * nextEvent = GetTop();
 		UpdateTime(nextEvent->GetTime());
-		PopTop();
-		if(nextEvent->CheckValid())
-			nextEvent->Execute();
-		else
-			nextEvent->Cancel();
+		if(!nextEvent->Cancelled())
+			if(nextEvent->CheckValid())
+				nextEvent->Execute();
 		delete nextEvent;
-		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tcurrentTime is = " << currentTime << " (year = " << currentTime / 365.25 << ")" <<  endl);
-		D(cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttheQ size is = " << theQ->Size() << endl);
+		D(cout << "\tcurrentTime is = " << currentTime << " (year = " << currentTime / 365.25 << ")" <<  endl);
+		D(cout << "\ttheQ size is = " << theQ->Size() << endl);
 	}
+	while(!Empty())
+		delete GetTop();
 	return;
 }
 
@@ -73,13 +73,8 @@ bool eventQ::Empty() const
 event * eventQ::GetTop()
 {
 	event * theEvent = iQ.top();
-	return theEvent;
-}
-
-/* Define PopTop() */
-void eventQ::PopTop()
-{
 	iQ.pop();
+	return theEvent;
 }
 
 /* Define Size() */

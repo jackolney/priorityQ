@@ -14,11 +14,8 @@
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 #include "toolbox.h"
-#include "eventQ.h"
 
 using namespace std;
-
-extern eventQ * theQ;
 
 /* Intervention Pointers */
 extern int const * p_Hbct;
@@ -56,6 +53,7 @@ event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Interventions scheduled for " << Time << " (year = " << Time / 365.25 << ")" << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Interventions::~Interventions()
@@ -74,7 +72,7 @@ void Interventions::Execute()
 	/* Hbct */
 	
 	if(*p_Hbct) {
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);
 		
@@ -93,7 +91,7 @@ void Interventions::Execute()
 		else
 			vctHivTestTime = vctHivTestTimeOriginal * (1/1.25);
 		D(cout << "VctHivTest Intervention. vctHivTestTime = " << vctHivTestTime << endl);
-		ScheduleVctHivTest(pPerson);
+		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
 		/////////////////////
@@ -101,7 +99,7 @@ void Interventions::Execute()
 	
 	if(*p_HbctPocCd4) {
 		D(cout << "HbctPocCd4 Intervention." << endl);
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),true);
 		
@@ -139,7 +137,7 @@ void Interventions::Execute()
 		double k = 0;
 		if(*p_PreOutreach == 1) { k = 1; } else { k = 0.2; }
 		
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14792.625 + (i * 365.25))
 				new PreArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
@@ -161,16 +159,16 @@ void Interventions::Execute()
 			vctProbSecondaryCd4Test = 1;
 			pictProbSecondaryCd4Test = 1;
 		} else {
-			cd4ResultProbAttend = 0.9;
-			hctShortTermRetention = 0.8096;
-			hctLongTermRetention = 0.6645;
-			vctShortTermRetention = 0.7663;
-			vctLongTermRetention = 0.69545;
-			pictShortTermRetention = 0.77035;
-			pictLongTermRetention = 0.6890;
-			hctProbSecondaryCd4Test = 0.71665;
-			vctProbSecondaryCd4Test = 0.65525;
-			pictProbSecondaryCd4Test = 0.65645;
+			cd4ResultProbAttend = 0.9743416;
+			hctShortTermRetention = 0.9743416;
+			hctLongTermRetention = 0.9743416;
+			vctShortTermRetention = 0.9743416;
+			vctLongTermRetention = 0.9743416;
+			pictShortTermRetention = 0.9743416;
+			pictLongTermRetention = 0.9743416;
+			hctProbSecondaryCd4Test = 0.875;
+			vctProbSecondaryCd4Test = 0.875;
+			pictProbSecondaryCd4Test = 0.875;
 		}
 	}
 	
@@ -185,7 +183,7 @@ void Interventions::Execute()
 	
 	if(*p_VctPocCd4) {
 		vctPocFlag = true;
-		ScheduleVctHivTest(pPerson);
+		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
 		/////////////////////
@@ -195,7 +193,7 @@ void Interventions::Execute()
 		double k = 0;
 		if(*p_ArtOutreach == 1) { k = 1; } else { k = 0.4; }
 		
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14792.625 + (i * 365.25))
 				new ArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
@@ -217,7 +215,7 @@ void Interventions::Execute()
 		immediateArtFlag = true;
 		UpdateTreatmentGuidelines(pPerson,4,1);
 		
-		for(size_t i=0;i<7;i++)
+		for(size_t i=0;i<5;i++)
 			if(GetTime() <= 14610 + (i * 1461))
 				new SeedHct(pPerson,14610 + (i * 1461),false);
 		
@@ -236,14 +234,14 @@ void Interventions::Execute()
 		if(*p_Adherence == 1)
 			pPerson->SetArtAdherenceState(1);
 		else
-			pPerson->SetArtAdherenceState(0.875);
+			pPerson->SetArtAdherenceState(0.975);
 	}
 	
 		/////////////////////
 	/* Calibration */
 	
 	if(*p_Calibration) {
-		for(size_t i=0;i<26;i++)
+		for(size_t i=0;i<20;i++)
 			if(GetTime() <= 14610 + (i * 365.25))
 				new SeedPerpetualHct(pPerson, 14610 + (i * 365.25));
 	}

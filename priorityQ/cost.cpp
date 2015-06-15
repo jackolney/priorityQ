@@ -10,11 +10,9 @@
 #include "cost.h"
 #include "person.h"
 #include "toolbox.h"
-#include "eventQ.h"
 
 using namespace std;
 
-extern eventQ * theQ;
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;
@@ -73,21 +71,13 @@ void ChargePocCd4Test(person * const thePerson)
 	/////////////////////
 	/////////////////////
 
-void ChargeArtCare(person * const thePerson)
+void ChargeArtCare(person * const thePerson, const double theTime, const double theArrayTime)
 {
 	if(thePerson->GetArtInitiationState()) {
-		double yr [27];
-		for(size_t i=0; i<27; i++)
-			yr[i] = 14610 + (i * 365.25);
-		
-		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<27)
-			i++;
-		
-		if(thePerson->GetArtDay() <= yr[i-1])
-			thePerson->SetAnnualArtCost((((theQ->GetTime() - yr[i-1]) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
+		if(thePerson->GetArtDay() <= theArrayTime)
+			thePerson->SetAnnualArtCost((((theTime - theArrayTime) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
 		else
-			thePerson->SetAnnualArtCost((((theQ->GetTime() - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
+			thePerson->SetAnnualArtCost((((theTime - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualArtCost);
 	} else
 		thePerson->SetAnnualArtCost((thePerson->GetArtTime() / 365.25) * annualArtCost);
 }
@@ -96,21 +86,13 @@ void ChargeArtCare(person * const thePerson)
 	/////////////////////
 	/////////////////////
 
-void ChargeAdherence(person * const thePerson)
+void ChargeAdherence(person * const thePerson, const double theTime, const double theArrayTime)
 {
 	if(adherenceFlag && thePerson->GetArtInitiationState()) {
-		double yr [27];
-		for(size_t i=0; i<27; i++)
-			yr[i] = 14610 + (i * 365.25);
-		
-		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<27)
-			i++;
-		
-		if(thePerson->GetArtDay() <= yr[i-1])
-			thePerson->SetAnnualAdherenceCost((((theQ->GetTime() - yr[i-1]) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
+		if(thePerson->GetArtDay() <= theArrayTime)
+			thePerson->SetAnnualAdherenceCost((((theTime - theArrayTime) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
 		else
-			thePerson->SetAnnualAdherenceCost((((theQ->GetTime() - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
+			thePerson->SetAnnualAdherenceCost((((theTime - thePerson->GetArtDay()) + thePerson->GetArtTime()) / 365.25) * annualAdherenceCost);
 	} else
 		thePerson->SetAnnualAdherenceCost((thePerson->GetArtTime() / 365.25) * annualAdherenceCost);
 }
@@ -134,36 +116,30 @@ void ChargeArtOutreach(person * const thePerson)
 	/////////////////////
 	/////////////////////
 
-void WriteCost(person * const thePerson)
+void WriteCost(person * const thePerson, const double theTime)
 {
 	if(thePerson->Alive()) {
-		
-		/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
-		double yr [26];
-		for(size_t i=0; i<26; i++)
-			yr[i] = 14975.25 + (i * 365.25);
-		
-		unsigned int i = 0;
-		while(theQ->GetTime() > yr[i] && i<26)
-			i++;
-		
-		if(theQ->GetTime() > 14610) {
-			ChargeArtCare(thePerson);
-			ChargeAdherence(thePerson);
+		if(theTime > 14610) {
+			/* Create array with dates from 2011 to 2030 (to allow us to capture DALYs at year end between 2010 and 2030). */
+			double yr [100];
+			for(size_t i = 0; i<100; i++)
+				yr[i] = 14975.25 + (i * 365.25);
+			
+			unsigned int i = 0;
+			while(theTime > yr[i] && i < 100)
+				i++;
+			
+			ChargeArtCare(thePerson,theTime,yr[i] - 365.25);
+			ChargeAdherence(thePerson,theTime,yr[i] - 365.25);
 			theCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
-			
 			thePreArtCOST[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
-			
 			theArtCOST[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
 			
 			if(thePerson->GetSeroStatus()) {
 				thePreArtCOST_Hiv[i] += thePerson->GetHctVisitCost() + thePerson->GetRapidHivTestCost() + thePerson->GetPreArtClinicVisitCost() + thePerson->GetLabCd4TestCost() + thePerson->GetPocCd4TestCost() + thePerson->GetPreArtOutreachCost();
-				
 				theArtCOST_Hiv[i] += thePerson->GetAnnualArtCost() + thePerson->GetAnnualAdherenceCost() + thePerson->GetArtOutreachCost() + thePerson->GetPreArtOutreachCost();
 			}
-			
 		}
-		
 		thePerson->ResetCost();
 	}
 }

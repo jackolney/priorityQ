@@ -7,24 +7,23 @@
 	//
 
 #include <iostream>
-#include "macro.h"
 #include "rng.h"
 #include "population.h"
 #include "cohort.h"
 #include "output.h"
 #include "update.h"
-#include "eventQ.h"
 #include "events.h"
 #include "toolbox.h"
 #include "outputUpdate.h"
 #include "discount.h"
 #include "calibration.h"
+#include "eventQ.h"
 #include "wp19.h"
 
 using namespace std;
 
-extern eventQ * theQ;
 extern Rng * theRng;
+extern eventQ * theQ;
 
 population::population(const double theSize) :
 sizeAdjustment(theSize),
@@ -99,13 +98,14 @@ void population::PushInVector(person * thePerson)
 		// 0to4,5to9,10to14,15to19,20to24,25to29,30to34,35to39,40to44,45to49,50to54,55to59,60to64,64to69,70to74,75to79,>80
 	unsigned int ageCatMax[17] = {4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,200};
 	unsigned int i = 0;
-	const double theAge = thePerson->GetAge() / 365.25;
+	const double currentTime = theQ->GetTime();
+	const double theAge = thePerson->GetAge(currentTime) / 365.25;
 	
 	while(theAge > ageCatMax[i] && i < 17)
 		i++;
 	
 	if(i < 16)
-		ScheduleVectorUpdate(thePerson,(ageCatMax[i] - theAge) * 365.25);
+		ScheduleVectorUpdate(thePerson,currentTime + ((ageCatMax[i] - theAge) * 365.25));
 	
 	if(thePerson->GetGender()) // If Male then i += 17;
 		i += 17;
@@ -196,28 +196,27 @@ double population::GetWeightedTotal() const
 
 void population::CalculateBeta()
 {
-	D(cout << "Beta calculation..." << endl);
 	beta = incidentCases / GetWeightedTotal();
 }
 
 	/////////////////////
 	/////////////////////
 
-double population::CalculateLambda(const double * theIRR)
+double population::CalculateLambda(const double * theIRR, const double theTime)
 {
 	/* IncidenceCases (M+F Total - Spectrum2014) & IRR (0 to 16 are Female, 17 to 33 are Male */
 	const double SpectrumIncidence[32] = {0,0,0,0,0,0,0,0,0,0,140,355,1134,1791,3418,6444,11887,21704,38623,66784,108993,165074,226131,269547,275327,243681,195612,152571,121318,101327,99767,93594};
 	
 	/* Find total number of infected (I) */
 	double I = 0;
-	if(theQ->GetTime() < 32 * 365.25) {
+	if(theTime < 32 * 365.25) {
 		
 		double yr [32];
-		for(size_t i = 0; i<32; i++)
+		for(size_t i=0; i<32; i++)
 			yr[i] = i * 365.25;
 		
 		unsigned int j = 0;
-		while(theQ->GetTime() > yr[j] && j < 32)
+		while(theTime > yr[j] && j < 32)
 			j++;
 		
 		I = SpectrumIncidence[j] / sizeAdjustment;
@@ -226,7 +225,7 @@ double population::CalculateLambda(const double * theIRR)
 	
 	/* Calculate sum of S(a,s) and IRR(a,s) */
 	double S = 0;
-	for(size_t j=0;j<34;j++)
+	for(size_t j=0; j<34; j++)
 		S += people.at(j).size() * theIRR[j];
 	
 	/* Calculate and return lambda */
@@ -239,30 +238,30 @@ double population::CalculateLambda(const double * theIRR)
 	/////////////////////
 	/////////////////////
 
-void population::CalculateIncidence()
+void population::CalculateIncidence(const size_t theIndex, const double theTime)
 {
 	/* Define IRR's */
 	const double IRR[34] = {0.000000,0.000000,0.000000,0.431475,0.979206,1.000000,0.848891,0.684447,0.550791,0.440263,0.336719,0.239474,0.167890,0.146594,0.171352,0.000000,0.000000,0.000000,0.000000,0.000000,0.244859,0.790423,1.000000,0.989385,0.854318,0.670484,0.493512,0.358977,0.282399,0.259244,0.264922,0.254788,0.164143,0.000000};
 	
 	/* Create incidence array (contains age and sex) */
 	double incidence[34];
-	for(size_t j=0;j<34;j++)
+	for(size_t j=0; j<34; j++)
 		incidence[j] = 0;
 	
 	/* Get lambda */
-	double lambda = CalculateLambda(IRR);
+	double lambda = CalculateLambda(IRR,theTime);
 	
 	/* Find Incidence(a,s) */
-	for(size_t j=0;j<34;j++)
+	for(size_t j=0; j<34; j++)
 		incidence[j] = Round(lambda * people.at(j).size() * IRR[j]);
 	
 	/* Randomly pick cases */
-	for(size_t j=0;j<34;j++)
+	for(size_t j=0; j<34; j++)
 		if(incidence[j] != 0 && incidence[j] < people.at(j).size())
-			RandomiseInfection(incidence[j],j,people.at(j));
+			RandomiseInfection(incidence[j],j,people.at(j),theTime);
 	
 	/* Record incidence and reset */
-	WriteIncidence(incidentCases);
+	WriteIncidence(incidentCases,theIndex);
 	incidentCases = 0;
 	cout << "Year " << 1970 + (theQ->GetTime() / 365.25) << endl;
 }
@@ -270,19 +269,19 @@ void population::CalculateIncidence()
 	/////////////////////
 	/////////////////////
 
-void population::RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector)
+void population::RandomiseInfection(const size_t theSize, const size_t theRow, vector<person *> theVector, const double theTime)
 {
 	/* Shuffle theVector (by value ONLY, not by reference) */
 	random_shuffle(theVector.begin(),theVector.end(),Random);
 	
 	for(size_t i=0;i<theSize;i++)
-		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime() + (theRng->doub() * 365.25));
+		new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theTime + (theRng->doub() * 365.25));
 }
 
 	/////////////////////
 	/////////////////////
 
-void population::PassInfection(const size_t theRow)
+void population::PassInfection(const size_t theRow, const double theTime)
 {
 	vector<person *> theVector = people.at(theRow);
 	random_shuffle(theVector.begin(),theVector.end(),Random);
@@ -291,7 +290,7 @@ void population::PassInfection(const size_t theRow)
 	while(people.at(theRow).at(theVector.at(i)->GetPersonIndex())->GetHivDate() != 0 && i < people.at(theRow).size())
 		i++;
 	
-	new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theQ->GetTime());
+	new Infection(people.at(theRow).at(theVector.at(i)->GetPersonIndex()),theTime);
 }
 
 	/////////////////////

@@ -27,13 +27,19 @@ double * ART12;
 double * ART13;
 double * ART14;
 double * Pre2010;
+unsigned int * In2014;
 unsigned int * HivArray;
+unsigned int * DiagArray;
 unsigned int * ArtArray;
 unsigned int * R3_Counter;
 unsigned int * R8_Counter;
 unsigned int * ART6_Counter;
 unsigned int * ART10_Counter;
 unsigned int * ART12_Counter;
+
+unsigned int * Pie_1;
+unsigned int * Pie_2;
+unsigned int * Pie_3;
 
 void SeedCalibration(person * const thePerson, const double theTimeZero, const double theTimeOne, const double theTimeTwo, const double theTimeThree)
 {
@@ -56,14 +62,16 @@ void SeedCalibration(person * const thePerson, const double theTimeZero, const d
 TimeSplit::TimeSplit(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
-{}
+{
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+}
 
 TimeSplit::~TimeSplit()
 {}
 
 bool TimeSplit::CheckValid()
 {
-	return pPerson->Alive();
+	return true;
 }
 
 void TimeSplit::Execute()
@@ -102,7 +110,9 @@ void CreateCalibrationArray()
 	ART13 = new double[9];
 	ART14 = new double[9];
 	Pre2010 = new double[3];
+	In2014 = new unsigned int[2];
 	HivArray = new unsigned int[3];
+	DiagArray = new unsigned int[3];
 	ArtArray = new unsigned int[3];
 	R3_Counter = new unsigned int[9];
 	R8_Counter = new unsigned int[9];
@@ -110,7 +120,13 @@ void CreateCalibrationArray()
 	ART10_Counter = new unsigned int[3];
 	ART12_Counter = new unsigned int[3];
 	
+	Pie_1 = new unsigned int[3];
+	Pie_2 = new unsigned int[3];
+	Pie_3 = new unsigned int[6];
+	
 	for(size_t i=0;i<48;i++) {
+		if(i<2)
+			In2014[i] = 0;
 		if(i<3) {
 			ART4[i] = 0;
 			ART6[i] = 0;
@@ -118,11 +134,16 @@ void CreateCalibrationArray()
 			ART12[i] = 0;
 			Pre2010[i] = 0;
 			HivArray[i] = 0;
+			DiagArray[i] = 0;
 			ArtArray[i] = 0;
 			ART6_Counter[i] = 0;
 			ART10_Counter[i] = 0;
 			ART12_Counter[i] = 0;
+			Pie_1[i] = 0;
+			Pie_2[i] = 0;
 		}
+		if(i<6)
+			Pie_3[i] = 0;
 		if(i<9) {
 			C1[i] = 0;
 			R3[i] = 0;
@@ -235,13 +256,15 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 		ART14[(theTimeIndex * 3) + (thePerson->GetCalAtArtCareRoute()-1)]++;
 	
 		// HIV-positive individuals initiating ART per year;
-	if(thePerson->GetSeroStatus())
+	if(thePerson->GetSeroStatus() && thePerson->Alive())
 		HivArray[theTimeIndex]++;
-	if(thePerson->GetArtInitiationState())
+	if(thePerson->GetDiagnosedState())
+		DiagArray[theTimeIndex]++;
+	if(thePerson->GetEverArt())
 		ArtArray[theTimeIndex]++;
 	
 		// Pre2010 - Dx levels pre-2010. (don't run this code after 2010)
-	if(theTimeIndex == 0) {
+	if(theTimeIndex == 0 && thePerson->Alive()) {
 		if(thePerson->GetDiagnosedState()) {
 			Pre2010[0]++;
 			if(thePerson->GetDiagnosisRoute() == 2)
@@ -250,6 +273,50 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 				Pre2010[2]++;
 		}
 	}
+	if(theTimeIndex == 2 && thePerson->Alive()) {
+		if(thePerson->GetInCareState()) {
+			In2014[0]++;
+			if(thePerson->GetArtInitiationState())
+				In2014[1]++;
+		}
+	}
+	
+	/* Pie Charts */
+		// Previously thePerson->GetCalEligibleAtEnrollment();
+	
+	if(theTimeIndex == 0) {
+		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
+			Pie_1[0]++;
+		else if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment())
+			Pie_1[1]++;
+		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
+			Pie_1[2]++;
+	}
+	
+	if(theTimeIndex == 1) {
+		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
+			Pie_2[0]++;
+		else if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment())
+			Pie_2[1]++;
+		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
+			Pie_2[2]++;
+	}
+	
+	if(theTimeIndex == 2) { // not discrete.
+		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment() && ((thePerson->GetCalArtDay() - thePerson->GetCalDiagDay()) <= 90))
+			Pie_3[0]++;
+		else if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment() && ((thePerson->GetCalArtDay() - thePerson->GetCalDiagDay()) > 90))
+			Pie_3[1]++;
+		else if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && !thePerson->GetCalAtArtEverReturnCare())
+			Pie_3[2]++;
+		else if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && !thePerson->GetCalAtArtEligibleAtReturnCare())
+			Pie_3[3]++;
+		else if(thePerson->GetCalEverArt() && !thePerson->GetArtAtEnrollment() && thePerson->GetCalAtArtEverReturnCare() && thePerson->GetCalAtArtEligibleAtReturnCare())
+			Pie_3[4]++;
+		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
+			Pie_3[5]++;
+	}
+	
 }
 
 	/////////////////////

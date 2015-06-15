@@ -7,12 +7,10 @@
 	//
 
 #include <iostream>
-#include "macro.h"
 #include "rng.h"
 #include "person.h"
 #include "event.h"
 #include "events.h"
-#include "eventQ.h"
 #include "cohort.h"
 #include "update.h"
 #include "cascadeUpdate.h"
@@ -21,11 +19,10 @@
 #include "interventions.h"
 #include "calibration.h"
 #include "outputUpdate.h"
-#include "wp19.h"
 #include "wp19Update.h"
+#include "wp19.h"
 
 extern Rng * theRng;
-extern eventQ * theQ;
 
 using namespace std;
 
@@ -57,6 +54,7 @@ diagnosisCount(0),
 diagnosisRoute(0),
 lastDiagnosisRoute(0),
 inCare(false),
+everCare(false),
 everCd4Test(false),
 cd4TestCount(0),
 everCd4TestResult(false),
@@ -71,13 +69,16 @@ artAtEnrollment(false),
 artCount(0),
 everLostArt(false),
 everReturnArt(false),
-adherence(theRng->Sample(0.75)),
+adherence(theRng->Sample(0.95)),
 cd4AtArt(0),
 hivDeath(false),
 artDeath(false),
 cd4Tx(0),
 whoTx(0),
 iDALY(0),
+iDALY_OffArt(0),
+iDALY_OnArt(0),
+iDALY_LYL(0),
 iHctVisitCost(0),
 iRapidHivTestCost(0),
 iPreArtClinicVisitCost(0),
@@ -106,10 +107,10 @@ calAtArtCareRoute(0),
 calAtArtPreArtVisitCount(0),
 calAtArtEverReturnPreArtCare(false),
 calAtArtEligibleAtReturnPreArtCare(false),
-calEverReturnArt(false)
+calEverReturnArt(false),
+calEligibleAtEnrollment(false)
 {
 	gender = AssignGender();
-	D(cout << "Gender is = " << gender << endl);
 	AssignInitialAge(Time);
 	natDeathDate = AssignNatDeathDate(Time);
 	iPop->AddPerson(this);
@@ -117,13 +118,7 @@ calEverReturnArt(false)
 	SeedGuidelinesOutput(this);
 	SeedCalibration(this,13514.25,14609,14974,16225);
 	SeedInterventions(this);
-	if(Time > 12418.5) {
-		new SeedInitialHivTests(this,Time);
-		new SeedTreatmentGuidelinesUpdate(this,Time);
-	} else {
-		new SeedInitialHivTests(this,12418.5);
-		new SeedTreatmentGuidelinesUpdate(this,14975.25);
-	}
+	SeedTreatmentUpdate(this,Time);
 }
 
 person::~person()
@@ -164,7 +159,6 @@ void person::AssignInitialAge(const double Time)
 	}
 	
 	currentAge = initialAge;
-	D(cout << "Initial age = " << initialAge << ". (year = " << initialAge / 365.25 << ")" << endl);
 }
 
 	/////////////////////
@@ -244,53 +238,50 @@ double person::AssignNatDeathDate(const double Time)
 	
 	/* Create Natural Death Date Event & Add to eventQ */
 	new Death(this,Time + deathAge - initialAge,false);
-	D(cout << "NatDeathDate = " << Time + deathAge - initialAge << " (year = " << (Time + deathAge - initialAge) / 365.25 << ")" << endl);
-	
 	return Time + deathAge - initialAge;
 }
 
 	/////////////////////
 	/////////////////////
 
-void person::Kill(const double Time, const bool theCause)
+void person::Kill(const double theTime, const bool theCause)
 {
-	deathDay = Time;
+	deathDay = theTime;
 	hivDeath = theCause;
 	artDeath = art;
 	iPop->RemovePerson(this);
 	if(GetHivDate() && !GetSeroStatus())
-		iPop->PassInfection(GetRowIndex());
-	D(cout << "\tDeathDate = " << deathDay << endl);
+		iPop->PassInfection(GetRowIndex(),theTime);
 	return;
 }
 
 	/////////////////////
 	/////////////////////
 
-double person::GetAge()
+double person::GetAge(const double theTime)
 {
-	SetAge(theQ->GetTime());
+	SetAge(theTime);
 	return currentAge;
 }
 
 	/////////////////////
 	/////////////////////
 
-void person::SetAge(const double Time)
+void person::SetAge(const double theTime)
 {
-	currentAge = initialAge + (Time - birthDay);
+	currentAge = initialAge + (theTime - birthDay);
 }
 
 	/////////////////////
 	/////////////////////
 
-void person::Hiv()
+void person::Hiv(const double theTime)
 {
-	D(cout << "HIV+" << endl);
 	SetSeroStatus(true);
-	SetSeroconversionDay(theQ->GetTime());
-	SetHivIndicators(); //Function to determine initial CD4 count / WHO stage / HIV-related mortality etc.
-	ScheduleHivIndicatorUpdate();
+	SetSeroconversionDay(theTime);
+	SetHivIndicators();
+	AssignHivDeathDate(theTime);
+	ScheduleHivIndicatorUpdate(theTime);
 	WriteGuidelinesNewInfection(this);
 	UpdatePopulation();
 	iPop->AddCase();
@@ -304,7 +295,6 @@ void person::SetHivIndicators()
 {
 	SetInitialCd4Count();
 	SetInitialWhoStage();
-	AssignHivDeathDate();
 }
 
 	/////////////////////
@@ -323,7 +313,6 @@ void person::SetInitialCd4Count()
 	
 	currentCd4 = i;
 	initialCd4 = i;
-	D(cout << "\tInitialCd4 = " << i << endl);
 }
 
 	/////////////////////
@@ -333,53 +322,52 @@ void person::SetInitialWhoStage()
 {
 	currentWho = 1;
 	initialWho = 1;
-	D(cout << "\tInitialWho = " << initialWho << endl);
 }
 
 	/////////////////////
 	/////////////////////
 
-void person::AssignHivDeathDate()
+void person::AssignHivDeathDate(const double theTime)
 {
-	new Death(this,GenerateHivDeathDate(),true); //true flag signifies that it is an HIV-related death.
+	new Death(this,GenerateHivDeathDate(theTime),true); // true flag signifies that it is an HIV-related death.
 }
 
 	/////////////////////
 	/////////////////////
 
-double person::GenerateHivDeathDate() //Perhaps a way of cancelling the previous date in the line??
+double person::GenerateHivDeathDate(const double theTime)
 {
 		//HivMortalityTime [ART] [WHO-1] [CD4-1];
 	const double HivMortalityTime [2] [4] [4] =
 	{
 		{
-		{10.89670749,18.89537630,145.12237880,4100.20238599},
-		{5.55555556,16.45278052,30.19225219,80.73449010},
-		{3.33333333,8.81927541,11.24427329,23.00614908},
-		{0.80895939,2.76601300,3.92628016,7.96693404}
+		{17.18386669,26.93036884,163.91486393,833.52754525},
+		{8.23354279,23.80904763,35.03608717,46.80780155},
+		{3.81526196,7.21250938,15.90774020,22.92211067},
+		{1.78259220,2.25749941,7.62232304,9.72800877}
 		},
 	
 		{
-		{12.18473104,21.12886652,162.27627978,4584.85862111},
-		{6.21223891,18.39754859,33.76106706,90.27754928},
-		{3.72734334,9.86174025,12.57338016,25.72554499},
-		{0.90458082,3.09296405,4.39037827,8.90864957}
+		{18.08856633,28.34820428,172.54468642,877.41126992},
+		{8.66702400,25.06255112,36.88067408,49.27214803},
+		{4.01612864,7.59223501,16.74525408,24.12891853},
+		{1.87644247,2.37635269,8.02362463,10.24017091}
 		}
 	};
 	
 	if(GetArtAdherenceState())
-		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
+		return theTime + theRng->SampleExpDist(HivMortalityTime[art][currentWho-1][currentCd4-1] * 365.25);
 	else
-		return theQ->GetTime() + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
+		return theTime + theRng->SampleExpDist(HivMortalityTime[0][currentWho-1][currentCd4-1] * 365.25);
 }
 
 	/////////////////////
 	/////////////////////
 
-void person::ScheduleHivIndicatorUpdate()
+void person::ScheduleHivIndicatorUpdate(const double theTime)
 {
-	ScheduleCd4Update(this);
-	ScheduleWhoUpdate(this);
+	ScheduleCd4Update(this,theTime);
+	ScheduleWhoUpdate(this,theTime);
 }
 
 	/////////////////////
@@ -410,15 +398,18 @@ void person::SetInCareState(const bool theState, const double theTime)
 			if(GetEligible())
 				eligibleAtReturnPreArtCare = true;
 		}
-	} else {
+	} else if(!GetEverArt()) {
 		everLostPreArtCare = true;
 		WriteGuidelinesPreArtDropout();
 	}
 	if(theState && !GetInCareState()) {
+		everCare = theState;
 		calEverCare = theState;
 		calCareDay = theTime;
 		calCareRoute = lastDiagnosisRoute;
 		calCd4EntryCare = currentCd4;
+		if(GetEligible())
+			calEligibleAtEnrollment = true;
 	}
 	inCare = theState;
 }
@@ -478,6 +469,8 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		else
 			artTime += theTime - yr[i-1];
 	}
+	if(!theState)
+		SetInCareState(theState,theTime);
 }
 
 	/////////////////////
@@ -493,9 +486,6 @@ void person::SetArtAdherenceState(const double theProb)
 
 void person::ResetCalibration()
 {
-	calEverDiag = false;
-	calDiagDay = 0;
-	calDiagRoute = 0;
 	calEverCare = false;
 	calCareDay = 0;
 	calCareRoute = 0;
@@ -509,6 +499,7 @@ void person::ResetCalibration()
 	calAtArtEverReturnPreArtCare = false;
 	calAtArtEligibleAtReturnPreArtCare = false;
 	calEverReturnArt = false;
+	calEligibleAtEnrollment = false;
 }
 
 	/////////////////////

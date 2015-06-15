@@ -51,7 +51,7 @@ private:
 
 class Incidence : public event {
 public:
-	Incidence(population * const thePopulation, const double Time); //constructor
+	Incidence(population * const thePopulation, const double Time, const size_t theIndex); //constructor
 	~Incidence(); //destructor
 	
 	/* Methods */
@@ -60,6 +60,7 @@ public:
 	
 private:
 	population * const pPopulation;
+	const size_t index;
 };
 
 	/////////////////////

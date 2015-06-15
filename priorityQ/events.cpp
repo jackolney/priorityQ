@@ -7,7 +7,6 @@
 	//
 
 #include <iostream>
-#include "macro.h"
 #include "events.h"
 #include "event.h"
 #include "person.h"
@@ -39,8 +38,7 @@ bool CohortStart::CheckValid()
 
 void CohortStart::Execute()
 {
-	D(cout << "CohortStart executed." << endl);
-	pCohort->GenerateCohort();
+	pCohort->GenerateCohort(GetTime());
 }
 
 	/////////////////////
@@ -50,8 +48,8 @@ VectorUpdate::VectorUpdate(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "VectorUpdate on day = " << Time << endl);
 	pPerson->SetVectorUpdateDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 VectorUpdate::~VectorUpdate()
@@ -73,9 +71,10 @@ void VectorUpdate::Execute()
 	/////////////////////
 	/////////////////////
 
-Incidence::Incidence(population * const thePopulation, const double Time) :
+Incidence::Incidence(population * const thePopulation, const double Time, const size_t theIndex) :
 event(Time),
-pPopulation(thePopulation)
+pPopulation(thePopulation),
+index(theIndex)
 {}
 
 Incidence::~Incidence()
@@ -88,7 +87,7 @@ bool Incidence::CheckValid()
 
 void Incidence::Execute()
 {
-	pPopulation->CalculateIncidence();
+	pPopulation->CalculateIncidence(index,GetTime());
 }
 
 	/////////////////////
@@ -97,9 +96,7 @@ void Incidence::Execute()
 BetaCalculation::BetaCalculation(population * const thePopulation, const double Time) :
 event(Time),
 pPopulation(thePopulation)
-{
-	D(cout << "BetaCalculation scheduled for = " << Time << endl);
-}
+{}
 
 BetaCalculation::~BetaCalculation()
 {}
@@ -122,6 +119,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetHivDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Infection::~Infection()
@@ -134,7 +132,7 @@ bool Infection::CheckValid()
 
 void Infection::Execute()
 {
-	pPerson->Hiv();
+	pPerson->Hiv(GetTime());
 }
 
 	/////////////////////
@@ -155,7 +153,6 @@ bool PersonStart::CheckValid()
 
 void PersonStart::Execute()
 {
-	D(cout << "PersonStart executed." << endl);
 	new person(pPop,GetTime());
 }
 
@@ -176,30 +173,32 @@ Death::~Death()
 
 bool Death::CheckValid()
 {
-	if(hivRelated)
+	if(hivRelated) {
 		if(pPerson->GetHivDeathDate() == GetTime())
 			return pPerson->Alive();
 		else
 			return false;
-		else
-			return pPerson->Alive();
+	} else if(pPerson->Alive()) {
+		return true;
+	} else {
+		delete pPerson;
+		return false;
+	}
 }
 
 void Death::Execute()
 {
-	UpdateDaly(pPerson);
-	WriteCost(pPerson);
+	UpdateDaly(pPerson,GetTime());
+	WriteCost(pPerson,GetTime());
 	pPerson->Kill(GetTime(),hivRelated);
 	WriteCare(pPerson,GetTime());
-	WriteDeath(pPerson);
-	WriteGuidelinesDeath(pPerson);
+	WriteDeath(pPerson,GetTime());
 	if(hivRelated) {
-		D(cout << "Death executed (HIV-related)." << endl);
-		WriteAidsDeath(pPerson);
+		WriteGuidelinesDeath(pPerson);
+		WriteAidsDeath(pPerson,GetTime());
 		WriteClinic(pPerson,GetTime());
-	}
-	else
-		D(cout << "Death executed (Natural)." << endl);
+	} else
+		delete pPerson;
 }
 
 	/////////////////////
@@ -210,6 +209,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetCd4DeclineDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Decline::~Cd4Decline()
@@ -225,14 +225,13 @@ bool Cd4Decline::CheckValid()
 
 void Cd4Decline::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "Cd4Decline executed." << endl);
-	D(cout << "\tCd4Decline from " << pPerson->GetCurrentCd4() << " to ");
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()-1);
-	D(cout << pPerson->GetCurrentCd4() << endl);
-	ScheduleCd4Update(pPerson);
-	pPerson->AssignHivDeathDate();
+	ScheduleCd4Update(pPerson,GetTime());
+	pPerson->AssignHivDeathDate(GetTime());
 	pPerson->UpdateInfectiousnessArray();
+		// if(pPerson->GetCurrentCd4() == 1)
+		// 	SchedulePictHivTest(pPerson,GetTime());
 }
 
 	/////////////////////
@@ -243,6 +242,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetCd4RecoverDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Recover::~Cd4Recover()
@@ -258,13 +258,10 @@ bool Cd4Recover::CheckValid()
 
 void Cd4Recover::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "Cd4Recover executed." << endl);
-	D(cout << "\tCd4Recover from " << pPerson->GetCurrentCd4() << " to ");
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetCurrentCd4Count(pPerson->GetCurrentCd4()+1);
-	D(cout << pPerson->GetCurrentCd4() << endl);
-	ScheduleCd4Update(pPerson);
-	pPerson->AssignHivDeathDate();
+	ScheduleCd4Update(pPerson,GetTime());
+	pPerson->AssignHivDeathDate(GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 
@@ -276,6 +273,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetWhoDeclineDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 WhoDecline::~WhoDecline()
@@ -291,15 +289,12 @@ bool WhoDecline::CheckValid()
 
 void WhoDecline::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "WhoDecline executed." << endl);
-	D(cout << "\tWhoDecline from " << pPerson->GetCurrentWho() << " to ");
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()+1);
-	D(cout << pPerson->GetCurrentWho() << endl);
-	ScheduleWhoUpdate(pPerson);
-	pPerson->AssignHivDeathDate();
+	ScheduleWhoUpdate(pPerson,GetTime());
+	pPerson->AssignHivDeathDate(GetTime());
 	if(pPerson->GetCurrentWho() > 2)
-		SchedulePictHivTest(pPerson);
+		SchedulePictHivTest(pPerson,GetTime());
 }
 
 	/////////////////////
@@ -310,6 +305,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetWhoRecoverDate(Time);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 WhoRecover::~WhoRecover()
@@ -317,7 +313,7 @@ WhoRecover::~WhoRecover()
 
 bool WhoRecover::CheckValid()
 {
-	if(pPerson->GetArtInitiationState() && pPerson->GetArtAdherenceState() && pPerson->GetWhoRecoverDate() == GetTime())
+	if(pPerson->GetWhoRecoverDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -325,13 +321,12 @@ bool WhoRecover::CheckValid()
 
 void WhoRecover::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "WhoRecover executed." << endl);
-	D(cout << "\tWhoRecover from " << pPerson->GetCurrentWho() << " to ");
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetCurrentWhoStage(pPerson->GetCurrentWho()-1);
-	D(cout << pPerson->GetCurrentWho() << endl);
-	ScheduleWhoUpdate(pPerson);
-	pPerson->AssignHivDeathDate();
+	ScheduleWhoUpdate(pPerson,GetTime());
+	pPerson->AssignHivDeathDate(GetTime());
+	if(pPerson->GetCurrentWho() > 2)
+		SchedulePictHivTest(pPerson,GetTime());
 }
 
 	/////////////////////

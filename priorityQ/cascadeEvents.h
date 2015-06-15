@@ -114,6 +114,22 @@ private:
 	/////////////////////
 	/////////////////////
 
+class PreArtDropout : public event {
+public:
+	PreArtDropout(person * const thePerson, const double Time); //constructor
+	~PreArtDropout(); //destructor
+	
+	/* Methods */
+	bool CheckValid();
+	void Execute();
+	
+private:
+	person * const pPerson;
+};
+
+	/////////////////////
+	/////////////////////
+
 class ArtInitiation : public event {
 public:
 	ArtInitiation(person * const thePerson, const double Time); //constructor
