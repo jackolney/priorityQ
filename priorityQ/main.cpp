@@ -103,9 +103,11 @@ int main(int argc, const char * argv[])
 		/* THE MODEL */
 		theRng = new Rng(mach_absolute_time());
 
-		theQ = new eventQ(0,(66 * 365.25) + 1);
+		theQ = new eventQ(0,(60 * 365.25) + 1);
 		
-		new population(1000);
+		const int SizeAdjustment = 100;
+		
+		new population(SizeAdjustment);
 		
 		theQ->RunEvents();
 		
@@ -127,9 +129,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 		
-//		cout << "theGuidelines_PopDist_HivNegative:" << endl;
-//		for(size_t i=0; i<36; i++)
-//			cout << theGuidelines_PopDist_HivNegative[i] << endl;
+		cout << "thePOP:" << endl;
+		for(size_t i=0; i<66; i++)
+			cout << thePOP[i] << endl;
 		
 //		cout << "theGuidelines_Death_200_OffArt:" << endl;
 //		for(size_t i=0; i<36; i++)

@@ -41,6 +41,7 @@ public:
 	/* Accessor Methods */
 	double GetReferenceYear() const { return referenceYear; }
 	double GetBeta() const { return beta; }
+	int GetPopulationSize() const { return populationSize; }
 	
 	/* Incidence Calculation */
 	double GetWeightedTotal() const;
