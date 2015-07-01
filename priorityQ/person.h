@@ -1,10 +1,10 @@
-	//
-	//  person.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 09/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  person.h
+//  priorityQ
+//
+//  Created by Jack Olney on 09/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__person__
 #define __priorityQ__person__
@@ -23,14 +23,14 @@ public:
 	double GenerateNatDeathAge();
 	double AssignNatDeathDate(const double Time);
 	
-		/////////////
+	/////////////
 	/* Methods */
-		/////////////
-	void Kill(const double Time, const bool theCause);
-	void SetAge(const double Time);
+	/////////////
+	void Kill(const double theTime, const bool theCause);
+	void SetAge(const double theTime);
 	
 	/* Hiv Acquisition Functions */
-	void Hiv();
+	void Hiv(const double theTime);
 	void SetSeroStatus(const bool theState) { seroStatus = theState; }
 	void SetSeroconversionDay(const double Time) { seroconversionDay = Time; }
 	void SetHivIndicators();
@@ -38,11 +38,11 @@ public:
 	void SetInitialWhoStage();
 	
 	/* Hiv Progression Functions */
-	void ScheduleHivIndicatorUpdate();
+	void ScheduleHivIndicatorUpdate(const double theTime);
 	void SetCurrentCd4Count(unsigned int theCount) { currentCd4 = theCount; }
 	void SetCurrentWhoStage(unsigned int theStage) { currentWho = theStage; }
-	double GenerateHivDeathDate(); //function returns the HivDeathDate Value;
-	void AssignHivDeathDate(); //function creates the Death event.
+	double GenerateHivDeathDate(const double theTime); //function returns the HivDeathDate Value;
+	void AssignHivDeathDate(const double theTime); //function creates the Death event.
 	
 	/* Hiv Care Functions */
 	void SetDiagnosedState(const bool theState, unsigned int theRoute, const double theTime);
@@ -71,7 +71,10 @@ public:
 	
 	/* Daly Functions */
 	void SetDalys(const double theValue) { iDALY += theValue; }
-	void ResetDalys() { iDALY = 0; }
+	void SetDalys_OffArt(const double theValue) { iDALY_OffArt += theValue; }
+	void SetDalys_OnArt(const double theValue) { iDALY_OnArt += theValue; }
+	void SetDalys_LYL(const double theValue) { iDALY_LYL += theValue; }
+	void ResetDalys() { iDALY = 0; iDALY_OffArt = 0; iDALY_OnArt = 0; iDALY_LYL = 0; }
 	
 	/* Cost Functions */
 	void SetHctVisitCost(const double theCost) { iHctVisitCost += theCost; }
@@ -95,13 +98,13 @@ public:
 	void UpdatePopulation() { iPop->UpdateVector(this); }
 	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
 	
-		//////////////////////
+	//////////////////////
 	/* Accessor methods */
-		//////////////////////
+	//////////////////////
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
-	double GetAge();
+	double GetAge(const double theTime);
 	const double GetBirthDay() const { return birthDay; }
 	unsigned int GetCurrentCd4() const { return currentCd4; }
 	unsigned int GetCurrentWho() const { return currentWho; }
@@ -116,6 +119,7 @@ public:
 	bool GetEligible() const { if(currentCd4 <= cd4Tx || currentWho >= whoTx) return true; else return false; }
 	bool GetWhoEligible() const { if(currentWho >= whoTx) return true; else return false; }
 	bool GetInCareState() const { return inCare; }
+	bool GetEverCareState() const { return everCare; }
 	bool GetArtInitiationState() const { return art; }
 	bool GetArtAdherenceState() const { return adherence; }
 	bool GetEverArt() const { return everArt; }
@@ -145,6 +149,9 @@ public:
 	
 	/* Daly Functions */
 	double GetDalys() const { return iDALY; }
+	double GetDalys_OffArt() const { return iDALY_OffArt; }
+	double GetDalys_OnArt() const { return iDALY_OnArt; }
+	double GetDalys_LYL() const { return iDALY_LYL; }
 	
 	/* Cost Functions */
 	double GetHctVisitCost() const { return iHctVisitCost; }
@@ -190,6 +197,7 @@ public:
 	bool GetCalAtArtEligibleAtReturnCare() const { return calAtArtEligibleAtReturnPreArtCare; }
 	bool GetArtAtEnrollment() const { return artAtEnrollment; }
 	bool GetCalEverReturnArt() const { return calEverReturnArt; }
+	bool GetCalEligibleAtEnrollment() const { return calEligibleAtEnrollment; }
 	
 private:
 	/* Basic characteristics */
@@ -232,6 +240,7 @@ private:
 	unsigned int diagnosisRoute; //1 = Hct, 2 = Vct, 3 = Pict.
 	unsigned int lastDiagnosisRoute;
 	bool inCare;
+	bool everCare;
 	bool everCd4Test;
 	unsigned int cd4TestCount;
 	bool everCd4TestResult;
@@ -259,6 +268,9 @@ private:
 	
 	/* DALY */
 	double iDALY;
+	double iDALY_OffArt;
+	double iDALY_OnArt;
+	double iDALY_LYL;
 	
 	/* COST */
 	double iHctVisitCost;
@@ -294,6 +306,7 @@ private:
 	bool calAtArtEverReturnPreArtCare;
 	bool calAtArtEligibleAtReturnPreArtCare;
 	bool calEverReturnArt;
+	bool calEligibleAtEnrollment;
 };
 
 #endif /* defined(__priorityQ__person__) */

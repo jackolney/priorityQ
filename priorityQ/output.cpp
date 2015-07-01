@@ -1,10 +1,10 @@
-	//
-	//  output.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 28/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  output.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 28/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
 #include "output.h"
@@ -57,9 +57,12 @@ double * theDeath;
 double * theAidsDeath;
 double * theDeath_2010_Age;
 double * theAidsDeath_2010_Age;
+double * theDALY_OffArt;
+double * theDALY_OnArt;
+double * theDALY_LYL;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void SeedOutput(person * const thePerson)
 {
@@ -67,17 +70,20 @@ void SeedOutput(person * const thePerson)
 	for(size_t i=0; i<66; i++) {
 		yr[i] = 365.25 + (i * 365.25);
 		if(thePerson->GetBirthDay() < yr[i])
-			new Output(thePerson,yr[i]);
+			new Output(thePerson,yr[i],i);
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
-Output::Output(person * const thePerson, const double Time) :
+Output::Output(person * const thePerson, const double Time, const size_t theIndex) :
 event(Time),
-pPerson(thePerson)
-{}
+pPerson(thePerson),
+index(theIndex)
+{
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+}
 
 Output::~Output()
 {}
@@ -89,15 +95,15 @@ bool Output::CheckValid()
 
 void Output::Execute()
 {
-	if(GetTime() >= 14610) {
-		WriteDaly(pPerson);
-		WriteCost(pPerson);
+	if(GetTime() >= 14610 && GetTime() < 21916) {
+		WriteDaly(pPerson,index);
+		WriteCost(pPerson,GetTime());
 	}
-	WritePop(pPerson);
-	WriteHiv(pPerson);
-	WriteArt(pPerson);
-	WriteCd4(pPerson);
-	WriteWho(pPerson);
+	WritePop(pPerson,GetTime(),index);
+	WriteHiv(pPerson,GetTime(),index);
+	WriteArt(pPerson,GetTime(),index);
+	WriteCd4(pPerson,index);
+	WriteWho(pPerson,index);
 	if(GetTime() == 13879.5)
 		Write2007(pPerson);
 	if(GetTime() == 15705.75)
@@ -106,14 +112,14 @@ void Output::Execute()
 		Write2014(pPerson);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 void CreateOutputArray()
 {
 	theCARE = new double[6]; // NeverDiagnosed, DiagnosedButNeverLinkedToCare, DiagnosedLinkedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
-	theDALY = new double[26];
-	theCOST = new double[26];
+	theDALY = new double[20];
+	theCOST = new double[20];
 	thePOP = new double[66];
 	theHIV = new double[66];
 	thePOP_15to49 = new double[66];
@@ -145,15 +151,18 @@ void CreateOutputArray()
 	theWHO_3_Art = new double[66];
 	theWHO_4_Art = new double[66];
 	theINCIDENCE = new double[66];
-	thePreArtCOST = new double[26];
-	theArtCOST = new double[26];
-	thePreArtCOST_Hiv = new double[26];
-	theArtCOST_Hiv = new double[26];
+	thePreArtCOST = new double[20];
+	theArtCOST = new double[20];
+	thePreArtCOST_Hiv = new double[20];
+	theArtCOST_Hiv = new double[20];
 	theCLINIC = new double[5]; // NeverDiagnosed, DiagnosedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
 	theDeath = new double[66];
 	theAidsDeath = new double[66];
 	theDeath_2010_Age = new double[20];
 	theAidsDeath_2010_Age = new double[20];
+	theDALY_OffArt = new double[20];
+	theDALY_OnArt = new double[20];
+	theDALY_LYL = new double[20];
 	
 	for(size_t i=0;i<66;i++) {
 		if(i<4)
@@ -175,14 +184,15 @@ void CreateOutputArray()
 			theHIV_AgeSex_2007[i] = 0;
 			theDeath_2010_Age[i] = 0;
 			theAidsDeath_2010_Age[i] = 0;
-		}
-		if(i<26) {
 			theDALY[i] = 0;
 			theCOST[i] = 0;
 			thePreArtCOST[i] = 0;
 			theArtCOST[i] = 0;
 			thePreArtCOST_Hiv[i] = 0;
 			theArtCOST_Hiv[i] = 0;
+			theDALY_OffArt[i] = 0;
+			theDALY_OnArt[i] = 0;
+			theDALY_LYL[i] = 0;		
 		}
 		thePOP[i] = 0;
 		thePOP_15to49[i] = 0;
@@ -213,5 +223,5 @@ void CreateOutputArray()
 	}
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

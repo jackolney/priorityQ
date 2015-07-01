@@ -1,10 +1,10 @@
-	//
-	//  wp19Update.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 12/03/2015.
-	//  Copyright (c) 2015 Jack Olney. All rights reserved.
-	//
+//
+//  wp19Update.h
+//  priorityQ
+//
+//  Created by Jack Olney on 12/03/2015.
+//  Copyright (c) 2015 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__wp19Update__
 #define __priorityQ__wp19Update__

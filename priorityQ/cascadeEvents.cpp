@@ -1,13 +1,12 @@
-	//
-	//  cascadeEvents.cpp
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 22/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cascadeEvents.cpp
+//  priorityQ
+//
+//  Created by Jack Olney on 22/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #include <iostream>
-#include "macro.h"
 #include "toolbox.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
@@ -20,17 +19,20 @@
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
 #include "wp19Update.h"
+#include "rng.h"
+
+extern Rng * theRng;
 
 using namespace std;
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedInitialHivTests::SeedInitialHivTests(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "InitialHivTests scheduled to begin in " <<  this->GetTime() << "." << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 };
 
 SeedInitialHivTests::~SeedInitialHivTests()
@@ -44,19 +46,19 @@ bool SeedInitialHivTests::CheckValid()
 void SeedInitialHivTests::Execute()
 {
 	if(!immediateArtFlag)
-		UpdateTreatmentGuidelines(pPerson,1,4);
-	ScheduleVctHivTest(pPerson);
-	SchedulePictHivTest(pPerson);
+		UpdateTreatmentGuidelines(pPerson,1,3);
+	ScheduleVctHivTest(pPerson,GetTime());
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "Treatment guidelines will update on " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 SeedTreatmentGuidelinesUpdate::~SeedTreatmentGuidelinesUpdate()
@@ -72,11 +74,14 @@ bool SeedTreatmentGuidelinesUpdate::CheckValid()
 
 void SeedTreatmentGuidelinesUpdate::Execute()
 {
-	UpdateTreatmentGuidelines(pPerson,2,3);
+	if(GetTime() >= 14975.25)
+		UpdateTreatmentGuidelines(pPerson,2,3);
+	// if(GetTime() >= 16436.25)
+	// 	UpdateTreatmentGuidelines(pPerson,3,3);
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 VctHivTest::VctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -84,7 +89,7 @@ pPerson(thePerson),
 pointOfCare(poc)
 {
 	thePerson->SetVctHivTestDate(Time);
-	D(cout << "VctHivTest scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 VctHivTest::~VctHivTest()
@@ -94,20 +99,17 @@ bool VctHivTest::CheckValid()
 {
 	if(pPerson->GetVctHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
-	else {
+	else
 		return false;
-	}
 }
 
 void VctHivTest::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargeVctPictHivTest(pPerson);
-	D(cout << "VctHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,2,GetTime());
-		D(cout << "Diagnosed as HIV-positive." << endl);
-		SchedulePictHivTest(pPerson);
+		SchedulePictHivTest(pPerson,GetTime());
 		if(pointOfCare)
 			new VctPocCd4Test(pPerson,GetTime());
 		else if(VctLinkage(pPerson))
@@ -115,18 +117,18 @@ void VctHivTest::Execute()
 		else
 			ChargePreArtClinicVisit(pPerson);
 	}
-	ScheduleVctHivTest(pPerson);
+	ScheduleVctHivTest(pPerson,GetTime());
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 PictHivTest::PictHivTest(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
 	thePerson->SetPictHivTestDate(Time);
-	D(cout << "PictHivTest scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 PictHivTest::~PictHivTest()
@@ -136,35 +138,32 @@ bool PictHivTest::CheckValid()
 {
 	if(pPerson->GetPictHivTestDate() == GetTime() && !pPerson->GetEverArt())
 		return pPerson->Alive();
-	else {
+	else
 		return false;
-	}
 }
 
 void PictHivTest::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargeVctPictHivTest(pPerson);
-	D(cout << "PictHivTest executed." << endl);
 	if(pPerson->GetSeroStatus()) {
 		pPerson->SetDiagnosedState(true,3,GetTime());
-		D(cout << "Diagnosed as HIV-positive." << endl);
 		if(PictLinkage(pPerson))
 			new Cd4Test(pPerson,GetTime());
 		else
 			ChargePreArtClinicVisit(pPerson);
 	}
-	SchedulePictHivTest(pPerson);
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4Test::Cd4Test(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "Cd4Test scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4Test::~Cd4Test()
@@ -173,9 +172,9 @@ Cd4Test::~Cd4Test()
 bool Cd4Test::CheckValid()
 {
 	if(!pPerson->GetEverArt() && pPerson->Alive()) {
-		if(!pocFlag)
+		if(!pocFlag) {
 			return true;
-		else {
+		} else {
 			new PocCd4Test(pPerson,GetTime());
 			return false;
 		}
@@ -185,29 +184,29 @@ bool Cd4Test::CheckValid()
 
 void Cd4Test::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicVisit(pPerson);
 	ChargePreArtClinicCd4Test(pPerson);
-	D(cout << "Entered care." << endl);
-	D(cout << "Cd4Test executed." << endl);
 	pPerson->SetEverCd4TestState(true);
-	FastTrackArt(pPerson);
+	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
-	else if(ReceiveCd4TestResult(pPerson)) {
-		ScheduleCd4TestResult(pPerson);
-		pPerson->SetInCareState(true,GetTime());
-	}
+		ScheduleImmediateArt(pPerson,GetTime());
+	else if(pPerson->GetCurrentWho() > 2 || theRng->Sample(0.05))
+		FastTrackArt(pPerson,GetTime());
+	else if(ReceiveCd4TestResult(pPerson,GetTime()))
+		ScheduleCd4TestResult(pPerson,GetTime());
+	else
+		SchedulePreArtResultDropout(pPerson,GetTime());
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 Cd4TestResult::Cd4TestResult(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "Cd4TestResult scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Cd4TestResult::~Cd4TestResult()
@@ -215,36 +214,61 @@ Cd4TestResult::~Cd4TestResult()
 
 bool Cd4TestResult::CheckValid()
 {
-	return AttendCd4TestResult(pPerson);
+	return AttendCd4TestResult(pPerson,GetTime());
 }
 
 void Cd4TestResult::Execute()
 {
-	UpdateDaly(pPerson);
+	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicCd4ResultVisit(pPerson);
-	D(cout << "Cd4TestResult executed." << endl);
 	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
-		ScheduleImmediateArt(pPerson);
-	else if(pPerson->GetEligible()) {
-		D(cout << "Eligible for ART." << endl);
-		ScheduleArtInitiation(pPerson);
-	} else {
-		D(cout << "Not eligible for ART." << endl);
-		if(SecondaryCd4Test(pPerson))
-			SchedulePreArtCd4Test(pPerson);
-	}
-	SchedulePictHivTest(pPerson);
+		ScheduleImmediateArt(pPerson,GetTime());
+	else if(pPerson->GetEligible())
+		ScheduleArtInitiation(pPerson,GetTime());
+	else if(SecondaryCd4Test(pPerson,GetTime()))
+		SchedulePreArtCd4Test(pPerson,GetTime());
+	else
+		SchedulePreArtTestDropout(pPerson,GetTime());
+	SchedulePictHivTest(pPerson,GetTime());
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
+
+PreArtDropout::PreArtDropout(person * const thePerson, const double Time) :
+event(Time),
+pPerson(thePerson)
+{
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+}
+
+PreArtDropout::~PreArtDropout()
+{}
+
+bool PreArtDropout::CheckValid()
+{
+	if(pPerson->GetInCareState() && !pPerson->GetArtInitiationState())
+		return pPerson->Alive();
+	else
+		return false;
+}
+
+void PreArtDropout::Execute()
+{
+	pPerson->SetInCareState(false,GetTime());
+	ScheduleVctHivTest(pPerson,GetTime());
+	SchedulePictHivTest(pPerson,GetTime());
+}
+
+/////////////////////
+/////////////////////
 
 ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "ArtInitiation scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 ArtInitiation::~ArtInitiation()
@@ -260,26 +284,23 @@ bool ArtInitiation::CheckValid()
 
 void ArtInitiation::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "ArtInitiation executed." << endl);
-	if(!pPerson->GetArtAdherenceState())
-		D(cout << "NON-ADHERER to Art." << endl);
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetArtInitiationState(true,GetTime());
 	WriteGuidelinesArtInitiation(pPerson);
-	ScheduleCd4Update(pPerson);
-	ScheduleWhoUpdate(pPerson);
-	ScheduleArtDropout(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
+	ScheduleWhoUpdate(pPerson,GetTime());
+	ScheduleArtDropout(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 ArtDropout::ArtDropout(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	D(cout << "ArtDropout scheduled for day = " << Time << endl);
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
 }
 
 ArtDropout::~ArtDropout()
@@ -292,14 +313,13 @@ bool ArtDropout::CheckValid()
 
 void ArtDropout::Execute()
 {
-	UpdateDaly(pPerson);
-	D(cout << "ArtDropout executed." << endl);
+	UpdateDaly(pPerson,GetTime());
 	pPerson->SetArtInitiationState(false,GetTime());
 	WriteGuidelinesArtDropout();
-	ScheduleCd4Update(pPerson);
-	ScheduleWhoUpdate(pPerson);
+	ScheduleCd4Update(pPerson,GetTime());
+	ScheduleWhoUpdate(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
 }
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////

@@ -1,10 +1,10 @@
-	//
-	//  interventionEvents.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 03/11/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  interventionEvents.h
+//  priorityQ
+//
+//  Created by Jack Olney on 03/11/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__interventionEvents__
 #define __priorityQ__interventionEvents__
@@ -13,8 +13,8 @@
 #include "event.h"
 #include "person.h"
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class SeedHct : public event {
 public:
@@ -30,8 +30,8 @@ private:
 	const bool pointOfCare;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class SeedPerpetualHct : public event {
 public:
@@ -46,8 +46,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class HctHivTest : public event {
 public:
@@ -63,8 +63,8 @@ private:
 	const bool pointOfCare;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class HctPocCd4Test : public event {
 public:
@@ -79,8 +79,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class PreArtOutreach : public event {
 public:
@@ -96,8 +96,8 @@ private:
 	const double probReturn;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class VctPocCd4Test : public event {
 public:
@@ -112,8 +112,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class PocCd4Test : public event {
 public:
@@ -128,8 +128,8 @@ private:
 	person * const pPerson;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 class ArtOutreach : public event {
 public:
@@ -145,7 +145,7 @@ private:
 	const double probReturn;
 };
 
-	/////////////////////
-	/////////////////////
+/////////////////////
+/////////////////////
 
 #endif /* defined(__priorityQ__interventionEvents__) */

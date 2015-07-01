@@ -1,10 +1,10 @@
-	//
-	//  cohort.h
-	//  priorityQ
-	//
-	//  Created by Jack Olney on 15/10/2014.
-	//  Copyright (c) 2014 Jack Olney. All rights reserved.
-	//
+//
+//  cohort.h
+//  priorityQ
+//
+//  Created by Jack Olney on 15/10/2014.
+//  Copyright (c) 2014 Jack Olney. All rights reserved.
+//
 
 #ifndef __priorityQ__cohort__
 #define __priorityQ__cohort__
@@ -22,7 +22,7 @@ public:
 	~cohort(); //destructor
 	
 	/* methods */
-	void GenerateCohort(); // Create cohort of desired size...
+	void GenerateCohort(const double theTime);
 	void ScheduleNewPerson(const double Time);
 	void SelfDestruct();
 	
