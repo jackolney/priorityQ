@@ -58,11 +58,11 @@ void WriteDaly(person * const thePerson, const size_t theIndex)
 {
 	UpdateDaly(thePerson,(theIndex + 1) * 365.25);
 	
-	if((theIndex + 1) * 365.25 > 14610) {
-		theDALY[theIndex - 40] += thePerson->GetDalys();
-		theDALY_OffArt[theIndex - 40] += thePerson->GetDalys_OffArt();
-		theDALY_OnArt[theIndex - 40] += thePerson->GetDalys_OnArt();
-		theDALY_LYL[theIndex - 40] += thePerson->GetDalys_LYL();
+	if((theIndex + 1) * 365.25 > 16801.5) {
+		theDALY[theIndex - 46] += thePerson->GetDalys();
+		theDALY_OffArt[theIndex - 46] += thePerson->GetDalys_OffArt();
+		theDALY_OnArt[theIndex - 46] += thePerson->GetDalys_OnArt();
+		theDALY_LYL[theIndex - 46] += thePerson->GetDalys_LYL();
 	}
 	
 	thePerson->ResetDalys();

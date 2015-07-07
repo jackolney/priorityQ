@@ -95,7 +95,7 @@ void WriteArt(person * const thePerson, const double theTime, const size_t theIn
 
 void WriteCare(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
+	if(thePerson->GetHivDeath() && theTime >= 16801.5 && theTime < 24106.5) {
 		// NeverDiagnosed
 		theCARE[0] += !thePerson->GetDiagnosedState();
 		// DiagnosedButNeverLinkedToCare
@@ -116,7 +116,7 @@ void WriteCare(person * const thePerson, const double theTime)
 
 void WriteClinic(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetEverCd4TestState() && thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
+	if(thePerson->GetEverCd4TestState() && thePerson->GetHivDeath() && theTime >= 16801.5 && theTime < 24106.5) {
 		// NeverDiagnosed
 		theCLINIC[0] += !thePerson->GetDiagnosedState();
 		// DiagnosedButNeverInitiatedArt
