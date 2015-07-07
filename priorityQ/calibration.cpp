@@ -119,7 +119,7 @@ void CreateCalibrationArray()
 	ART6_Counter = new unsigned int[3];
 	ART10_Counter = new unsigned int[3];
 	ART12_Counter = new unsigned int[3];
-
+	
 	Pie_1 = new unsigned int[3];
 	Pie_2 = new unsigned int[3];
 	Pie_3 = new unsigned int[6];
@@ -276,14 +276,14 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 	if(theTimeIndex == 2 && thePerson->Alive()) {
 		if(thePerson->GetInCareState()) {
 			In2014[0]++;
-		if(thePerson->GetArtInitiationState())
-			In2014[1]++;
+			if(thePerson->GetArtInitiationState())
+				In2014[1]++;
 		}
 	}
-
+	
 	/* Pie Charts */
 	// Previously thePerson->GetCalEligibleAtEnrollment();
-
+	
 	if(theTimeIndex == 0) {
 		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
 			Pie_1[0]++;
@@ -292,7 +292,7 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
 			Pie_1[2]++;
 	}
-
+	
 	if(theTimeIndex == 1) {
 		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment())
 			Pie_2[0]++;
@@ -301,7 +301,7 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
 			Pie_2[2]++;
 	}
-
+	
 	if(theTimeIndex == 2) { // not discrete.
 		if(thePerson->GetCalEverArt() && thePerson->GetArtAtEnrollment() && ((thePerson->GetCalArtDay() - thePerson->GetCalDiagDay()) <= 90))
 			Pie_3[0]++;
@@ -316,7 +316,7 @@ void UpdateCalibrationArray(person * const thePerson, const unsigned int theTime
 		else if(thePerson->GetCalEverArt() && thePerson->GetCalEverReturnArt())
 			Pie_3[5]++;
 	}
-
+	
 }
 
 /////////////////////

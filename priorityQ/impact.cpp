@@ -40,7 +40,7 @@ void UpdateDaly(person * const thePerson, const double theTime)
 			thePerson->SetDalys((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
 			thePerson->SetDalys_OffArt((theQ->GetIncrementalTime() / 365.25) * dalyWeight_Cd4_1);
 		}
-	} else if(theTime <= thePerson->GetNatDeathDate()) {
+	} else if(thePerson->GetHivDeathDate() > 14610 && theTime <= thePerson->GetNatDeathDate()) {
 		if((theTime - thePerson->GetHivDeathDate()) <= 365.35) {
 			thePerson->SetDalys((theTime - thePerson->GetHivDeathDate()) / 365.25);
 			thePerson->SetDalys_LYL((theTime - thePerson->GetHivDeathDate()) / 365.25);

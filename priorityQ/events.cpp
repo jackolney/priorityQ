@@ -305,7 +305,7 @@ event(Time),
 pPerson(thePerson)
 {
 	pPerson->SetWhoRecoverDate(Time);
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 WhoRecover::~WhoRecover()

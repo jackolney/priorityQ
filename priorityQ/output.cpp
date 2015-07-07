@@ -192,7 +192,7 @@ void CreateOutputArray()
 			theArtCOST_Hiv[i] = 0;
 			theDALY_OffArt[i] = 0;
 			theDALY_OnArt[i] = 0;
-			theDALY_LYL[i] = 0;		
+			theDALY_LYL[i] = 0;
 		}
 		thePOP[i] = 0;
 		thePOP_15to49[i] = 0;

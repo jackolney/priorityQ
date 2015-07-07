@@ -16,7 +16,7 @@
 /////////////////////
 /////////////////////
 
-void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc);
+void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc, const bool PreArtRetention, const bool ArtRetention, const bool Adherence);
 
 void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime);
 

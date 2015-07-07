@@ -66,6 +66,13 @@ public:
 	void SetVctHivTestDate(double theDate) { vctHivTestDate = theDate; }
 	void SetPictHivTestDate(double theDate) { pictHivTestDate = theDate; }
 	
+	/* HBCT Stuff */
+	void SetHctNcdCostTrigger(bool theValue)  { hctNcdCostTrigger = theValue; }
+	void SetHctPreArtRetentionTrigger(bool theValue) { hctPreArtRetentionTrigger = theValue; }
+	void SetHctArtRetentionTrigger(bool theValue) { hctArtRetentionTrigger = theValue; }
+	void SetPreArtDropoutDate(double theDate) { preArtDropoutDate = theDate; }
+	void SetArtDropoutDate(double theDate) { artDropoutDate = theDate; }
+	
 	/* Update Tx Guidelines */
 	void UpdateTxGuidelines(unsigned int theCd4, unsigned int theWho) { cd4Tx = theCd4; whoTx = theWho; }
 	
@@ -137,6 +144,13 @@ public:
 	double GetCd4RecoverDate() const { return cd4RecoverDate; }
 	double GetWhoDeclineDate() const { return whoDeclineDate; }
 	double GetWhoRecoverDate() const { return whoRecoverDate; }
+	
+	/* HBCT Stuff */
+	bool GetHctNcdCostTrigger() const { return hctNcdCostTrigger; }
+	bool GetHctPreArtRetentionTrigger() const { return hctPreArtRetentionTrigger; }
+	bool GetHctArtRetentionTrigger() const { return hctArtRetentionTrigger; }
+	double GetPreArtDropoutDate() const { return preArtDropoutDate; }
+	double GetArtDropoutDate() const { return artDropoutDate; }
 	
 	/* Hiv Care Date Getting Functions */
 	double GetHctHivTestDate() const { return hctHivTestDate; }
@@ -233,6 +247,13 @@ private:
 	double hctHivTestDate;
 	double vctHivTestDate;
 	double pictHivTestDate;
+	
+	/* HBCT STUFF */
+	bool hctNcdCostTrigger;
+	bool hctPreArtRetentionTrigger;
+	bool hctArtRetentionTrigger;
+	double preArtDropoutDate;
+	double artDropoutDate;
 	
 	/* Hiv care flags */
 	bool diagnosed;

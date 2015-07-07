@@ -21,12 +21,12 @@ using namespace std;
 ////////////////////
 ////////////////////
 
-void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc)
+void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc, const bool PreArtRetention, const bool ArtRetention, const bool Adherence)
 {
 	if(thePerson->GetBirthDay() != 0 && theTime >= 14610 && theTime < 21915) {
 		const double diagDay = theRng->SampleExpDist(hctHivTestTime);
 		if(diagDay <= 365.25)
-			new HctHivTest(thePerson,theTime + diagDay,poc);
+			new HctHivTest(thePerson,theTime + diagDay,poc,PreArtRetention,ArtRetention,Adherence);
 	}
 }
 
@@ -36,7 +36,7 @@ void ScheduleHctHivTest(person * const thePerson, const double theTime, const bo
 void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetBirthDay() != 0 && theTime >= 14610 && theTime < 21915)
-		new HctHivTest(thePerson,theTime + (theRng->doub() * 365.25),0);
+		new HctHivTest(thePerson,theTime + (theRng->doub() * 365.25),false,false,false,false);
 }
 
 ////////////////////
@@ -44,30 +44,16 @@ void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime)
 
 bool HctLinkage(person * const thePerson, const double theTime)
 {
-	if(theTime < 14975.25) {
-		if(thePerson->GetDiagnosisCount() > 1) {
-			if(theRng->Sample(hctProbLinkPreviouslyDiagnosedRollOut))
-				return true;
-			else
-				return false;
-		} else {
-			if(theRng->Sample(hctProbLinkRollOut))
-				return true;
-			else
-				return false;
-		}
+	if(thePerson->GetDiagnosisCount() > 1) {
+		if(theRng->Sample(hctProbLinkPreviouslyDiagnosed))
+			return true;
+		else
+			return false;
 	} else {
-		if(thePerson->GetDiagnosisCount() > 1) {
-			if(theRng->Sample(hctProbLinkPreviouslyDiagnosed))
-				return true;
-			else
-				return false;
-		} else {
-			if(theRng->Sample(hctProbLink))
-				return true;
-			else
-				return false;
-		}
+		if(theRng->Sample(hctProbLink))
+			return true;
+		else
+			return false;
 	}
 }
 

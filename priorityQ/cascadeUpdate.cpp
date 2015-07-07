@@ -120,7 +120,7 @@ void SchedulePreArtResultDropout(person * const thePerson, const double theTime)
 ////////////////////
 
 void SchedulePreArtTestDropout(person * const thePerson, const double theTime)
-{	
+{
 	new PreArtDropout(thePerson,theTime + theRng->SampleExpDist(cd4TestTime));
 }
 
@@ -129,20 +129,39 @@ void SchedulePreArtTestDropout(person * const thePerson, const double theTime)
 
 bool ReceiveCd4TestResult(person * const thePerson, const double theTime)
 {
-	if(thePerson->GetCd4TestCount() <= 1) {
-	 	switch(thePerson->GetDiagnosisRoute()) {
-			case 1: return theRng->Sample(hctShortTermRetention);  break;
-		 	case 2: return theRng->Sample(vctShortTermRetention);  break;
-		 	case 3: return theRng->Sample(pictShortTermRetention); break;
-		 	default: thePerson->SetInCareState(false,theTime); return false;
-	 	}
+	if(thePerson->GetHctPreArtRetentionTrigger() == false) {
+		if(thePerson->GetCd4TestCount() <= 1) {
+			switch(thePerson->GetDiagnosisRoute()) {
+				case 1: return theRng->Sample(hctShortTermRetention);  break;
+				case 2: return theRng->Sample(vctShortTermRetention);  break;
+				case 3: return theRng->Sample(pictShortTermRetention); break;
+				default: thePerson->SetInCareState(false,theTime); return false;
+			}
+		} else {
+			switch(thePerson->GetDiagnosisRoute()) {
+				case 1: return theRng->Sample(hctLongTermRetention);  break;
+				case 2: return theRng->Sample(vctLongTermRetention);  break;
+				case 3: return theRng->Sample(pictLongTermRetention); break;
+				default: thePerson->SetInCareState(false,theTime); return false;
+			}
+		}
 	} else {
-		switch(thePerson->GetDiagnosisRoute()) {
-			case 1: return theRng->Sample(hctLongTermRetention);  break;
-		 	case 2: return theRng->Sample(vctLongTermRetention);  break;
-		 	case 3: return theRng->Sample(pictLongTermRetention); break;
-		 	default: thePerson->SetInCareState(false,theTime); return false;
-	 	}
+		// thePerson->GetHctPreArtRetentionTrigger() == true;
+		if(thePerson->GetCd4TestCount() <= 1) {
+			switch(thePerson->GetDiagnosisRoute()) {
+				case 1: return theRng->Sample(0.9743416);  break;
+				case 2: return theRng->Sample(0.9743416);  break;
+				case 3: return theRng->Sample(0.9743416); break;
+				default: thePerson->SetInCareState(false,theTime); return false;
+			}
+		} else {
+			switch(thePerson->GetDiagnosisRoute()) {
+				case 1: return theRng->Sample(0.9743416);  break;
+				case 2: return theRng->Sample(0.9743416);  break;
+				case 3: return theRng->Sample(0.9743416); break;
+				default: thePerson->SetInCareState(false,theTime); return false;
+			}
+		}
 	}
 }
 
@@ -151,11 +170,20 @@ bool ReceiveCd4TestResult(person * const thePerson, const double theTime)
 
 bool AttendCd4TestResult(person * const thePerson, const double theTime)
 {
-	if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
-		return thePerson->Alive();
-	else {
-		thePerson->SetInCareState(false,theTime);
-		return false;
+	if(thePerson->GetHctPreArtRetentionTrigger() == false) {
+		if(theRng->Sample(cd4ResultProbAttend) && !thePerson->GetEverArt())
+			return thePerson->Alive();
+		else {
+			thePerson->SetInCareState(false,theTime);
+			return false;
+		}
+	} else {
+		if(theRng->Sample(0.9743416) && !thePerson->GetEverArt())
+			return thePerson->Alive();
+		else {
+			thePerson->SetInCareState(false,theTime);
+			return false;
+		}
 	}
 }
 
@@ -164,11 +192,20 @@ bool AttendCd4TestResult(person * const thePerson, const double theTime)
 
 bool SecondaryCd4Test(person * const thePerson, const double theTime)
 {
-	switch(thePerson->GetDiagnosisRoute()) {
-		case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
-		case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
-		case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
-		default: thePerson->SetInCareState(false,theTime); return false;
+	if(thePerson->GetHctPreArtRetentionTrigger() == false) {
+		switch(thePerson->GetDiagnosisRoute()) {
+			case 1: return theRng->Sample(hctProbSecondaryCd4Test); break;
+			case 2: return theRng->Sample(vctProbSecondaryCd4Test); break;
+			case 3: return theRng->Sample(pictProbSecondaryCd4Test); break;
+			default: thePerson->SetInCareState(false,theTime); return false;
+		}
+	} else {
+		switch(thePerson->GetDiagnosisRoute()) {
+			case 1: return theRng->Sample(0.875); break;
+			case 2: return theRng->Sample(0.875); break;
+			case 3: return theRng->Sample(0.875); break;
+			default: thePerson->SetInCareState(false,theTime); return false;
+		}
 	}
 	
 }
@@ -195,13 +232,27 @@ void ScheduleArtInitiation(person * const thePerson, const double theTime)
 
 void ScheduleArtDropout(person * const thePerson, const double theTime)
 {
-	const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear);
+	const double TimeSinceArtInitiation = theTime - thePerson->GetArtDay();
 	
-	if(artDropoutDate < 365.25)
-		new ArtDropout(thePerson,theTime + artDropoutDate);
-	else
-		new ArtDropout(thePerson,theTime + 365.25 + theRng->SampleExpDist(artDropoutTimeTwoYear));
-	
+	if(thePerson->GetHctArtRetentionTrigger() == false) {
+		if(TimeSinceArtInitiation < 365.25) {
+			const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear);
+			if(artDropoutDate < 365.25 - TimeSinceArtInitiation)
+				new ArtDropout(thePerson,theTime + artDropoutDate);
+			else
+				new ArtDropout(thePerson,theTime + (365.25 - TimeSinceArtInitiation) + theRng->SampleExpDist(artDropoutTimeTwoYear));
+		} else
+			new ArtDropout(thePerson,theTime + theRng->SampleExpDist(artDropoutTimeTwoYear));
+	} else {
+		if(TimeSinceArtInitiation < 365.25) {
+			const double artDropoutDate = theRng->SampleExpDist(artDropoutTimeOneYear * 1.25);
+			if(artDropoutDate < 365.25 - TimeSinceArtInitiation)
+				new ArtDropout(thePerson,theTime + artDropoutDate);
+			else
+				new ArtDropout(thePerson,theTime + (365.25 - TimeSinceArtInitiation) + theRng->SampleExpDist(artDropoutTimeTwoYear * 1.25));
+		} else
+			new ArtDropout(thePerson,theTime + theRng->SampleExpDist(artDropoutTimeTwoYear * 1.25));
+	}
 }
 
 ////////////////////

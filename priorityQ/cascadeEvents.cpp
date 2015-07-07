@@ -240,7 +240,10 @@ PreArtDropout::PreArtDropout(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
+	if(Time >= thePerson->GetNatDeathDate())
+		Cancel();
+	else
+		pPerson->SetPreArtDropoutDate(Time);
 }
 
 PreArtDropout::~PreArtDropout()
@@ -248,7 +251,7 @@ PreArtDropout::~PreArtDropout()
 
 bool PreArtDropout::CheckValid()
 {
-	if(pPerson->GetInCareState() && !pPerson->GetArtInitiationState())
+	if(pPerson->GetInCareState() && !pPerson->GetArtInitiationState() && pPerson->GetPreArtDropoutDate() == GetTime())
 		return pPerson->Alive();
 	else
 		return false;
@@ -300,7 +303,10 @@ ArtDropout::ArtDropout(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
+	if(Time >= thePerson->GetNatDeathDate())
+		Cancel();
+	else
+		pPerson->SetArtDropoutDate(Time);
 }
 
 ArtDropout::~ArtDropout()
@@ -308,7 +314,10 @@ ArtDropout::~ArtDropout()
 
 bool ArtDropout::CheckValid()
 {
-	return pPerson->Alive();
+	if(pPerson->GetArtDropoutDate() == GetTime())
+		return pPerson->Alive();
+	else
+		return false;
 }
 
 void ArtDropout::Execute()

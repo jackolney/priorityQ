@@ -32,6 +32,7 @@ extern double * theHIV;
 extern double * theART_15to49;
 extern double * theINCIDENCE;
 
+extern double * theDALY;
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;
@@ -49,18 +50,23 @@ extern int * theGuidelines_PreArtDropout;
 extern int * theGuidelines_ArtDropout;
 
 /* Intervention Pointers */
-int const * p_Hbct;
+int const * p_NaiveHbct;
+int const * p_HbctNcd;
+int const * p_HbctNcdPreArtRetention;
+int const * p_HbctNcdRetention;
+int const * p_HbctNcdRetentionAdherence;
+int const * p_HbctFrequency;
 int const * p_Vct;
 int const * p_HbctPocCd4;
 int const * p_Linkage;
-int const * p_VctPocCd4;
 int const * p_PreOutreach;
 int const * p_ImprovedCare;
 int const * p_PocCd4;
+int const * p_VctPocCd4;
 int const * p_ArtOutreach;
-int const * p_Adherence;
 int const * p_ImmediateArt;
 int const * p_UniversalTestAndTreat;
+int const * p_Adherence;
 int const * p_Calibration;
 
 /* Calibration pointers */
@@ -69,32 +75,42 @@ extern double * L21;
 int main(int argc, const char * argv[])
 {
 	/* Intervention Triggers (0 = OFF, 1 = ON (Best), 2 = ON (Realistic)) */
-	int s_Hbct = 0;
+	int s_NaiveHbct = 0;
+	int s_HbctNcd = 0;
+	int s_HbctNcdPreArtRetention = 0;
+	int s_HbctNcdRetention = 0;
+	int s_HbctNcdRetentionAdherence = 0;
+	int s_HbctFrequency = 0;
 	int s_Vct = 0;
 	int s_HbctPocCd4 = 0;
 	int s_Linkage = 0;
-	int s_VctPocCd4 = 0;
 	int s_PreOutreach = 0;
 	int s_ImprovedCare = 0;
 	int s_PocCd4 = 0;
+	int s_VctPocCd4 = 0;
 	int s_ArtOutreach = 0;
-	int s_Adherence = 0;
 	int s_ImmediateArt = 0;
 	int s_UniversalTestAndTreat = 0;
+	int s_Adherence = 0;
 	int s_Calibration = 0;
 
-	p_Hbct = &s_Hbct;
+	p_NaiveHbct = &s_NaiveHbct;
+	p_HbctNcd = &s_HbctNcd;
+	p_HbctNcdPreArtRetention = &s_HbctNcdPreArtRetention;
+	p_HbctNcdRetention = &s_HbctNcdRetention;
+	p_HbctNcdRetentionAdherence = &s_HbctNcdRetentionAdherence;
+	p_HbctFrequency = &s_HbctFrequency;
 	p_Vct = &s_Vct;
 	p_HbctPocCd4 = &s_HbctPocCd4;
 	p_Linkage = &s_Linkage;
-	p_VctPocCd4 = &s_VctPocCd4;
 	p_PreOutreach = &s_PreOutreach;
 	p_ImprovedCare = &s_ImprovedCare;
 	p_PocCd4 = &s_PocCd4;
+	p_VctPocCd4 = &s_VctPocCd4;
 	p_ArtOutreach = &s_ArtOutreach;
-	p_Adherence = &s_Adherence;
 	p_ImmediateArt = &s_ImmediateArt;
 	p_UniversalTestAndTreat = &s_UniversalTestAndTreat;
+	p_Adherence = &s_Adherence;
 	p_Calibration = &s_Calibration;
 	
 
@@ -105,7 +121,7 @@ int main(int argc, const char * argv[])
 
 		theQ = new eventQ(0,(60 * 365.25) + 1);
 		
-		const int SizeAdjustment = 100;
+		const int SizeAdjustment = 1000;
 		
 		new population(SizeAdjustment);
 		
@@ -129,9 +145,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 		
-		cout << "thePOP:" << endl;
-		for(size_t i=0; i<66; i++)
-			cout << thePOP[i] << endl;
+		cout << "theDALY:" << endl;
+		for(size_t i=0; i<20; i++)
+			cout << theDALY[i] << endl;
 		
 //		cout << "theGuidelines_Death_200_OffArt:" << endl;
 //		for(size_t i=0; i<36; i++)

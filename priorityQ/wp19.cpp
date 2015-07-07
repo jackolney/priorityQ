@@ -192,7 +192,7 @@ void CreateGuidelinesArray()
 	theGuidelines_NewDiagnoses = new int[36];
 	theGuidelines_PreArtDropout = new int[36];
 	theGuidelines_ArtDropout = new int[36];
-
+	
 	mid2010 = new int[2];
 	
 	for(size_t i=0;i<36;i++) {

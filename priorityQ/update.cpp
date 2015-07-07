@@ -27,15 +27,15 @@ using namespace std;
 void SeedTreatmentUpdate(person * const thePerson, const double theTime)
 {
 	if(theTime > 12418.5)
-	    new SeedInitialHivTests(thePerson,theTime);
+		new SeedInitialHivTests(thePerson,theTime);
 	else
-	    new SeedInitialHivTests(thePerson,12418.5);
-	 
+		new SeedInitialHivTests(thePerson,12418.5);
+	
 	if(theTime > 14975.25)
-	    new SeedTreatmentGuidelinesUpdate(thePerson,theTime);
+		new SeedTreatmentGuidelinesUpdate(thePerson,theTime);
 	else
-	    new SeedTreatmentGuidelinesUpdate(thePerson,14975.25);
-	 
+		new SeedTreatmentGuidelinesUpdate(thePerson,14975.25);
+	
 	// if(theTime > 16436.25)
 	//     new SeedTreatmentGuidelinesUpdate(thePerson,theTime);
 	// else
@@ -98,10 +98,10 @@ void ScheduleWhoUpdate(person * const thePerson, const double theTime)
 	//WhoRecoverTime [WHO from->to] = {2->1,3->2,4->3}
 	const double WhoRecoverTime [3] = {0.32760300,14.38530000,3.36363000};
 	const double WhoRecoverTimeArt [3] = {0.65476400,0.32730800,0.04945540};
-
+	
 	if((!thePerson->GetArtInitiationState() || (thePerson->GetArtInitiationState() && !thePerson->GetArtAdherenceState()))) {
 		if(thePerson->GetCurrentWho() < 4) {
-			new WhoDecline(thePerson, theTime + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));	
+			new WhoDecline(thePerson, theTime + theRng->SampleExpDist(WhoDeclineTime [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
 		}
 		if(thePerson->GetCurrentWho() > 1) {
 			new WhoRecover(thePerson, theTime + theRng->SampleExpDist(WhoRecoverTime [thePerson->GetCurrentWho()-2] * 365.25));
@@ -109,7 +109,7 @@ void ScheduleWhoUpdate(person * const thePerson, const double theTime)
 	} else if(thePerson->GetArtInitiationState() && thePerson->GetArtAdherenceState()) {
 		if(thePerson->GetCurrentWho() < 4) {
 			new WhoDecline(thePerson, theTime + theRng->SampleExpDist(WhoDeclineTimeArt [thePerson->GetCurrentWho()-1] [thePerson->GetCurrentCd4()-1] * 365.25));
-		}	
+		}
 		if(thePerson->GetCurrentWho() > 1) {
 			new WhoRecover(thePerson, theTime + theRng->SampleExpDist(WhoRecoverTimeArt [thePerson->GetCurrentWho()-2] * 365.25));
 		}

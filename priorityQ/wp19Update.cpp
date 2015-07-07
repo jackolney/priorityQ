@@ -97,7 +97,7 @@ void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex)
 		if(thePerson->GetArtInitiationState())
 			mid2010[1]++;
 	}
-
+	
 	if(!thePerson->GetSeroStatus()) {
 		theGuidelines_PopDist_HivNegative[theIndex]++;
 	} else if(thePerson->GetCurrentCd4() == 4) {
@@ -172,11 +172,11 @@ void WriteGuidelinesDeath(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(!thePerson->GetSeroStatus()) {
 			theGuidelines_Death_HivNegative[i]++;
 		} else if(thePerson->GetCurrentCd4() == 4) {
@@ -252,11 +252,11 @@ void WriteGuidelinesArtInitiation(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(thePerson->GetCurrentCd4() == 4)
 			theGuidelines_Art_500[i]++;
 		else if(thePerson->GetCurrentCd4() == 3)
@@ -277,11 +277,11 @@ void WriteGuidelinesNewInfection(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(thePerson->GetAge(theQ->GetTime()) > 15 * 365.25)
 			theGuidelines_NewInfectionsAdult[i]++;
 	}
@@ -296,11 +296,11 @@ void WriteGuidelinesNewDiagnosis()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_NewDiagnoses[i]++;
 	}
 }
@@ -314,11 +314,11 @@ void WriteGuidelinesPreArtDropout()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_PreArtDropout[i]++;
 	}
 }
@@ -332,11 +332,11 @@ void WriteGuidelinesArtDropout()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_ArtDropout[i]++;
 	}
 }

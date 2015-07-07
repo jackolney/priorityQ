@@ -138,7 +138,7 @@ void WriteDeath(person * const thePerson, const double theTime)
 	double yr [66];
 	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
-
+	
 	unsigned int i = 0;
 	while(theTime > yr[i] && i<66)
 		i++;
@@ -164,7 +164,7 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 	double yr [66];
 	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
-
+	
 	unsigned int i = 0;
 	while(theTime > yr[i] && i<66)
 		i++;

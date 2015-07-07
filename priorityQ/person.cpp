@@ -49,6 +49,11 @@ whoRecoverDate(0),
 hctHivTestDate(0),
 vctHivTestDate(0),
 pictHivTestDate(0),
+hctNcdCostTrigger(false),
+hctPreArtRetentionTrigger(false),
+hctArtRetentionTrigger(false),
+preArtDropoutDate(0),
+artDropoutDate(0),
 diagnosed(false),
 diagnosisCount(0),
 diagnosisRoute(0),
@@ -444,7 +449,7 @@ void person::SetArtInitiationState(const bool theState, const double theTime)
 		artCount++;
 		if(everLostArt) { everReturnArt = true; calEverReturnArt = true; }
 		if(!inCare) { SetInCareState(theState,theTime); }
-
+		
 		/* Calibration */
 		calEverArt = true;
 		calArtDay = theTime;

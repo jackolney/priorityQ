@@ -24,8 +24,13 @@ extern double * theArtCOST_Hiv;
 
 void ChargeHctVisit(person * const thePerson)
 {
-	thePerson->SetHctVisitCost(hctVisitCost);
-	thePerson->SetRapidHivTestCost(rapidHivTestCost);
+	if(thePerson->GetHctNcdCostTrigger()) {
+		thePerson->SetHctVisitCost(hctVisitCost * 0.5);
+		thePerson->SetRapidHivTestCost(rapidHivTestCost * 0.5);
+	} else {
+		thePerson->SetHctVisitCost(hctVisitCost);
+		thePerson->SetRapidHivTestCost(rapidHivTestCost);
+	}
 }
 
 /////////////////////
@@ -124,7 +129,7 @@ void WriteCost(person * const thePerson, const double theTime)
 			double yr [26];
 			for(size_t i = 0; i<26; i++)
 				yr[i] = 14975.25 + (i * 365.25);
-
+			
 			unsigned int i = 0;
 			while(theTime > yr[i] && i < 26)
 				i++;
