@@ -109,7 +109,7 @@ int main(int argc, const char * argv[])
 
         theQ = new eventQ(0,(60 * 365.25) + 1);
         
-        const int SizeAdjustment = 1000;
+        const int SizeAdjustment = 1;
         
         new population(SizeAdjustment);
         
