@@ -173,9 +173,10 @@ void CreateOutputArray()
 			thePOP_NoArtCd4_2007[i] = 0;
 		if(i<5)
 			theCLINIC[i] = 0;
-		if(i<6)
+		if(i<6) {
 			theCARE[i] = 0;
 			theCARE_PT[i] = 0;
+		}
 		if(i<10) {
 			thePOP_AgeSex_2014[i] = 0;
 			theHIV_AgeSex_2014[i] = 0;

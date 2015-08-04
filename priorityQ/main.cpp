@@ -32,6 +32,8 @@ extern double * theHIV;
 extern double * theART_15to49;
 extern double * theINCIDENCE;
 
+extern double * theCARE_PT;
+
 extern double * theCOST;
 extern double * thePreArtCOST;
 extern double * theArtCOST;
@@ -107,7 +109,7 @@ int main(int argc, const char * argv[])
 
         theQ = new eventQ(0,(60 * 365.25) + 1);
         
-        const int SizeAdjustment = 100;
+        const int SizeAdjustment = 1000;
         
         new population(SizeAdjustment);
         
@@ -131,9 +133,9 @@ int main(int argc, const char * argv[])
 //          cout << "i = " << i << endl;
 //      }
         
-        cout << "thePOP:" << endl;
-        for(size_t i=0; i<66; i++)
-            cout << thePOP[i] << endl;
+        cout << "theCARE_PT:" << endl;
+        for(size_t i=0; i<6; i++)
+            cout << theCARE_PT[i] << endl;
         
 //      cout << "theGuidelines_Death_200_OffArt:" << endl;
 //      for(size_t i=0; i<36; i++)
