@@ -123,7 +123,7 @@ int main(int argc, const char * argv[])
 		
 		const int SizeAdjustment = 1000;
 		
-		new population(SizeAdjustment);
+		population * thePop = new population(SizeAdjustment);
 		
 		theQ->RunEvents();
 		
@@ -172,7 +172,7 @@ int main(int argc, const char * argv[])
 //		cout << "theGuidelines_ArtDropout:" << endl;
 //		for(size_t i=0; i<36; i++)
 //			cout << theGuidelines_ArtDropout[i] << endl;
-		
+				
 		delete theQ;
 		delete theRng;
 		delete thePop;
