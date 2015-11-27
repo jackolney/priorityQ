@@ -1,10 +1,10 @@
-//
-//  interventions.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 31/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  interventions.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 31/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "macro.h"
@@ -13,6 +13,7 @@
 #include "interventionEvents.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
+#include "outputUpdate.h"
 #include "toolbox.h"
 
 using namespace std;
@@ -32,8 +33,8 @@ extern int const * p_UniversalTestAndTreat;
 extern int const * p_Adherence;
 extern int const * p_Calibration;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void SeedInterventions(person * const thePerson)
 {
@@ -45,15 +46,15 @@ void SeedInterventions(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Interventions::Interventions(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
 	D(cout << "Interventions scheduled for " << Time << " (year = " << Time / 365.25 << ")" << endl);
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 Interventions::~Interventions()
@@ -67,8 +68,8 @@ bool Interventions::CheckValid()
 void Interventions::Execute()
 {
 	
-	/////////////////////
-	/////////////////////
+		/////////////////////
+		/////////////////////
 	/* Hbct */
 	
 	if(*p_Hbct) {
@@ -82,7 +83,7 @@ void Interventions::Execute()
 		}
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* Vct */
 	
 	if(*p_Vct) {
@@ -94,7 +95,7 @@ void Interventions::Execute()
 		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* HbctPocCd4 */
 	
 	if(*p_HbctPocCd4) {
@@ -112,11 +113,12 @@ void Interventions::Execute()
 		}
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* Linkage */
 	
 	if(*p_Linkage) {
 		D(cout << "Linkage intervention." << endl);
+		linkageFlag = true;
 		if(*p_Linkage == 1) {
 			hctProbLink = 1;
 			hctProbLinkPreviouslyDiagnosed = 1;
@@ -130,7 +132,7 @@ void Interventions::Execute()
 		}
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* PreOutreach */
 	
 	if(*p_PreOutreach) {
@@ -142,11 +144,12 @@ void Interventions::Execute()
 				new PreArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* ImprovedCare */
 	
 	if(*p_ImprovedCare) {
 		D(cout << "ImprovedCare intervention." << endl);
+		impCareFlag = true;
 		if(*p_ImprovedCare == 1) {
 			cd4ResultProbAttend = 1;
 			hctShortTermRetention = 1;
@@ -172,13 +175,13 @@ void Interventions::Execute()
 		}
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* PocCd4 */
 	
 	if(*p_PocCd4)
 		pocFlag = true;
 	
-	/////////////////////
+		/////////////////////
 	/* VctPocCd4 */
 	
 	if(*p_VctPocCd4) {
@@ -186,7 +189,7 @@ void Interventions::Execute()
 		ScheduleVctHivTest(pPerson,GetTime());
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* ArtOutreach */
 	
 	if(*p_ArtOutreach) {
@@ -198,7 +201,7 @@ void Interventions::Execute()
 				new ArtOutreach(pPerson,14792.625 + (i * 365.25),k);
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* ImmediateArt */
 	
 	if(*p_ImmediateArt) {
@@ -207,7 +210,7 @@ void Interventions::Execute()
 		UpdateTreatmentGuidelines(pPerson,4,1);
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* UniversalTestAndTreat */
 	
 	if(*p_UniversalTestAndTreat) {
@@ -225,7 +228,7 @@ void Interventions::Execute()
 		}
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* Adherence */
 	
 	if(*p_Adherence) {
@@ -234,10 +237,10 @@ void Interventions::Execute()
 		if(*p_Adherence == 1)
 			pPerson->SetArtAdherenceState(1);
 		else
-			pPerson->SetArtAdherenceState(0.975);
+			pPerson->SetArtAdherenceState(0.93);
 	}
 	
-	/////////////////////
+		/////////////////////
 	/* Calibration */
 	
 	if(*p_Calibration) {
@@ -246,9 +249,12 @@ void Interventions::Execute()
 				new SeedPerpetualHct(pPerson, 14610 + (i * 365.25));
 	}
 	
-	/////////////////////
+		/////////////////////
+	
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 	
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

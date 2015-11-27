@@ -39,6 +39,8 @@ extern double * thePreArtCOST_Hiv;
 extern double * theArtCOST_Hiv;
 extern double * theCLINIC;
 
+extern double * theUnitCost_AnnualArtCost;
+
 extern int * theGuidelines_PopDist_HivNegative;
 extern int * theGuidelines_Death_200_ArtMoreSixMonths;
 extern int * theGuidelines_Death_200_OffArt;
@@ -129,9 +131,9 @@ int main(int argc, const char * argv[])
 //			cout << "i = " << i << endl;
 //		}
 		
-		cout << "thePOP:" << endl;
-		for(size_t i=0; i<66; i++)
-			cout << thePOP[i] << endl;
+		cout << "theUnitCost_AnnualArtCost:" << endl;
+		for(size_t i=0; i<20; i++)
+			cout << theUnitCost_AnnualArtCost[i] << endl;
 		
 //		cout << "theGuidelines_Death_200_OffArt:" << endl;
 //		for(size_t i=0; i<36; i++)

@@ -1,10 +1,10 @@
-//
-//  interventionEvents.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 03/11/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  interventionEvents.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 03/11/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "toolbox.h"
@@ -14,6 +14,7 @@
 #include "impact.h"
 #include "cost.h"
 #include "rng.h"
+#include "outputUpdate.h"
 #include "cascadeEvents.h"
 #include "cascadeUpdate.h"
 
@@ -21,8 +22,8 @@ using namespace std;
 
 extern Rng * theRng;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedHct::SeedHct(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -48,8 +49,8 @@ void SeedHct::Execute()
 	ScheduleHctHivTest(pPerson,GetTime(),pointOfCare);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedPerpetualHct::SeedPerpetualHct(person * const thePerson, const double Time) :
 event(Time),
@@ -74,8 +75,8 @@ void SeedPerpetualHct::Execute()
 	SchedulePerpetualHctHivTest(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 HctHivTest::HctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -109,10 +110,12 @@ void HctHivTest::Execute()
 			ScheduleInitialCd4TestAfterHct(pPerson,GetTime());
 		SchedulePictHivTest(pPerson,GetTime());
 	}
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 HctPocCd4Test::HctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -140,10 +143,12 @@ void HctPocCd4Test::Execute()
 	else if(HctLinkage(pPerson,GetTime()))
 		ScheduleInitialCd4TestAfterHct(pPerson,GetTime());
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PreArtOutreach::PreArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
@@ -169,10 +174,12 @@ void PreArtOutreach::Execute()
 	ChargePreArtOutreach(pPerson);
 	if(theRng->Sample(probReturn))
 		new Cd4Test(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 VctPocCd4Test::VctPocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -210,10 +217,12 @@ void VctPocCd4Test::Execute()
 			SchedulePreArtCd4Test(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PocCd4Test::PocCd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -252,17 +261,19 @@ void PocCd4Test::Execute() // Update.
 			SchedulePreArtCd4Test(pPerson,GetTime());
 	}
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtOutreach::ArtOutreach(person * const thePerson, const double Time, const double theProb) :
 event(Time),
 pPerson(thePerson),
 probReturn(theProb)
 {
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 ArtOutreach::~ArtOutreach()
@@ -287,7 +298,9 @@ void ArtOutreach::Execute()
 		ScheduleArtDropout(pPerson,GetTime());
 		pPerson->UpdateInfectiousnessArray();
 	}
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

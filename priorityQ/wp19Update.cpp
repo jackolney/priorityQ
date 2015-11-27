@@ -1,10 +1,10 @@
-//
-//  wp19Update.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 12/03/2015.
-//  Copyright (c) 2015 Jack Olney. All rights reserved.
-//
+	//
+	//  wp19Update.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 12/03/2015.
+	//  Copyright (c) 2015 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "wp19Update.h"
@@ -86,8 +86,8 @@ extern int * theGuidelines_ArtDropout;
 
 extern int * mid2010;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex)
 {
@@ -97,7 +97,7 @@ void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex)
 		if(thePerson->GetArtInitiationState())
 			mid2010[1]++;
 	}
-
+	
 	if(!thePerson->GetSeroStatus()) {
 		theGuidelines_PopDist_HivNegative[theIndex]++;
 	} else if(thePerson->GetCurrentCd4() == 4) {
@@ -163,8 +163,8 @@ void WriteGuidelinesPopDist(person * const thePerson, const size_t theIndex)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesDeath(person * const thePerson)
 {
@@ -172,11 +172,11 @@ void WriteGuidelinesDeath(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(!thePerson->GetSeroStatus()) {
 			theGuidelines_Death_HivNegative[i]++;
 		} else if(thePerson->GetCurrentCd4() == 4) {
@@ -243,8 +243,8 @@ void WriteGuidelinesDeath(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesArtInitiation(person * const thePerson)
 {
@@ -252,11 +252,11 @@ void WriteGuidelinesArtInitiation(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(thePerson->GetCurrentCd4() == 4)
 			theGuidelines_Art_500[i]++;
 		else if(thePerson->GetCurrentCd4() == 3)
@@ -268,8 +268,8 @@ void WriteGuidelinesArtInitiation(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesNewInfection(person * const thePerson)
 {
@@ -277,18 +277,18 @@ void WriteGuidelinesNewInfection(person * const thePerson)
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		if(thePerson->GetAge(theQ->GetTime()) > 15 * 365.25)
 			theGuidelines_NewInfectionsAdult[i]++;
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesNewDiagnosis()
 {
@@ -296,17 +296,17 @@ void WriteGuidelinesNewDiagnosis()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_NewDiagnoses[i]++;
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesPreArtDropout()
 {
@@ -314,17 +314,17 @@ void WriteGuidelinesPreArtDropout()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_PreArtDropout[i]++;
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteGuidelinesArtDropout()
 {
@@ -332,14 +332,14 @@ void WriteGuidelinesArtDropout()
 		double yr [36];
 		for(size_t i=0; i<36; i++)
 			yr[i] = 11322.75 + (i * 365.25);
-
+		
 		unsigned int i=0;
 		while(theQ->GetTime() >= yr[i] && i<36)
 			i++;
-
+		
 		theGuidelines_ArtDropout[i]++;
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

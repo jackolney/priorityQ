@@ -1,10 +1,10 @@
-//
-//  updateCascade.h
-//  priorityQ
-//
-//  Created by Jack Olney on 22/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  updateCascade.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 22/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__updateCascade__
 #define __priorityQ__updateCascade__

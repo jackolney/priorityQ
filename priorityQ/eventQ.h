@@ -1,10 +1,10 @@
-//
-//  eventQ.h
-//  priorityQ
-//
-//  Created by Jack Olney on 08/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  eventQ.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 08/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__eventQ__
 #define __priorityQ__eventQ__

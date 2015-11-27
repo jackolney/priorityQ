@@ -1,10 +1,10 @@
-//
-//  output.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 28/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  output.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 28/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "output.h"
@@ -15,6 +15,7 @@
 using namespace std;
 
 double * theCARE;
+double * theCARE_PT;
 double * theDALY;
 double * theCOST;
 double * thePOP;
@@ -61,8 +62,32 @@ double * theDALY_OffArt;
 double * theDALY_OnArt;
 double * theDALY_LYL;
 
-/////////////////////
-/////////////////////
+/* COST UNITS (values which we multiply by unit cost to arrive at COST) */
+double * theUNIT_HctVisitCost;
+double * theUNIT_RapidHivTestCost;
+double * theUNIT_LinkageCost;
+double * theUNIT_ImpCareCost;
+double * theUNIT_PreArtClinicVisitCost;
+double * theUNIT_LabCd4TestCost;
+double * theUNIT_PocCd4TestCost;
+double * theUNIT_AnnualArtCost;
+double * theUNIT_AnnualAdherenceCost;
+double * theUNIT_OutreachCost;
+
+/* Unit Costs (the unit cost which is multiplied by the Cost Unit to arrive at COST) */
+double * theUnitCost_HctVisitCost;
+double * theUnitCost_RapidHivTestCost;
+double * theUnitCost_LinkageCost;
+double * theUnitCost_ImpCareCost;
+double * theUnitCost_PreArtClinicVisitCost;
+double * theUnitCost_LabCd4TestCost;
+double * theUnitCost_PocCd4TestCost;
+double * theUnitCost_AnnualArtCost;
+double * theUnitCost_AnnualAdherenceCost;
+double * theUnitCost_OutreachCost;
+
+	/////////////////////
+	/////////////////////
 
 void SeedOutput(person * const thePerson)
 {
@@ -74,8 +99,8 @@ void SeedOutput(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Output::Output(person * const thePerson, const double Time, const size_t theIndex) :
 event(Time),
@@ -110,14 +135,17 @@ void Output::Execute()
 		Write2012(pPerson);
 	if(GetTime() == 16436.25)
 		Write2014(pPerson);
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void CreateOutputArray()
 {
 	theCARE = new double[6]; // NeverDiagnosed, DiagnosedButNeverLinkedToCare, DiagnosedLinkedButNeverInitiatedArt, ArtLate, ArtButDiedOffArt, ArtEarly.
+	theCARE_PT = new double[6]; // Person-time tracker for each category.
 	theDALY = new double[20];
 	theCOST = new double[20];
 	thePOP = new double[66];
@@ -163,14 +191,36 @@ void CreateOutputArray()
 	theDALY_OffArt = new double[20];
 	theDALY_OnArt = new double[20];
 	theDALY_LYL = new double[20];
+	theUNIT_HctVisitCost = new double[20];
+	theUNIT_RapidHivTestCost = new double[20];
+	theUNIT_LinkageCost = new double[20];
+	theUNIT_ImpCareCost = new double[20];
+	theUNIT_PreArtClinicVisitCost = new double[20];
+	theUNIT_LabCd4TestCost = new double[20];
+	theUNIT_PocCd4TestCost = new double[20];
+	theUNIT_AnnualArtCost = new double[20];
+	theUNIT_AnnualAdherenceCost = new double[20];
+	theUNIT_OutreachCost = new double[20];
+	theUnitCost_HctVisitCost = new double[20];
+	theUnitCost_RapidHivTestCost = new double[20];
+	theUnitCost_LinkageCost = new double[20];
+	theUnitCost_ImpCareCost = new double[20];
+	theUnitCost_PreArtClinicVisitCost = new double[20];
+	theUnitCost_LabCd4TestCost = new double[20];
+	theUnitCost_PocCd4TestCost = new double[20];
+	theUnitCost_AnnualArtCost = new double[20];
+	theUnitCost_AnnualAdherenceCost = new double[20];
+	theUnitCost_OutreachCost = new double[20];
 	
 	for(size_t i=0;i<66;i++) {
 		if(i<4)
 			thePOP_NoArtCd4_2007[i] = 0;
 		if(i<5)
 			theCLINIC[i] = 0;
-		if(i<6)
+		if(i<6) {
 			theCARE[i] = 0;
+			theCARE_PT[i] = 0;
+		}
 		if(i<10) {
 			thePOP_AgeSex_2014[i] = 0;
 			theHIV_AgeSex_2014[i] = 0;
@@ -192,7 +242,27 @@ void CreateOutputArray()
 			theArtCOST_Hiv[i] = 0;
 			theDALY_OffArt[i] = 0;
 			theDALY_OnArt[i] = 0;
-			theDALY_LYL[i] = 0;		
+			theDALY_LYL[i] = 0;
+			theUNIT_HctVisitCost[i] = 0;
+			theUNIT_RapidHivTestCost[i] = 0;
+			theUNIT_LinkageCost[i] = 0;
+			theUNIT_ImpCareCost[i] = 0;
+			theUNIT_PreArtClinicVisitCost[i] = 0;
+			theUNIT_LabCd4TestCost[i] = 0;
+			theUNIT_PocCd4TestCost[i] = 0;
+			theUNIT_AnnualArtCost[i] = 0;
+			theUNIT_AnnualAdherenceCost[i] = 0;
+			theUNIT_OutreachCost[i] = 0;
+			theUnitCost_HctVisitCost[i] = 0;
+			theUnitCost_RapidHivTestCost[i] = 0;
+			theUnitCost_LinkageCost[i] = 0;
+			theUnitCost_ImpCareCost[i] = 0;
+			theUnitCost_PreArtClinicVisitCost[i] = 0;
+			theUnitCost_LabCd4TestCost[i] = 0;
+			theUnitCost_PocCd4TestCost[i] = 0;
+			theUnitCost_AnnualArtCost[i] = 0;
+			theUnitCost_AnnualAdherenceCost[i] = 0;
+			theUnitCost_OutreachCost[i] = 0;
 		}
 		thePOP[i] = 0;
 		thePOP_15to49[i] = 0;
@@ -223,5 +293,5 @@ void CreateOutputArray()
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

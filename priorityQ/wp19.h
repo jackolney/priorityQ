@@ -1,10 +1,10 @@
-//
-//  wp19.h
-//  priorityQ
-//
-//  Created by Jack Olney on 12/03/2015.
-//  Copyright (c) 2015 Jack Olney. All rights reserved.
-//
+	//
+	//  wp19.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 12/03/2015.
+	//  Copyright (c) 2015 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__wp19__
 #define __priorityQ__wp19__
@@ -15,8 +15,8 @@
 
 void SeedGuidelinesOutput(person * const thePerson);
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class GuidelinesOutput : public event { //For reporting GuidelinesOutput from 2000 to 2035.
 public:
@@ -32,14 +32,14 @@ private:
 	const size_t index;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 /* Population.cpp uses these functions. */
 
 void CreateGuidelinesArray();
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 #endif /* defined(__priorityQ__wp19__) */

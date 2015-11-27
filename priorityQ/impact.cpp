@@ -1,10 +1,10 @@
-//
-//  impact.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 27/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  impact.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 27/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "impact.h"
@@ -20,8 +20,8 @@ extern double * theDALY_OffArt;
 extern double * theDALY_OnArt;
 extern double * theDALY_LYL;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void UpdateDaly(person * const thePerson, const double theTime)
 {
@@ -51,8 +51,8 @@ void UpdateDaly(person * const thePerson, const double theTime)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteDaly(person * const thePerson, const size_t theIndex)
 {
@@ -68,5 +68,5 @@ void WriteDaly(person * const thePerson, const size_t theIndex)
 	thePerson->ResetDalys();
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

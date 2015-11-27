@@ -1,10 +1,10 @@
-//
-//  calibration.h
-//  priorityQ
-//
-//  Created by Jack Olney on 01/12/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  calibration.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 01/12/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__calibration__
 #define __priorityQ__calibration__
@@ -15,8 +15,8 @@
 
 void SeedCalibration(person * const thePerson, const double theTimeZero, const double theTimeOne, const double theTimeTwo, const double theTimeThree);
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class TimeSplit : public event {
 public:
@@ -31,8 +31,8 @@ private:
 	person * const pPerson;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void CreateCalibrationArray();
 

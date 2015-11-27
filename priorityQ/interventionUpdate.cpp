@@ -1,10 +1,10 @@
-//
-//  interventionUpdate.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 03/11/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  interventionUpdate.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 03/11/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "interventionUpdate.h"
@@ -18,8 +18,8 @@ extern Rng * theRng;
 
 using namespace std;
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleHctHivTest(person * const thePerson, const double theTime, const bool poc)
 {
@@ -30,8 +30,8 @@ void ScheduleHctHivTest(person * const thePerson, const double theTime, const bo
 	}
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime)
 {
@@ -39,8 +39,8 @@ void SchedulePerpetualHctHivTest(person * const thePerson, const double theTime)
 		new HctHivTest(thePerson,theTime + (theRng->doub() * 365.25),0);
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool HctLinkage(person * const thePerson, const double theTime)
 {
@@ -71,13 +71,13 @@ bool HctLinkage(person * const thePerson, const double theTime)
 	}
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleImmediateArt(person * const thePerson, const double theTime)
 {
 	new ArtInitiation(thePerson,theTime);
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////

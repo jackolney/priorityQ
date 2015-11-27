@@ -1,10 +1,10 @@
-//
-//  person.h
-//  priorityQ
-//
-//  Created by Jack Olney on 09/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  person.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 09/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__person__
 #define __priorityQ__person__
@@ -23,9 +23,9 @@ public:
 	double GenerateNatDeathAge();
 	double AssignNatDeathDate(const double Time);
 	
-	/////////////
+		/////////////
 	/* Methods */
-	/////////////
+		/////////////
 	void Kill(const double theTime, const bool theCause);
 	void SetAge(const double theTime);
 	
@@ -86,7 +86,23 @@ public:
 	void SetAnnualAdherenceCost(const double theCost) { iAdherenceCost += theCost; }
 	void SetArtOutreachCost(const double theCost) { iArtOutreachCost += theCost; }
 	void SetPreArtOutreachCost(const double theCost) { iPreArtOutreachCost += theCost; }
-	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iArtOutreachCost = 0; iPreArtOutreachCost = 0; artTime = 0; }
+	void SetLinkageCost(const double theCost) { iLinkageCost += theCost; }
+	void SetImpCareCost(const double theCost) { iImpCareCost += theCost; }
+	void ResetCost() { iHctVisitCost = 0; iRapidHivTestCost = 0; iPreArtClinicVisitCost = 0; iLabCd4TestCost = 0; iPocCd4TestCost = 0; iAnnualArtCost = 0; iAdherenceCost = 0; iArtOutreachCost = 0; iPreArtOutreachCost = 0; artTime = 0; diagNotLinkedTime = 0; iLinkageCost = 0; iImpCareCost = 0; }
+	
+	/* Cost Unit Functions */
+	void SetHctVisitUnit(const double theUnit) { iHctVisitUnit += theUnit; }
+	void SetRapidHivTestUnit(const double theUnit) { iRapidHivTestUnit += theUnit; }
+	void SetPreArtClinicVisitUnit(const double theUnit) { iPreArtClinicVisitUnit += theUnit; }
+	void SetLabCd4TestUnit(const double theUnit) { iLabCd4TestUnit += theUnit; }
+	void SetPocCd4TestUnit(const double theUnit) { iPocCd4TestUnit += theUnit; }
+	void SetAnnualArtUnit(const double theUnit) { iAnnualArtUnit += theUnit; }
+	void SetAnnualAdherenceUnit(const double theUnit) { iAdherenceUnit += theUnit; }
+	void SetArtOutreachUnit(const double theUnit) { iArtOutreachUnit += theUnit; }
+	void SetPreArtOutreachUnit(const double theUnit) { iPreArtOutreachUnit += theUnit; }
+	void SetLinkageUnit(const double theUnit) { iLinkageUnit += theUnit; }
+	void SetImpCareUnit(const double theUnit) { iImpCareUnit += theUnit; }
+	void ResetUnit() { iHctVisitUnit = 0; iRapidHivTestUnit = 0; iPreArtClinicVisitUnit = 0; iLabCd4TestUnit = 0; iPocCd4TestUnit = 0; iAnnualArtUnit = 0; iAdherenceUnit = 0; iArtOutreachUnit = 0; iPreArtOutreachUnit = 0; iLinkageUnit = 0; iImpCareUnit = 0; }
 	
 	/* Vector functions */
 	void SetPersonIndex(const size_t theIndex) { personIndex = theIndex; }
@@ -98,9 +114,12 @@ public:
 	void UpdatePopulation() { iPop->UpdateVector(this); }
 	void UpdateInfectiousnessArray() { iPop->UpdateArray(this); }
 	
-	//////////////////////
+	/* Person-time functions */
+	void SetLastUpdateTime(const double theTime) { lastUpdateTime = theTime; }
+	
+		//////////////////////
 	/* Accessor methods */
-	//////////////////////
+		//////////////////////
 	bool GetGender() const;
 	double GetNatDeathDate() const;
 	bool Alive() const;
@@ -127,6 +146,7 @@ public:
 	double GetSeroconversionDay() const { return seroconversionDay; }
 	double GetArtDay() const { return artDay; }
 	double GetArtTime() const { return artTime; }
+	double GetDiagNotLinkedTime() const { return diagNotLinkedTime; }
 	bool GetEverReturnCare() const { return everReturnPreArtCare; }
 	bool GetEligibleAtReturnCare() const { return eligibleAtReturnPreArtCare; }
 	
@@ -163,6 +183,21 @@ public:
 	double GetAnnualAdherenceCost() const { return iAdherenceCost; }
 	double GetArtOutreachCost() const { return iArtOutreachCost; }
 	double GetPreArtOutreachCost() const { return iPreArtOutreachCost; }
+	double GetLinkageCost() const { return iLinkageCost; }
+	double GetImpCareCost() const { return iImpCareCost; }
+	
+	/* Cost Unit Functions */
+	double GetHctVisitUnit() const { return iHctVisitUnit; }
+	double GetRapidHivTestUnit() const { return iRapidHivTestUnit; }
+	double GetPreArtClinicVisitUnit() const { return iPreArtClinicVisitUnit; }
+	double GetLabCd4TestUnit() const { return iLabCd4TestUnit; }
+	double GetPocCd4TestUnit() const { return iPocCd4TestUnit; }
+	double GetAnnualArtUnit() const { return iAnnualArtUnit; }
+	double GetAnnualAdherenceUnit() const { return iAdherenceUnit; }
+	double GetArtOutreachUnit() const { return iArtOutreachUnit; }
+	double GetPreArtOutreachUnit() const { return iPreArtOutreachUnit; }
+	double GetLinkageUnit() const { return iLinkageUnit; }
+	double GetImpCareUnit() const { return iImpCareUnit; }
 	
 	/* Output functions */
 	bool GetHivDeath() const { return hivDeath; }
@@ -199,6 +234,9 @@ public:
 	bool GetCalEverReturnArt() const { return calEverReturnArt; }
 	bool GetCalEligibleAtEnrollment() const { return calEligibleAtEnrollment; }
 	
+	/* Person-time functions */
+	double GetLastUpdateTime() const { return lastUpdateTime; }
+	
 private:
 	/* Basic characteristics */
 	bool gender;
@@ -219,6 +257,12 @@ private:
 	const double birthDay;
 	double artDay;
 	double artTime;
+	double diagDay;
+	double careDay;
+	double initArtDay;
+	double lostArtDay;
+	double lastUpdateTime;
+	double diagNotLinkedTime;
 	
 	/* Date = time an event will occur */
 	double hivDate;
@@ -239,6 +283,7 @@ private:
 	unsigned int diagnosisCount;
 	unsigned int diagnosisRoute; //1 = Hct, 2 = Vct, 3 = Pict.
 	unsigned int lastDiagnosisRoute;
+	double lastDiagnosisDay;
 	bool inCare;
 	bool everCare;
 	bool everCd4Test;
@@ -282,6 +327,21 @@ private:
 	double iAdherenceCost;
 	double iArtOutreachCost;
 	double iPreArtOutreachCost;
+	double iLinkageCost;
+	double iImpCareCost;
+	
+	/* COST UNIT */
+	double iHctVisitUnit;
+	double iRapidHivTestUnit;
+	double iPreArtClinicVisitUnit;
+	double iLabCd4TestUnit;
+	double iPocCd4TestUnit;
+	double iAnnualArtUnit;
+	double iAdherenceUnit;
+	double iArtOutreachUnit;
+	double iPreArtOutreachUnit;
+	double iLinkageUnit;
+	double iImpCareUnit;
 	
 	/* Data */
 	population * const iPop;

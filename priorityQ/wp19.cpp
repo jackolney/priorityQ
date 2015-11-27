@@ -1,16 +1,17 @@
-//
-//  wp19.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 12/03/2015.
-//  Copyright (c) 2015 Jack Olney. All rights reserved.
-//
+	//
+	//  wp19.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 12/03/2015.
+	//  Copyright (c) 2015 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "wp19.h"
 #include "impact.h"
 #include "cost.h"
 #include "wp19Update.h"
+#include "outputUpdate.h"
 
 using namespace std;
 
@@ -86,8 +87,8 @@ int * theGuidelines_ArtDropout;
 
 int * mid2010;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void SeedGuidelinesOutput(person * const thePerson)
 {
@@ -99,8 +100,8 @@ void SeedGuidelinesOutput(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 GuidelinesOutput::GuidelinesOutput(person * const thePerson, const double Time, const size_t theIndex) :
 event(Time),
@@ -121,8 +122,8 @@ void GuidelinesOutput::Execute()
 	WriteGuidelinesPopDist(pPerson,index);
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void CreateGuidelinesArray()
 {
@@ -192,7 +193,7 @@ void CreateGuidelinesArray()
 	theGuidelines_NewDiagnoses = new int[36];
 	theGuidelines_PreArtDropout = new int[36];
 	theGuidelines_ArtDropout = new int[36];
-
+	
 	mid2010 = new int[2];
 	
 	for(size_t i=0;i<36;i++) {
@@ -267,5 +268,5 @@ void CreateGuidelinesArray()
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

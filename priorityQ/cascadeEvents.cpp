@@ -1,10 +1,10 @@
-//
-//  cascadeEvents.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 22/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  cascadeEvents.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 22/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "toolbox.h"
@@ -19,14 +19,15 @@
 #include "interventionEvents.h"
 #include "interventionUpdate.h"
 #include "wp19Update.h"
+#include "outputUpdate.h"
 #include "rng.h"
 
 extern Rng * theRng;
 
 using namespace std;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedInitialHivTests::SeedInitialHivTests(person * const thePerson, const double Time) :
 event(Time),
@@ -49,10 +50,12 @@ void SeedInitialHivTests::Execute()
 		UpdateTreatmentGuidelines(pPerson,1,3);
 	ScheduleVctHivTest(pPerson,GetTime());
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 SeedTreatmentGuidelinesUpdate::SeedTreatmentGuidelinesUpdate(person * const thePerson, const double Time) :
 event(Time),
@@ -76,12 +79,14 @@ void SeedTreatmentGuidelinesUpdate::Execute()
 {
 	if(GetTime() >= 14975.25)
 		UpdateTreatmentGuidelines(pPerson,2,3);
-	// if(GetTime() >= 16436.25)
-	// 	UpdateTreatmentGuidelines(pPerson,3,3);
+		// if(GetTime() >= 16436.25)
+		// 	UpdateTreatmentGuidelines(pPerson,3,3);
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 VctHivTest::VctHivTest(person * const thePerson, const double Time, const bool poc) :
 event(Time),
@@ -118,10 +123,12 @@ void VctHivTest::Execute()
 			ChargePreArtClinicVisit(pPerson);
 	}
 	ScheduleVctHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PictHivTest::PictHivTest(person * const thePerson, const double Time) :
 event(Time),
@@ -154,10 +161,12 @@ void PictHivTest::Execute()
 			ChargePreArtClinicVisit(pPerson);
 	}
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4Test::Cd4Test(person * const thePerson, const double Time) :
 event(Time),
@@ -187,6 +196,7 @@ void Cd4Test::Execute()
 	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicVisit(pPerson);
 	ChargePreArtClinicCd4Test(pPerson);
+	ChargeImprovedCareInt(pPerson);
 	pPerson->SetEverCd4TestState(true);
 	pPerson->SetInCareState(true,GetTime());
 	if(immediateArtFlag)
@@ -197,10 +207,12 @@ void Cd4Test::Execute()
 		ScheduleCd4TestResult(pPerson,GetTime());
 	else
 		SchedulePreArtResultDropout(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 Cd4TestResult::Cd4TestResult(person * const thePerson, const double Time) :
 event(Time),
@@ -221,6 +233,7 @@ void Cd4TestResult::Execute()
 {
 	UpdateDaly(pPerson,GetTime());
 	ChargePreArtClinicCd4ResultVisit(pPerson);
+	ChargeImprovedCareInt(pPerson);
 	pPerson->SetEverCd4TestResultState(true);
 	if(immediateArtFlag)
 		ScheduleImmediateArt(pPerson,GetTime());
@@ -231,10 +244,12 @@ void Cd4TestResult::Execute()
 	else
 		SchedulePreArtTestDropout(pPerson,GetTime());
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 PreArtDropout::PreArtDropout(person * const thePerson, const double Time) :
 event(Time),
@@ -259,10 +274,12 @@ void PreArtDropout::Execute()
 	pPerson->SetInCareState(false,GetTime());
 	ScheduleVctHivTest(pPerson,GetTime());
 	SchedulePictHivTest(pPerson,GetTime());
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtInitiation::ArtInitiation(person * const thePerson, const double Time) :
 event(Time),
@@ -291,16 +308,18 @@ void ArtInitiation::Execute()
 	ScheduleWhoUpdate(pPerson,GetTime());
 	ScheduleArtDropout(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 ArtDropout::ArtDropout(person * const thePerson, const double Time) :
 event(Time),
 pPerson(thePerson)
 {
-	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }	
+	if(Time >= thePerson->GetNatDeathDate()) { Cancel(); }
 }
 
 ArtDropout::~ArtDropout()
@@ -319,7 +338,9 @@ void ArtDropout::Execute()
 	ScheduleCd4Update(pPerson,GetTime());
 	ScheduleWhoUpdate(pPerson,GetTime());
 	pPerson->UpdateInfectiousnessArray();
+		// Person-time calculation
+	UpdateCarePersonTime(pPerson,GetTime());
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

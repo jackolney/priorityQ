@@ -1,10 +1,10 @@
-//
-//  outputUpdate.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 30/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  outputUpdate.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 30/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "outputUpdate.h"
@@ -12,6 +12,7 @@
 using namespace std;
 
 extern double * theCARE;
+extern double * theCARE_PT;
 extern double * thePOP;
 extern double * theHIV;
 extern double * thePOP_15to49;
@@ -53,8 +54,8 @@ extern double * theAidsDeath;
 extern double * theDeath_2010_Age;
 extern double * theAidsDeath_2010_Age;
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WritePop(person * const thePerson, const double theTime, const size_t theIndex)
 {
@@ -67,8 +68,8 @@ void WritePop(person * const thePerson, const double theTime, const size_t theIn
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteHiv(person * const thePerson, const double theTime, const size_t theIndex)
 {
@@ -79,8 +80,8 @@ void WriteHiv(person * const thePerson, const double theTime, const size_t theIn
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteArt(person * const thePerson, const double theTime, const size_t theIndex)
 {
@@ -90,62 +91,86 @@ void WriteArt(person * const thePerson, const double theTime, const size_t theIn
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteCare(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
-		// NeverDiagnosed
+			// NeverDiagnosed
 		theCARE[0] += !thePerson->GetDiagnosedState();
-		// DiagnosedButNeverLinkedToCare
+			// DiagnosedButNeverLinkedToCare
 		theCARE[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestState() && !thePerson->GetEverArt());
-		// DiagnosedLinkedButNeverInitiatedArt
+			// DiagnosedLinkedButNeverInitiatedArt
 		theCARE[2] += (thePerson->GetDiagnosedState() && thePerson->GetEverCd4TestState() && !thePerson->GetEverArt());
-		// ArtLate
+			// ArtLate
 		theCARE[3] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
-		// ArtButDiedOffArt
+			// ArtButDiedOffArt
 		theCARE[4] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
-		// ArtEarly
+			// ArtEarly
 		theCARE[5] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
+
+void UpdateCarePersonTime(person * const thePerson, const double theTime)
+{
+	if(thePerson->Alive() && thePerson->GetSeroStatus() && theTime >= 14610 && theTime < 21915) {
+		if(!thePerson->GetDiagnosedState())
+			theCARE_PT[0] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		else if(thePerson->GetDiagnosedState() && !thePerson->GetEverCd4TestState() && !thePerson->GetEverArt())
+			theCARE_PT[1] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		else if(thePerson->GetDiagnosedState() && thePerson->GetEverCd4TestState() && !thePerson->GetEverArt())
+			theCARE_PT[2] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		else if(thePerson->GetArtInitiationState() && thePerson->GetCd4AtArt() == 1)
+			theCARE_PT[3] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		else if(thePerson->GetEverArt() && !thePerson->GetArtInitiationState())
+			theCARE_PT[4] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		else if(thePerson->GetArtInitiationState() && thePerson->GetCd4AtArt() > 1)
+			theCARE_PT[5] += (theTime - thePerson->GetLastUpdateTime()) / 365.25;
+		
+		thePerson->SetLastUpdateTime(theTime);
+	}
+	
+}
+
+	/////////////////////
+	/////////////////////
 
 void WriteClinic(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetEverCd4TestState() && thePerson->GetHivDeath() && theTime >= 14610 && theTime < 21915) {
-		// NeverDiagnosed
+			// NeverDiagnosed
 		theCLINIC[0] += !thePerson->GetDiagnosedState();
-		// DiagnosedButNeverInitiatedArt
+			// DiagnosedButNeverInitiatedArt
 		theCLINIC[1] += (thePerson->GetDiagnosedState() && !thePerson->GetEverArt());
-		// ArtLate
+			// ArtLate
 		theCLINIC[2] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() == 1);
-		// ArtButDiedOffArt
+			// ArtButDiedOffArt
 		theCLINIC[3] += (thePerson->GetEverArt() && !thePerson->GetArtDeath());
-		// ArtEarly
+			// ArtEarly
 		theCLINIC[4] += (thePerson->GetEverArt() && thePerson->GetArtDeath() && thePerson->GetCd4AtArt() > 1);
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteDeath(person * const thePerson, const double theTime)
 {
 	double yr [66];
 	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
-
+	
 	unsigned int i = 0;
 	while(theTime > yr[i] && i<66)
 		i++;
 	
 	theDeath[i]++;
 	
-	// Age stratification for 2010 only
+		// Age stratification for 2010 only
 	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
@@ -156,15 +181,15 @@ void WriteDeath(person * const thePerson, const double theTime)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteAidsDeath(person * const thePerson, const double theTime)
 {
 	double yr [66];
 	for(size_t i = 0; i<66; i++)
 		yr[i] = 365.25 + (i * 365.25);
-
+	
 	unsigned int i = 0;
 	while(theTime > yr[i] && i<66)
 		i++;
@@ -174,7 +199,7 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 	if(thePerson->GetAge(theTime) > 15 * 365.25)
 		theAidsDeath_15plus[i] += thePerson->GetSeroStatus();
 	
-	// Age stratification for 2010 only
+		// Age stratification for 2010 only
 	if(theTime > 14610 && theTime <= (14610 + 365.25)) {
 		const int ageCatMax[20] = {5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,100};
 		unsigned int j = 0;
@@ -185,8 +210,8 @@ void WriteAidsDeath(person * const thePerson, const double theTime)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void Write2007(person * const thePerson)
 {
@@ -218,8 +243,8 @@ void Write2007(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void Write2012(person * const thePerson)
 {
@@ -240,8 +265,8 @@ void Write2012(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void Write2014(person * const thePerson)
 {
@@ -260,8 +285,8 @@ void Write2014(person * const thePerson)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteCd4(person * const thePerson, const size_t theIndex)
 {
@@ -289,8 +314,8 @@ void WriteCd4(person * const thePerson, const size_t theIndex)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteWho(person * const thePerson, const size_t theIndex)
 {
@@ -317,12 +342,12 @@ void WriteWho(person * const thePerson, const size_t theIndex)
 	}
 }
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 void WriteIncidence(unsigned int const &theIncidentCases, const size_t theIndex)
 {
 	theINCIDENCE[theIndex] = theIncidentCases;
 }
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////

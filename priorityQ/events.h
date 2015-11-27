@@ -1,10 +1,10 @@
-//
-//  events.h
-//  priorityQ
-//
-//  Created by Jack Olney on 09/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  events.h
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 09/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #ifndef __priorityQ__events__
 #define __priorityQ__events__
@@ -14,8 +14,8 @@
 #include "cohort.h"
 #include "event.h"
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class CohortStart : public event {
 public:
@@ -30,8 +30,8 @@ private:
 	cohort * const pCohort; //Pointer to cohort.
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class VectorUpdate : public event {
 public:
@@ -46,8 +46,8 @@ private:
 	person * const pPerson;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class Incidence : public event {
 public:
@@ -63,8 +63,8 @@ private:
 	const size_t index;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class BetaCalculation : public event {
 public:
@@ -79,8 +79,8 @@ private:
 	population * const pPopulation;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class Infection : public event {
 public:
@@ -95,8 +95,8 @@ private:
 	person * pPerson;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class PersonStart : public event {
 public:
@@ -111,8 +111,8 @@ private:
 	population * const pPop;
 };
 
-/////////////////////
-/////////////////////
+	/////////////////////
+	/////////////////////
 
 class Death : public event {
 public:
@@ -128,8 +128,8 @@ private:
 	const bool hivRelated;
 };
 
-///////////////////////
-///////////////////////
+	///////////////////////
+	///////////////////////
 
 class Cd4Decline : public event {
 public:
@@ -144,8 +144,8 @@ private:
 	person * const pPerson;
 };
 
-///////////////////////
-///////////////////////
+	///////////////////////
+	///////////////////////
 
 class Cd4Recover : public event {
 public:
@@ -160,8 +160,8 @@ private:
 	person * const pPerson;
 };
 
-///////////////////////
-///////////////////////
+	///////////////////////
+	///////////////////////
 
 class WhoDecline : public event {
 public:
@@ -176,8 +176,8 @@ private:
 	person * const pPerson;
 };
 
-///////////////////////
-///////////////////////
+	///////////////////////
+	///////////////////////
 
 class WhoRecover : public event {
 public:
@@ -192,7 +192,7 @@ private:
 	person * const pPerson;
 };
 
-///////////////////////
-///////////////////////
+	///////////////////////
+	///////////////////////
 
 #endif /* defined(__priorityQ__events__) */

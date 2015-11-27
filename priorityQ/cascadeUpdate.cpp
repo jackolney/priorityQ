@@ -1,10 +1,10 @@
-//
-//  updateCascade.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 22/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  updateCascade.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 22/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <iostream>
 #include "toolbox.h"
@@ -20,24 +20,24 @@ extern Rng * theRng;
 
 using namespace std;
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void UpdateTreatmentGuidelines(person * const thePerson, unsigned int theCd4, unsigned int theWho)
 {
 	thePerson->UpdateTxGuidelines(theCd4,theWho);
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleVctHivTest(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetBirthDay() != 0 && theTime >= 12418.5)
 		new VctHivTest(thePerson,theTime + theRng->SampleExpDist(vctHivTestTime),vctPocFlag);
 }
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void SchedulePictHivTest(person * const thePerson, const double theTime)
 {
@@ -62,8 +62,8 @@ void SchedulePictHivTest(person * const thePerson, const double theTime)
 	}
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool VctLinkage(person * const thePerson)
 {
@@ -73,8 +73,8 @@ bool VctLinkage(person * const thePerson)
 		return false;
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool PictLinkage(person * const thePerson)
 {
@@ -84,70 +84,70 @@ bool PictLinkage(person * const thePerson)
 		return false;
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleInitialCd4TestAfterHct(person * const thePerson, const double theTime)
 {
 	new Cd4Test(thePerson,theTime + theRng->SampleExpDist(hctCd4TestTime[thePerson->GetCurrentCd4()-1]));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void SchedulePreArtCd4Test(person * const thePerson, const double theTime)
 {
 	new Cd4Test(thePerson,theTime + theRng->SampleExpDist(cd4TestTime));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleCd4TestResult(person * const thePerson, const double theTime)
 {
 	new Cd4TestResult(thePerson,theTime + theRng->SampleExpDist(cd4ResultTime));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void SchedulePreArtResultDropout(person * const thePerson, const double theTime)
 {
 	new PreArtDropout(thePerson,theTime + theRng->SampleExpDist(cd4ResultTime));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void SchedulePreArtTestDropout(person * const thePerson, const double theTime)
-{	
+{
 	new PreArtDropout(thePerson,theTime + theRng->SampleExpDist(cd4TestTime));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool ReceiveCd4TestResult(person * const thePerson, const double theTime)
 {
 	if(thePerson->GetCd4TestCount() <= 1) {
-	 	switch(thePerson->GetDiagnosisRoute()) {
+		switch(thePerson->GetDiagnosisRoute()) {
 			case 1: return theRng->Sample(hctShortTermRetention);  break;
-		 	case 2: return theRng->Sample(vctShortTermRetention);  break;
-		 	case 3: return theRng->Sample(pictShortTermRetention); break;
-		 	default: thePerson->SetInCareState(false,theTime); return false;
-	 	}
+			case 2: return theRng->Sample(vctShortTermRetention);  break;
+			case 3: return theRng->Sample(pictShortTermRetention); break;
+			default: thePerson->SetInCareState(false,theTime); return false;
+		}
 	} else {
 		switch(thePerson->GetDiagnosisRoute()) {
 			case 1: return theRng->Sample(hctLongTermRetention);  break;
-		 	case 2: return theRng->Sample(vctLongTermRetention);  break;
-		 	case 3: return theRng->Sample(pictLongTermRetention); break;
-		 	default: thePerson->SetInCareState(false,theTime); return false;
-	 	}
+			case 2: return theRng->Sample(vctLongTermRetention);  break;
+			case 3: return theRng->Sample(pictLongTermRetention); break;
+			default: thePerson->SetInCareState(false,theTime); return false;
+		}
 	}
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool AttendCd4TestResult(person * const thePerson, const double theTime)
 {
@@ -159,8 +159,8 @@ bool AttendCd4TestResult(person * const thePerson, const double theTime)
 	}
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 bool SecondaryCd4Test(person * const thePerson, const double theTime)
 {
@@ -173,8 +173,8 @@ bool SecondaryCd4Test(person * const thePerson, const double theTime)
 	
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void FastTrackArt(person * const thePerson, const double theTime)
 {
@@ -182,16 +182,16 @@ void FastTrackArt(person * const thePerson, const double theTime)
 	new ArtInitiation(thePerson,theTime);
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleArtInitiation(person * const thePerson, const double theTime)
 {
 	new ArtInitiation(thePerson,theTime + theRng->SampleExpDist(artInitiationTime));
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////
 
 void ScheduleArtDropout(person * const thePerson, const double theTime)
 {
@@ -204,5 +204,5 @@ void ScheduleArtDropout(person * const thePerson, const double theTime)
 	
 }
 
-////////////////////
-////////////////////
+	////////////////////
+	////////////////////

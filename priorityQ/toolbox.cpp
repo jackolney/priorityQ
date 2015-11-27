@@ -1,10 +1,10 @@
-//
-//  toolbox.cpp
-//  priorityQ
-//
-//  Created by Jack Olney on 31/10/2014.
-//  Copyright (c) 2014 Jack Olney. All rights reserved.
-//
+	//
+	//  toolbox.cpp
+	//  priorityQ
+	//
+	//  Created by Jack Olney on 31/10/2014.
+	//  Copyright (c) 2014 Jack Olney. All rights reserved.
+	//
 
 #include <stdio.h>
 #include "toolbox.h"
@@ -12,9 +12,9 @@
 
 extern Rng * theRng;
 
-////////////////////
-//PARAMETER VALUES//
-////////////////////
+	////////////////////
+	//PARAMETER VALUES//
+	////////////////////
 
 /* Hiv testing times */
 double hctHivTestTime = 0.4342945 * 365.25;
@@ -75,21 +75,23 @@ double pictProbSecondaryCd4Test = 0.75;
 double artInitiationTime = 145.12;
 
 /* Art dropout times */
-double artDropoutTimeOneYear = 21.72 * 365.25; //0.045/100py
-double artDropoutTimeTwoYear = 52.13 * 365.25; //0.019/100py
+double artDropoutTimeOneYear = 21.72 * 365.25; //0.045 py
+double artDropoutTimeTwoYear = 52.13 * 365.25; //0.019 py
 
-//////////////////////
-//Intervention Flags//
-//////////////////////
+	//////////////////////
+	//Intervention Flags//
+	//////////////////////
 
 bool pocFlag = false;
 bool vctPocFlag = false;
 bool immediateArtFlag = false;
 bool adherenceFlag = false;
+bool linkageFlag = false;
+bool impCareFlag = false;
 
-////////////////
-//DALY WEIGHTS//
-////////////////
+	////////////////
+	//DALY WEIGHTS//
+	////////////////
 
 /* DALY weights */
 double dalyWeight_Cd4_3 = 0.053;
@@ -97,9 +99,9 @@ double dalyWeight_Cd4_2 = 0.221;
 double dalyWeight_Cd4_1 = 0.547;
 double dalyWeightArt = 0.053;
 
-//////////////
-//UNIT COSTS//
-//////////////
+	//////////////
+	//UNIT COSTS//
+	//////////////
 
 /* Hiv care unit costs */
 double hctVisitCost = 8.00;
@@ -113,21 +115,23 @@ double annualArtCost = 367.00;
 /* Intervention costs */
 double annualAdherenceCost = 33.54;
 double outreachCost = 19.55;
+double annualLinkageCost = 2.61;
+double impCareCost = 7.05;
 
-//How to use:
+	//How to use:
 /* HBCT */
-//HCT visit + HIV-test = 8 + 10 = $18
-//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
+	//HCT visit + HIV-test = 8 + 10 = $18
+	//HCT visit + HIV-test + POC-CD4 test = 8 + 10 + 42 = $60
 
 /* VCT or PICT */
-//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
-//Clinic visit = $28 (Result visit)
-//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
+	//Clinic visit + HIV-test + lab-CD4 test = 28 + 10 + 12 = $50 (Test visit)
+	//Clinic visit = $28 (Result visit)
+	//Clinic visit + HIV-test + POC-CD4 test = 28 + 10 + 42 = $80
 
 /* Pre-ART Care */
-//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
-//Clinic visit = $28 (Result visit)
-//Clinic visit + POC-CD4 test = 28 + 42 = $70
+	//Clinic visit + lab-CD4 test = 28 + 12 = $40 (Test visit)
+	//Clinic visit = $28 (Result visit)
+	//Clinic visit + POC-CD4 test = 28 + 42 = $70
 
 /* Random */
 double Random(const int i)
